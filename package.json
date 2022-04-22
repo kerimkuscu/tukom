@@ -7,7 +7,9 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "phpcs:fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app/",
+        "larastan": "vendor/bin/phpstan analyse --memory-limit=2G"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
@@ -22,6 +24,7 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "vue": "^2.6.12",
+        "vue-loader": "^15.9.8",
         "vue-template-compiler": "^2.6.12"
     }
 }
