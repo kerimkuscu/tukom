@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductFormRequest;
+use App\Http\Resources\ProductResource;
+use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductController extends Controller
 {
@@ -16,81 +19,65 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return AnonymousResourceCollection
      */
     public function index(Request $request)
     {
-        $this->repository->getPaginatedData();
-    }
+        //filtreleme
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
+        return ProductResource::collection(Product::paginate(10));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param ProductFormRequest $request
      *
-     * @return Response
+     * @return ProductResource
      */
-    public function store(Request $request)
+    public function store(ProductFormRequest $request)
     {
-        //
+        $product = Product::query()->create($request->validated());
+
+        return new ProductResource($product);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Product $product
      *
-     * @return Response
+     * @return ProductResource
      */
-    public function show($id)
+    public function show(Product $product): ProductResource
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
+        return new ProductResource($product);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param ProductFormRequest $request
+     * @param Product            $product
      *
-     * @return Response
+     * @return ProductResource
      */
-    public function update(Request $request, $id)
+    public function update(ProductFormRequest $request, Product $product): ProductResource
     {
-        //
+        $product->update($request->validated());
+
+        return new ProductResource($product);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param Product $product
      *
-     * @return Response
+     * @return void
      */
-    public function destroy($id)
+    public function destroy(Product $product): void
     {
-        //
+        $product->delete();
     }
 }
