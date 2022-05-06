@@ -26,5 +26,11 @@
         "vue": "^2.6.12",
         "vue-loader": "^15.9.8",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "form-backend-validation": "^2.4.0",
+        "primeicons": "^5.0.0",
+        "primevue": "^2.9.2",
+        "vue-router": "^3.1.6"
     }
 }

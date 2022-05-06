@@ -26,7 +26,7 @@ class MenuController extends Controller
         $data = $this->repository->getTreeData();
 
         return response()->json([
-            'root' => $data,
+            'data' => $data,
         ]);
     }
 

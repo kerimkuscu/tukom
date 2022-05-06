@@ -13,12 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('welcome');
 });
 
-Route::get('/test', [\App\Http\Controllers\LocalController::class,'test']);
+Route::get('/test', [\App\Http\Controllers\LocalController::class, 'test']);
+
+Route::get('/fligram', [\App\Http\Controllers\LocalController::class, 'fligram']);
+Route::post('/fligram', [\App\Http\Controllers\LocalController::class, 'fligramStore'])->name('fligram.store');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('{any}', function() {
+        return view('index');
+    })->where('any', '.*');
+});
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

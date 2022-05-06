@@ -29,6 +29,7 @@
 
             </div>
         </div>
+
     </div>
 </template>
 
@@ -51,23 +52,25 @@
         },
 
         methods: {
-            submit(){
-                axios.post('/login', this.login).then(response => {
-                    this.getUser();
-                });
+            async submit(){
+                await axios.post('/login', this.login)
+
+                await this.getUser();
+
+                window.location.href = '/home'
             },
 
-            getUser(){
-                axios.get('/api/user').then(response => {
-                    this.user = response.data
-                });
+            async getUser(){
+                const response = axios.get('/api/user');
 
-                axios.post('api/menus',{
-                    'name': 'test2',
-                    'parent_id': '5'
-                }).then(response => {
-                    console.log(response.data);
-                });
+                this.user = response.data
+
+                // axios.post('api/menus',{
+                //     'name': 'test2',
+                //     'parent_id': '5'
+                // }).then(response => {
+                //     console.log(response.data);
+                // });
             }
         }
     }

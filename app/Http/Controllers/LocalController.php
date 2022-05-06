@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class LocalController extends Controller
 {
@@ -27,6 +29,24 @@ class LocalController extends Controller
         dd($data);
 
         return 'OK';
+    }
+
+    public function fligram()
+    {
+        return view('fligram');
+    }
+
+    public function fligramStore(Request $request)
+    {
+        //dd($request->toArray());
+
+        $img = Image::make($request->file('file'));
+
+        /* insert watermark at bottom-right corner with 10px offset */
+        $img->insert(public_path('fligram.png'), 'bottom-right', 5, 5);
+        $img->encode('png');
+
+        $img->save(public_path('images/new-image.png'));
     }
 
     public function recursive($key, $menu): array

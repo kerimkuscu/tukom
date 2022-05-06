@@ -13,7 +13,9 @@ class MenuRepository
     public function getTreeData(): array
     {
         /** @var Collection $menus */
-        $menus = Menu::with('subMenus')->get();
+        $menus = Menu::with('subMenus')
+            ->whereNull('parent_id')
+            ->get();
 
         $data = [];
 
