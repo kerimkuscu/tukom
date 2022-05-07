@@ -27,6 +27,10 @@ import Calendar from 'primevue/calendar';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import CascadeSelect from 'primevue/cascadeselect';
+import Dropdown from 'primevue/dropdown';
+import ColumnGroup from 'primevue/columngroup';
+import DataTable from 'primevue/datatable';
+import Password from 'primevue/password';
 
 Vue.component('App', require('./components/App.vue').default);
 Vue.component('login-form', require('./components/LoginForm.vue').default);
@@ -36,6 +40,11 @@ Vue.component('Calendar', Calendar);
 Vue.component('Button', Button);
 Vue.component('InputText', InputText);
 Vue.component('CascadeSelect', CascadeSelect);
+Vue.component('Dropdown', Dropdown);
+Vue.component('ColumnGroup', ColumnGroup);
+Vue.component('DataTable', DataTable);
+Vue.component('Password', Password);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

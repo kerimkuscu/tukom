@@ -5,11 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Ramsey\Collection\Collection;
 
 class LocalController extends Controller
 {
     public function test()
     {
+
+        /** @var Collection $menus */
+        $menus = Menu::with('subMenus')
+            ->whereNull('parent_id')
+            ->get();
+
+        $data = [];
+        foreach ($menus as $menu){
+            $data[] = [
+                'name' =>  $menu->name,
+                'childrens' => $menu->subMenus
+            ];
+        }
+
+        dd($data);
+
+
 //        $a =Menu::factory()->create([
 //            'parent_id' =>   Menu::find(1)->id
 //        ]);
@@ -18,15 +36,15 @@ class LocalController extends Controller
 //        $q = Menu::find(1)->subMenus;
 //        dd($q->first()->subMenus);
 
-        $a = Menu::with('subMenus')->get();
-
-        $data = [];
-
-        foreach ($a as $key => $menu) {
-            $data[] = $this->recursive($key, $menu);
-        }
-
-        dd($data);
+//        $a = Menu::with('subMenus')->get();
+//
+//        $data = [];
+//
+//        foreach ($a as $key => $menu) {
+//            $data[] = $this->recursive($key, $menu);
+//        }
+//
+//        dd($data);
 
         return 'OK';
     }

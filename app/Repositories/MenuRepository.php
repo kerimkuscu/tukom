@@ -54,4 +54,63 @@ class MenuRepository
 
         return $data;
     }
+
+    public function getMenuList(): array
+    {
+        /** @var Collection $menus */
+        return Menu::with('subMenus')
+            ->get()
+            ->map(function($item) {
+               return [
+                   'text' => $item->name,
+                   'value' => $item->id
+               ];
+            })
+            ->toArray();
+
+//        $data = [];
+//        $maxDeep = 0;
+//        $deep = 0;
+//
+//        foreach ($menus as $menu) {
+//            $data[] = $this->getTreeForMenuList($menu, $deep);
+//
+//            if($deep > $maxDeep){
+//                $maxDeep = $deep;
+//            }
+//        }
+//
+//        return [
+//            'data' => $data,
+//            'meta' => [
+//                'deep' => $maxDeep
+//            ]
+//        ];
+    }
+
+    /**
+     * @param Menu $menu
+     *
+     * @return array
+     */
+    public function getTreeForMenuList(Menu $menu, &$deep): array
+    {
+        $data = [
+            'name' => $menu->name,
+            'childrens' => []
+        ];
+
+        if (!$menu->submenus->isEmpty()) {
+            foreach ($menu->submenus as $menu2) {
+                $childrens[] = $this->getTreeForMenuList($menu2, $deep);
+            }
+
+            if (isset($childrens)) {
+                $data['childrens'] = $childrens;
+                $deep++;
+            }
+        }
+
+        return $data;
+    }
 }

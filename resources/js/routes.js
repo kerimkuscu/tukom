@@ -1,8 +1,10 @@
 import MenuForm from "./components/Menu/MenuForm";
-import User from "./components/User";
 import Product from "./components/Product";
 import MenuIndex from "./components/Menu/MenuIndex";
 import MenuGrid from "./components/Menu/MenuGrid";
+import UserForm from "./components/User/UserForm";
+import UserIndex from "./components/User/UserIndex";
+import UserGrid from "./components/User/UserGrid";
 
 export const routes = [
     {
@@ -31,19 +33,24 @@ export const routes = [
     {
         path: '/users',
         name: 'users',
-        component: User,
-        // children: [
-        //     {
-        //         path: 'edit/:id',
-        //         name: 'edit',
-        //         component: UserForm,
-        //     },
-        //     {
-        //         path: 'create',
-        //         name: 'create',
-        //         component: UserForm,
-        //     },
-        // ]
+        component: UserIndex,
+        children: [
+            {
+                path: '/',
+                name: 'users.grid',
+                component: UserGrid,
+            },
+            {
+                path: 'edit/:id',
+                name: 'users.edit',
+                component: UserForm,
+            },
+            {
+                path: 'create',
+                name: 'users.create',
+                component: UserForm,
+            },
+        ]
     },
 
     {

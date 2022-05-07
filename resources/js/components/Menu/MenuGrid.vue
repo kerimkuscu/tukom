@@ -4,7 +4,12 @@
             <Button label="Create" @click="create" class="float-end" />
         </div>
         <TreeTable :value="menus">
-            <Column field="name" header="Name" :expander="true"></Column>
+            <Column field="name" header="Name" :expander="true">
+                <template #body="item">
+                    {{ item.node.data.name }}
+                    <Button type="button" icon="pi pi-pencil" class="p-button-warning float-end" @click="edit(item.node.data.id)" />
+                </template>
+            </Column>
         </TreeTable>
     </div>
 </template>
@@ -42,6 +47,10 @@ export default {
 
         create(){
             this.$router.push({ name: 'menus.create' });
+        },
+
+        edit(id){
+            this.$router.push({ path: 'edit/' + id });
         }
     }
 }

@@ -28,7 +28,9 @@ Route::middleware('auth:sanctum')->group(function() {
         return ['token' => $token->plainTextToken];
     });
 
+    Route::get('menus/getMenuList', [MenuController::class, 'getMenuList']);
     Route::apiResource('menus', MenuController::class);
+
     Route::apiResource('products', ProductController::class);
     Route::apiResource('users', UserController::class);
 });

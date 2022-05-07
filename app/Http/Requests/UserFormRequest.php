@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UserFormRequest extends FormRequest
 {
@@ -23,13 +25,26 @@ class UserFormRequest extends FormRequest
      */
     public function rules()
     {
+        $user = $this->route('user');
+
         return [
             'name' => [
                 'required',
             ],
             'email' => [
                 'required',
-                'unique:users',
+                'email',
+                Rule::unique('users')->ignore($user),
+            ],
+            'password' => [
+                $user ? 'nullable' : 'required',
+                'confirmed',
+                'max:30',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols(),
             ],
         ];
     }

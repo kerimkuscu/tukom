@@ -37,7 +37,7 @@
 
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <router-link :to="{name:'users'}" class="nav-link">
+                            <router-link :to="{name:'users.grid'}" class="nav-link">
                                 Users
                             </router-link>
                         </li>

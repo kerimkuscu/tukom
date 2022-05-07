@@ -30,6 +30,15 @@ class MenuController extends Controller
         ]);
     }
 
+    public function getMenuList()
+    {
+        $data = $this->repository->getMenuList();
+
+        return response()->json([
+            'data' => $data,
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
