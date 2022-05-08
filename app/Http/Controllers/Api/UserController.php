@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserFormRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,9 +17,20 @@ class UserController extends Controller
      *
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return UserResource::collection(User::paginate(10));
+        $columns       = ['name', 'email'];
+        $sortValue     = $request->input('sort') ?? '';
+        $sortColumn    = in_array($sortValue, $columns) ? $sortValue : 'id';
+        $sortDirection = $request->input('sortOrder', '1') === '1' ? 'ASC' : 'DESC';
+
+        $users = User::query()
+            ->when($request->input('name'), fn($query, $value) => $query->where('name', 'like', '%' . $value . '%'))
+            ->when($request->input('email'), fn($query, $value) => $query->where('email', 'like', '%' . $value . '%'))
+            ->orderBy($sortColumn, $sortDirection)
+            ->paginate(2);
+
+        return UserResource::collection($users);
     }
 
     /**
@@ -61,6 +74,8 @@ class UserController extends Controller
         if (empty($attributes['password'])) {
             unset($attributes['password']);
             unset($attributes['password_confirmation']);
+        } else {
+            $attributes['password'] = Hash::make($attributes['password']);
         }
 
         $user->update($attributes);

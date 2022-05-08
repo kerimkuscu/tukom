@@ -31,6 +31,8 @@ import Dropdown from 'primevue/dropdown';
 import ColumnGroup from 'primevue/columngroup';
 import DataTable from 'primevue/datatable';
 import Password from 'primevue/password';
+import ConfirmationService from 'primevue/confirmationservice';
+import ConfirmDialog from 'primevue/confirmdialog';
 
 Vue.component('App', require('./components/App.vue').default);
 Vue.component('login-form', require('./components/LoginForm.vue').default);
@@ -44,6 +46,8 @@ Vue.component('Dropdown', Dropdown);
 Vue.component('ColumnGroup', ColumnGroup);
 Vue.component('DataTable', DataTable);
 Vue.component('Password', Password);
+Vue.component('ConfirmDialog', ConfirmDialog);
+Vue.use(ConfirmationService);
 
 
 /**

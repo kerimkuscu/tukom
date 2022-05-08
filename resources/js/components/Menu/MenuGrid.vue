@@ -1,12 +1,16 @@
 <template>
     <div>
+        <ConfirmDialog></ConfirmDialog>
+
         <div class="pb-5">
             <Button label="Create" @click="create" class="float-end" />
         </div>
         <TreeTable :value="menus">
-            <Column field="name" header="Name" :expander="true">
+            <Column field="name" header="Name" :expander="true"></Column>
+
+            <Column field="actions" >
                 <template #body="item">
-                    {{ item.node.data.name }}
+                    <Button type="button" icon="pi pi-trash" class="p-button-danger float-end" @click="remove(item.node.data.id)" />
                     <Button type="button" icon="pi pi-pencil" class="p-button-warning float-end" @click="edit(item.node.data.id)" />
                 </template>
             </Column>
@@ -51,6 +55,20 @@ export default {
 
         edit(id){
             this.$router.push({ path: 'edit/' + id });
+        },
+
+        remove(id){
+            this.$confirm.require({
+                message: 'Are you sure you want to delete this record?',
+                header: 'Confirmation',
+                icon: 'pi pi-exclamation-triangle',
+                accept: () => {
+                    this.$http.delete('/api/menus/' + id)
+                },
+                reject: () => {
+                    //callback to execute when user rejects the action
+                }
+            });
         }
     }
 }

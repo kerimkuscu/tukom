@@ -57,7 +57,7 @@
 
                 await this.getUser();
 
-                window.location.href = '/home'
+                window.location.href = '/products/'
             },
 
             async getUser(){
