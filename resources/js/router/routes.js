@@ -1,11 +1,13 @@
 import MenuForm from "../components/Menu/MenuForm";
-import Product from "../components/Product";
 import MenuIndex from "../components/Menu/MenuIndex";
 import MenuGrid from "../components/Menu/MenuGrid";
 import UserForm from "../components/User/UserForm";
 import UserIndex from "../components/User/UserIndex";
 import UserGrid from "../components/User/UserGrid";
 import LoginForm from "../components/LoginForm";
+import ProductIndex from "../components/Product/ProductIndex";
+import ProductGrid from "../components/Product/ProductGrid";
+import ProductForm from "../components/Product/ProductForm";
 
 export default [
     {
@@ -75,25 +77,29 @@ export default [
             },
         ]
     },
-
     {
         path: '/products',
         name: 'products',
-        component: Product,
+        component: ProductIndex,
         meta: {
             auth: true
         },
-        // children: [
-        //     {
-        //         path: 'edit/:id',
-        //         name: 'edit',
-        //         component: ProductForm,
-        //     },
-        //     {
-        //         path: 'create',
-        //         name: 'create',
-        //         component: ProductForm,
-        //     },
-        // ]
+        children: [
+            {
+                path: '/',
+                name: 'products.grid',
+                component: ProductGrid,
+            },
+            {
+                path: 'edit/:id',
+                name: 'products.edit',
+                component: ProductForm,
+            },
+            {
+                path: 'create',
+                name: 'products.create',
+                component: ProductForm,
+            },
+        ]
     },
 ];

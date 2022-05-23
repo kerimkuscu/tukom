@@ -24,7 +24,16 @@ class ProductFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'card_code' => [
+                'required',
+                'numeric'
+            ],
+            'description' => [
+                'required',
+            ],
+            'type' => [
+                'required',
+            ],
         ];
     }
 }

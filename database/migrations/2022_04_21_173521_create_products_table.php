@@ -15,10 +15,26 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('card_code');
             $table->string('description');
-            $table->integer('menu_id');
-            $table->unsignedTinyInteger('status')->default(0);
+            $table->string('type');
+            $table->string('brand')->nullable();
+            $table->integer('fiili_stok')->nullable();
+            $table->integer('actual_stock')->nullable();
+            $table->string('main_unit')->nullable();
+            $table->integer('price')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('group_code')->nullable();
+            $table->string('special_code_1')->nullable();
+            $table->string('special_code_2')->nullable();
+            $table->string('special_code_3')->nullable();
+            $table->string('special_code_4')->nullable();
+            $table->string('special_code_5')->nullable();
+            $table->string('special_code_6')->nullable();
+            $table->string('special_code_7')->nullable();
+            $table->string('special_code_8')->nullable();
+            $table->string('special_code_9')->nullable();
+            $table->string('special_code_10')->nullable();
             $table->timestamps();
         });
     }

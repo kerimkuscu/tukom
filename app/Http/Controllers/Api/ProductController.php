@@ -25,7 +25,7 @@ class ProductController extends Controller
     {
         //filtreleme
 
-        return ProductResource::collection(Product::paginate(10));
+        return ProductResource::collection(Product::paginate(15));
     }
 
     /**
@@ -37,7 +37,7 @@ class ProductController extends Controller
      */
     public function store(ProductFormRequest $request)
     {
-        $product = Product::query()->create($request->validated());
+        $product = Product::query()->create($request->all());
 
         return new ProductResource($product);
     }

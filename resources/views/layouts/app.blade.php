@@ -48,7 +48,7 @@
 
                         <li class="nav-item">
 
-                            <router-link :to="{name:'products'}" class="nav-link">
+                            <router-link :to="{name:'products.grid'}" class="nav-link">
                                 Products
                             </router-link>
                         </li>

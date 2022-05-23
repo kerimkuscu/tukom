@@ -114,8 +114,6 @@ export default {
         },
 
         remove(id){
-            console.log(id);
-
             this.$confirm.require({
                 message: 'Are you sure you want to delete this record?',
                 header: 'Confirmation',
