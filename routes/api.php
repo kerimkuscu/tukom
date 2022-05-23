@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +17,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group([
+    'middleware' => 'api',
+    'namespace'  => 'Auth',
+    'prefix'     => 'auth',
+], function() {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::get('user', [AuthController::class, 'user']);
+});
 
-Route::middleware('auth:sanctum')->group(function() {
+//'auth:sanctum'
+Route::group(['middleware' => ['auth:api']],function() {
     Route::get('/user', function(Request $request) {
         return $request->user();
     });
@@ -34,7 +44,3 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('products', ProductController::class);
     Route::apiResource('users', UserController::class);
 });
-
-
-
-

@@ -5,16 +5,21 @@
         <div class="pb-5">
             <Button label="Create" @click="create" class="float-end" />
         </div>
-        <TreeTable :value="menus">
+        <TreeTable v-if="menus.length > 0" :value="menus">
             <Column field="name" header="Name" :expander="true"></Column>
 
-            <Column field="actions" >
+            <Column :bodyStyle="{'text-align': 'center', overflow: 'visible'}" >
                 <template #body="item">
                     <Button type="button" icon="pi pi-trash" class="p-button-danger float-end" @click="remove(item.node.data.id)" />
                     <Button type="button" icon="pi pi-pencil" class="p-button-warning float-end" @click="edit(item.node.data.id)" />
                 </template>
             </Column>
         </TreeTable>
+        <div v-else>
+            <div class="alert alert-warning" role="alert">
+                There is no record to display
+            </div>
+        </div>
     </div>
 </template>
 
@@ -62,8 +67,9 @@ export default {
                 message: 'Are you sure you want to delete this record?',
                 header: 'Confirmation',
                 icon: 'pi pi-exclamation-triangle',
-                accept: () => {
-                    this.$http.delete('/api/menus/' + id)
+                accept: async () => {
+                    await this.$http.delete('/api/menus/' + id)
+                    await this.fetch()
                 },
                 reject: () => {
                     //callback to execute when user rejects the action

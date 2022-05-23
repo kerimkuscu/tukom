@@ -1,5 +1,7 @@
 <template>
 <div>
+    <ConfirmDialog></ConfirmDialog>
+
     <div class="pb-5">
         <Button label="Create" @click="create" class="float-end" />
     </div>
@@ -27,7 +29,6 @@
             </template>
         </Column>
 
-<!--        <Column field="name" header="Name" filterMatchMode="startsWith" ref="name" :sortable="true"></Column>-->
         <Column field="email" header="Email" filterField="email" filterMatchMode="contains" ref="email" :sortable="true">
             <template #filter="{filterModel,filterCallback}">
                 <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search by email"/>
@@ -37,6 +38,7 @@
         <Column :bodyStyle="{'text-align': 'center', overflow: 'visible'}">
             <template #body="{data}">
                 <Button type="button" icon="pi pi-pencil" class="p-button-warning" @click="edit(data.id)"></Button>
+                <Button type="button" icon="pi pi-trash" class="p-button-danger" @click="remove(data.id)"></Button>
             </template>
         </Column>
     </DataTable>
@@ -109,6 +111,22 @@ export default {
 
         edit(id){
             this.$router.push({ path: 'edit/' + id });
+        },
+
+        remove(id){
+            console.log(id);
+
+            this.$confirm.require({
+                message: 'Are you sure you want to delete this record?',
+                header: 'Confirmation',
+                icon: 'pi pi-exclamation-triangle',
+                accept: () => {
+                    this.$http.delete('/api/users/' + id)
+                },
+                reject: () => {
+                    //callback to execute when user rejects the action
+                }
+            });
         }
     }
 }

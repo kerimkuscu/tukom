@@ -28,7 +28,7 @@ class UserController extends Controller
             ->when($request->input('name'), fn($query, $value) => $query->where('name', 'like', '%' . $value . '%'))
             ->when($request->input('email'), fn($query, $value) => $query->where('email', 'like', '%' . $value . '%'))
             ->orderBy($sortColumn, $sortDirection)
-            ->paginate(2);
+            ->paginate(15);
 
         return UserResource::collection($users);
     }

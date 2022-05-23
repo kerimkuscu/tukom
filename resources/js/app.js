@@ -56,17 +56,30 @@ Vue.use(ConfirmationService);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import VueAuth from '@websanova/vue-auth';
+import router from './router'
+
+Vue.axios = window.axios;
+
+Vue.use(VueAuth, {
+    auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+    http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+    router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+    loginData: {url: '/api/auth/login', method: 'POST', redirect: '', fetchUser: true},
+    // fetchData: {url: '/api/auth/user', method: 'GET'},
+});
+
 import VueRouter from 'vue-router';
-import { routes } from './routes';
+import { routes } from './router/routes';
 import PrimeVue from 'primevue/config';
 
 Vue.use(PrimeVue);
 Vue.use(VueRouter);
 
-const router = new VueRouter({
-    mode: 'history',
-    routes
-});
+// const router = new VueRouter({
+//     mode: 'history',
+//     routes
+// });
 
 const app = new Vue({
     el: '#app',

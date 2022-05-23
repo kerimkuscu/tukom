@@ -1,16 +1,36 @@
-import MenuForm from "./components/Menu/MenuForm";
-import Product from "./components/Product";
-import MenuIndex from "./components/Menu/MenuIndex";
-import MenuGrid from "./components/Menu/MenuGrid";
-import UserForm from "./components/User/UserForm";
-import UserIndex from "./components/User/UserIndex";
-import UserGrid from "./components/User/UserGrid";
+import MenuForm from "../components/Menu/MenuForm";
+import Product from "../components/Product";
+import MenuIndex from "../components/Menu/MenuIndex";
+import MenuGrid from "../components/Menu/MenuGrid";
+import UserForm from "../components/User/UserForm";
+import UserIndex from "../components/User/UserIndex";
+import UserGrid from "../components/User/UserGrid";
+import LoginForm from "../components/LoginForm";
 
-export const routes = [
+export default [
+    {
+        path: '/login',
+        name: 'auth.login',
+        component: LoginForm,
+        meta: {
+            auth: false,
+        },
+    },
+    {
+        path: '/',
+        name: 'auth.login',
+        component: LoginForm,
+        meta: {
+            auth: false,
+        },
+    },
     {
         path: '/menus',
         name: 'menus',
         component: MenuIndex,
+        meta: {
+            auth: true
+        },
         children: [
             {
                 path: '/',
@@ -34,6 +54,9 @@ export const routes = [
         path: '/users',
         name: 'users',
         component: UserIndex,
+        meta: {
+            auth: true
+        },
         children: [
             {
                 path: '/',
@@ -57,6 +80,9 @@ export const routes = [
         path: '/products',
         name: 'products',
         component: Product,
+        meta: {
+            auth: true
+        },
         // children: [
         //     {
         //         path: 'edit/:id',
