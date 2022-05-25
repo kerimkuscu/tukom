@@ -20,6 +20,7 @@ class Product extends Model
         'price',
         'currency',
         'group_code',
+        'image',
         'special_code_1',
         'special_code_2',
         'special_code_3',

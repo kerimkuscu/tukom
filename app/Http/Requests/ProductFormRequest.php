@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductFormRequest extends FormRequest
 {
@@ -23,10 +24,17 @@ class ProductFormRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('product');
+
         return [
+            'image' => [
+                $id ? 'nullable' : 'required',
+                'mimes:jpeg,png,jpg',
+                'max:2048',
+            ],
             'card_code' => [
                 'required',
-                'numeric'
+                'numeric',
             ],
             'description' => [
                 'required',

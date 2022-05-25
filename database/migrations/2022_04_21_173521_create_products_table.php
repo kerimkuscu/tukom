@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('price')->nullable();
             $table->string('currency')->nullable();
             $table->string('group_code')->nullable();
+            $table->string('image')->nullable();
             $table->string('special_code_1')->nullable();
             $table->string('special_code_2')->nullable();
             $table->string('special_code_3')->nullable();

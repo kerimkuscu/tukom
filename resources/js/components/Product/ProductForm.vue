@@ -9,6 +9,43 @@
         <div class="row">
             <div class="col-8 mx-auto">
                 <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3 required">Image</label>
+                    <div class="col-md-9 grid p-fluid">
+<!--                        <input-->
+<!--                            id="image"-->
+<!--                            type="file"-->
+<!--                            accept=".jpg,.png"-->
+<!--                            :class="{ 'is-invalid': form.errors.has('card_code')}"-->
+<!--                            v-on:change="onFileChange"-->
+<!--                        />-->
+
+                        <div
+                            class="image-input"
+                            :style="{ 'background-image': `url(${imageData})` }"
+                            @click="chooseImage"
+                            :class="{ 'is-invalid': form.errors.has('card_code')}"
+                        >
+                            <span
+                                v-if="!imageData"
+                                class="placeholder"
+                            >
+                              Choose an Image
+                            </span>
+                            <input
+                                class="file-input"
+                                ref="fileInput"
+                                type="file"
+                                accept=".jpg,.png"
+                                @input="onSelectFile"
+                            >
+                        </div>
+
+                        <small id="image-help" class="invalid-feedback">{{ form.errors.first('image') }}</small>
+                    </div>
+                </div>
+
+
+                <div class="form-group row mb-2">
                     <label class="col-form-label col-md-3 required">Card Code</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
@@ -51,7 +88,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Brand</label>
+                    <label class="col-form-label col-md-3">Brand</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="brand"
@@ -65,7 +102,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Fiili Stok</label>
+                    <label class="col-form-label col-md-3">Fiili Stok</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="fiili_stok"
@@ -79,7 +116,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Actual Stoct</label>
+                    <label class="col-form-label col-md-3">Actual Stoct</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="actual_stock"
@@ -93,7 +130,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Main Unit</label>
+                    <label class="col-form-label col-md-3">Main Unit</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="main_unit"
@@ -107,7 +144,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Price</label>
+                    <label class="col-form-label col-md-3">Price</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="price"
@@ -121,7 +158,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Currency</label>
+                    <label class="col-form-label col-md-3">Currency</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="currency"
@@ -135,7 +172,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Group Code</label>
+                    <label class="col-form-label col-md-3">Group Code</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="group_code"
@@ -149,7 +186,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Special Code 1</label>
+                    <label class="col-form-label col-md-3">Special Code 1</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="special_code1"
@@ -175,6 +212,7 @@ export default {
 
     data: () => ({
         form: new Form({
+            image: null,
             card_code: null,
             description: null,
             type: null,
@@ -195,7 +233,9 @@ export default {
             special_code_8: null,
             special_code_9: null,
             special_code_10: null
-        })
+        }),
+
+        imageData: null
     }),
 
     async mounted() {
@@ -208,6 +248,11 @@ export default {
         async fetch(){
             const response = await this.$http.get('/api/products/' + this.$route.params.id);
             this.form.populate(response.data.data);
+
+            //'/images/1653505341.jpg'
+            this.imageData = '/images/' + this.form.image;
+
+            this.form.image = null;
         },
 
         async submit() {
@@ -229,7 +274,7 @@ export default {
 
         async update() {
             try {
-                await this.form.put('/api/products/' + this.$route.params.id);
+                await this.form.post('/api/products/' + this.$route.params.id);
                 await this.$router.push({ name: 'products.grid' });
             } catch (error) {
                 if(error.response.status !== 422){
@@ -240,7 +285,60 @@ export default {
 
         back(){
             this.$router.push({ name: 'products.grid' });
+        },
+
+        onFileChange(e){
+            this.form.image = e.target.files[0];
+        },
+
+        chooseImage () {
+            this.$refs.fileInput.click()
+        },
+
+        onSelectFile () {
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                    this.form.image = files[0];
+                }
+                reader.readAsDataURL(files[0])
+                this.$emit('input', files[0])
+            }
         }
     }
 }
 </script>
+
+<style>
+    .image-input{
+        display: block;
+        width: 100%;
+        height: 200px;
+        cursor: pointer;
+        background-size: cover;
+        background-position: center center;
+    }
+    .placeholder {
+        background: #F0F0F0;
+        width: 100%;
+
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+        font-size: 18px;
+        font-family: Helvetica;
+    }
+
+    .placeholder:hover {
+        background: #E0E0E0
+    }
+
+    .file-input {
+        display: none
+    }
+</style>

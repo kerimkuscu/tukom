@@ -23,8 +23,6 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        //filtreleme
-
         return ProductResource::collection(Product::paginate(15));
     }
 
@@ -37,7 +35,11 @@ class ProductController extends Controller
      */
     public function store(ProductFormRequest $request)
     {
-        $product = Product::query()->create($request->all());
+        $attributes = $request->toArray();
+
+        $attributes = $this->uploadImage($request, $attributes);
+
+        $product = Product::query()->create($attributes);
 
         return new ProductResource($product);
     }
@@ -64,7 +66,15 @@ class ProductController extends Controller
      */
     public function update(ProductFormRequest $request, Product $product): ProductResource
     {
-        $product->update($request->validated());
+        $attributes = $request->toArray();
+
+        if (!$request->file('image')) {
+            unset($attributes['image']);
+        }
+
+        $attributes = $this->uploadImage($request, $attributes);
+
+        $product->update($attributes);
 
         return new ProductResource($product);
     }
@@ -79,5 +89,29 @@ class ProductController extends Controller
     public function destroy(Product $product): void
     {
         $product->delete();
+    }
+
+    /**
+     * @param ProductFormRequest $request
+     * @param array              $attributes
+     *
+     * @return array
+     */
+    private function uploadImage(ProductFormRequest $request, array $attributes): array
+    {
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $fullPath  = $request->file('image')->storeAs(
+                'images',
+                $imageName,
+                'public'
+            );
+
+            $fullPath = str_replace('images/', '', $fullPath);
+
+            $attributes['image'] = $fullPath;
+        }
+
+        return $attributes;
     }
 }
