@@ -1,6 +1,10 @@
 <template>
     <div>
         <form autocomplete="off" method="post" @submit.prevent="login">
+            <div v-if="errors.has('error')" class="alert alert-danger">
+                {{ errors.first('error') }}
+            </div>
+
             <div class="row mb-3">
                 <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
 

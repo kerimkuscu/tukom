@@ -3,7 +3,7 @@
         <ConfirmDialog></ConfirmDialog>
 
         <div class="pb-5">
-            <Button label="Create" @click="create" class="float-end" />
+            <Button label="Create" @click="create" style="margin-bottom: 20px" class="float-end" />
         </div>
         <TreeTable v-if="menus.length > 0" :value="menus">
             <Column field="name" header="Name" :expander="true"></Column>
@@ -11,7 +11,7 @@
             <Column :bodyStyle="{'text-align': 'center', overflow: 'visible'}" >
                 <template #body="item">
                     <Button type="button" icon="pi pi-trash" class="p-button-danger float-end" @click="remove(item.node.data.id)" />
-                    <Button type="button" icon="pi pi-pencil" class="p-button-warning float-end" @click="edit(item.node.data.id)" />
+                    <Button type="button" icon="pi pi-pencil" style="margin-right: 10px" class="p-button-warning float-end" @click="edit(item.node.data.id)" />
                 </template>
             </Column>
         </TreeTable>

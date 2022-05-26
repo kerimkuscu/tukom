@@ -2,7 +2,7 @@
 <div>
     <ConfirmDialog></ConfirmDialog>
 
-    <div class="pb-5">
+    <div class="pb-5" style="margin-bottom: 20px">
         <Button label="Create" @click="create" class="float-end" />
     </div>
 
@@ -118,8 +118,9 @@ export default {
                 message: 'Are you sure you want to delete this record?',
                 header: 'Confirmation',
                 icon: 'pi pi-exclamation-triangle',
-                accept: () => {
-                    this.$http.delete('/api/users/' + id)
+                accept: async () => {
+                    await this.$http.delete('/api/users/' + id)
+                    await this.fetch()
                 },
                 reject: () => {
                     //callback to execute when user rejects the action

@@ -6610,6 +6610,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {// axios.get('/sanctum/csrf-cookie').then(response => {
@@ -7724,6 +7728,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductGrid",
   data: function data() {
@@ -7734,7 +7752,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       perPage: null,
       lazyParams: {},
       filters: {
-        'cardCode': {
+        'card_code': {
           value: '',
           matchMode: 'contains'
         },
@@ -7767,7 +7785,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _this.loading = true;
-                queryString = "?page=".concat(_this.lazyParams.page + 1 || '', "&sort=").concat(_this.lazyParams.sortField || '', "&sortOrder=").concat(_this.lazyParams.sortOrder || '');
+                queryString = "?page=".concat(_this.lazyParams.page + 1 || '', "&sort=").concat(_this.lazyParams.sortField || '', "&sortOrder=").concat(_this.lazyParams.sortOrder || '', "&card_code=").concat(_this.lazyParams.filters.card_code.value || '', "&description=").concat(_this.lazyParams.filters.description.value || '');
                 _context.next = 4;
                 return _this.$http.get('/api/products' + queryString);
 
@@ -7815,9 +7833,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         message: 'Are you sure you want to delete this record?',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
-        accept: function accept() {
-          _this2.$http["delete"]('/api/products/' + id);
-        },
+        accept: function () {
+          var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return _this2.$http["delete"]('/api/products/' + id);
+
+                  case 2:
+                    _context2.next = 4;
+                    return _this2.fetch();
+
+                  case 4:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2);
+          }));
+
+          function accept() {
+            return _accept.apply(this, arguments);
+          }
+
+          return accept;
+        }(),
         reject: function reject() {//callback to execute when user rejects the action
         }
       });
@@ -8292,9 +8334,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         message: 'Are you sure you want to delete this record?',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
-        accept: function accept() {
-          _this2.$http["delete"]('/api/users/' + id);
-        },
+        accept: function () {
+          var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return _this2.$http["delete"]('/api/users/' + id);
+
+                  case 2:
+                    _context2.next = 4;
+                    return _this2.fetch();
+
+                  case 4:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2);
+          }));
+
+          function accept() {
+            return _accept.apply(this, arguments);
+          }
+
+          return accept;
+        }(),
         reject: function reject() {//callback to execute when user rejects the action
         }
       });
@@ -8537,11 +8603,7 @@ __webpack_require__.r(__webpack_exports__);
   }
 }, {
   path: '/',
-  name: 'auth.login',
-  component: _components_LoginForm__WEBPACK_IMPORTED_MODULE_6__["default"],
-  meta: {
-    auth: false
-  }
+  redirect: 'products'
 }, {
   path: '/menus',
   name: 'menus',
@@ -57144,6 +57206,16 @@ var render = function () {
         },
       },
       [
+        _vm.errors.has("error")
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.errors.first("error")) +
+                  "\n        "
+              ),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "row mb-3" }, [
           _c(
             "label",
@@ -57394,6 +57466,7 @@ var render = function () {
         [
           _c("Button", {
             staticClass: "float-end",
+            staticStyle: { "margin-bottom": "20px" },
             attrs: { label: "Create" },
             on: { click: _vm.create },
           }),
@@ -57432,6 +57505,7 @@ var render = function () {
                           _vm._v(" "),
                           _c("Button", {
                             staticClass: "p-button-warning float-end",
+                            staticStyle: { "margin-right": "10px" },
                             attrs: { type: "button", icon: "pi pi-pencil" },
                             on: {
                               click: function ($event) {
@@ -57445,7 +57519,7 @@ var render = function () {
                   ],
                   null,
                   false,
-                  2496553342
+                  3405502689
                 ),
               }),
             ],
@@ -57761,7 +57835,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Actual Stoct"),
+              _vm._v("Actual Stock"),
             ]),
             _vm._v(" "),
             _c(
@@ -58020,7 +58094,7 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "pb-5" },
+        { staticClass: "pb-5", staticStyle: { "margin-bottom": "20px" } },
         [
           _c("Button", {
             staticClass: "float-end",
@@ -58038,6 +58112,9 @@ var render = function () {
           attrs: {
             dataKey: "id",
             responsiveLayout: "scroll",
+            scrollable: true,
+            scrollHeight: "1500px",
+            scrollDirection: "both",
             value: _vm.products,
             lazy: true,
             paginator: true,
@@ -58071,6 +58148,7 @@ var render = function () {
               header: "Card Code",
               filterMatchMode: "startsWith",
               sortable: true,
+              styles: { "min-width": "400px" },
             },
             scopedSlots: _vm._u([
               {
@@ -58124,6 +58202,7 @@ var render = function () {
               filterField: "description",
               filterMatchMode: "contains",
               sortable: true,
+              styles: { "min-width": "400px" },
             },
             scopedSlots: _vm._u([
               {
@@ -58171,8 +58250,78 @@ var render = function () {
           _vm._v(" "),
           _c("Column", {
             attrs: {
-              bodyStyle: { "text-align": "center", overflow: "visible" },
+              field: "type",
+              header: "Type",
+              styles: { "min-width": "150px" },
             },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "brand",
+              header: "Brand",
+              styles: { "min-width": "150px" },
+            },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "fiili_stok",
+              header: "Fiili Stok",
+              styles: { "min-width": "150px" },
+            },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "actual_stock",
+              header: "Actual stock",
+              styles: { "min-width": "150px" },
+            },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "main_unit",
+              header: "Main Unit",
+              styles: { "min-width": "150px" },
+            },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "price",
+              header: "Price",
+              styles: { "min-width": "150px" },
+            },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "currency",
+              header: "Currency",
+              styles: { "min-width": "150px" },
+            },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "group_code",
+              header: "Group Code",
+              styles: { "min-width": "150px" },
+            },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_1",
+              header: "Special Code 1",
+              styles: { "min-width": "150px" },
+            },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: { exportable: false, styles: { "min-width": "8rem" } },
             scopedSlots: _vm._u([
               {
                 key: "body",
@@ -58181,6 +58330,7 @@ var render = function () {
                   return [
                     _c("Button", {
                       staticClass: "p-button-warning",
+                      staticStyle: { "margin-right": "10px" },
                       attrs: { type: "button", icon: "pi pi-pencil" },
                       on: {
                         click: function ($event) {
@@ -58483,7 +58633,7 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "pb-5" },
+        { staticClass: "pb-5", staticStyle: { "margin-bottom": "20px" } },
         [
           _c("Button", {
             staticClass: "float-end",

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -23,7 +24,18 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        return ProductResource::collection(Product::paginate(15));
+        $columns       = ['card_code', 'description'];
+        $sortValue     = $request->input('sort') ?? '';
+        $sortColumn    = in_array($sortValue, $columns) ? $sortValue : 'id';
+        $sortDirection = $request->input('sortOrder', '1') === '1' ? 'ASC' : 'DESC';
+
+        $products = Product::query()
+            ->when($request->input('card_code'), fn($query, $value) => $query->where('card_code', 'like', '%' . $value . '%'))
+            ->when($request->input('description'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
+            ->orderBy($sortColumn, $sortDirection)
+            ->paginate(15);
+
+        return ProductResource::collection($products);
     }
 
     /**
@@ -101,15 +113,13 @@ class ProductController extends Controller
     {
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $fullPath  = $request->file('image')->storeAs(
-                'images',
-                $imageName,
-                'public'
-            );
 
-            $fullPath = str_replace('images/', '', $fullPath);
+            $img = Image::make($request->file('image'));
+            $img->insert(public_path('fligram.png'), 'bottom-right', 5, 5);
+            $img->encode('png');
+            $img->save(public_path('images/' . $imageName));
 
-            $attributes['image'] = $fullPath;
+            $attributes['image'] = $imageName;
         }
 
         return $attributes;

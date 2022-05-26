@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3">Actual Stoct</label>
+                    <label class="col-form-label col-md-3">Actual Stock</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
                             id="actual_stock"

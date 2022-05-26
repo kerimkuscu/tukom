@@ -20,11 +20,7 @@ export default [
     },
     {
         path: '/',
-        name: 'auth.login',
-        component: LoginForm,
-        meta: {
-            auth: false,
-        },
+        redirect: 'products'
     },
     {
         path: '/menus',

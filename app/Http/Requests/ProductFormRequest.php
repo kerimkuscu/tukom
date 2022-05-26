@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ProductFormRequest extends FormRequest
 {
@@ -35,6 +34,7 @@ class ProductFormRequest extends FormRequest
             'card_code' => [
                 'required',
                 'numeric',
+                'unique:products',
             ],
             'description' => [
                 'required',
