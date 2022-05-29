@@ -20,7 +20,7 @@ export default [
     },
     {
         path: '/',
-        redirect: 'products'
+        redirect: 'products/'
     },
     {
         path: '/menus',

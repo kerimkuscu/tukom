@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductFormRequest extends FormRequest
 {
@@ -32,9 +33,9 @@ class ProductFormRequest extends FormRequest
                 'max:2048',
             ],
             'card_code' => [
-                'required',
+                $id ? 'nullable' : 'required',
                 'numeric',
-                'unique:products',
+                Rule::unique('products')->ignore($id)
             ],
             'description' => [
                 'required',

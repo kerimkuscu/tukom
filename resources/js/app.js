@@ -33,6 +33,7 @@ import DataTable from 'primevue/datatable';
 import Password from 'primevue/password';
 import ConfirmationService from 'primevue/confirmationservice';
 import ConfirmDialog from 'primevue/confirmdialog';
+import FileUpload from 'primevue/fileupload';
 
 Vue.component('App', require('./components/App.vue').default);
 Vue.component('login-form', require('./components/LoginForm.vue').default);
@@ -47,6 +48,7 @@ Vue.component('ColumnGroup', ColumnGroup);
 Vue.component('DataTable', DataTable);
 Vue.component('Password', Password);
 Vue.component('ConfirmDialog', ConfirmDialog);
+Vue.component('FileUpload', FileUpload);
 Vue.use(ConfirmationService);
 
 

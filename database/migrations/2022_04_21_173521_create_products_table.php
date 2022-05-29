@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('fiili_stok')->nullable();
             $table->integer('actual_stock')->nullable();
             $table->string('main_unit')->nullable();
-            $table->integer('price')->nullable();
+            $table->float('price')->nullable();
             $table->string('currency')->nullable();
             $table->string('group_code')->nullable();
             $table->string('image')->nullable();

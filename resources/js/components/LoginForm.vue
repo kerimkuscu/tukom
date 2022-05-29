@@ -90,8 +90,8 @@ import {Errors} from 'form-backend-validation';
                     success: () => {
                         let redirect = this.$auth.redirect();
 
-                        const redirectTo = redirect ? redirect.from.fullPath : '/products';
-console.log(redirectTo);
+                        const redirectTo = redirect ? redirect.from.fullPath : '/products/';
+
                         this.$router.push(redirectTo)
                     },
 

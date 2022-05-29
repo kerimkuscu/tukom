@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ProductImportController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('menus', MenuController::class);
 
     Route::apiResource('products', ProductController::class);
+    Route::post('/products/import', [ProductImportController::class, 'store']);
     Route::post('/products/{product}', [ProductController::class, 'update']);
 
     Route::apiResource('users', UserController::class);

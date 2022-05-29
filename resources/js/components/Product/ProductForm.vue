@@ -11,14 +11,6 @@
                 <div class="form-group row mb-2">
                     <label class="col-form-label col-md-3 required">Image</label>
                     <div class="col-md-9 grid p-fluid">
-<!--                        <input-->
-<!--                            id="image"-->
-<!--                            type="file"-->
-<!--                            accept=".jpg,.png"-->
-<!--                            :class="{ 'is-invalid': form.errors.has('card_code')}"-->
-<!--                            v-on:change="onFileChange"-->
-<!--                        />-->
-
                         <div
                             class="image-input"
                             :style="{ 'background-image': `url(${imageData})` }"
@@ -250,7 +242,9 @@ export default {
             this.form.populate(response.data.data);
 
             //'/images/1653505341.jpg'
-            this.imageData = '/images/' + this.form.image;
+            if(this.form.image){
+                this.imageData = '/images/' + this.form.image;
+            }
 
             this.form.image = null;
         },

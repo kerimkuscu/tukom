@@ -4,6 +4,16 @@
 
         <div class="pb-5" style="margin-bottom: 20px">
             <Button label="Create" @click="create" class="float-end" />
+
+            <FileUpload
+                mode="basic"
+                :auto="true"
+                chooseLabel="Import" name="demo[]"
+                :customUpload="true"
+                @uploader="importProducts"
+                accept=".xlsx, .xls, .csv"
+                style="float:right;padding-right: 3px;"
+            />
         </div>
 
         <DataTable
@@ -13,6 +23,8 @@
             :scrollable="true"
             scrollHeight="1500px"
             scrollDirection="both"
+            :resizableColumns="true"
+            columnResizeMode="expand"
             :value="products"
             :lazy="true"
             :paginator="true"
@@ -30,11 +42,20 @@
                 <template #filter="{filterModel,filterCallback}">
                     <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search by card code"/>
                 </template>
+
+                <template #body="slotProps">
+                    <router-link :to="{ path: 'edit/' + slotProps.data.id }" >{{ slotProps.data.description }}</router-link>
+<!--                    <a :title="slotProps.data.description">{{ slotProps.data.description }} </a>-->
+                </template>
             </Column>
 
             <Column field="description" header="Description" filterField="description" filterMatchMode="contains" ref="description" :sortable="true" :styles="{'min-width':'400px'}">
                 <template #filter="{filterModel,filterCallback}">
                     <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search by description"/>
+                </template>
+
+                <template #body="slotProps">
+                     <p :title="slotProps.data.description">{{ slotProps.data.description }} </p>
                 </template>
             </Column>
 
@@ -140,6 +161,20 @@ export default {
                 },
                 reject: () => {
                     //callback to execute when user rejects the action
+                }
+            });
+        },
+
+        importProducts(event){
+            let formData = new FormData();
+            let file = event.files[0];
+            formData.append('file', file);
+
+            console.log(file)
+
+            this.$http.post('/api/products/import', formData,  {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
                 }
             });
         }

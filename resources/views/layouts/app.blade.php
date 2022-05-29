@@ -62,9 +62,7 @@
 {{--                            @if (Route::has('login'))--}}
                                 <li v-if="$auth.check() === false" class="nav-item">
 {{--                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-                                    <router-link :to="{name:'auth.login'}" class="nav-link">
-                                        Users
-                                    </router-link>
+
                                 </li>
 {{--                            @endif--}}
 
