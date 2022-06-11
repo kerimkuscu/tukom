@@ -1,9 +1,15 @@
 <template>
     <form @submit.prevent="submit">
-        <div class="float-end">
-            <Button label="Back" @click="back"/>
+        <div class="pb-5" style="margin-bottom: 20px">
+            <h3 class="float-start card-title">Products</h3>
 
-            <Button type="submit" label="Save" />
+            <div class="float-end">
+                <div class="float-end">
+                    <Button class="p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
+
+                    <Button type="submit" label="Save" />
+                </div>
+            </div>
         </div>
 
         <div class="row">

@@ -32,4 +32,8 @@ class Product extends Model
         'special_code_9',
         'special_code_10',
     ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+    ];
 }

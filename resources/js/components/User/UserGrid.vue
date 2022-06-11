@@ -3,6 +3,7 @@
     <ConfirmDialog></ConfirmDialog>
 
     <div class="pb-5" style="margin-bottom: 20px">
+        <h3 class="float-start card-title">Users</h3>
         <Button label="Create" @click="create" class="float-end" />
     </div>
 
@@ -23,22 +24,14 @@
         @sort="onSort($event)"
         @filter="onFilter($event)"
     >
-        <Column field="name" header="Name" filterMatchMode="startsWith" ref="name" :sortable="true">
-            <template #filter="{filterModel,filterCallback}">
-                <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search by name"/>
-            </template>
-        </Column>
+        <Column field="name" header="Name" ref="name"></Column>
 
-        <Column field="email" header="Email" filterField="email" filterMatchMode="contains" ref="email" :sortable="true">
-            <template #filter="{filterModel,filterCallback}">
-                <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search by email"/>
-            </template>
-        </Column>
+        <Column field="email" header="Email" ref="email"></Column>
 
         <Column :bodyStyle="{'text-align': 'center', overflow: 'visible'}">
             <template #body="{data}">
-                <Button type="button" icon="pi pi-pencil" class="p-button-warning" @click="edit(data.id)"></Button>
-                <Button type="button" icon="pi pi-trash" class="p-button-danger" @click="remove(data.id)"></Button>
+                <Button icon="pi pi-pencil" class="p-button-secondary p-button-outlined" @click="edit(data.id)" />
+                <Button icon="pi pi-trash" class="p-button-danger" @click="remove(data.id)" />
             </template>
         </Column>
     </DataTable>

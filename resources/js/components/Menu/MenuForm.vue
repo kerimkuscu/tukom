@@ -2,19 +2,21 @@
 <div>
     <form @submit.prevent="submit">
 
-        <div class="float-end">
-            <Button label="Back" @click="back"/>
+        <div class="pb-5" style="margin-bottom: 20px">
+                <h3 class="float-start card-title">Menus</h3>
 
-            <Button type="submit" label="Save" />
-        </div>
+                <div class="float-end">
+                    <Button class="p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
+
+                    <Button type="submit" label="Save" />
+                </div>
+            </div>
 
     <div class="row">
         <div class="col-8 mx-auto">
             <div class="form-group row mb-2">
-                <label class="col-form-label col-md-3 required">Parent Menu</label>
+                <label class="col-form-label col-md-3">Parent Menu</label>
                 <div class="col-md-9 grid p-fluid">
-<!--                    <CascadeSelect v-model="form.parent_id" :options="countries" optionLabel="cname" optionGroupLabel="name"-->
-<!--                                   :optionGroupChildren="['states', 'cities']" style="minWidth: 14rem" placeholder="Parent Menu" />-->
 
                     <Dropdown
                         v-model="form.parent_id"
