@@ -13,7 +13,6 @@
                 :customUpload="true"
                 @uploader="importProducts"
                 accept=".xlsx, .xls, .csv"
-                chooseIcon="pi pi-download"
                 style="float:right;padding-right: 3px;"
                 buttonClass="p-button-outlined p-button-secondary"
             />

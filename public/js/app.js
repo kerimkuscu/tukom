@@ -7186,8 +7186,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "MenuIndex"
 });
@@ -7881,6 +7879,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductGrid",
   data: function data() {
@@ -8030,8 +8029,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -8520,8 +8517,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -59287,11 +59282,9 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card m-5" }, [
-          _c("div", { staticClass: "card-body" }, [_c("router-view")], 1),
-        ]),
+    _c("div", { staticClass: "row justify-content-center m-2" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body" }, [_c("router-view")], 1),
       ]),
     ]),
   ])
@@ -59910,6 +59903,7 @@ var render = function () {
               name: "demo[]",
               customUpload: true,
               accept: ".xlsx, .xls, .csv",
+              buttonClass: "p-button-outlined p-button-secondary",
             },
             on: { uploader: _vm.importProducts },
           }),
@@ -60605,11 +60599,9 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card m-5" }, [
-          _c("div", { staticClass: "card-body" }, [_c("router-view")], 1),
-        ]),
+    _c("div", { staticClass: "row justify-content-center m-2" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body" }, [_c("router-view")], 1),
       ]),
     ]),
   ])
@@ -60992,11 +60984,9 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card m-5" }, [
-          _c("div", { staticClass: "card-body" }, [_c("router-view")], 1),
-        ]),
+    _c("div", { staticClass: "row justify-content-center m-2" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body" }, [_c("router-view")], 1),
       ]),
     ]),
   ])
