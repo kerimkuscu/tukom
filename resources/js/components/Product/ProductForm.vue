@@ -1,13 +1,13 @@
 <template>
     <form @submit.prevent="submit">
         <div class="pb-5" style="margin-bottom: 20px">
-            <h3 class="float-start card-title">Products</h3>
+            <h4 class="float-start card-title">Products / {{createOrEditPage}}</h4>
 
             <div class="float-end">
                 <div class="float-end">
-                    <Button class="p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
+                    <Button class="p-button-sm p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
 
-                    <Button type="submit" label="Save" />
+                    <Button type="submit" label="Save" class="p-button-sm" />
                 </div>
             </div>
         </div>
@@ -210,6 +210,7 @@ export default {
 
     data: () => ({
         form: new Form({
+            id: null,
             image: null,
             card_code: null,
             description: null,
@@ -239,6 +240,12 @@ export default {
     async mounted() {
         if(this.$route.params.id){
             await this.fetch();
+        }
+    },
+
+    computed: {
+        createOrEditPage() {
+            return this.form.id === null ? 'Create' : 'Edit';
         }
     },
 

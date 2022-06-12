@@ -2,11 +2,11 @@
     <form @submit.prevent="submit">
 
         <div class="pb-5" style="margin-bottom: 20px">
-            <h3 class="float-start card-title">Users</h3>
+            <h4 class="float-start card-title">Users / {{createOrEditPage}}</h4>
 
             <div class="float-end">
-                <Button class="p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
-                <Button type="submit" label="Save" />
+                <Button class="p-button-sm p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
+                <Button type="submit" label="Save" class="p-button-sm" />
             </div>
         </div>
 
@@ -41,7 +41,7 @@
                 </div>
 
                 <div v-if="canChangePassword">
-                    <Button label="Change Password" class="p-button-danger" @click="changePassword = true"/>
+                    <Button label="Change Password" class="p-button-sm p-button-danger p-button-outlined" @click="changePassword = true"/>
                 </div>
 
 
@@ -93,6 +93,7 @@ export default {
 
     data: () => ({
         form: new Form({
+            id: null,
             name: null,
             email: null,
             password: null,
@@ -106,6 +107,10 @@ export default {
         canChangePassword(){
             console.log(this.$route.params.id !== undefined || this.changePassword);
             return this.$route.params.id !== undefined && !this.changePassword
+        },
+
+        createOrEditPage() {
+            return this.form.id === null ? 'Create' : 'Edit';
         }
     },
 

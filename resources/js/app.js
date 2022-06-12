@@ -35,6 +35,8 @@ import ConfirmationService from 'primevue/confirmationservice';
 import ConfirmDialog from 'primevue/confirmdialog';
 import FileUpload from 'primevue/fileupload';
 import NotFound from "./components/NotFound";
+import Card from 'primevue/card';
+
 
 Vue.component('App', require('./components/App.vue').default);
 Vue.component('login-form', require('./components/LoginForm.vue').default);
@@ -50,6 +52,7 @@ Vue.component('DataTable', DataTable);
 Vue.component('Password', Password);
 Vue.component('ConfirmDialog', ConfirmDialog);
 Vue.component('FileUpload', FileUpload);
+Vue.component('Card', Card);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
 

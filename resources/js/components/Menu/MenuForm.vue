@@ -3,12 +3,12 @@
     <form @submit.prevent="submit">
 
         <div class="pb-5" style="margin-bottom: 20px">
-                <h3 class="float-start card-title">Menus</h3>
+                <h4 class="float-start card-title">Menus / {{createOrEditPage}}</h4>
 
                 <div class="float-end">
-                    <Button class="p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
+                    <Button class="p-button-sm p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
 
-                    <Button type="submit" label="Save" />
+                    <Button type="submit" label="Save" class="p-button-sm" />
                 </div>
             </div>
 
@@ -57,67 +57,12 @@ export default {
 
     data: () => ({
         form: new Form({
+            id: null,
             parent_id: null,
             name: null,
         }),
 
         menuList: null,
-        // deep: null,
-        // menuList: null,
-        // optionGroupChildren: [],
-        //
-        // countries: [
-        //     {
-        //         name: 'Australia',
-        //         code: 'AU',
-        //         states: [
-        //             {
-        //                 name: 'New South Wales',
-        //                 cities: [
-        //                     {cname: 'Sydney', code: 'A-SY'},
-        //                     {cname: 'Newcastle', code: 'A-NE'},
-        //                     {cname: 'Wollongong', code: 'A-WO'}
-        //                 ]
-        //             },
-        //             {
-        //                 name: 'Queensland',
-        //                 cities: [
-        //                     {cname: 'Brisbane', code: 'A-BR'},
-        //                     {cname: 'Townsville', code: 'A-TO'}
-        //                 ]
-        //             },
-        //
-        //         ]
-        //     },
-        //     {
-        //         name: 'Canada',
-        //         code: 'CA',
-        //         states: [
-        //             {
-        //                 name: 'Quebec',
-        //                 cities: [
-        //                     {cname: 'Montreal', code: 'C-MO'},
-        //                     {cname: 'Quebec City', code: 'C-QU'}
-        //                 ]
-        //             },
-        //             {
-        //                 name: 'Ontario',
-        //                 cities: [
-        //                     {cname: 'Ottawa', code: 'C-OT'},
-        //                     {cname: 'Toronto', code: 'C-TO'}
-        //                 ]
-        //             },
-        //
-        //         ]
-        //     },
-        //     {
-        //         name: 'United States',
-        //         code: 'US',
-        //         states: [
-        //
-        //         ]
-        //     }
-        // ]
     }),
 
     async mounted() {
@@ -127,6 +72,12 @@ export default {
 
         await this.getMenuTree()
        // await this.prepareOptionGroupChildren()
+    },
+
+    computed: {
+        createOrEditPage() {
+            return this.form.id === null ? 'Create' : 'Edit';
+        }
     },
 
     methods : {

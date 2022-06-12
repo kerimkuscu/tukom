@@ -3,8 +3,8 @@
     <ConfirmDialog></ConfirmDialog>
 
     <div class="pb-5" style="margin-bottom: 20px">
-        <h3 class="float-start card-title">Users</h3>
-        <Button label="Create" @click="create" class="float-end" />
+        <h4 class="float-start card-title">Users</h4>
+        <Button label="Create" @click="create" class="float-end p-button-sm" />
     </div>
 
     <DataTable
@@ -27,8 +27,8 @@
 
         <Column :bodyStyle="{'text-align': 'center', overflow: 'visible'}">
             <template #body="{data}">
-                <Button icon="pi pi-pencil" class="p-button-secondary p-button-outlined" @click="edit(data.id)" />
-                <Button icon="pi pi-trash" class="p-button-danger" @click="remove(data.id)" />
+                <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(data.id)" />
+                <Button icon="pi pi-pencil" class="float-end p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="edit(data.id)" />
             </template>
         </Column>
     </DataTable>
