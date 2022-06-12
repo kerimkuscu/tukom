@@ -10,3 +10,25 @@
 @import '~primevue/resources/themes/saga-blue/theme.css';
 @import '~primevue/resources/primevue.min.css';
 @import '~primeicons/primeicons.css';
+
+.truncate {
+    display: inline-block;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+label.required:after {
+    color: #c00;
+    content: " *";
+    display: inline;
+}
+
+.p-filter-column {
+    background-color: #fff !important;
+}
+
+.p-paginator{
+    justify-content: right !important;
+}

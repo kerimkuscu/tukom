@@ -24,6 +24,8 @@
             dataKey="id"
             responsiveLayout="scroll"
             :scrollable="true"
+            :rows="perPage"
+            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
             scrollHeight="1500px"
             scrollDirection="both"
             :resizableColumns="true"
@@ -31,7 +33,6 @@
             :value="products"
             :lazy="true"
             :paginator="true"
-            :rows="perPage"
             :totalRecords="totalRecords"
             :loading="loading"
             filterDisplay="row"
@@ -65,27 +66,114 @@
                 </template>
             </Column>
 
-            <Column field="type" header="Type" :styles="{'min-width':'150px'}"></Column>
-            <Column field="brand" header="Brand" :styles="{'min-width':'150px'}"></Column>
-            <Column field="fiili_stok" header="Fiili Stok" :styles="{'min-width':'150px'}"></Column>
-            <Column field="actual_stock" header="Actual stock" :styles="{'min-width':'150px'}"></Column>
-            <Column field="main_unit" header="Main Unit" :styles="{'min-width':'150px'}"></Column>
+            <Column field="type" header="Type" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.type" class="truncate">{{ slotProps.data.type }} </p>
+                </template>
+            </Column>
 
-            <Column field="price" header="Price" :styles="{'min-width':'150px'}">
+            <Column field="brand" header="Brand" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.brand" class="truncate">{{ slotProps.data.brand }} </p>
+                </template>
+            </Column>
+
+            <Column field="fiili_stok" header="Fiili Stok" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.fiili_stok" class="truncate">{{ slotProps.data.fiili_stok }} </p>
+                </template>
+            </Column>
+
+            <Column field="actual_stock" header="Actual stock" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.actual_stock" class="truncate">{{ slotProps.data.actual_stock }} </p>
+                </template>
+            </Column>
+
+            <Column field="main_unit" header="Main Unit" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.main_unit" class="truncate">{{ slotProps.data.main_unit }} </p>
+                </template>
+            </Column>
+
+            <Column field="price" header="Price" :styles="{'min-width':'200px'}">
                 <template #body="slotProps">
                     <p :title="slotProps.data.price" class="truncate">{{ slotProps.data.price }} </p>
                 </template>
             </Column>
 
-            <Column field="currency" header="Currency" :styles="{'min-width':'150px'}"></Column>
+            <Column field="currency" header="Currency" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.currency" class="truncate">{{ slotProps.data.currency }} </p>
+                </template>
+            </Column>
 
-            <Column field="group_code" header="Group Code" :styles="{'min-width':'150px'}">
+            <Column field="group_code" header="Group Code" :styles="{'min-width':'200px'}">
                 <template #body="slotProps">
                     <p :title="slotProps.data.group_code" class="truncate">{{ slotProps.data.group_code }} </p>
                 </template>
             </Column>
 
-            <Column field="special_code_1" header="Special Code 1" :styles="{'min-width':'150px'}"></Column>
+            <Column field="special_code_1" header="Special Code 1" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_1" class="truncate">{{ slotProps.data.special_code_1 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_2" header="Special Code 2" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_2" class="truncate">{{ slotProps.data.special_code_2 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_3" header="Special Code 3" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_3" class="truncate">{{ slotProps.data.special_code_3 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_4" header="Special Code 4" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_4" class="truncate">{{ slotProps.data.special_code_4 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_5" header="Special Code 5" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_5" class="truncate">{{ slotProps.data.special_code_5 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_6" header="Special Code 6" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_6" class="truncate">{{ slotProps.data.special_code_6 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_7" header="Special Code 7" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_7" class="truncate">{{ slotProps.data.special_code_7 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_8" header="Special Code 8" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_8" class="truncate">{{ slotProps.data.special_code_8 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_9" header="Special Code 9" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_9" class="truncate">{{ slotProps.data.special_code_9 }} </p>
+                </template>
+            </Column>
+
+            <Column field="special_code_10" header="Special Code 10" :styles="{'min-width':'200px'}">
+                <template #body="slotProps">
+                    <p :title="slotProps.data.special_code_10" class="truncate">{{ slotProps.data.special_code_10 }} </p>
+                </template>
+            </Column>
+
 
             <Column :exportable="false" :styles="{'min-width':'8rem'}">
                 <template #body="{data}">
@@ -107,7 +195,7 @@ export default {
         products: null,
         loading: false,
         totalRecords: 0,
-        perPage: null,
+        perPage: 10,
         lazyParams: {},
 
         filters: {

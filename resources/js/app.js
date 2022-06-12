@@ -34,6 +34,7 @@ import Password from 'primevue/password';
 import ConfirmationService from 'primevue/confirmationservice';
 import ConfirmDialog from 'primevue/confirmdialog';
 import FileUpload from 'primevue/fileupload';
+import NotFound from "./components/NotFound";
 
 Vue.component('App', require('./components/App.vue').default);
 Vue.component('login-form', require('./components/LoginForm.vue').default);
@@ -50,7 +51,7 @@ Vue.component('Password', Password);
 Vue.component('ConfirmDialog', ConfirmDialog);
 Vue.component('FileUpload', FileUpload);
 Vue.use(ConfirmationService);
-
+Vue.use(NotFound);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
