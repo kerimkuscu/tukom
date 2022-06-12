@@ -8,6 +8,7 @@ import LoginForm from "../components/LoginForm";
 import ProductIndex from "../components/Product/ProductIndex";
 import ProductGrid from "../components/Product/ProductGrid";
 import ProductForm from "../components/Product/ProductForm";
+import NotFound from "../components/NotFound";
 
 export default [
     {
@@ -98,4 +99,6 @@ export default [
             },
         ]
     },
+
+    {path: '*', component: NotFound}
 ];

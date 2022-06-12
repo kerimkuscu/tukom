@@ -11,18 +11,15 @@
         ref="dt"
         dataKey="id"
         responsiveLayout="scroll"
+        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
         :value="users"
         :lazy="true"
         :paginator="true"
         :rows="perPage"
         :totalRecords="totalRecords"
         :loading="loading"
-        filterDisplay="row"
-        :filters.sync="filters"
-        :globalFilterFields="['name','email']"
         @page="onPage($event)"
         @sort="onSort($event)"
-        @filter="onFilter($event)"
     >
         <Column field="name" header="Name" ref="name"></Column>
 
@@ -48,11 +45,6 @@ export default {
         totalRecords: 0,
         perPage: null,
         lazyParams: {},
-
-        filters: {
-            'name': {value: '', matchMode: 'contains'},
-            'email': {value: '', matchMode: 'contains'},
-        },
     }),
 
     mounted() {
@@ -61,7 +53,6 @@ export default {
             rows: this.$refs.dt.rows,
             sortField: null,
             sortOrder: null,
-            filters: this.filters,
             page: 0
         };
 
@@ -72,7 +63,7 @@ export default {
         async fetch(){
             this.loading = true;
 
-            const queryString = `?page=${this.lazyParams.page + 1 || ''}&sort=${this.lazyParams.sortField || '' }&sortOrder=${this.lazyParams.sortOrder || ''}&name=${this.lazyParams.filters.name.value || ''}&email=${this.lazyParams.filters.email.value || ''}`
+            const queryString = `?page=${this.lazyParams.page + 1 || ''}`;
             const response = await this.$http.get('/api/users' + queryString)
 
             this.users = response.data.data;
@@ -89,11 +80,6 @@ export default {
         },
 
         onSort(event){
-            this.lazyParams = event;
-            this.fetch();
-        },
-
-        onFilter(event){
             this.lazyParams = event;
             this.fetch();
         },

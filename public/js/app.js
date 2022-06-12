@@ -6619,9 +6619,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -7197,6 +7194,37 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "NotFound"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Product/ProductForm.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Product/ProductForm.vue?vue&type=script&lang=js& ***!
@@ -7765,6 +7793,94 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductGrid",
   data: function data() {
@@ -7772,7 +7888,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       products: null,
       loading: false,
       totalRecords: 0,
-      perPage: null,
+      perPage: 10,
       lazyParams: {},
       filters: {
         'card_code': {
@@ -8281,9 +8397,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserGrid",
   data: function data() {
@@ -8292,17 +8405,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loading: false,
       totalRecords: 0,
       perPage: null,
-      lazyParams: {},
-      filters: {
-        'name': {
-          value: '',
-          matchMode: 'contains'
-        },
-        'email': {
-          value: '',
-          matchMode: 'contains'
-        }
-      }
+      lazyParams: {}
     };
   },
   mounted: function mounted() {
@@ -8311,7 +8414,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       rows: this.$refs.dt.rows,
       sortField: null,
       sortOrder: null,
-      filters: this.filters,
       page: 0
     };
     this.fetch();
@@ -8327,7 +8429,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _this.loading = true;
-                queryString = "?page=".concat(_this.lazyParams.page + 1 || '', "&sort=").concat(_this.lazyParams.sortField || '', "&sortOrder=").concat(_this.lazyParams.sortOrder || '', "&name=").concat(_this.lazyParams.filters.name.value || '', "&email=").concat(_this.lazyParams.filters.email.value || '');
+                queryString = "?page=".concat(_this.lazyParams.page + 1 || '');
                 _context.next = 4;
                 return _this.$http.get('/api/users' + queryString);
 
@@ -8351,10 +8453,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.fetch();
     },
     onSort: function onSort(event) {
-      this.lazyParams = event;
-      this.fetch();
-    },
-    onFilter: function onFilter(event) {
       this.lazyParams = event;
       this.fetch();
     },
@@ -8463,12 +8561,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var primevue_confirmationservice__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! primevue/confirmationservice */ "./node_modules/primevue/confirmationservice/index.js");
 /* harmony import */ var primevue_confirmdialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! primevue/confirmdialog */ "./node_modules/primevue/confirmdialog/index.js");
 /* harmony import */ var primevue_fileupload__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! primevue/fileupload */ "./node_modules/primevue/fileupload/index.js");
-/* harmony import */ var _websanova_vue_auth__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @websanova/vue-auth */ "./node_modules/@websanova/vue-auth/src/index.js");
-/* harmony import */ var _websanova_vue_auth__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _router_routes__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./router/routes */ "./resources/js/router/routes.js");
-/* harmony import */ var primevue_config__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! primevue/config */ "./node_modules/primevue/config/index.js");
+/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/NotFound */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var _websanova_vue_auth__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @websanova/vue-auth */ "./node_modules/@websanova/vue-auth/src/index.js");
+/* harmony import */ var _websanova_vue_auth__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _router_routes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./router/routes */ "./resources/js/router/routes.js");
+/* harmony import */ var primevue_config__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! primevue/config */ "./node_modules/primevue/config/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -8501,6 +8600,7 @@ Vue.prototype.$http = window.axios;
 
 
 
+
 Vue.component('App', (__webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"]));
 Vue.component('login-form', (__webpack_require__(/*! ./components/LoginForm.vue */ "./resources/js/components/LoginForm.vue")["default"]));
 Vue.component('TreeTable', primevue_treetable__WEBPACK_IMPORTED_MODULE_0__["default"]);
@@ -8516,6 +8616,7 @@ Vue.component('Password', primevue_password__WEBPACK_IMPORTED_MODULE_9__["defaul
 Vue.component('ConfirmDialog', primevue_confirmdialog__WEBPACK_IMPORTED_MODULE_11__["default"]);
 Vue.component('FileUpload', primevue_fileupload__WEBPACK_IMPORTED_MODULE_12__["default"]);
 Vue.use(primevue_confirmationservice__WEBPACK_IMPORTED_MODULE_10__["default"]);
+Vue.use(_components_NotFound__WEBPACK_IMPORTED_MODULE_13__["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -8525,7 +8626,7 @@ Vue.use(primevue_confirmationservice__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
 
 Vue.axios = window.axios;
-Vue.use((_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_13___default()), {
+Vue.use((_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_14___default()), {
   auth: __webpack_require__(/*! @websanova/vue-auth/drivers/auth/bearer.js */ "./node_modules/@websanova/vue-auth/drivers/auth/bearer.js"),
   http: __webpack_require__(/*! @websanova/vue-auth/drivers/http/axios.1.x.js */ "./node_modules/@websanova/vue-auth/drivers/http/axios.1.x.js"),
   router: __webpack_require__(/*! @websanova/vue-auth/drivers/router/vue-router.2.x.js */ "./node_modules/@websanova/vue-auth/drivers/router/vue-router.2.x.js"),
@@ -8540,15 +8641,15 @@ Vue.use((_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_13___default()), {
 
 
 
-Vue.use(primevue_config__WEBPACK_IMPORTED_MODULE_16__["default"]);
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_17__["default"]); // const router = new VueRouter({
+Vue.use(primevue_config__WEBPACK_IMPORTED_MODULE_17__["default"]);
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_18__["default"]); // const router = new VueRouter({
 //     mode: 'history',
 //     routes
 // });
 
 var app = new Vue({
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_14__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_15__["default"]
 });
 
 /***/ }),
@@ -8638,6 +8739,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Product_ProductIndex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Product/ProductIndex */ "./resources/js/components/Product/ProductIndex.vue");
 /* harmony import */ var _components_Product_ProductGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Product/ProductGrid */ "./resources/js/components/Product/ProductGrid.vue");
 /* harmony import */ var _components_Product_ProductForm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Product/ProductForm */ "./resources/js/components/Product/ProductForm.vue");
+/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/NotFound */ "./resources/js/components/NotFound.vue");
+
 
 
 
@@ -8718,6 +8821,9 @@ __webpack_require__.r(__webpack_exports__);
     name: 'products.create',
     component: _components_Product_ProductForm__WEBPACK_IMPORTED_MODULE_9__["default"]
   }]
+}, {
+  path: '*',
+  component: _components_NotFound__WEBPACK_IMPORTED_MODULE_10__["default"]
 }]);
 
 /***/ }),
@@ -50748,6 +50854,45 @@ component.options.__file = "resources/js/components/Menu/MenuIndex.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/NotFound.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/NotFound.vue ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _NotFound_vue_vue_type_template_id_2ce50e5a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NotFound.vue?vue&type=template&id=2ce50e5a& */ "./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a&");
+/* harmony import */ var _NotFound_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NotFound.vue?vue&type=script&lang=js& */ "./resources/js/components/NotFound.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _NotFound_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _NotFound_vue_vue_type_template_id_2ce50e5a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _NotFound_vue_vue_type_template_id_2ce50e5a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/NotFound.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Product/ProductForm.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/Product/ProductForm.vue ***!
@@ -51061,6 +51206,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MenuIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Menu/MenuIndex.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/NotFound.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/NotFound.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NotFound.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -52761,6 +52922,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuIndex_vue_vue_type_template_id_61d710e4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuIndex_vue_vue_type_template_id_61d710e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MenuIndex.vue?vue&type=template&id=61d710e4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Menu/MenuIndex.vue?vue&type=template&id=61d710e4&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_2ce50e5a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_2ce50e5a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_2ce50e5a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NotFound.vue?vue&type=template&id=2ce50e5a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a&");
 
 
 /***/ }),
@@ -58829,7 +59007,18 @@ var render = function () {
                     ]),
                   ]),
                   _vm._v(" "),
-                  _vm._m(0),
+                  _c("div", { staticClass: "row mb-0" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-8 offset-md-4" },
+                      [
+                        _c("Button", {
+                          attrs: { type: "submit", label: "Login" },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
                 ]
               ),
             ]),
@@ -58839,26 +59028,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-0" }, [
-      _c("div", { staticClass: "col-md-8 offset-md-4" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [
-            _vm._v(
-              "\n                                        Login\n                                    "
-            ),
-          ]
-        ),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -59127,6 +59297,50 @@ var render = function () {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card m-5" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "alert alert-warning" }, [
+                _vm._v("Page Not Found"),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -59711,6 +59925,9 @@ var render = function () {
             dataKey: "id",
             responsiveLayout: "scroll",
             scrollable: true,
+            rows: _vm.perPage,
+            paginatorTemplate:
+              "CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink",
             scrollHeight: "1500px",
             scrollDirection: "both",
             resizableColumns: true,
@@ -59718,7 +59935,6 @@ var render = function () {
             value: _vm.products,
             lazy: true,
             paginator: true,
-            rows: _vm.perPage,
             totalRecords: _vm.totalRecords,
             loading: _vm.loading,
             filterDisplay: "row",
@@ -59879,47 +60095,132 @@ var render = function () {
             attrs: {
               field: "type",
               header: "Type",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.type },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.type) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
           }),
           _vm._v(" "),
           _c("Column", {
             attrs: {
               field: "brand",
               header: "Brand",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.brand },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.brand) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
           }),
           _vm._v(" "),
           _c("Column", {
             attrs: {
               field: "fiili_stok",
               header: "Fiili Stok",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.fiili_stok },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.fiili_stok) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
           }),
           _vm._v(" "),
           _c("Column", {
             attrs: {
               field: "actual_stock",
               header: "Actual stock",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.actual_stock },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.actual_stock) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
           }),
           _vm._v(" "),
           _c("Column", {
             attrs: {
               field: "main_unit",
               header: "Main Unit",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.main_unit },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.main_unit) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
           }),
           _vm._v(" "),
           _c("Column", {
             attrs: {
               field: "price",
               header: "Price",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
               {
@@ -59944,15 +60245,32 @@ var render = function () {
             attrs: {
               field: "currency",
               header: "Currency",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.currency },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.currency) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
           }),
           _vm._v(" "),
           _c("Column", {
             attrs: {
               field: "group_code",
               header: "Group Code",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
               {
@@ -59977,8 +60295,250 @@ var render = function () {
             attrs: {
               field: "special_code_1",
               header: "Special Code 1",
-              styles: { "min-width": "150px" },
+              styles: { "min-width": "200px" },
             },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_1 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_1) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_2",
+              header: "Special Code 2",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_2 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_2) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_3",
+              header: "Special Code 3",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_3 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_3) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_4",
+              header: "Special Code 4",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_4 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_4) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_5",
+              header: "Special Code 5",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_5 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_5) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_6",
+              header: "Special Code 6",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_6 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_6) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_7",
+              header: "Special Code 7",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_7 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_7) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_8",
+              header: "Special Code 8",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_8 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_8) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_9",
+              header: "Special Code 9",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_9 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_9) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: {
+              field: "special_code_10",
+              header: "Special Code 10",
+              styles: { "min-width": "200px" },
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "truncate",
+                        attrs: { title: slotProps.data.special_code_10 },
+                      },
+                      [_vm._v(_vm._s(slotProps.data.special_code_10) + " ")]
+                    ),
+                  ]
+                },
+              },
+            ]),
           }),
           _vm._v(" "),
           _c("Column", {
@@ -60338,28 +60898,21 @@ var render = function () {
           attrs: {
             dataKey: "id",
             responsiveLayout: "scroll",
+            paginatorTemplate:
+              "CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink",
             value: _vm.users,
             lazy: true,
             paginator: true,
             rows: _vm.perPage,
             totalRecords: _vm.totalRecords,
             loading: _vm.loading,
-            filterDisplay: "row",
-            filters: _vm.filters,
-            globalFilterFields: ["name", "email"],
           },
           on: {
-            "update:filters": function ($event) {
-              _vm.filters = $event
-            },
             page: function ($event) {
               return _vm.onPage($event)
             },
             sort: function ($event) {
               return _vm.onSort($event)
-            },
-            filter: function ($event) {
-              return _vm.onFilter($event)
             },
           },
         },

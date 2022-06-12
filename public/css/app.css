@@ -6495,7 +6495,7 @@
 .pi-refresh:before {
     content: "\e938";
 }
-
+  
 .pi-user:before {
     content: "\e939";
 }
@@ -18015,29 +18015,24 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-
-.card-title {
-    float: left;
-    margin: 0;
-    font-size: 20px;
-    font-weight: 800;
-    color: #000000;
-}
-
 .truncate {
-    display: inline-block;
-    width: 150px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: inline-block;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 label.required:after {
-    color: #c00;
-    content: " *";
-    display: inline;
+  color: #c00;
+  content: " *";
+  display: inline;
 }
 
-.p-invalid {
-    color: #dc3545;
+.p-filter-column {
+  background-color: #fff !important;
+}
+
+.p-paginator {
+  justify-content: right !important;
 }
