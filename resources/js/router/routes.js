@@ -1,16 +1,20 @@
-import MenuForm from "../components/Menu/MenuForm";
-import MenuIndex from "../components/Menu/MenuIndex";
-import MenuGrid from "../components/Menu/MenuGrid";
-import UserForm from "../components/User/UserForm";
-import UserIndex from "../components/User/UserIndex";
-import UserGrid from "../components/User/UserGrid";
-import LoginForm from "../components/LoginForm";
-import ProductIndex from "../components/Product/ProductIndex";
-import ProductGrid from "../components/Product/ProductGrid";
-import ProductForm from "../components/Product/ProductForm";
+// Backend
+import MenuForm from "../Backend/Pages/Menu/MenuForm";
+import MenuIndex from "../Backend/Pages/Menu/MenuIndex";
+import MenuGrid from "../Backend/Pages/Menu/MenuGrid";
+import UserForm from "../Backend/Pages/User/UserForm";
+import UserIndex from "../Backend/Pages/User/UserIndex";
+import UserGrid from "../Backend/Pages/User/UserGrid";
+import LoginForm from "../Backend/Pages/LoginForm";
+import ProductIndex from "../Backend/Pages/Product/ProductIndex";
+import ProductGrid from "../Backend/Pages/Product/ProductGrid";
+import ProductForm from "../Backend/Pages/Product/ProductForm";
 import NotFound from "../components/NotFound";
 
+// Frontend
+
 export default [
+    //Backend
     {
         path: '/login',
         name: 'auth.login',
@@ -18,10 +22,6 @@ export default [
         meta: {
             auth: false,
         },
-    },
-    {
-        path: '/',
-        redirect: 'products/'
     },
     {
         path: '/menus',
@@ -48,7 +48,6 @@ export default [
             },
         ]
     },
-
     {
         path: '/users',
         name: 'users',
@@ -99,6 +98,8 @@ export default [
             },
         ]
     },
+
+    //Frontend
 
     {path: '*', component: NotFound}
 ];

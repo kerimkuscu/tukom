@@ -39,7 +39,7 @@ import Card from 'primevue/card';
 
 
 Vue.component('App', require('./components/App.vue').default);
-Vue.component('login-form', require('./components/LoginForm.vue').default);
+Vue.component('login-form', require('./Backend/Pages/LoginForm.vue').default);
 Vue.component('TreeTable', TreeTable);
 Vue.component('Column', Column);
 Vue.component('Calendar', Calendar);
