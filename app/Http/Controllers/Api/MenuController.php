@@ -8,7 +8,6 @@ use App\Http\Resources\MenuResource;
 use App\Models\Menu;
 use App\Repositories\MenuRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
 class MenuController extends Controller
 {
@@ -84,9 +83,18 @@ class MenuController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Menu $menu
+     * @return JsonResponse
      */
-    public function destroy(Menu $menu): void
+    public function destroy(Menu $menu): JsonResponse
     {
-        $menu->delete();
+        $status = false;
+        if (!$menu->subMenus()->exists()) {
+            $menu->delete();
+            $status = true;
+        }
+
+        return response()->json([
+            'status' => $status,
+        ]);
     }
 }

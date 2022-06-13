@@ -36,7 +36,7 @@ import ConfirmDialog from 'primevue/confirmdialog';
 import FileUpload from 'primevue/fileupload';
 import NotFound from "./components/NotFound";
 import Card from 'primevue/card';
-
+import ToastService from 'primevue/toastservice';
 
 Vue.component('App', require('./components/App.vue').default);
 Vue.component('login-form', require('./Backend/Pages/LoginForm.vue').default);
@@ -55,6 +55,7 @@ Vue.component('FileUpload', FileUpload);
 Vue.component('Card', Card);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
+Vue.use(ToastService);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

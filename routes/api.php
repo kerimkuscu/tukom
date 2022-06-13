@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
@@ -47,4 +48,5 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('/products/{product}', [ProductController::class, 'update']);
 
     Route::apiResource('users', UserController::class);
+    Route::apiResource('brands', BrandController::class);
 });
