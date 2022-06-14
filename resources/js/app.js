@@ -1,25 +1,9 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue').default;
 
 Vue.prototype.$http = window.axios;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 import TreeTable from 'primevue/treetable';
 import Column from 'primevue/column';
@@ -36,6 +20,10 @@ import ConfirmDialog from 'primevue/confirmdialog';
 import FileUpload from 'primevue/fileupload';
 import NotFound from "./components/NotFound";
 import Card from 'primevue/card';
+import ImagePreview from 'primevue/imagepreview';
+
+
+import Navbar from './Backend/Pages/Navbar';
 
 
 Vue.component('App', require('./components/App.vue').default);
@@ -53,8 +41,10 @@ Vue.component('Password', Password);
 Vue.component('ConfirmDialog', ConfirmDialog);
 Vue.component('FileUpload', FileUpload);
 Vue.component('Card', Card);
+Vue.component('ImagePreview', ImagePreview);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
+Vue.component('Navbar', Navbar);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
