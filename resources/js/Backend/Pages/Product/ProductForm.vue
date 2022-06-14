@@ -42,6 +42,19 @@
                     </div>
                 </div>
 
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Menu</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <Dropdown
+                            v-model="form.menu_id"
+                            :options="menuList"
+                            optionLabel="text"
+                            optionValue="value"
+                            placeholder="Menu"
+                            :filter="true"
+                        />
+                    </div>
+                </div>
 
                 <div class="form-group row mb-2">
                     <label class="col-form-label col-md-3 required">Card Code</label>
@@ -187,13 +200,139 @@
                     <label class="col-form-label col-md-3">Special Code 1</label>
                     <div class="col-md-9 grid p-fluid">
                         <InputText
-                            id="special_code1"
+                            id="special_code_1"
                             class="p-inputtext-sm"
                             type="text"
-                            v-model="form.special_code1"
+                            v-model="form.special_code_1"
                             placeholder="Special Code 1"
-                            :class="{ 'p-invalid': form.errors.has('special_code1')}"/>
-                        <small id="special-code1-unit-help" class="p-invalid">{{ form.errors.first('special_code1') }}</small>
+                            :class="{ 'p-invalid': form.errors.has('special_code_1')}"/>
+                        <small id="special-code-1-unit-help" class="p-invalid">{{ form.errors.first('special_code_1') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 2</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_2"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_2"
+                            placeholder="Special Code 2"
+                            :class="{ 'p-invalid': form.errors.has('special_code_2')}"/>
+                        <small id="special-code-2-unit-help" class="p-invalid">{{ form.errors.first('special_code_2') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 3</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_3"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_3"
+                            placeholder="Special Code 3"
+                            :class="{ 'p-invalid': form.errors.has('special_code_3')}"/>
+                        <small id="special-code-3-unit-help" class="p-invalid">{{ form.errors.first('special_code_3') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 4</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_4"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_4"
+                            placeholder="Special Code 4"
+                            :class="{ 'p-invalid': form.errors.has('special_code_4')}"/>
+                        <small id="special-code-4-unit-help" class="p-invalid">{{ form.errors.first('special_code_4') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 5</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_5"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_5"
+                            placeholder="Special Code 5"
+                            :class="{ 'p-invalid': form.errors.has('special_code_5')}"/>
+                        <small id="special-code-5-unit-help" class="p-invalid">{{ form.errors.first('special_code_5') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 6</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_6"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_6"
+                            placeholder="Special Code 6"
+                            :class="{ 'p-invalid': form.errors.has('special_code_6')}"/>
+                        <small id="special-code-6-unit-help" class="p-invalid">{{ form.errors.first('special_code_6') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 7</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_7"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_7"
+                            placeholder="Special Code 7"
+                            :class="{ 'p-invalid': form.errors.has('special_code_7')}"/>
+                        <small id="special-code-7-unit-help" class="p-invalid">{{ form.errors.first('special_code_7') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 8</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_8"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_8"
+                            placeholder="Special Code 8"
+                            :class="{ 'p-invalid': form.errors.has('special_code_8')}"/>
+                        <small id="special-code-8-unit-help" class="p-invalid">{{ form.errors.first('special_code_8') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 9</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_9"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_9"
+                            placeholder="Special Code 9"
+                            :class="{ 'p-invalid': form.errors.has('special_code_9')}"/>
+                        <small id="special-code-9-unit-help" class="p-invalid">{{ form.errors.first('special_code_9') }}</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3">Special Code 10</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <InputText
+                            id="special_code_10"
+                            class="p-inputtext-sm"
+                            type="text"
+                            v-model="form.special_code_10"
+                            placeholder="Special Code 10"
+                            :class="{ 'p-invalid': form.errors.has('special_code_10')}"/>
+                        <small id="special-code-10-unit-help" class="p-invalid">{{ form.errors.first('special_code_10') }}</small>
                     </div>
                 </div>
 
@@ -211,6 +350,7 @@ export default {
     data: () => ({
         form: new Form({
             id: null,
+            menu_id: null,
             image: null,
             card_code: null,
             description: null,
@@ -234,6 +374,8 @@ export default {
             special_code_10: null
         }),
 
+        menuList: [],
+
         imageData: null
     }),
 
@@ -241,6 +383,8 @@ export default {
         if(this.$route.params.id){
             await this.fetch();
         }
+
+        await this.getMenus();
     },
 
     computed: {
@@ -260,6 +404,11 @@ export default {
             }
 
             this.form.image = null;
+        },
+
+        async getMenus(){
+            const response = await this.$http.get('/api/menus/getMenuList')
+            this.menuList = response.data.data;
         },
 
         async submit() {

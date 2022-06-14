@@ -1,6 +1,7 @@
 <template>
     <div>
         <ConfirmDialog></ConfirmDialog>
+        <Toast position="top-right" />
 
         <div class="pb-5" style="margin-bottom: 20px">
             <h4 class="float-start card-title">Menus</h4>
@@ -26,8 +27,14 @@
 </template>
 
 <script>
+import Toast from 'primevue/toast';
+
 export default {
     name: "Menus",
+
+    components : {
+        Toast
+    },
 
     data: () => ({
        menus: null,
@@ -57,7 +64,15 @@ export default {
                 header: 'Confirmation',
                 icon: 'pi pi-exclamation-triangle',
                 accept: async () => {
-                    await this.$http.delete('/api/menus/' + id)
+                    const response = await this.$http.delete('/api/menus/' + id)
+                    console.log(response.data.status);
+                    if(response.data.status){
+                        this.$toast.add({severity:'success', summary: 'Success', detail:'Menu deleted.', life: 1000});
+                    }
+                    else{
+                        this.$toast.add({severity:'error', summary: 'Error', detail:'Parent menu cannot be deleted.', life: 1000});
+                    }
+
                     await this.fetch()
                 },
                 reject: () => {

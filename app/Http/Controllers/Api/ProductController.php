@@ -20,11 +20,13 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
+     *
      * @return AnonymousResourceCollection
      */
-    public function index(Request $request)
+    public function index(Request $request): AnonymousResourceCollection
     {
-        $columns       = ['card_code', 'description'];
+        $columns       = ['card_code', 'description', 'type'];
         $sortValue     = $request->input('sort') ?? '';
         $sortColumn    = in_array($sortValue, $columns) ? $sortValue : 'id';
         $sortDirection = $request->input('sortOrder', '1') === '1' ? 'ASC' : 'DESC';
@@ -32,8 +34,9 @@ class ProductController extends Controller
         $products = Product::query()
             ->when($request->input('card_code'), fn($query, $value) => $query->where('card_code', 'like', '%' . $value . '%'))
             ->when($request->input('description'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
+            ->when($request->input('type'), fn($query, $value) => $query->where('type', 'like', '%' . $value . '%'))
             ->orderBy($sortColumn, $sortDirection)
-            ->paginate(15);
+            ->paginate($request->input('per_page', '15'));
 
         return ProductResource::collection($products);
     }
@@ -45,7 +48,7 @@ class ProductController extends Controller
      *
      * @return ProductResource
      */
-    public function store(ProductFormRequest $request)
+    public function store(ProductFormRequest $request): ProductResource
     {
         $attributes = $request->toArray();
 
@@ -115,7 +118,8 @@ class ProductController extends Controller
             $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
 
             $img = Image::make($request->file('image'));
-            $img->insert(public_path('fligram.png'), 'bottom-right', 5, 5);
+
+            $img->insert(public_path('fligram.png'), 'center');
             $img->encode('png');
             $img->save(public_path('images/' . $imageName));
 

@@ -23,8 +23,11 @@
             dataKey="id"
             responsiveLayout="scroll"
             :scrollable="true"
+            @cell-edit-complete="onCellEditComplete"
+            editMode="cell"
             :rows="perPage"
-            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+            :rowsPerPageOptions="[15,25,50,100]"
+            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
             scrollHeight="1500px"
             scrollDirection="both"
             :resizableColumns="true"
@@ -65,9 +68,28 @@
                 </template>
             </Column>
 
-            <Column field="type" header="Type" :styles="{'min-width':'200px'}">
+            <Column field="type" header="Type" filterField="type" filterMatchMode="contains" ref="type" :sortable="true" :styles="{'min-width':'400px'}">
+                <template #filter="{filterModel,filterCallback}">
+                    <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search by type"/>
+                </template>
+
                 <template #body="slotProps">
                     <p :title="slotProps.data.type" class="truncate">{{ slotProps.data.type }} </p>
+                </template>
+            </Column>
+
+            <Column field="menu_id" header="Menu" :styles="{'min-width':'400px'}">
+                <template #body="slotProps">
+<!--                    :filter="true"-->
+                    <Dropdown
+                        v-model="slotProps.data.menu_id"
+                        :options="menuList"
+                        optionLabel="text"
+                        optionValue="value"
+                        placeholder="Parent Menu"
+
+                    >
+                    </Dropdown>
                 </template>
             </Column>
 
@@ -194,13 +216,16 @@ export default {
         products: null,
         loading: false,
         totalRecords: 0,
-        perPage: 10,
+        perPage: 15,
         lazyParams: {},
 
         filters: {
             'card_code': {value: '', matchMode: 'contains'},
             'description': {value: '', matchMode: 'contains'},
+            'type': {value: '', matchMode: 'contains'},
         },
+
+        menuList: []
     }),
 
     mounted() {
@@ -214,13 +239,18 @@ export default {
         };
 
         this.fetch();
+
+        this.getMenus();
     },
 
     methods: {
+        onCellEditComplete(){
+
+        },
         async fetch(){
             this.loading = true;
 
-            const queryString = `?page=${this.lazyParams.page + 1 || ''}&sort=${this.lazyParams.sortField || '' }&sortOrder=${this.lazyParams.sortOrder || ''}&card_code=${this.lazyParams.filters.card_code.value || ''}&description=${this.lazyParams.filters.description.value || ''}`
+            const queryString = `?page=${this.lazyParams.page + 1 || ''}&sort=${this.lazyParams.sortField || '' }&sortOrder=${this.lazyParams.sortOrder || ''}&card_code=${this.lazyParams.filters.card_code.value || ''}&description=${this.lazyParams.filters.description.value || ''}&type=${this.lazyParams.filters.type.value || ''}&per_page=${this.lazyParams.rows}`
 
             const response = await this.$http.get('/api/products' + queryString)
 
@@ -230,6 +260,11 @@ export default {
 
             this.loading = false;
 
+        },
+
+        async getMenus(){
+            const response = await this.$http.get('/api/menus/getMenuList')
+            this.menuList = response.data.data;
         },
 
         onPage(event) {

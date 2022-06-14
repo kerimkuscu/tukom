@@ -21,7 +21,7 @@ import FileUpload from 'primevue/fileupload';
 import NotFound from "./components/NotFound";
 import Card from 'primevue/card';
 import ImagePreview from 'primevue/imagepreview';
-
+import ToastService from 'primevue/toastservice';
 
 import Navbar from './Backend/Pages/Navbar';
 
@@ -44,6 +44,7 @@ Vue.component('Card', Card);
 Vue.component('ImagePreview', ImagePreview);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
+Vue.use(ToastService);
 Vue.component('Navbar', Navbar);
 
 /**
