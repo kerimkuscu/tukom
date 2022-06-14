@@ -78,21 +78,6 @@
                 </template>
             </Column>
 
-            <Column field="menu_id" header="Menu" :styles="{'min-width':'400px'}">
-                <template #body="slotProps">
-<!--                    :filter="true"-->
-                    <Dropdown
-                        v-model="slotProps.data.menu_id"
-                        :options="menuList"
-                        optionLabel="text"
-                        optionValue="value"
-                        placeholder="Parent Menu"
-
-                    >
-                    </Dropdown>
-                </template>
-            </Column>
-
             <Column field="brand" header="Brand" :styles="{'min-width':'200px'}">
                 <template #body="slotProps">
                     <p :title="slotProps.data.brand" class="truncate">{{ slotProps.data.brand }} </p>
@@ -198,12 +183,23 @@
 
             <Column :exportable="false" :styles="{'min-width':'8rem'}">
                 <template #body="{data}">
-                    <Button icon="pi pi-trash" class="p-button-sm p-button-danger" @click="remove(data.id)" />
+                    <Button icon="pi pi-bars" class="p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="showMenuModal" />
                     <Button icon="pi pi-pencil" class="p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="edit(data.id)" />
+                    <Button icon="pi pi-trash" class="p-button-sm p-button-danger" @click="remove(data.id)" />
                 </template>
             </Column>
 
         </DataTable>
+
+        <Dialog :visible.sync="display" :showHeader="false">
+
+            Content
+
+            <template #footer>
+                <Button label="Cancel" icon="pi pi-times" class="p-button-sm p-button-secondary p-button-outlined"/>
+                <Button label="Save" icon="pi pi-check" class="p-button-sm p-button-primary" />
+            </template>
+        </Dialog>
 
     </div>
 </template>
@@ -225,7 +221,8 @@ export default {
             'type': {value: '', matchMode: 'contains'},
         },
 
-        menuList: []
+        menuList: [],
+        display: false
     }),
 
     mounted() {
@@ -305,23 +302,31 @@ export default {
             });
         },
 
-        importProducts(event){
-            let formData = new FormData();
-            let file = event.files[0];
-            formData.append('file', file);
+        async importProducts(event){
+            this.loading = true
 
-            console.log(file)
+                let formData = new FormData();
+                let file = event.files[0];
+                formData.append('file', file);
 
-            this.$http.post('/api/products/import', formData,  {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+                const response = await this.$http.post('/api/products/import', formData,  { headers: { 'Content-Type': 'multipart/form-data' } });
+
+                response.status === 200 ? this.fetch() : this.$toast.add({severity:'error', summary: 'Please try again later', detail:'Order submitted', life: 3000});
+
+            this.loading = false;
+        },
+
+        showMenuModal() {
+            this.display = true;
         }
     }
 }
 </script>
 
-<style scoped>
-
+<style>
+.p-fileupload-choose:not(.p-disabled):hover {
+    background: rgba(100, 116, 139, 0.04) !important;
+    color: #64748B !important;
+    border: 1px solid !important;
+}
 </style>
