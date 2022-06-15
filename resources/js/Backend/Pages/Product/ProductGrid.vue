@@ -196,7 +196,7 @@
             Content
 
             <template #footer>
-                <Button label="Cancel" icon="pi pi-times" class="p-button-sm p-button-secondary p-button-outlined"/>
+                <Button label="Cancel" icon="pi pi-times" class="p-button-sm p-button-secondary p-button-outlined" @click="closeMenuModal" />
                 <Button label="Save" icon="pi pi-check" class="p-button-sm p-button-primary" />
             </template>
         </Dialog>
@@ -318,6 +318,10 @@ export default {
 
         showMenuModal() {
             this.display = true;
+        },
+
+        closeMenuModal() {
+            this.display = false;
         }
     }
 }

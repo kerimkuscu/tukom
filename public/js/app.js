@@ -8250,6 +8250,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     showMenuModal: function showMenuModal() {
       this.display = true;
+    },
+    closeMenuModal: function closeMenuModal() {
+      this.display = false;
     }
   }
 });
@@ -63014,6 +63017,7 @@ var render = function () {
                     staticClass:
                       "p-button-sm p-button-secondary p-button-outlined",
                     attrs: { label: "Cancel", icon: "pi pi-times" },
+                    on: { click: _vm.closeMenuModal },
                   }),
                   _vm._v(" "),
                   _c("Button", {
