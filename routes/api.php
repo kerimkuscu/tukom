@@ -28,6 +28,8 @@ Route::group([
     Route::get('user', [AuthController::class, 'user']);
 });
 
+Route::get('menus/getMenuList', [MenuController::class, 'getMenuList']);
+
 //'auth:sanctum'
 Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/user', function(Request $request) {
@@ -40,7 +42,6 @@ Route::group(['middleware' => ['auth:api']], function() {
         return ['token' => $token->plainTextToken];
     });
 
-    Route::get('menus/getMenuList', [MenuController::class, 'getMenuList']);
     Route::apiResource('menus', MenuController::class);
 
     Route::apiResource('products', ProductController::class);

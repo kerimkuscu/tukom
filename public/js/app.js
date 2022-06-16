@@ -6621,51 +6621,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "UserForm",
+  name: "BrandForm",
   data: function data() {
     return {
       form: new form_backend_validation__WEBPACK_IMPORTED_MODULE_1__["default"]({
-        id: null,
         name: null,
-        email: null,
-        password: null,
-        password_confirmation: null
+        image: null
       }),
-      changePassword: false
+      imageData: null
     };
   },
   computed: {
-    canChangePassword: function canChangePassword() {
-      console.log(this.$route.params.id !== undefined || this.changePassword);
-      return this.$route.params.id !== undefined && !this.changePassword;
-    },
     createOrEditPage: function createOrEditPage() {
       return this.form.id === null ? 'Create' : 'Edit';
     }
@@ -6705,14 +6673,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.$http.get('/api/users/' + _this2.$route.params.id);
+                return _this2.$http.get('/api/brands/' + _this2.$route.params.id);
 
               case 2:
                 response = _context2.sent;
 
                 _this2.form.populate(response.data.data);
 
-              case 4:
+                if (_this2.form.image) {
+                  _this2.imageData = '/images/' + _this2.form.image;
+                }
+
+                _this2.form.image = null;
+
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -6762,12 +6736,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return _this4.form.post('/api/users');
+                return _this4.form.post('/api/brands');
 
               case 3:
                 _context4.next = 5;
                 return _this4.$router.push({
-                  name: 'users.grid'
+                  name: 'brands.grid'
                 });
 
               case 5:
@@ -6798,12 +6772,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context5.prev = 0;
                 _context5.next = 3;
-                return _this5.form.put('/api/users/' + _this5.$route.params.id);
+                return _this5.form.put('/api/brands/' + _this5.$route.params.id);
 
               case 3:
                 _context5.next = 5;
                 return _this5.$router.push({
-                  name: 'users.grid'
+                  name: 'brands.grid'
                 });
 
               case 5:
@@ -6826,8 +6800,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     back: function back() {
       this.$router.push({
-        name: 'users.grid'
+        name: 'brands.grid'
       });
+    },
+    chooseImage: function chooseImage() {
+      this.$refs.fileInput.click();
+    },
+    onSelectFile: function onSelectFile() {
+      var _this6 = this;
+
+      var input = this.$refs.fileInput;
+      var files = input.files;
+
+      if (files && files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          _this6.imageData = e.target.result;
+          _this6.form.image = files[0];
+        };
+
+        reader.readAsDataURL(files[0]);
+        this.$emit('input', files[0]);
+      }
     }
   }
 });
@@ -15364,7 +15359,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.image-input{\n    display: block;\n    width: 100%;\n    height: 200px;\n    cursor: pointer;\n    background-size: cover;\n    background-position: center center;\n}\n.placeholder {\n    background: #F0F0F0;\n    width: 100%;\n\n    height: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    color: #333;\n    font-size: 18px;\n    font-family: Helvetica;\n}\n.placeholder:hover {\n    background: #E0E0E0\n}\n.file-input {\n    display: none\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.image-input{\n    display: block;\n    width: 75%;\n    height: 300px;\n    cursor: pointer;\n    background-size: cover;\n    background-position: center center;\n}\n.placeholder {\n    background: #F0F0F0;\n    width: 100%;\n\n    height: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    color: #333;\n    font-size: 18px;\n    font-family: Helvetica;\n}\n.placeholder:hover {\n    background: #E0E0E0\n}\n.file-input {\n    display: none\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -63029,6 +63024,52 @@ var render = function () {
         _c("div", { staticClass: "col-8 mx-auto" }, [
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3 required" }, [
+              _vm._v("Image"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-9 grid p-fluid" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "image-input",
+                  class: { "is-invalid": _vm.form.errors.has("image") },
+                  style: {
+                    "background-image": "url(" + _vm.imageData + ")",
+                    "background-size": "100% 300px",
+                  },
+                  on: { click: _vm.chooseImage },
+                },
+                [
+                  !_vm.imageData
+                    ? _c("span", { staticClass: "placeholder" }, [
+                        _vm._v(
+                          "\n                          Choose an Image\n                        "
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "fileInput",
+                    staticClass: "file-input",
+                    attrs: { type: "file", accept: ".jpg,.png" },
+                    on: { input: _vm.onSelectFile },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "small",
+                {
+                  staticClass: "invalid-feedback",
+                  attrs: { id: "image-help" },
+                },
+                [_vm._v(_vm._s(_vm.form.errors.first("image")))]
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row mb-2" }, [
+            _c("label", { staticClass: "col-form-label col-md-3 required" }, [
               _vm._v("Name"),
             ]),
             _vm._v(" "),
@@ -63058,142 +63099,6 @@ var render = function () {
               1
             ),
           ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row mb-2" }, [
-            _c("label", { staticClass: "col-form-label col-md-3 required" }, [
-              _vm._v("Email"),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-9 grid p-fluid" },
-              [
-                _c("InputText", {
-                  staticClass: "p-inputtext-sm",
-                  class: { "p-invalid": _vm.form.errors.has("email") },
-                  attrs: { id: "email", type: "text", placeholder: "Email" },
-                  model: {
-                    value: _vm.form.email,
-                    callback: function ($$v) {
-                      _vm.$set(_vm.form, "email", $$v)
-                    },
-                    expression: "form.email",
-                  },
-                }),
-                _vm._v(" "),
-                _c(
-                  "small",
-                  { staticClass: "p-invalid", attrs: { id: "email-help" } },
-                  [_vm._v(_vm._s(_vm.form.errors.first("email")))]
-                ),
-              ],
-              1
-            ),
-          ]),
-          _vm._v(" "),
-          _vm.canChangePassword
-            ? _c(
-                "div",
-                [
-                  _c("Button", {
-                    staticClass:
-                      "p-button-sm p-button-danger p-button-outlined",
-                    attrs: { label: "Change Password" },
-                    on: {
-                      click: function ($event) {
-                        _vm.changePassword = true
-                      },
-                    },
-                  }),
-                ],
-                1
-              )
-            : _c("div", [
-                _c("div", { staticClass: "form-group row mb-2" }, [
-                  _c(
-                    "label",
-                    { staticClass: "col-form-label col-md-3 required" },
-                    [_vm._v("Password")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-9 grid p-fluid" },
-                    [
-                      _c("Password", {
-                        class: { "p-invalid": _vm.form.errors.has("password") },
-                        attrs: { placeholder: "Password", toggleMask: "" },
-                        model: {
-                          value: _vm.form.password,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.form, "password", $$v)
-                          },
-                          expression: "form.password",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "p-invalid",
-                          attrs: { id: "password-help" },
-                        },
-                        [_vm._v(_vm._s(_vm.form.errors.first("password")))]
-                      ),
-                    ],
-                    1
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    { staticClass: "col-form-label col-md-3 required" },
-                    [_vm._v("Password Confirmation")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-9 grid p-fluid" },
-                    [
-                      _c("Password", {
-                        class: {
-                          "p-invalid": _vm.form.errors.has(
-                            "password_confirmation"
-                          ),
-                        },
-                        attrs: {
-                          placeholder: "Password Confirmation",
-                          toggleMask: "",
-                        },
-                        model: {
-                          value: _vm.form.password_confirmation,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.form, "password_confirmation", $$v)
-                          },
-                          expression: "form.password_confirmation",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "p-invalid",
-                          attrs: { id: "password_confirmation-help" },
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.form.errors.first("password_confirmation")
-                            )
-                          ),
-                        ]
-                      ),
-                    ],
-                    1
-                  ),
-                ]),
-              ]),
         ]),
       ]),
     ]
@@ -63273,11 +63178,6 @@ var render = function () {
           _c("Column", {
             ref: "name",
             attrs: { field: "name", header: "Name" },
-          }),
-          _vm._v(" "),
-          _c("Column", {
-            ref: "email",
-            attrs: { field: "email", header: "Email" },
           }),
           _vm._v(" "),
           _c("Column", {
@@ -63811,7 +63711,7 @@ var render = function () {
           [
             _c("ImagePreview", {
               attrs: {
-                src: "../../../images/tukom-logo.png",
+                src: "/tukom-logo.png",
                 alt: "TUKOM Electronics",
                 "image-style": "height: 50px",
               },
@@ -64093,8 +63993,11 @@ var render = function () {
                 "div",
                 {
                   staticClass: "image-input",
-                  class: { "is-invalid": _vm.form.errors.has("card_code") },
-                  style: { "background-image": "url(" + _vm.imageData + ")" },
+                  class: { "is-invalid": _vm.form.errors.has("image") },
+                  style: {
+                    "background-image": "url(" + _vm.imageData + ")",
+                    "background-size": "100% 300px",
+                  },
                   on: { click: _vm.chooseImage },
                 },
                 [

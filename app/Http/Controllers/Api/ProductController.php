@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
@@ -103,7 +104,15 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): void
     {
-        $product->delete();
+        $image_path = 'images/' . $product->image;
+
+        $deleted = $product->delete();
+
+        if ($deleted) {
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
+        }
     }
 
     /**
@@ -118,6 +127,7 @@ class ProductController extends Controller
             $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
 
             $img = Image::make($request->file('image'));
+            $img->resize(1024, 800);
 
             $img->insert(public_path('fligram.png'), 'center');
             $img->encode('png');

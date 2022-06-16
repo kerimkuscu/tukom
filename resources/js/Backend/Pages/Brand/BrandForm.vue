@@ -12,6 +12,35 @@
 
         <div class="row">
             <div class="col-8 mx-auto">
+
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-md-3 required">Image</label>
+                    <div class="col-md-9 grid p-fluid">
+                        <div
+                            class="image-input"
+                            :style="{ 'background-image': `url(${imageData})`, 'background-size': '100% 300px' }"
+                            @click="chooseImage"
+                            :class="{ 'is-invalid': form.errors.has('image')}"
+                        >
+                            <span
+                                v-if="!imageData"
+                                class="placeholder"
+                            >
+                              Choose an Image
+                            </span>
+                            <input
+                                class="file-input"
+                                ref="fileInput"
+                                type="file"
+                                accept=".jpg,.png"
+                                @input="onSelectFile"
+                            >
+                        </div>
+
+                        <small id="image-help" class="invalid-feedback">{{ form.errors.first('image') }}</small>
+                    </div>
+                </div>
+
                 <div class="form-group row mb-2">
                     <label class="col-form-label col-md-3 required">Name</label>
                     <div class="col-md-9 grid p-fluid">
@@ -26,61 +55,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Email</label>
-                    <div class="col-md-9 grid p-fluid">
-                        <InputText
-                            id="email"
-                            class="p-inputtext-sm"
-                            type="text"
-                            v-model="form.email"
-                            placeholder="Email"
-                            :class="{ 'p-invalid': form.errors.has('email')}"/>
-                        <small id="email-help" class="p-invalid">{{ form.errors.first('email') }}</small>
-                    </div>
-                </div>
-
-                <div v-if="canChangePassword">
-                    <Button label="Change Password" class="p-button-sm p-button-danger p-button-outlined" @click="changePassword = true"/>
-                </div>
-
-
-                <div v-else>
-
-                    <div class="form-group row mb-2">
-                        <label class="col-form-label col-md-3 required">Password</label>
-                        <div class="col-md-9 grid p-fluid">
-
-                            <Password
-                                v-model="form.password"
-                                placeholder="Password"
-                                toggleMask
-                                :class="{ 'p-invalid': form.errors.has('password')}"
-                            />
-
-
-                            <small id="password-help" class="p-invalid">{{ form.errors.first('password') }}</small>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-form-label col-md-3 required">Password Confirmation</label>
-                        <div class="col-md-9 grid p-fluid">
-
-                            <Password
-                                v-model="form.password_confirmation"
-                                placeholder="Password Confirmation"
-                                toggleMask
-                                :class="{ 'p-invalid': form.errors.has('password_confirmation')}"
-                            />
-                            <small id="password_confirmation-help" class="p-invalid">{{ form.errors.first('password_confirmation') }}</small>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-
         </div>
     </form>
 </template>
@@ -89,26 +64,19 @@
 import Form from "form-backend-validation";
 
 export default {
-    name: "UserForm",
+    name: "BrandForm",
 
     data: () => ({
         form: new Form({
-            id: null,
             name: null,
-            email: null,
-            password: null,
-            password_confirmation: null,
+            image: null
         }),
 
-        changePassword: false
+        imageData: null,
+
     }),
 
-    computed : {
-        canChangePassword(){
-            console.log(this.$route.params.id !== undefined || this.changePassword);
-            return this.$route.params.id !== undefined && !this.changePassword
-        },
-
+    computed: {
         createOrEditPage() {
             return this.form.id === null ? 'Create' : 'Edit';
         }
@@ -122,8 +90,14 @@ export default {
 
     methods : {
         async fetch(){
-            const response = await this.$http.get('/api/users/' + this.$route.params.id);
+            const response = await this.$http.get('/api/brands/' + this.$route.params.id);
             this.form.populate(response.data.data);
+
+            if(this.form.image){
+                this.imageData = '/images/' + this.form.image;
+            }
+
+            this.form.image = null;
         },
 
         async submit() {
@@ -134,8 +108,8 @@ export default {
 
         async store() {
             try {
-                await this.form.post('/api/users');
-                await this.$router.push({ name: 'users.grid' });
+                await this.form.post('/api/brands');
+                await this.$router.push({ name: 'brands.grid' });
             } catch (error) {
                 if(error.response.status !== 422){
 
@@ -145,8 +119,8 @@ export default {
 
         async update() {
             try {
-                await this.form.put('/api/users/' + this.$route.params.id);
-                await this.$router.push({ name: 'users.grid' });
+                await this.form.put('/api/brands/' + this.$route.params.id);
+                await this.$router.push({ name: 'brands.grid' });
             } catch (error) {
                 if(error.response.status !== 422){
 
@@ -155,7 +129,25 @@ export default {
         },
 
         back(){
-            this.$router.push({ name: 'users.grid' });
+            this.$router.push({ name: 'brands.grid' });
+        },
+
+        chooseImage () {
+            this.$refs.fileInput.click()
+        },
+
+        onSelectFile () {
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                    this.form.image = files[0];
+                }
+                reader.readAsDataURL(files[0])
+                this.$emit('input', files[0])
+            }
         }
     }
 }

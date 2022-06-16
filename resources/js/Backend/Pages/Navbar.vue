@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container m-0">
             <a class="navbar-brand" href="#">
-                <ImagePreview src="../../../images/tukom-logo.png" alt="TUKOM Electronics" image-style="height: 50px"/>
+                <ImagePreview src="/tukom-logo.png" alt="TUKOM Electronics" image-style="height: 50px"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>

@@ -23,7 +23,7 @@
     >
         <Column field="name" header="Name" ref="name"></Column>
 
-        <Column field="email" header="Email" ref="email"></Column>
+<!--        <Column field="email" header="Email" ref="email"></Column>-->
 
         <Column :bodyStyle="{'text-align': 'center', overflow: 'visible'}">
             <template #body="{data}">

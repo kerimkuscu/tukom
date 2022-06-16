@@ -19,9 +19,9 @@
                     <div class="col-md-9 grid p-fluid">
                         <div
                             class="image-input"
-                            :style="{ 'background-image': `url(${imageData})` }"
+                            :style="{ 'background-image': `url(${imageData})`, 'background-size': '100% 300px' }"
                             @click="chooseImage"
-                            :class="{ 'is-invalid': form.errors.has('card_code')}"
+                            :class="{ 'is-invalid': form.errors.has('image')}"
                         >
                             <span
                                 v-if="!imageData"
@@ -471,8 +471,8 @@ export default {
 <style>
     .image-input{
         display: block;
-        width: 100%;
-        height: 200px;
+        width: 75%;
+        height: 300px;
         cursor: pointer;
         background-size: cover;
         background-position: center center;
