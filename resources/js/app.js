@@ -19,10 +19,11 @@ import ConfirmationService from 'primevue/confirmationservice';
 import ConfirmDialog from 'primevue/confirmdialog';
 import Dialog from 'primevue/dialog';
 import FileUpload from 'primevue/fileupload';
-import NotFound from "./components/NotFound";
 import Card from 'primevue/card';
 import ImagePreview from 'primevue/imagepreview';
 import ToastService from 'primevue/toastservice';
+import MegaMenu from 'primevue/megamenu';
+import NotFound from "./components/NotFound";
 
 import Navbar from './Backend/Pages/Navbar';
 
@@ -44,6 +45,7 @@ Vue.component('Dialog', Dialog);
 Vue.component('FileUpload', FileUpload);
 Vue.component('Card', Card);
 Vue.component('ImagePreview', ImagePreview);
+Vue.component('MegaMenu', MegaMenu);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
 Vue.use(ToastService);

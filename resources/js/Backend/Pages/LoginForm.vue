@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <div class="container">
-            <div class="row justify-content-center m-2">
-                <div class="col-md-8">
+            <div class="row justify-content-center m-5">
+                <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
                             <form autocomplete="off" method="post" @submit.prevent="login">
@@ -11,26 +9,26 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
+                                    <label for="email" class="col-md-3 col-form-label">Email</label>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input id="email" type="email" class="form-control" v-model="email" required autocomplete="email" autofocus>
 
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
+                                    <label for="password" class="col-md-3 col-form-label">Password</label>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input id="password" type="password" class="form-control" v-model="password" required autocomplete="current-password">
                                     </div>
                                 </div>
 
 
                                 <div class="row mb-0">
-                                    <div class="col-md-8 offset-md-4">
-                                        <Button type="submit" label="Login"></Button>
+                                    <div class="col-md-8 offset-md-5">
+                                        <Button type="submit" label="Login" class="p-button-rounded"></Button>
                                     </div>
                                 </div>
 
@@ -39,8 +37,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </template>
 
 <script>

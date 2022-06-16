@@ -1,17 +1,27 @@
 // Backend
-import MenuForm from "../Backend/Pages/Menu/MenuForm";
+import LoginForm from "../Backend/Pages/LoginForm";
+
 import MenuIndex from "../Backend/Pages/Menu/MenuIndex";
 import MenuGrid from "../Backend/Pages/Menu/MenuGrid";
-import UserForm from "../Backend/Pages/User/UserForm";
+import MenuForm from "../Backend/Pages/Menu/MenuForm";
+
 import UserIndex from "../Backend/Pages/User/UserIndex";
 import UserGrid from "../Backend/Pages/User/UserGrid";
-import LoginForm from "../Backend/Pages/LoginForm";
+import UserForm from "../Backend/Pages/User/UserForm";
+
 import ProductIndex from "../Backend/Pages/Product/ProductIndex";
 import ProductGrid from "../Backend/Pages/Product/ProductGrid";
 import ProductForm from "../Backend/Pages/Product/ProductForm";
+
+import BrandIndex from '../Backend/Pages/Brand/BrandIndex';
+import BrandGrid from '../Backend/Pages/Brand/BrandGrid';
+import BrandForm from '../Backend/Pages/Brand/BrandForm';
+
 import NotFound from "../components/NotFound";
 
 // Frontend
+
+import Index from '../Frontend/Pages/Index'
 
 export default [
     //Backend
@@ -23,6 +33,7 @@ export default [
             auth: false,
         },
     },
+
     {
         path: '/menus',
         name: 'menus',
@@ -48,6 +59,7 @@ export default [
             },
         ]
     },
+
     {
         path: '/users',
         name: 'users',
@@ -73,6 +85,7 @@ export default [
             },
         ]
     },
+
     {
         path: '/products',
         name: 'products',
@@ -99,7 +112,42 @@ export default [
         ]
     },
 
+    {
+        path: '/brands',
+        name: 'brands',
+        component: BrandIndex,
+        meta: {
+            auth: true
+        },
+        children: [
+            {
+                path: '/',
+                name: 'brands.grid',
+                component: BrandGrid,
+            },
+            {
+                path: 'edit/:id',
+                name: 'brands.edit',
+                component: BrandForm,
+            },
+            {
+                path: 'create',
+                name: 'brands.create',
+                component: BrandForm,
+            },
+        ]
+    },
+
     //Frontend
+
+    {
+        path: '/',
+        name: 'index',
+        component: Index,
+        meta: {
+            auth: false
+        },
+    },
 
     {path: '*', component: NotFound}
 ];
