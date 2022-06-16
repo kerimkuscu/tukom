@@ -41,6 +41,12 @@
                     <li class="nav-item">
                         <Menu></Menu>
                     </li>
+
+                    <li class="nav-item">
+                        <router-link :to="{name:'communication'}" class="nav-link">
+                            Communication
+                        </router-link>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto">

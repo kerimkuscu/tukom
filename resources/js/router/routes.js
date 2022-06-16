@@ -21,7 +21,8 @@ import NotFound from "../components/NotFound";
 
 // Frontend
 
-import Index from '../Frontend/Pages/Index'
+import Index from '../Frontend/Pages/Index';
+import Communication from '../Frontend/Pages/Communication';
 
 export default [
     //Backend
@@ -148,6 +149,17 @@ export default [
             auth: false
         },
     },
+
+    {
+        path: '/communication',
+        name: 'communication',
+        component: Communication,
+        meta: {
+            auth: false
+        },
+    },
+
+
 
     {path: '*', component: NotFound}
 ];
