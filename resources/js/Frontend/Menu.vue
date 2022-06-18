@@ -1,7 +1,7 @@
 <template>
   <div>
       <Button type="button" label="Toggle" @click="toggle" />
-      <Menu ref="menu" :model="items" :popup="true" />
+<!--      <Menu ref="menu" :model="items" :popup="true" />-->
   </div>
 </template>
 

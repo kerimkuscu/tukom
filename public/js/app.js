@@ -65893,8 +65893,6 @@ var render = function () {
         attrs: { type: "button", label: "Toggle" },
         on: { click: _vm.toggle },
       }),
-      _vm._v(" "),
-      _c("Menu", { ref: "menu", attrs: { model: _vm.items, popup: true } }),
     ],
     1
   )
