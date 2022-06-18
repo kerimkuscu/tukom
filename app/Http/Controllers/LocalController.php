@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Repositories\MenuRepository;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Ramsey\Collection\Collection;
@@ -12,20 +13,7 @@ class LocalController extends Controller
     public function test()
     {
 
-        /** @var Collection $menus */
-        $menus = Menu::with('subMenus')
-            ->whereNull('parent_id')
-            ->get();
-
-        $data = [];
-        foreach ($menus as $menu){
-            $data[] = [
-                'name' =>  $menu->name,
-                'childrens' => $menu->subMenus
-            ];
-        }
-
-        dd($data);
+        app(MenuRepository::class)->getMegaMenuList();
 
 
 //        $a =Menu::factory()->create([

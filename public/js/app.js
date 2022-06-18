@@ -9463,10 +9463,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    this.getMenuList();
+    this.getMegaMenuList();
   },
   methods: {
-    getMenuList: function getMenuList() {
+    getMegaMenuList: function getMegaMenuList() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -9476,7 +9476,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.$http.get('/api/menus/getMenuList');
+                return _this.$http.get('/api/menus/getMegaMenuList');
 
               case 2:
                 response = _context.sent;

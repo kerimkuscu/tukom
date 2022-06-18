@@ -38,6 +38,15 @@ class MenuController extends Controller
         ]);
     }
 
+    public function getMegaMenuList()
+    {
+        $data = $this->repository->getMegaMenuList();
+
+        return response()->json([
+            'data' => $data,
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

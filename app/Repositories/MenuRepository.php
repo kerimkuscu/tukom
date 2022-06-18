@@ -61,9 +61,9 @@ class MenuRepository
         return Menu::with('subMenus')
             ->get()
             ->map(function($item) {
-               return [
-                   'text' => $item->name,
-                   'value' => $item->id
+                return [
+                   'text'  => $item->name,
+                   'value' => $item->id,
                ];
             })
             ->toArray();
@@ -96,8 +96,8 @@ class MenuRepository
     public function getTreeForMenuList(Menu $menu, &$deep): array
     {
         $data = [
-            'name' => $menu->name,
-            'childrens' => []
+            'name'      => $menu->name,
+            'childrens' => [],
         ];
 
         if (!$menu->submenus->isEmpty()) {
@@ -112,5 +112,45 @@ class MenuRepository
         }
 
         return $data;
+    }
+
+    public function getMegaMenuList(): array
+    {
+        /** @var Collection $menus */
+        $menus = Menu::with('subMenus')
+            ->whereNull('parent_id')
+            ->get();
+
+        $items = [];
+
+        foreach ($menus as $key => $menu) {
+            $items[$key] = [
+                'label' => $menu->name,
+                'items' => [],
+            ];
+
+            $items2 = [];
+            $items3 = [];
+
+            foreach ($menu->submenus as $key2 => $menu2) {
+                $items2[$key][$key2] = [
+                    'label' => $menu2->name,
+                    'items' => [],
+                ];
+
+                foreach ($menu2->submenus as $key3 => $menu3) {
+                    $items3[$key3] = [
+                        'label' => $menu3->name,
+                    ];
+                }
+
+                $items2[$key][$key2]['items'] = $items3;
+                $items3                       = [];
+            }
+
+            $items[$key]['items'] = $items2;
+        }
+
+        return $items;
     }
 }

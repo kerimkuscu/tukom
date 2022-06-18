@@ -9,17 +9,19 @@ export default {
     name: 'Menu',
 
     data: () => ({
-        items: []
+        items: [],
+
     }),
 
     mounted() {
-        this.getMenuList();
+        this.getMegaMenuList();
     },
 
     methods: {
-        async getMenuList() {
-            const response = await this.$http.get('/api/menus/getMenuList')
+        async getMegaMenuList() {
+            const response = await this.$http.get('/api/menus/getMegaMenuList')
             this.items = response.data.data;
+
             window.localStorage.setItem('menu', JSON.stringify(items));
         }
     }

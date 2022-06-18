@@ -28,9 +28,9 @@ Route::group([
     Route::get('user', [AuthController::class, 'user']);
 });
 
-Route::get('menus/getMenuList', [MenuController::class, 'getMenuList']);
+Route::get('menus/getMegaMenuList', [MenuController::class, 'getMegaMenuList']);
+Route::get('products', [ProductController::class, 'index']);
 
-//'auth:sanctum'
 Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/user', function(Request $request) {
         return $request->user();
@@ -42,9 +42,11 @@ Route::group(['middleware' => ['auth:api']], function() {
         return ['token' => $token->plainTextToken];
     });
 
+    Route::get('menus/getMenuList', [MenuController::class, 'getMenuList']);
+
     Route::apiResource('menus', MenuController::class);
 
-    Route::apiResource('products', ProductController::class);
+    Route::apiResource('products', ProductController::class)->except(['index']);
     Route::post('/products/import', [ProductImportController::class, 'store']);
     Route::post('/products/{product}', [ProductController::class, 'update']);
 
