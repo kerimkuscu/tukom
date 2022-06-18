@@ -22,7 +22,7 @@ import FileUpload from 'primevue/fileupload';
 import Card from 'primevue/card';
 import ImagePreview from 'primevue/imagepreview';
 import ToastService from 'primevue/toastservice';
-import MegaMenu from 'primevue/megamenu';
+import Menu from 'primevue/menu';
 import NotFound from "./components/NotFound";
 
 import Navbar from './Backend/Pages/Navbar';
@@ -45,7 +45,7 @@ Vue.component('Dialog', Dialog);
 Vue.component('FileUpload', FileUpload);
 Vue.component('Card', Card);
 Vue.component('ImagePreview', ImagePreview);
-Vue.component('MegaMenu', MegaMenu);
+Vue.component('Menu', Menu);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
 Vue.use(ToastService);

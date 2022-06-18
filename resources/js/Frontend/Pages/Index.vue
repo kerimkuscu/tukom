@@ -1,7 +1,7 @@
 <template>
-    <div>
-        kerim
-    </div>
+  <div>
+    kerim
+  </div>
 </template>
 
 <script>

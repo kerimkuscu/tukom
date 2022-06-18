@@ -1,70 +1,70 @@
 <template>
-    <form @submit.prevent="submit">
+  <form @submit.prevent="submit">
+    <div class="pb-5" style="margin-bottom: 20px">
+      <h4 class="float-start card-title">
+        Brands / {{ createOrEditPage }}
+      </h4>
 
-        <div class="pb-5" style="margin-bottom: 20px">
-            <h4 class="float-start card-title">Brands / {{createOrEditPage}}</h4>
+      <div class="float-end">
+        <Button class="p-button-sm p-button-secondary p-button-outlined" label="Cancel" @click="back" />
+        <Button type="submit" label="Save" class="p-button-sm" />
+      </div>
+    </div>
 
-            <div class="float-end">
-                <Button class="p-button-sm p-button-secondary p-button-outlined" label="Cancel" @click="back"/>
-                <Button type="submit" label="Save" class="p-button-sm" />
+    <div class="row">
+      <div class="col-8 mx-auto">
+        <div class="form-group row mb-2">
+          <label class="col-form-label col-md-3 required">Image</label>
+          <div class="col-md-9 grid p-fluid">
+            <div
+              class="image-input"
+              :style="{ 'background-image': `url(${imageData})`, 'background-size': '100% 300px' }"
+              :class="{ 'is-invalid': form.errors.has('image')}"
+              @click="chooseImage"
+            >
+              <span
+                v-if="!imageData"
+                class="placeholder"
+              >
+                Choose an Image
+              </span>
+              <input
+                ref="fileInput"
+                class="file-input"
+                type="file"
+                accept=".jpg,.png"
+                @input="onSelectFile"
+              >
             </div>
+
+            <small id="image-help" class="invalid-feedback">{{ form.errors.first('image') }}</small>
+          </div>
         </div>
 
-        <div class="row">
-            <div class="col-8 mx-auto">
-
-                <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Image</label>
-                    <div class="col-md-9 grid p-fluid">
-                        <div
-                            class="image-input"
-                            :style="{ 'background-image': `url(${imageData})`, 'background-size': '100% 300px' }"
-                            @click="chooseImage"
-                            :class="{ 'is-invalid': form.errors.has('image')}"
-                        >
-                            <span
-                                v-if="!imageData"
-                                class="placeholder"
-                            >
-                              Choose an Image
-                            </span>
-                            <input
-                                class="file-input"
-                                ref="fileInput"
-                                type="file"
-                                accept=".jpg,.png"
-                                @input="onSelectFile"
-                            >
-                        </div>
-
-                        <small id="image-help" class="invalid-feedback">{{ form.errors.first('image') }}</small>
-                    </div>
-                </div>
-
-                <div class="form-group row mb-2">
-                    <label class="col-form-label col-md-3 required">Name</label>
-                    <div class="col-md-9 grid p-fluid">
-                        <InputText
-                            id="name"
-                            class="p-inputtext-sm"
-                            type="text"
-                            v-model="form.name"
-                            placeholder="Name"
-                            :class="{ 'p-invalid': form.errors.has('name')}"/>
-                        <small id="name-help" class="p-invalid">{{ form.errors.first('name') }}</small>
-                    </div>
-                </div>
-
-            </div>
+        <div class="form-group row mb-2">
+          <label class="col-form-label col-md-3 required">Name</label>
+          <div class="col-md-9 grid p-fluid">
+            <InputText
+              id="name"
+              v-model="form.name"
+              class="p-inputtext-sm"
+              type="text"
+              placeholder="Name"
+              :class="{ 'p-invalid': form.errors.has('name')}"
+            />
+            <small id="name-help" class="p-invalid">{{ form.errors.first('name') }}</small>
+          </div>
         </div>
-    </form>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
-import Form from "form-backend-validation";
+import Form from 'form-backend-validation';
 
 export default {
-    name: "BrandForm",
+    name: 'BrandForm',
 
     data: () => ({
         form: new Form({
@@ -112,7 +112,7 @@ export default {
                 await this.form.post('/api/brands');
                 await this.$router.push({ name: 'brands.grid' });
             } catch (error) {
-                if(error.response.status !== 422){
+                if(error.response.status !== 422) {
 
                 }
             }
@@ -123,7 +123,7 @@ export default {
                 await this.form.put('/api/brands/' + this.$route.params.id);
                 await this.$router.push({ name: 'brands.grid' });
             } catch (error) {
-                if(error.response.status !== 422){
+                if(error.response.status !== 422) {
 
                 }
             }

@@ -1,43 +1,45 @@
 <template>
-<div>
-    <ConfirmDialog></ConfirmDialog>
+  <div>
+    <ConfirmDialog />
 
     <div class="pb-5" style="margin-bottom: 20px">
-        <h4 class="float-start card-title">Brands</h4>
-        <Button label="Create" @click="create" class="float-end p-button-sm" />
+      <h4 class="float-start card-title">
+        Brands
+      </h4>
+      <Button label="Create" class="float-end p-button-sm" @click="create" />
     </div>
 
     <DataTable
-        ref="dt"
-        dataKey="id"
-        responsiveLayout="scroll"
-        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
-        :value="users"
-        :lazy="true"
-        :paginator="true"
-        :rows="perPage"
-        :totalRecords="totalRecords"
-        :loading="loading"
-        @page="onPage($event)"
-        @sort="onSort($event)"
+      ref="dt"
+      data-key="id"
+      responsive-layout="scroll"
+      paginator-template="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+      :value="users"
+      :lazy="true"
+      :paginator="true"
+      :rows="perPage"
+      :total-records="totalRecords"
+      :loading="loading"
+      @page="onPage($event)"
+      @sort="onSort($event)"
     >
-        <Column field="name" header="Name" ref="name"></Column>
+      <Column ref="name" field="name" header="Name" />
 
-<!--        <Column field="email" header="Email" ref="email"></Column>-->
+      <!--        <Column field="email" header="Email" ref="email"></Column>-->
 
-        <Column :bodyStyle="{'text-align': 'center', overflow: 'visible'}">
-            <template #body="{data}">
-                <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(data.id)" />
-                <Button icon="pi pi-pencil" class="float-end p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="edit(data.id)" />
-            </template>
-        </Column>
+      <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
+        <template #body="{data}">
+          <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(data.id)" />
+          <Button icon="pi pi-pencil" class="float-end p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="edit(data.id)" />
+        </template>
+      </Column>
     </DataTable>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "BrandGrid",
+    name: 'BrandGrid',
 
     data: () => ({
         users: null,

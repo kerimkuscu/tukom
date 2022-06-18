@@ -1,36 +1,38 @@
 <template>
-    <div>
-        <ConfirmDialog></ConfirmDialog>
-        <Toast position="top-right" />
+  <div>
+    <ConfirmDialog />
+    <Toast position="top-right" />
 
-        <div class="pb-5" style="margin-bottom: 20px">
-            <h4 class="float-start card-title">Menus</h4>
-            <Button label="Create" @click="create" class="float-end p-button-sm" />
-        </div>
-
-        <TreeTable v-if="menus.length > 0" :value="menus">
-            <Column field="name" header="Name" :expander="true"></Column>
-
-            <Column :bodyStyle="{'text-align': 'center', overflow: 'visible'}" >
-                <template #body="item">
-                    <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(item.node.data.id)" />
-                    <Button icon="pi pi-pencil" class="float-end p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="edit(item.node.data.id)" />
-                </template>
-            </Column>
-        </TreeTable>
-        <div v-else>
-            <div class="alert alert-warning" role="alert">
-                There is no record to display
-            </div>
-        </div>
+    <div class="pb-5" style="margin-bottom: 20px">
+      <h4 class="float-start card-title">
+        Menus
+      </h4>
+      <Button label="Create" class="float-end p-button-sm" @click="create" />
     </div>
+
+    <TreeTable v-if="menus.length > 0" :value="menus">
+      <Column field="name" header="Name" :expander="true" />
+
+      <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
+        <template #body="item">
+          <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(item.node.data.id)" />
+          <Button icon="pi pi-pencil" class="float-end p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="edit(item.node.data.id)" />
+        </template>
+      </Column>
+    </TreeTable>
+    <div v-else>
+      <div class="alert alert-warning" role="alert">
+        There is no record to display
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import Toast from 'primevue/toast';
 
 export default {
-    name: "Menus",
+    name: 'Menus',
 
     components : {
         Toast
@@ -67,10 +69,10 @@ export default {
                     const response = await this.$http.delete('/api/menus/' + id)
                     console.log(response.data.status);
                     if(response.data.status){
-                        this.$toast.add({severity:'success', summary: 'Success', detail:'Menu deleted.', life: 1000});
+                        this.$toast.add({ severity:'success', summary: 'Success', detail:'Menu deleted.', life: 1000 });
                     }
                     else{
-                        this.$toast.add({severity:'error', summary: 'Error', detail:'Parent menu cannot be deleted.', life: 1000});
+                        this.$toast.add({ severity:'error', summary: 'Error', detail:'Parent menu cannot be deleted.', life: 1000 });
                     }
 
                     await this.fetch()

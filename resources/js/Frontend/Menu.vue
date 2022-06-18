@@ -1,7 +1,8 @@
 <template>
-    <div>
-        <MegaMenu :model="items" />
-    </div>
+  <div>
+      <Button type="button" label="Toggle" @click="toggle" />
+      <Menu ref="menu" :model="items" :popup="true" />
+  </div>
 </template>
 
 <script>
@@ -10,7 +11,6 @@ export default {
 
     data: () => ({
         items: [],
-
     }),
 
     mounted() {
@@ -23,15 +23,11 @@ export default {
             this.items = response.data.data;
 
             window.localStorage.setItem('menu', JSON.stringify(items));
+        },
+
+        toggle(event) {
+            this.$refs.menu.toggle(event);
         }
     }
 }
 </script>
-
-<style>
-.p-megamenu {
-    background: transparent !important;
-    color: transparent !important;
-    border: 0;
-}
-</style>

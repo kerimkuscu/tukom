@@ -1,7 +1,7 @@
 <template>
-    <div>
-        Lokasyon
-    </div>
+  <div>
+    Lokasyon
+  </div>
 </template>
 
 <script>

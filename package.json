@@ -11,9 +11,10 @@
         "phpcs:fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app/",
         "larastan": "vendor/bin/phpstan analyse --memory-limit=2G",
         "lint": "node_modules/.bin/eslint resources/assets/js/ --ext .vue",
-        "lint:fix": "node_modules/.bin/eslint resources/assets/js/ --ext .vue --fix"
+        "lint:fix": "node_modules/.bin/eslint resources/js/ --ext .vue --fix"
     },
     "devDependencies": {
+        "@babel/eslint-parser": "^7.15",
         "@popperjs/core": "^2.10.2",
         "axios": "^0.25",
         "babel-eslint": "^10.1.0",
