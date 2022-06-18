@@ -18,7 +18,7 @@ export default {
 
     methods: {
         async getMenuList() {
-            const response = await this.$http.get('/api/menus')
+            const response = await this.$http.get('/api/menus/getMenuList')
             this.items = response.data.data;
             window.localStorage.setItem('menu', JSON.stringify(items));
         }
