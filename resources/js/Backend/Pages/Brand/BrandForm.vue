@@ -68,6 +68,7 @@ export default {
 
     data: () => ({
         form: new Form({
+            id: null,
             name: null,
             image: null
         }),

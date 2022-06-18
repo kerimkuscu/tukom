@@ -6627,6 +6627,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       form: new form_backend_validation__WEBPACK_IMPORTED_MODULE_1__["default"]({
+        id: null,
         name: null,
         image: null
       }),
