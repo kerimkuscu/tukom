@@ -44,7 +44,7 @@
 
         <ul v-else class="navbar-nav me-auto">
           <li class="nav-item">
-            <Menu />
+            <MenuList />
           </li>
 
           <li class="nav-item">
@@ -83,13 +83,13 @@
 
 <script>
 
-import Menu from '../../Frontend/Menu';
+import MenuList from '../../Frontend/MenuList';
 
 export default {
     name: 'Navbar',
 
     components: {
-        Menu
+        MenuList
     },
 
     data: () => ({
