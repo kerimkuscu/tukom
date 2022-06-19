@@ -10,38 +10,7 @@ export default {
     name: 'MenuList',
 
     data: () => ({
-        items: [
-            {
-                label: 'Options',
-                items: [
-                    {label: 'New', icon: 'pi pi-fw pi-plus', command:() => {} },
-                    {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'https://www.primetek.com.tr'}
-                ]
-            },
-            {
-                label: 'Account',
-                items: [
-                    {label: 'Options', icon: 'pi pi-fw pi-cog', to: '/options'},
-                    {label: 'Sign Out', icon: 'pi pi-fw pi-power-off', to: '/logout'}
-                ]
-            },
-
-            {
-                "label": "Adaptör",
-                "items": [
-                    [
-                        {
-                            "label": "RF Adaptörü",
-                            "items": []
-                        },
-                        {
-                            "label": "Su Geçirmez USB Adaptör",
-                            "items": []
-                        }
-                    ]
-                ]
-            },
-        ],
+        items: [],
     }),
 
     mounted() {
