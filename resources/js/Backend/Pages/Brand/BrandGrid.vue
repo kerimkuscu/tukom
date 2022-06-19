@@ -14,7 +14,7 @@
       data-key="id"
       responsive-layout="scroll"
       paginator-template="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
-      :value="users"
+      :value="items"
       :lazy="true"
       :paginator="true"
       :rows="perPage"
@@ -24,9 +24,11 @@
       @sort="onSort($event)"
     >
       <Column ref="name" field="name" header="Name" />
-
-      <!--        <Column field="email" header="Email" ref="email"></Column>-->
-
+      <Column header="Image">
+            <template #body="slotProps">
+                <img :src="'/images/' + slotProps.data.image" :alt="slotProps.data.image" class="brands-image" style="height: 30px" />
+            </template>
+      </Column>
       <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
         <template #body="{data}">
           <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(data.id)" />
@@ -42,7 +44,7 @@ export default {
     name: 'BrandGrid',
 
     data: () => ({
-        users: null,
+        items: null,
         loading: false,
         totalRecords: 0,
         perPage: null,
@@ -68,7 +70,7 @@ export default {
             const queryString = `?page=${this.lazyParams.page + 1 || ''}`;
             const response = await this.$http.get('/api/brands' + queryString)
 
-            this.users = response.data.data;
+            this.items = response.data.data;
             this.totalRecords = response.data.meta.total
             this.perPage = response.data.meta.per_page
 
@@ -107,7 +109,7 @@ export default {
                     //callback to execute when user rejects the action
                 }
             });
-        }
+        },
     }
 }
 </script>

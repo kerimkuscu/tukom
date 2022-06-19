@@ -6888,11 +6888,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'BrandGrid',
   data: function data() {
     return {
-      users: null,
+      items: null,
       loading: false,
       totalRecords: 0,
       perPage: null,
@@ -6926,7 +6928,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 response = _context.sent;
-                _this.users = response.data.data;
+                _this.items = response.data.data;
                 _this.totalRecords = response.data.meta.total;
                 _this.perPage = response.data.meta.per_page;
                 _this.loading = false;
@@ -7708,17 +7710,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Navbar',
@@ -7736,7 +7727,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showNavbar: function showNavbar() {
       var queryString = window.location.pathname;
-      queryString === '/login' ? this.show = false : true;
+      queryString === '/login' ? this.show = false : this.show = true;
     }
   }
 });
@@ -62877,7 +62868,7 @@ var render = function () {
             "responsive-layout": "scroll",
             "paginator-template":
               "CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink",
-            value: _vm.users,
+            value: _vm.items,
             lazy: true,
             paginator: true,
             rows: _vm.perPage,
@@ -62897,6 +62888,27 @@ var render = function () {
           _c("Column", {
             ref: "name",
             attrs: { field: "name", header: "Name" },
+          }),
+          _vm._v(" "),
+          _c("Column", {
+            attrs: { header: "Image" },
+            scopedSlots: _vm._u([
+              {
+                key: "body",
+                fn: function (slotProps) {
+                  return [
+                    _c("img", {
+                      staticClass: "brands-image",
+                      staticStyle: { height: "30px" },
+                      attrs: {
+                        src: "/images/" + slotProps.data.image,
+                        alt: slotProps.data.image,
+                      },
+                    }),
+                  ]
+                },
+              },
+            ]),
           }),
           _vm._v(" "),
           _c("Column", {
@@ -63440,11 +63452,11 @@ var render = function () {
     ? _c(
         "nav",
         {
-          staticClass:
-            "navbar navbar-expand-md navbar-light bg-white shadow-sm",
+          staticClass: "navbar navbar-expand-lg navbar-light bg-light",
+          staticStyle: { "background-color": "#ffffff !important" },
         },
         [
-          _c("div", { staticClass: "container m-0" }, [
+          _c("div", { staticClass: "container-fluid" }, [
             _c(
               "a",
               { staticClass: "navbar-brand", attrs: { href: "#" } },
@@ -63453,7 +63465,7 @@ var render = function () {
                   attrs: {
                     src: "/tukom-logo.png",
                     alt: "TUKOM Electronics",
-                    "image-style": "height: 50px",
+                    "image-style": "height: 55px",
                   },
                 }),
               ],
@@ -63470,99 +63482,119 @@ var render = function () {
               },
               [
                 _vm.$auth.check()
-                  ? _c("ul", { staticClass: "navbar-nav me-auto" }, [
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: { name: "users.grid" } },
-                            },
-                            [_vm._v("\n            Users\n          ")]
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: { name: "menus.grid" } },
-                            },
-                            [_vm._v("\n            Menus\n          ")]
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: { name: "products.grid" } },
-                            },
-                            [_vm._v("\n            Products\n          ")]
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: { name: "brands.grid" } },
-                            },
-                            [_vm._v("\n            Brands\n          ")]
-                          ),
-                        ],
-                        1
-                      ),
-                    ])
-                  : _c("ul", { staticClass: "navbar-nav me-auto" }, [
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [_c("MenuList")],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: { name: "communication" } },
-                            },
-                            [_vm._v("\n            Communication\n          ")]
-                          ),
-                        ],
-                        1
-                      ),
-                    ]),
+                  ? _c(
+                      "ul",
+                      { staticClass: "navbar-nav me-auto mb-2 mb-lg-0" },
+                      [
+                        _c(
+                          "li",
+                          { staticClass: "nav-item" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { to: { name: "users.grid" } },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Users\n                        "
+                                ),
+                              ]
+                            ),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          { staticClass: "nav-item" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { to: { name: "menus.grid" } },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Menus\n                    "
+                                ),
+                              ]
+                            ),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          { staticClass: "nav-item" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { to: { name: "products.grid" } },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Products\n                    "
+                                ),
+                              ]
+                            ),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          { staticClass: "nav-item" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { to: { name: "brands.grid" } },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Brands\n                    "
+                                ),
+                              ]
+                            ),
+                          ],
+                          1
+                        ),
+                      ]
+                    )
+                  : _c(
+                      "ul",
+                      { staticClass: "navbar-nav me-auto mb-2 mb-lg-0" },
+                      [
+                        _c(
+                          "li",
+                          { staticClass: "nav-item" },
+                          [_c("MenuList")],
+                          1
+                        ),
+                      ]
+                    ),
                 _vm._v(" "),
-                _c("ul", { staticClass: "navbar-nav ms-auto" }, [
-                  _vm.$auth.check()
-                    ? _c("li", { staticClass: "nav-item dropdown" }, [
+                !_vm.$auth.check()
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        staticStyle: { color: "rgb(115 115 115)" },
+                        attrs: { to: { name: "communication" } },
+                      },
+                      [_vm._v("\n                Communication\n            ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.$auth.check()
+                  ? _c("ul", { staticClass: "navbar-nav ms-auto" }, [
+                      _c("li", { staticClass: "nav-item dropdown" }, [
                         _vm._m(1),
                         _vm._v(" "),
                         _c(
@@ -63583,14 +63615,19 @@ var render = function () {
                                   },
                                 },
                               },
-                              [_vm._v("\n              Logout\n            ")]
+                              [
+                                _vm._v(
+                                  "\n                            Logout\n                        "
+                                ),
+                              ]
                             ),
                           ]
                         ),
-                      ])
-                    : _vm._e(),
-                ]),
-              ]
+                      ]),
+                    ])
+                  : _vm._e(),
+              ],
+              1
             ),
           ]),
         ]
@@ -63612,6 +63649,7 @@ var staticRenderFns = [
           "data-bs-target": "#navbarSupportedContent",
           "aria-controls": "navbarSupportedContent",
           "aria-expanded": "false",
+          "aria-label": "Toggle navigation",
         },
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
@@ -64933,7 +64971,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "actual_stock",
-              header: "Actual stock",
+              header: "Actual Stock",
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -65927,7 +65965,7 @@ var render = function () {
     [
       _c("Button", {
         staticClass: "p-button-outlined p-button-secondary",
-        attrs: { type: "button", icon: "pi-bars" },
+        attrs: { type: "button", icon: "pi pi-bars" },
         on: { click: _vm.toggle },
       }),
       _vm._v(" "),

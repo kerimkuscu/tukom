@@ -136,6 +136,7 @@ class MenuRepository
                 $items2[$key2] = [
                     'label' => $menu2->name,
                     'items' => [],
+                    'to' => (str_replace(' ', '-', strtolower($menu2->name)))
                 ];
 
 //                foreach ($menu2->submenus as $key3 => $menu3) {

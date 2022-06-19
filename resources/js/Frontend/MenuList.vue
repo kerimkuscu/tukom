@@ -1,6 +1,6 @@
 <template>
   <div>
-      <Button type="button" class="p-button-outlined p-button-secondary" @click="toggle" icon="pi-bars" />
+      <Button type="button" class="p-button-outlined p-button-secondary" @click="toggle" icon="pi pi-bars" />
       <Menu ref="menu" :model="items" :popup="true" />
   </div>
 </template>

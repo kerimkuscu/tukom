@@ -128,7 +128,7 @@
         </template>
       </Column>
 
-      <Column field="actual_stock" header="Actual stock" :styles="{'min-width':'200px'}">
+      <Column field="actual_stock" header="Actual Stock" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.actual_stock" class="truncate">
             {{ slotProps.data.actual_stock }}
