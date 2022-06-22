@@ -101,17 +101,17 @@ export default [
         children: [
             {
                 path: '/',
-                name: 'products.grid',
+                name: 'products-list.grid',
                 component: ProductGrid,
             },
             {
                 path: 'edit/:id',
-                name: 'products.edit',
+                name: 'products-list.edit',
                 component: ProductForm,
             },
             {
                 path: 'create',
-                name: 'products.create',
+                name: 'products-list.create',
                 component: ProductForm,
             },
         ]

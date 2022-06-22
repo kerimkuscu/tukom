@@ -10143,15 +10143,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   children: [{
     path: '/',
-    name: 'products.grid',
+    name: 'products-list.grid',
     component: _Backend_Pages_Product_ProductGrid__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
     path: 'edit/:id',
-    name: 'products.edit',
+    name: 'products-list.edit',
     component: _Backend_Pages_Product_ProductForm__WEBPACK_IMPORTED_MODULE_9__["default"]
   }, {
     path: 'create',
-    name: 'products.create',
+    name: 'products-list.create',
     component: _Backend_Pages_Product_ProductForm__WEBPACK_IMPORTED_MODULE_9__["default"]
   }]
 }, {
