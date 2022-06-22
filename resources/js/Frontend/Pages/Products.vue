@@ -1,5 +1,7 @@
 <template>
-    ürünler
+  <div>
+    Products
+  </div>
 </template>
 
 <script>

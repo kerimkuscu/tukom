@@ -441,7 +441,7 @@ export default {
         async store() {
             try {
                 await this.form.post('/api/products');
-                await this.$router.push({ name: 'products.grid' });
+                await this.$router.push({ name: 'products-list.grid' });
             } catch (error) {
                 if(error.response.status !== 422) {
 
@@ -452,7 +452,7 @@ export default {
         async update() {
             try {
                 await this.form.post('/api/products/' + this.$route.params.id);
-                await this.$router.push({ name: 'products.grid' });
+                await this.$router.push({ name: 'products-list.grid' });
             } catch (error) {
                 if(error.response.status !== 422) {
 
@@ -461,7 +461,7 @@ export default {
         },
 
         back(){
-            this.$router.push({ name: 'products.grid' });
+            this.$router.push({ name: 'products-list.grid' });
         },
 
         onFileChange(e){

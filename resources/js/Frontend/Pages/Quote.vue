@@ -1,11 +1,11 @@
 <template>
   <div>
-    Index
+    Quote
   </div>
 </template>
 
 <script>
 export default {
-    name: 'Index'
+    name: 'Quote'
 }
 </script>

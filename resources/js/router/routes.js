@@ -22,7 +22,11 @@ import NotFound from "../components/NotFound";
 // Frontend
 
 import Index from '../Frontend/Pages/Index';
-import Communication from '../Frontend/Pages/Communication';
+import Contact from '../Frontend/Pages/Contact';
+import About from '../Frontend/Pages/About';
+import Quote from '../Frontend/Pages/Quote';
+import Products from '../Frontend/Pages/Products';
+import ProductList from '../Frontend/Pages/ProductList';
 
 export default [
     //Backend
@@ -88,8 +92,8 @@ export default [
     },
 
     {
-        path: '/products',
-        name: 'products',
+        path: '/products-list',
+        name: 'products-list',
         component: ProductIndex,
         meta: {
             auth: true
@@ -149,11 +153,41 @@ export default [
             auth: false
         },
     },
-
     {
-        path: '/communication',
-        name: 'communication',
-        component: Communication,
+        path: '/products',
+        name: 'products',
+        component: Products,
+        meta: {
+            auth: false
+        },
+        children: [
+            {
+                path: ':id',
+                name: 'products-lists',
+                component: ProductList,
+            },
+        ]
+    },
+    {
+        path: '/contact',
+        name: 'contact',
+        component: Contact,
+        meta: {
+            auth: false
+        },
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: About,
+        meta: {
+            auth: false
+        },
+    },
+    {
+        path: '/quote',
+        name: 'quote',
+        component: Quote,
         meta: {
             auth: false
         },

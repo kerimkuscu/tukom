@@ -67,7 +67,6 @@ export default {
                 icon: 'pi pi-exclamation-triangle',
                 accept: async () => {
                     const response = await this.$http.delete('/api/menus/' + id)
-                    console.log(response.data.status);
                     if(response.data.status){
                         this.$toast.add({ severity:'success', summary: 'Success', detail:'Menu deleted.', life: 1000 });
                     }

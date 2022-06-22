@@ -2,6 +2,32 @@
   <div>
     <ConfirmDialog />
 
+    <Toast position="top-right" />
+
+    <Dialog position="right" :visible.sync="display">
+      <template #header>
+        <h3>{{ menuModalHeader }}</h3>
+      </template>
+
+      <div class="row" style="padding: 0 1.5rem 17rem 1.5rem;">
+        <div class="col-md-12 grid p-fluid">
+          <Dropdown
+            v-model="menu"
+            :options="menuList"
+            option-label="text"
+            option-value="value"
+            placeholder="(Select Menu)"
+            :filter="true"
+          />
+        </div>
+      </div>
+
+      <template #footer>
+        <Button label="Cancel" class="p-button-outlined p-button-secondary p-button-sm" @click="closeMenuModal" />
+        <Button label="Save" class=" p-button-sm" @click="saveMenu" />
+      </template>
+    </Dialog>
+
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
         Products
@@ -250,27 +276,24 @@
 
       <Column :exportable="false" :styles="{'min-width':'8rem'}">
         <template #body="{data}">
-          <Button icon="pi pi-bars" class="p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="showMenuModal" />
+          <Button icon="pi pi-bars" class="p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="showMenuModal(data)" />
           <Button icon="pi pi-pencil" class="p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="edit(data.id)" />
           <Button icon="pi pi-trash" class="p-button-sm p-button-danger" @click="remove(data.id)" />
         </template>
       </Column>
     </DataTable>
-
-    <Dialog :visible.sync="display" :show-header="false">
-      Content
-
-      <template #footer>
-        <Button label="Cancel" icon="pi pi-times" class="p-button-sm p-button-secondary p-button-outlined" @click="closeMenuModal" />
-        <Button label="Save" icon="pi pi-check" class="p-button-sm p-button-primary" />
-      </template>
-    </Dialog>
   </div>
 </template>
 
 <script>
+import Toast from 'primevue/toast';
+
 export default {
     name: 'ProductGrid',
+
+    components : {
+        Toast
+    },
 
     data: () => ({
         products: null,
@@ -285,8 +308,10 @@ export default {
             'type': { value: '', matchMode: 'contains' },
         },
 
+        menu: null,
         menuList: [],
-        display: false
+        display: false,
+        menuModalHeader: null,
     }),
 
     mounted() {
@@ -344,7 +369,7 @@ export default {
         },
 
         create(){
-            this.$router.push({ name: 'products.create' });
+            this.$router.push({ name: 'products-list.create' });
         },
 
         edit(id){
@@ -358,6 +383,7 @@ export default {
                 icon: 'pi pi-exclamation-triangle',
                 accept: async () => {
                     await this.$http.delete('/api/products/' + id)
+                    this.$toast.add({ severity:'success', detail:'Product Deleted', life: 1000 });
                     await this.fetch();
                 },
                 reject: () => {
@@ -380,12 +406,24 @@ export default {
             this.loading = false;
         },
 
-        showMenuModal() {
+        showMenuModal(item) {
+            this.menuHeader(item);
             this.display = true;
+        },
+
+        menuHeader(item) {
+            this.menuModalHeader = item.card_code + '-' + item.description;
         },
 
         closeMenuModal() {
             this.display = false;
+            this.menuModalHeader = null;
+        },
+
+        saveMenu() {
+            this.$toast.add({ severity:'success', detail:'Menu saved.', life: 1000 });
+            this.display = false;
+            this.menuModalHeader = null;
         }
     }
 }

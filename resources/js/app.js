@@ -2,6 +2,9 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+window.eventHub = new Vue();
+
+Vue.prototype.$eventHub = window.eventHub;
 Vue.prototype.$http = window.axios;
 
 
@@ -23,6 +26,7 @@ import Card from 'primevue/card';
 import ImagePreview from 'primevue/imagepreview';
 import ToastService from 'primevue/toastservice';
 import Menu from 'primevue/menu';
+import Sidebar from 'primevue/sidebar';
 import NotFound from "./components/NotFound";
 
 import Navbar from './Backend/Pages/Navbar';
@@ -46,6 +50,7 @@ Vue.component('FileUpload', FileUpload);
 Vue.component('Card', Card);
 Vue.component('ImagePreview', ImagePreview);
 Vue.component('Menu', Menu);
+Vue.component('Sidebar', Sidebar);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
 Vue.use(ToastService);

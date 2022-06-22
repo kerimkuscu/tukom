@@ -25,9 +25,9 @@
     >
       <Column ref="name" field="name" header="Name" />
       <Column header="Image">
-            <template #body="slotProps">
-                <img :src="'/images/' + slotProps.data.image" :alt="slotProps.data.image" class="brands-image" style="height: 30px" />
-            </template>
+        <template #body="slotProps">
+          <img :src="'/images/' + slotProps.data.image" :alt="slotProps.data.image" class="brands-image" style="height: 30px">
+        </template>
       </Column>
       <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
         <template #body="{data}">
