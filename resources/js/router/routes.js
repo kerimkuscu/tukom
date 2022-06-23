@@ -21,12 +21,12 @@ import NotFound from "../components/NotFound";
 
 // Frontend
 
-import Index from '../Frontend/Pages/Index';
-import Contact from '../Frontend/Pages/Contact';
-import About from '../Frontend/Pages/About';
-import Quote from '../Frontend/Pages/Quote';
-import Products from '../Frontend/Pages/Products';
-import ProductList from '../Frontend/Pages/ProductList';
+import Index from '../Frontend/Pages/Home';
+import Contact from '../Frontend/Pages/Contact/Contact';
+import About from '../Frontend/Pages/About/About';
+import Quote from '../Frontend/Pages/Quote/Quote';
+import Products from '../Frontend/Pages/Home/Products';
+import ProductList from '../Frontend/Pages/Home/ProductList';
 
 export default [
     //Backend

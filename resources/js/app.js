@@ -27,6 +27,9 @@ import ImagePreview from 'primevue/imagepreview';
 import ToastService from 'primevue/toastservice';
 import Menu from 'primevue/menu';
 import Sidebar from 'primevue/sidebar';
+import Galleria from 'primevue/galleria';
+import Carousel from 'primevue/carousel';
+
 import NotFound from "./components/NotFound";
 
 import Navbar from './Backend/Pages/Navbar';
@@ -51,6 +54,8 @@ Vue.component('Card', Card);
 Vue.component('ImagePreview', ImagePreview);
 Vue.component('Menu', Menu);
 Vue.component('Sidebar', Sidebar);
+Vue.component('Galleria', Galleria);
+Vue.component('Carousel', Carousel);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
 Vue.use(ToastService);
