@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
@@ -55,5 +56,6 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     Route::apiResource('users', UserController::class);
     Route::apiResource('brands', BrandController::class);
-    Route::apiResource('quote', QuoteController::class)->except(['index']);
+    Route::apiResource('quotes', QuoteController::class)->except(['store']);
+    Route::apiResource('contacts', ContactController::class)->except(['store']);
 });

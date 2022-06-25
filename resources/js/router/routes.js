@@ -27,6 +27,8 @@ import About from '../Frontend/Pages/About/About';
 import Quote from '../Frontend/Pages/Quote/Quote';
 import Products from '../Frontend/Pages/Home/Products';
 import ProductList from '../Frontend/Pages/Home/ProductList';
+import QuoteIndex from "../Backend/Pages/Quote/QuoteIndex";
+import QuoteGrid from "../Backend/Pages/Quote/QuoteGrid";
 
 export default [
     //Backend
@@ -140,6 +142,22 @@ export default [
                 name: 'brands.create',
                 component: BrandForm,
             },
+        ]
+    },
+
+    {
+        path: '/quotes',
+        name: 'quotes',
+        component: QuoteIndex,
+        meta: {
+            auth: true
+        },
+        children: [
+            {
+                path: '/',
+                name: 'quotes.grid',
+                component: QuoteGrid,
+            }
         ]
     },
 
