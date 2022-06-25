@@ -29,6 +29,8 @@ import Products from '../Frontend/Pages/Home/Products';
 import ProductList from '../Frontend/Pages/Home/ProductList';
 import QuoteIndex from "../Backend/Pages/Quote/QuoteIndex";
 import QuoteGrid from "../Backend/Pages/Quote/QuoteGrid";
+import ContactIndex from "../Backend/Pages/Contact/ContactIndex";
+import ContactGrid from "../Backend/Pages/Contact/ContactGrid";
 
 export default [
     //Backend
@@ -157,6 +159,22 @@ export default [
                 path: '/',
                 name: 'quotes.grid',
                 component: QuoteGrid,
+            }
+        ]
+    },
+
+    {
+        path: '/contacts',
+        name: 'contacts',
+        component: ContactIndex,
+        meta: {
+            auth: true
+        },
+        children: [
+            {
+                path: '/',
+                name: 'contacts.grid',
+                component: ContactGrid,
             }
         ]
     },

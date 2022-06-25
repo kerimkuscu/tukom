@@ -45,6 +45,12 @@
                     Quotes
                 </router-link>
             </li>
+
+            <li class="nav-item">
+                <router-link :to="{name:'contacts.grid'}" class="nav-link">
+                    Contacts
+                </router-link>
+            </li>
         </ul>
 
         <ul v-else class="navbar-nav me-auto mb-2 mb-lg-0">
