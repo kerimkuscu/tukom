@@ -138,6 +138,14 @@
         </template>
       </Column>
 
+        <Column field="menu" header="Menu" :styles="{'min-width':'200px'}">
+            <template #body="slotProps">
+                <p :title="slotProps.data.menu" class="truncate">
+                    {{ slotProps.data.menu }}
+                </p>
+            </template>
+        </Column>
+
       <Column field="brand" header="Brand" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.brand" class="truncate">
@@ -312,6 +320,7 @@ export default {
         menuList: [],
         display: false,
         menuModalHeader: null,
+        selectedId: null
     }),
 
     mounted() {
@@ -408,6 +417,7 @@ export default {
 
         showMenuModal(item) {
             this.menuHeader(item);
+            this.selectedId = item.id;
             this.display = true;
         },
 
@@ -420,8 +430,20 @@ export default {
             this.menuModalHeader = null;
         },
 
-        saveMenu() {
-            this.$toast.add({ severity:'success', detail:'Menu saved.', life: 1000 });
+        async saveMenu() {
+            let formData = new FormData();
+            formData.append('menu_id', this.menu);
+
+            const response = await this.$http.post(`/api/products/${this.selectedId}/menu`,formData);
+
+            if(response.data.status){
+                await this.fetch();
+                this.$toast.add({ severity:'success', detail:'Menu saved.', life: 1000 })
+            }
+            else {
+                this.$toast.add({ severity:'error', detail:'Menu could not saved.', life: 1000 });
+            }
+
             this.display = false;
             this.menuModalHeader = null;
         }

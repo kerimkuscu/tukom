@@ -21,7 +21,7 @@ import NotFound from "../components/NotFound";
 
 // Frontend
 
-import Index from '../Frontend/Pages/Home';
+import Index from '../Frontend/Pages/Home/Index';
 import Contact from '../Frontend/Pages/Contact/Contact';
 import About from '../Frontend/Pages/About/About';
 import Quote from '../Frontend/Pages/Quote/Quote';

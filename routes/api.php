@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
+use App\Http\Controllers\Api\ProductMenuContoller;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -49,6 +50,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('products', ProductController::class)->except(['index']);
     Route::post('/products/import', [ProductImportController::class, 'store']);
     Route::post('/products/{product}', [ProductController::class, 'update']);
+    Route::post('/products/{product}/menu', [ProductMenuContoller::class, 'store']);
 
     Route::apiResource('users', UserController::class);
     Route::apiResource('brands', BrandController::class);

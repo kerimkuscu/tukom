@@ -126,30 +126,20 @@ class MenuRepository
         foreach ($menus as $key => $menu) {
             $items[$key] = [
                 'label' => $menu->name,
-                'items' => [],
             ];
 
             $items2 = [];
-//            $items3 = [];
 
             foreach ($menu->submenus as $key2 => $menu2) {
                 $items2[$key2] = [
                     'label' => $menu2->name,
-                    'items' => [],
-                    'id' => $menu2->id,
+                    'id'    => $menu2->id,
                 ];
-
-//                foreach ($menu2->submenus as $key3 => $menu3) {
-//                    $items3[$key3] = [
-//                        'label' => $menu3->name,
-//                    ];
-//                }
-
-//                $items2[$key2]['items'] = $items3;
-//                $items3                       = [];
             }
 
-            $items[$key]['items'] = $items2;
+            if (!empty($items2)) {
+                $items[$key]['items'] = $items2;
+            }
         }
 
         return $items;

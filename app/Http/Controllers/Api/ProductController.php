@@ -33,6 +33,7 @@ class ProductController extends Controller
         $sortDirection = $request->input('sortOrder', '1') === '1' ? 'ASC' : 'DESC';
 
         $products = Product::query()
+            ->with('menu')
             ->when($request->input('card_code'), fn($query, $value) => $query->where('card_code', 'like', '%' . $value . '%'))
             ->when($request->input('description'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
             ->when($request->input('type'), fn($query, $value) => $query->where('type', 'like', '%' . $value . '%'))

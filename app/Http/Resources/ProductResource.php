@@ -2,11 +2,13 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Contracts\Support\Arrayable;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use JsonSerializable;
 
+/**
+ * @mixin Product
+ */
 class ProductResource extends JsonResource
 {
     /**
@@ -18,6 +20,11 @@ class ProductResource extends JsonResource
      */
     public function toArray($request): array
     {
-        return parent::toArray($request);
+        return array_merge(
+            parent::toArray($request),
+            [
+                'menu' => $this->menu?->name,
+            ]
+        );
     }
 }
