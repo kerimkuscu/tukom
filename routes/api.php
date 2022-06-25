@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
 use App\Http\Controllers\Api\ProductMenuContoller;
+use App\Http\Controllers\Api\QuoteController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -54,4 +55,5 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     Route::apiResource('users', UserController::class);
     Route::apiResource('brands', BrandController::class);
+    Route::apiResource('quote', QuoteController::class)->except(['index']);
 });
