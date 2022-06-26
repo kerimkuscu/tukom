@@ -7,6 +7,22 @@ window.eventHub = new Vue();
 Vue.prototype.$eventHub = window.eventHub;
 Vue.prototype.$http = window.axios;
 
+import VueI18n from 'vue-i18n'
+//Vuei18n
+Vue.use(VueI18n);
+
+import tr from './lang/tr.js';
+import en from './lang/en.js';
+
+let locale = 'tr';
+
+const i18n = new VueI18n({
+    locale,
+    messages: locale === 'tr' ? tr : en,
+});
+
+
+
 
 import TreeTable from 'primevue/treetable';
 import Column from 'primevue/column';
@@ -93,6 +109,7 @@ Vue.use(VueRouter);
 // });
 
 const app = new Vue({
+    i18n,
     el: '#app',
     router
 });

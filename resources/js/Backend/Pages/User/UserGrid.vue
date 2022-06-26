@@ -4,7 +4,7 @@
 
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
-        Users
+        {{ $t('users.title') }}
       </h4>
       <Button label="Create" class="float-end p-button-sm" @click="create" />
     </div>
@@ -23,7 +23,7 @@
       @page="onPage($event)"
       @sort="onSort($event)"
     >
-      <Column ref="name" field="name" header="Name" />
+      <Column ref="name" field="name" :header="$t('users.column.name')" />
 
       <Column ref="email" field="email" header="Email" />
 

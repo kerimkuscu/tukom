@@ -85,7 +85,7 @@ import { Errors } from 'form-backend-validation';
                     success: () => {
                         let redirect = this.$auth.redirect();
 
-                        const redirectTo = redirect ? redirect.from.fullPath : '/products/';
+                        const redirectTo = redirect ? redirect.from.fullPath : '/products-list/';
 
                         this.$router.push(redirectTo)
                     },

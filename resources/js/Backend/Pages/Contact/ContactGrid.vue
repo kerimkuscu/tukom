@@ -6,7 +6,6 @@
             <h4 class="float-start card-title">
                 Contacts
             </h4>
-            <Button label="Create" class="float-end p-button-sm" @click="create" />
         </div>
 
         <DataTable
@@ -87,14 +86,6 @@ export default {
         onSort(event){
             this.lazyParams = event;
             this.fetch();
-        },
-
-        create(){
-            this.$router.push({ name: 'contacts.create' });
-        },
-
-        edit(id){
-            this.$router.push({ path: 'edit/' + id });
         },
 
         remove(id){
