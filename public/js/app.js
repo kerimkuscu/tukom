@@ -6963,9 +6963,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       this.$confirm.require({
-        message: 'Are you sure you want to delete this record?',
-        header: 'Confirmation',
+        message: this.$i18n.t('messages.messages.delete_message'),
+        header: this.$i18n.t('messages.buttons.delete'),
         icon: 'pi pi-exclamation-triangle',
+        acceptClass: 'p-button-danger',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        acceptLabel: this.$i18n.t('messages.buttons.delete'),
+        rejectLabel: this.$i18n.t('messages.buttons.cancel'),
         accept: function () {
           var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -7154,9 +7158,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       this.$confirm.require({
-        message: 'Are you sure you want to delete this record?',
-        header: 'Confirmation',
+        message: this.$i18n.t('messages.messages.delete_message'),
+        header: this.$i18n.t('messages.buttons.delete'),
         icon: 'pi pi-exclamation-triangle',
+        acceptClass: 'p-button-danger',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        acceptLabel: this.$i18n.t('messages.buttons.delete'),
+        rejectLabel: this.$i18n.t('messages.buttons.cancel'),
         accept: function () {
           var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -7744,9 +7752,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       this.$confirm.require({
-        message: 'Are you sure you want to delete this record?',
-        header: 'Confirmation',
+        message: this.$i18n.t('messages.messages.delete_message'),
+        header: this.$i18n.t('messages.buttons.delete'),
         icon: 'pi pi-exclamation-triangle',
+        acceptClass: 'p-button-danger',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        acceptLabel: this.$i18n.t('messages.buttons.delete'),
+        rejectLabel: this.$i18n.t('messages.buttons.cancel'),
         accept: function () {
           var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
             var response;
@@ -9055,9 +9067,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       this.$confirm.require({
-        message: 'Are you sure you want to delete this record?',
-        header: 'Confirmation',
+        message: this.$i18n.t('messages.messages.delete_message'),
+        header: this.$i18n.t('messages.buttons.delete'),
         icon: 'pi pi-exclamation-triangle',
+        acceptClass: 'p-button-danger',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        acceptLabel: this.$i18n.t('messages.buttons.delete'),
+        rejectLabel: this.$i18n.t('messages.buttons.cancel'),
         accept: function () {
           var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
@@ -9366,9 +9382,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       this.$confirm.require({
-        message: 'Are you sure you want to delete this record?',
-        header: 'Confirmation',
+        message: this.$i18n.t('messages.messages.delete_message'),
+        header: this.$i18n.t('messages.buttons.delete'),
         icon: 'pi pi-exclamation-triangle',
+        acceptClass: 'p-button-danger',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        acceptLabel: this.$i18n.t('messages.buttons.delete'),
+        rejectLabel: this.$i18n.t('messages.buttons.cancel'),
         accept: function () {
           var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -9855,9 +9875,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       this.$confirm.require({
-        message: 'Are you sure you want to delete this record?',
-        header: 'Confirmation',
+        message: this.$i18n.t('messages.messages.delete_message'),
+        header: this.$i18n.t('messages.buttons.delete'),
         icon: 'pi pi-exclamation-triangle',
+        acceptClass: 'p-button-danger',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        acceptLabel: this.$i18n.t('messages.buttons.delete'),
+        rejectLabel: this.$i18n.t('messages.buttons.cancel'),
         accept: function () {
           var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -10646,10 +10670,11 @@ Vue.prototype.$http = window.axios;
 Vue.use(vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
-var locale = 'tr';
+var userLang = navigator.language.substring(0, 2);
+var locale = userLang ? locale = userLang : locale = 'tr';
 var i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]({
   locale: locale,
-  messages: locale === 'tr' ? _lang_tr_js__WEBPACK_IMPORTED_MODULE_1__["default"] : _lang_en_js__WEBPACK_IMPORTED_MODULE_2__["default"]
+  messages: locale
 });
 
 
@@ -10804,10 +10829,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users */ "./resources/js/lang/en/users.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./resources/js/lang/en/messages.js");
+/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users */ "./resources/js/lang/en/users.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  users: _users__WEBPACK_IMPORTED_MODULE_0__["default"]
+  messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"],
+  users: _users__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/lang/en/messages.js":
+/*!******************************************!*\
+  !*** ./resources/js/lang/en/messages.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  buttons: {
+    create: 'Create',
+    edit: 'Edit',
+    "delete": 'Delete',
+    cancel: 'Cancel'
+  },
+  messages: {
+    delete_message: 'Are you sure you want to delete this record?'
+  }
 });
 
 /***/ }),
@@ -10863,10 +10916,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users */ "./resources/js/lang/tr/users.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./resources/js/lang/tr/messages.js");
+/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users */ "./resources/js/lang/tr/users.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  users: _users__WEBPACK_IMPORTED_MODULE_0__["default"]
+  messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"],
+  users: _users__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/lang/tr/messages.js":
+/*!******************************************!*\
+  !*** ./resources/js/lang/tr/messages.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  buttons: {
+    create: 'Oluştur',
+    edit: 'Düzenle',
+    "delete": 'Sil',
+    cancel: 'İptal Et'
+  },
+  messages: {
+    delete_message: 'Bu kayıdı silmek istediğinize emin misiniz?'
+  }
 });
 
 /***/ }),
@@ -74077,7 +74158,7 @@ var render = function () {
           _vm._v(" "),
           _c("Column", {
             ref: "email",
-            attrs: { field: "email", header: "Email" },
+            attrs: { field: "email", header: _vm.$t("users.column.email") },
           }),
           _vm._v(" "),
           _c("Column", {

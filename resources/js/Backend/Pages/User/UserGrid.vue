@@ -25,7 +25,7 @@
     >
       <Column ref="name" field="name" :header="$t('users.column.name')" />
 
-      <Column ref="email" field="email" header="Email" />
+      <Column ref="email" field="email" :header="$t('users.column.email')" />
 
       <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
         <template #body="{data}">
@@ -96,9 +96,13 @@ export default {
 
         remove(id){
             this.$confirm.require({
-                message: 'Are you sure you want to delete this record?',
-                header: 'Confirmation',
+                message: this.$i18n.t('messages.messages.delete_message'),
+                header: this.$i18n.t('messages.buttons.delete'),
                 icon: 'pi pi-exclamation-triangle',
+                acceptClass: 'p-button-danger',
+                rejectClass: 'p-button-secondary p-button-outlined',
+                acceptLabel: this.$i18n.t('messages.buttons.delete'),
+                rejectLabel: this.$i18n.t('messages.buttons.cancel'),
                 accept: async () => {
                     await this.$http.delete('/api/users/' + id)
                     await this.fetch()

@@ -14,11 +14,13 @@ Vue.use(VueI18n);
 import tr from './lang/tr.js';
 import en from './lang/en.js';
 
-let locale = 'tr';
+let userLang = navigator.language.substring(0, 2);
+
+let locale = userLang ? locale = userLang : locale = 'tr';
 
 const i18n = new VueI18n({
     locale,
-    messages: locale === 'tr' ? tr : en,
+    messages: locale,
 });
 
 

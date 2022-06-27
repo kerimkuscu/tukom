@@ -100,9 +100,13 @@ export default {
 
         remove(id){
             this.$confirm.require({
-                message: 'Are you sure you want to delete this record?',
-                header: 'Confirmation',
+                message: this.$i18n.t('messages.messages.delete_message'),
+                header: this.$i18n.t('messages.buttons.delete'),
                 icon: 'pi pi-exclamation-triangle',
+                acceptClass: 'p-button-danger',
+                rejectClass: 'p-button-secondary p-button-outlined',
+                acceptLabel: this.$i18n.t('messages.buttons.delete'),
+                rejectLabel: this.$i18n.t('messages.buttons.cancel'),
                 accept: async () => {
                     await this.$http.delete('/api/quotes/' + id)
                     await this.fetch()
