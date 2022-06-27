@@ -7967,13 +7967,13 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     SidebarMenu: _Frontend_SidebarMenu__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mounted: function mounted() {
-    this.showNavbar();
-  },
   data: function data() {
     return {
       show: true
     };
+  },
+  mounted: function mounted() {
+    this.showNavbar();
   },
   methods: {
     showNavbar: function showNavbar() {
@@ -9991,6 +9991,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var form_backend_validation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! form-backend-validation */ "./node_modules/form-backend-validation/dist/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -10011,8 +10020,148 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Contact'
+  name: 'Contact',
+  data: function data() {
+    return {
+      form: new form_backend_validation__WEBPACK_IMPORTED_MODULE_1__["default"]({
+        name: null,
+        email: null,
+        phone: null,
+        subject: null,
+        message: null
+      })
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _this.form.post('/api/brands');
+
+              case 3:
+                _context.next = 8;
+                break;
+
+              case 5:
+                _context.prev = 5;
+                _context.t0 = _context["catch"](0);
+
+                if (_context.t0.response.status !== 422) {}
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 5]]);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -10859,6 +11008,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/lang/en/contact.js":
+/*!*****************************************!*\
+  !*** ./resources/js/lang/en/contact.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  frontend: {
+    name: 'Name',
+    email: 'Email',
+    phone: 'Phone',
+    subject: 'Subject',
+    message: 'Message',
+    send_email: 'Send Email'
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/lang/en/index.js":
 /*!***************************************!*\
   !*** ./resources/js/lang/en/index.js ***!
@@ -10873,13 +11046,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./resources/js/lang/en/messages.js");
 /* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navbar */ "./resources/js/lang/en/navbar.js");
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users */ "./resources/js/lang/en/users.js");
+/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contact */ "./resources/js/lang/en/contact.js");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"],
   navbar: _navbar__WEBPACK_IMPORTED_MODULE_1__["default"],
-  users: _users__WEBPACK_IMPORTED_MODULE_2__["default"]
+  users: _users__WEBPACK_IMPORTED_MODULE_2__["default"],
+  contact: _contact__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 
 /***/ }),
@@ -10978,6 +11154,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/lang/tr/contact.js":
+/*!*****************************************!*\
+  !*** ./resources/js/lang/tr/contact.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  frontend: {
+    name: 'İsim',
+    email: 'Email',
+    phone: 'Telefon',
+    subject: 'Konu',
+    message: 'Mesaj',
+    send_email: 'Email Gönder'
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/lang/tr/index.js":
 /*!***************************************!*\
   !*** ./resources/js/lang/tr/index.js ***!
@@ -10992,13 +11192,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./resources/js/lang/tr/messages.js");
 /* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navbar */ "./resources/js/lang/tr/navbar.js");
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users */ "./resources/js/lang/tr/users.js");
+/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contact */ "./resources/js/lang/tr/contact.js");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"],
   navbar: _navbar__WEBPACK_IMPORTED_MODULE_1__["default"],
-  users: _users__WEBPACK_IMPORTED_MODULE_2__["default"]
+  users: _users__WEBPACK_IMPORTED_MODULE_2__["default"],
+  contact: _contact__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 
 /***/ }),
@@ -71617,9 +71820,9 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n              " +
+                              "\n          " +
                                 _vm._s(_vm.$t("navbar.headers.home")) +
-                                "\n          "
+                                "\n        "
                             ),
                           ]
                         ),
@@ -71701,7 +71904,7 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n                " +
+                                  "\n              " +
                                     _vm._s(_vm.$t("navbar.headers.logout")) +
                                     "\n            "
                                 ),
@@ -74372,21 +74575,285 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "col-md-12" }, [
+    _c("div", { staticClass: "row" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticStyle: { "margin-top": "10rem" } }, [
+          _c(
+            "div",
+            {
+              staticClass: "justify-content-center",
+              staticStyle: { display: "flex", margin: "1rem" },
+            },
+            [_c("h3", [_vm._v(_vm._s(_vm.$t("navbar.headers.contact")))])]
+          ),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.submit.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-8 mx-auto" }, [
+                  _c("div", { staticClass: "form-group row mb-2" }, [
+                    _c(
+                      "label",
+                      { staticClass: "col-form-label col-md-3 required" },
+                      [_vm._v(_vm._s(_vm.$t("contact.frontend.name")))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-9 grid p-fluid" },
+                      [
+                        _c("InputText", {
+                          staticClass: "p-inputtext-sm",
+                          class: { "p-invalid": _vm.form.errors.has("name") },
+                          attrs: {
+                            id: "name",
+                            type: "text",
+                            placeholder: _vm.$t("contact.frontend.name"),
+                          },
+                          model: {
+                            value: _vm.form.name,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.form, "name", $$v)
+                            },
+                            expression: "form.name",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "p-invalid",
+                            attrs: { id: "name-help" },
+                          },
+                          [_vm._v(_vm._s(_vm.form.errors.first("name")))]
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row mb-2" }, [
+                    _c(
+                      "label",
+                      { staticClass: "col-form-label col-md-3 required" },
+                      [_vm._v(_vm._s(_vm.$t("contact.frontend.email")))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-9 grid p-fluid" },
+                      [
+                        _c("InputText", {
+                          staticClass: "p-inputtext-sm",
+                          class: { "p-invalid": _vm.form.errors.has("email") },
+                          attrs: {
+                            id: "email",
+                            type: "text",
+                            placeholder: _vm.$t("contact.frontend.email"),
+                          },
+                          model: {
+                            value: _vm.form.email,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.form, "email", $$v)
+                            },
+                            expression: "form.email",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "p-invalid",
+                            attrs: { id: "name-help" },
+                          },
+                          [_vm._v(_vm._s(_vm.form.errors.first("email")))]
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row mb-2" }, [
+                    _c(
+                      "label",
+                      { staticClass: "col-form-label col-md-3 required" },
+                      [_vm._v(_vm._s(_vm.$t("contact.frontend.phone")))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-9 grid p-fluid" },
+                      [
+                        _c("InputText", {
+                          staticClass: "p-inputtext-sm",
+                          class: { "p-invalid": _vm.form.errors.has("phone") },
+                          attrs: {
+                            id: "phone",
+                            type: "text",
+                            placeholder: _vm.$t("contact.frontend.phone"),
+                          },
+                          model: {
+                            value: _vm.form.phone,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.form, "phone", $$v)
+                            },
+                            expression: "form.phone",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "p-invalid",
+                            attrs: { id: "name-help" },
+                          },
+                          [_vm._v(_vm._s(_vm.form.errors.first("phone")))]
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row mb-2" }, [
+                    _c(
+                      "label",
+                      { staticClass: "col-form-label col-md-3 required" },
+                      [_vm._v(_vm._s(_vm.$t("contact.frontend.subject")))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-9 grid p-fluid" },
+                      [
+                        _c("InputText", {
+                          staticClass: "p-inputtext-sm",
+                          class: {
+                            "p-invalid": _vm.form.errors.has("subject"),
+                          },
+                          attrs: {
+                            id: "subject",
+                            type: "text",
+                            placeholder: _vm.$t("contact.frontend.subject"),
+                          },
+                          model: {
+                            value: _vm.form.subject,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.form, "subject", $$v)
+                            },
+                            expression: "form.subject",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "p-invalid",
+                            attrs: { id: "name-help" },
+                          },
+                          [_vm._v(_vm._s(_vm.form.errors.first("subject")))]
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row mb-2" }, [
+                    _c(
+                      "label",
+                      { staticClass: "col-form-label col-md-3 required" },
+                      [_vm._v(_vm._s(_vm.$t("contact.frontend.message")))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-9 grid p-fluid" },
+                      [
+                        _c("Textarea", {
+                          staticClass:
+                            "p-inputtextarea p-inputtext-sm p-inputtext p-component p-component",
+                          class: {
+                            "p-invalid": _vm.form.errors.has("message"),
+                          },
+                          attrs: {
+                            id: "message",
+                            placeholder: _vm.$t("contact.frontend.message"),
+                            "auto-resize": true,
+                            rows: "3",
+                            cols: "30",
+                          },
+                          model: {
+                            value: _vm.form.message,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.form, "message", $$v)
+                            },
+                            expression: "form.message",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "p-invalid",
+                            attrs: { id: "name-help" },
+                          },
+                          [_vm._v(_vm._s(_vm.form.errors.first("message")))]
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mb-0" }, [
+                _c(
+                  "div",
+                  { staticClass: "offset-md-5" },
+                  [
+                    _c("Button", {
+                      staticClass: "p-button-rounded w-25",
+                      attrs: {
+                        type: "submit",
+                        label: _vm.$t("contact.frontend.send_email"),
+                        icon: "pi pi-send",
+                      },
+                    }),
+                  ],
+                  1
+                ),
+              ]),
+            ]
+          ),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
+    return _c("div", { staticClass: "col-md-6" }, [
       _c("div", { staticClass: "mapouter" }, [
         _c("div", { staticClass: "gmap_canvas" }, [
           _c("iframe", {
             attrs: {
               id: "gmap_canvas",
-              width: "800",
-              height: "800",
+              width: "900",
+              height: "900",
               src: "https://maps.google.com/maps?q=Mimar%20Sinan%20Mah.%201.%C3%87akmak%20Sokak%20No%20:%209-11%20Kemerburgaz%20Ey%C3%BCpsultan%20%C4%B0stanbul&t=&z=15&ie=UTF8&iwloc=&output=embed",
               frameborder: "0",
               scrolling: "no",
@@ -74396,8 +74863,6 @@ var staticRenderFns = [
           }),
         ]),
       ]),
-      _vm._v(" "),
-      _c("form"),
     ])
   },
 ]

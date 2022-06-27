@@ -61,7 +61,7 @@ export default {
                 this.$eventHub.$emit('sub-menu-item', item.id);
                 let productName = item.label;
                 productName = productName.replace(/\s+/g, '-').toLowerCase();
-                this.$router.push({ name: 'products', params: { productName: productName } });
+                this.$router.push({ name: 'products', params: { productName } });
 
         },
 

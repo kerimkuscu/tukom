@@ -59,9 +59,9 @@
             <SidebarMenu />
           </li>
 
-            <router-link :to="{name:'index'}" class="nav-link" style="margin-left: 3em">
-                {{ $t('navbar.headers.home') }}
-            </router-link>
+          <router-link :to="{name:'index'}" class="nav-link" style="margin-left: 3em">
+            {{ $t('navbar.headers.home') }}
+          </router-link>
         </ul>
 
         <router-link v-if="!$auth.check()" :to="{name:'contact'}" class="nav-link" style="color: rgb(115 115 115)">
@@ -93,7 +93,7 @@
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <button class="dropdown-item" @click="authLogout">
-                  {{ $t('navbar.headers.logout') }}
+                {{ $t('navbar.headers.logout') }}
               </button>
             </div>
           </li>
@@ -114,13 +114,13 @@ export default {
         SidebarMenu,
     },
 
-    mounted() {
-        this.showNavbar();
-    },
-
     data: () => ({
         show: true,
     }),
+
+    mounted() {
+        this.showNavbar();
+    },
 
     methods: {
         showNavbar() {

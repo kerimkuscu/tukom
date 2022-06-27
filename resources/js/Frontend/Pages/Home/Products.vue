@@ -1,17 +1,17 @@
 <template>
-    <div class="p-card p-component m-2">
-        <div class="p-card-body">
-            <div class="p-card-content">
-                <div class="row col-md-12">
-                    <div v-for="option in productsOptions" class="col-md-2">
-                        <div class="align-items-center justify-content-center" style="display: flex">
-                            <img :alt="option.text" :src="option.path" style="width: 70%">
-                        </div>
-                    </div>
-                </div>
+  <div class="p-card p-component m-2">
+    <div class="p-card-body">
+      <div class="p-card-content">
+        <div class="row col-md-12">
+          <div v-for="option in productsOptions" class="col-md-2">
+            <div class="align-items-center justify-content-center" style="display: flex">
+              <img :alt="option.text" :src="option.path" style="width: 70%">
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
