@@ -138,13 +138,13 @@
         </template>
       </Column>
 
-        <Column field="menu" header="Menu" :styles="{'min-width':'200px'}">
-            <template #body="slotProps">
-                <p :title="slotProps.data.menu" class="truncate">
-                    {{ slotProps.data.menu }}
-                </p>
-            </template>
-        </Column>
+      <Column field="menu" header="Menu" :styles="{'min-width':'200px'}">
+        <template #body="slotProps">
+          <p :title="slotProps.data.menu" class="truncate">
+            {{ slotProps.data.menu }}
+          </p>
+        </template>
+      </Column>
 
       <Column field="brand" header="Brand" :styles="{'min-width':'200px'}">
         <template #body="slotProps">

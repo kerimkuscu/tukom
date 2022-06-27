@@ -88,6 +88,7 @@ import { Errors } from 'form-backend-validation';
                         const redirectTo = redirect ? redirect.from.fullPath : '/products-list/';
 
                         this.$router.push(redirectTo)
+                        window.location.reload();
                     },
 
                     error: (error) => {

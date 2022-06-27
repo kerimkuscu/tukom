@@ -1,23 +1,23 @@
 <template>
-    <div>
-        <div class="align-items-center justify-content-center" style="display: flex; margin: 10px 0 10px 0">
-            <h1>MARKETS</h1>
-        </div>
-        <div class="row col-md-12">
-            <div v-for="item in items" class="col-md-3">
-                <Card style="margin: 10px">
-                    <template #header>
-                        <img :alt="item.text" :src="item.path">
-                    </template>
-                    <template #title>
-                        <div class="align-items-center justify-content-center" style="display: flex">
-                            {{ item.text }}
-                        </div>
-                    </template>
-                </Card>
-            </div>
-        </div>
+  <div>
+    <div class="align-items-center justify-content-center" style="display: flex; margin: 10px 0 10px 0">
+      <h1>MARKETS</h1>
     </div>
+    <div class="row col-md-12">
+      <div v-for="item in items" class="col-md-3">
+        <Card style="margin: 10px">
+          <template #header>
+            <img :alt="item.text" :src="item.path">
+          </template>
+          <template #title>
+            <div class="align-items-center justify-content-center" style="display: flex">
+              {{ item.text }}
+            </div>
+          </template>
+        </Card>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

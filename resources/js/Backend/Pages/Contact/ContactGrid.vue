@@ -1,47 +1,46 @@
 <template>
-    <div>
-        <ConfirmDialog />
+  <div>
+    <ConfirmDialog />
 
-        <div class="pb-5" style="margin-bottom: 20px">
-            <h4 class="float-start card-title">
-                Contacts
-            </h4>
-        </div>
-
-        <DataTable
-            ref="dt"
-            data-key="id"
-            responsive-layout="scroll"
-            paginator-template="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
-            :value="items"
-            :lazy="true"
-            :paginator="true"
-            :rows="perPage"
-            :total-records="totalRecords"
-            :loading="loading"
-            @page="onPage($event)"
-            @sort="onSort($event)"
-        >
-            <Column ref="name" field="name" header="Name" />
-            <Column ref="email" field="email" header="Email" />
-            <Column ref="phone" field="phone" header="Phone" />
-            <Column ref="subject" field="subject" header="Subject" />
-            <Column ref="message" field="message" header="Message" />
-            <Column ref="message" field="message" header="Message" />
-
-            <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
-                <template #body="{data}">
-                    <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(data.id)" />
-                </template>
-            </Column>
-
-        </DataTable>
+    <div class="pb-5" style="margin-bottom: 20px">
+      <h4 class="float-start card-title">
+        Contacts
+      </h4>
     </div>
+
+    <DataTable
+      ref="dt"
+      data-key="id"
+      responsive-layout="scroll"
+      paginator-template="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+      :value="items"
+      :lazy="true"
+      :paginator="true"
+      :rows="perPage"
+      :total-records="totalRecords"
+      :loading="loading"
+      @page="onPage($event)"
+      @sort="onSort($event)"
+    >
+      <Column ref="name" field="name" header="Name" />
+      <Column ref="email" field="email" header="Email" />
+      <Column ref="phone" field="phone" header="Phone" />
+      <Column ref="subject" field="subject" header="Subject" />
+      <Column ref="message" field="message" header="Message" />
+      <Column ref="message" field="message" header="Message" />
+
+      <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
+        <template #body="{data}">
+          <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(data.id)" />
+        </template>
+      </Column>
+    </DataTable>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "ContactGrid",
+    name: 'ContactGrid',
 
     data: () => ({
         items: null,

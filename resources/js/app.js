@@ -7,24 +7,21 @@ window.eventHub = new Vue();
 Vue.prototype.$eventHub = window.eventHub;
 Vue.prototype.$http = window.axios;
 
-import VueI18n from 'vue-i18n'
 //Vuei18n
+import VueI18n from 'vue-i18n'
+import tr from './lang/tr';
+import en from './lang/en';
 Vue.use(VueI18n);
 
-import tr from './lang/tr.js';
-import en from './lang/en.js';
+let userLang = navigator.language || navigator.userLanguage;
+let userlangText = userLang.substring(0, 2);
 
-let userLang = navigator.language.substring(0, 2);
-
-let locale = userLang ? locale = userLang : locale = 'tr';
+let locale = userlangText;
 
 const i18n = new VueI18n({
     locale,
-    messages: locale,
+    messages: locale === 'tr' ? tr : en,
 });
-
-
-
 
 import TreeTable from 'primevue/treetable';
 import Column from 'primevue/column';

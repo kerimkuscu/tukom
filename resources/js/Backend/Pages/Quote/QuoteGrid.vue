@@ -1,57 +1,56 @@
 <template>
-    <div>
-        <ConfirmDialog />
+  <div>
+    <ConfirmDialog />
 
-        <div class="pb-5" style="margin-bottom: 20px">
-            <h4 class="float-start card-title">
-                Quotes
-            </h4>
-        </div>
-
-        <DataTable
-            ref="dt"
-            data-key="id"
-            responsive-layout="scroll"
-            paginator-template="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
-            :value="items"
-            :lazy="true"
-            :paginator="true"
-            :rows="perPage"
-            :total-records="totalRecords"
-            :loading="loading"
-            @page="onPage($event)"
-            @sort="onSort($event)"
-        >
-            <Column ref="first_name" field="first_name" header="First Name" />
-            <Column ref="last_name" field="last_name" header="Last Name" />
-            <Column ref="title" field="title" header="Title" />
-            <Column ref="business" field="business" header="Business" />
-            <Column ref="company" field="company" header="Company" />
-            <Column ref="address" field="address" header="Address" />
-            <Column ref="city_state_zip_country" field="city_state_zip_country" header="City State Zip Country" />
-            <Column ref="phone" field="phone" header="Phone" />
-            <Column ref="fax" field="fax" header="Fax" />
-            <Column ref="email" field="email" header="Email" />
-            <Column ref="connector_interested_in" field="connector_interested_in" header="Interested Connector" />
-            <Column ref="connector_supplier" field="connector_supplier" header="Connector Supplier" />
-            <Column ref="eau" field="eau" header="Eau" />
-            <Column ref="project_title" field="project_title" header="Project Title" />
-            <Column ref="project_start_date" field="project_start_date" header="Project Start Date" />
-            <Column ref="questions_comments" field="questions_comments" header="Questions And Comments" />
-
-            <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
-                <template #body="{data}">
-                    <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(data.id)" />
-                </template>
-            </Column>
-
-        </DataTable>
+    <div class="pb-5" style="margin-bottom: 20px">
+      <h4 class="float-start card-title">
+        Quotes
+      </h4>
     </div>
+
+    <DataTable
+      ref="dt"
+      data-key="id"
+      responsive-layout="scroll"
+      paginator-template="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+      :value="items"
+      :lazy="true"
+      :paginator="true"
+      :rows="perPage"
+      :total-records="totalRecords"
+      :loading="loading"
+      @page="onPage($event)"
+      @sort="onSort($event)"
+    >
+      <Column ref="first_name" field="first_name" header="First Name" />
+      <Column ref="last_name" field="last_name" header="Last Name" />
+      <Column ref="title" field="title" header="Title" />
+      <Column ref="business" field="business" header="Business" />
+      <Column ref="company" field="company" header="Company" />
+      <Column ref="address" field="address" header="Address" />
+      <Column ref="city_state_zip_country" field="city_state_zip_country" header="City State Zip Country" />
+      <Column ref="phone" field="phone" header="Phone" />
+      <Column ref="fax" field="fax" header="Fax" />
+      <Column ref="email" field="email" header="Email" />
+      <Column ref="connector_interested_in" field="connector_interested_in" header="Interested Connector" />
+      <Column ref="connector_supplier" field="connector_supplier" header="Connector Supplier" />
+      <Column ref="eau" field="eau" header="Eau" />
+      <Column ref="project_title" field="project_title" header="Project Title" />
+      <Column ref="project_start_date" field="project_start_date" header="Project Start Date" />
+      <Column ref="questions_comments" field="questions_comments" header="Questions And Comments" />
+
+      <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
+        <template #body="{data}">
+          <Button icon="pi pi-trash" class="float-end p-button-sm p-button-danger" @click="remove(data.id)" />
+        </template>
+      </Column>
+    </DataTable>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "QuoteGrid",
+    name: 'QuoteGrid',
 
     data: () => ({
         items: null,

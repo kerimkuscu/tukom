@@ -47,7 +47,8 @@ export default {
     data() {
         return {
             activeItem: null,
-            activeSubItem: null
+            activeSubItem: null,
+            productName: null
         }
     },
     methods: {
@@ -58,7 +59,10 @@ export default {
         onItemClickForSubMenu(event, item) {
                 this.activeSubItem = item;
                 this.$eventHub.$emit('sub-menu-item', item.id);
-                this.$router.push({ path: '/products/' + this.replaceSubMenuLabel(item.label) });
+                let productName = item.label;
+                productName = productName.replace(/\s+/g, '-').toLowerCase();
+                this.$router.push({ name: 'products', params: { productName: productName } });
+
         },
 
         getPanelToggleIcon(item) {
@@ -70,12 +74,6 @@ export default {
             const active = item === this.activeSubItem;
             return ['p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active }];
         },
-
-        replaceSubMenuLabel(item) {
-            let str = item;
-            str = str.replace(/\s+/g, '-').toLowerCase();
-            return str
-        }
     },
 }
 </script>
