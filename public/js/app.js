@@ -10524,6 +10524,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.$eventHub.$on('sub-menu-item', this.getProductsList);
+    this.fetchProductList();
   },
   methods: {
     getProductsList: function getProductsList(item) {
@@ -10548,6 +10549,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    fetchProductList: function fetchProductList() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.$http.get('/api/products?menu_id=' + _this2.$route.params.id);
+
+              case 2:
+                response = _context2.sent;
+                _this2.productsOptions = response.data;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     }
   }
@@ -10724,12 +10749,14 @@ __webpack_require__.r(__webpack_exports__);
     onItemClickForSubMenu: function onItemClickForSubMenu(event, item) {
       this.activeSubItem = item;
       this.$eventHub.$emit('sub-menu-item', item.id);
-      var productName = item.label;
-      productName = productName.replace(/\s+/g, '-').toLowerCase();
+      var urlProductName = item.label;
+      urlProductName = urlProductName.replace(/\s+/g, '-').toLowerCase();
+      var itemId = item.id;
       this.$router.push({
         name: 'products',
         params: {
-          productName: productName
+          productName: urlProductName,
+          id: itemId
         }
       });
     },
@@ -11488,7 +11515,7 @@ __webpack_require__.r(__webpack_exports__);
     auth: false
   }
 }, {
-  path: '/products/:productName',
+  path: '/products/:productName/:id',
   name: 'products',
   component: _Frontend_Pages_Home_Products__WEBPACK_IMPORTED_MODULE_18__["default"],
   meta: {

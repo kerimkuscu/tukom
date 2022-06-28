@@ -24,11 +24,18 @@ export default {
 
     mounted() {
         this.$eventHub.$on('sub-menu-item', this.getProductsList);
+        this.fetchProductList();
+
     },
 
     methods: {
         async getProductsList(item) {
             const response = await this.$http.get('/api/products?menu_id=' + item);
+            this.productsOptions = response.data;
+        },
+
+        async fetchProductList() {
+            const response = await this.$http.get('/api/products?menu_id=' + this.$route.params.id);
             this.productsOptions = response.data;
         }
     },
