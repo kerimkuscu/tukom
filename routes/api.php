@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
 use App\Http\Controllers\Api\ProductMenuContoller;
 use App\Http\Controllers\Api\QuoteController;
+use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ Route::group([
 
 Route::get('menus/getMegaMenuList', [MenuController::class, 'getMegaMenuList']);
 Route::get('products', [ProductController::class, 'index']);
+Route::get('products/{product}', [ProductController::class, 'show']);
 
 Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/user', function(Request $request) {
@@ -49,7 +51,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     Route::apiResource('menus', MenuController::class);
 
-    Route::apiResource('products', ProductController::class)->except(['index']);
+    Route::apiResource('products', ProductController::class)->except(['index', 'show']);
     Route::post('/products/import', [ProductImportController::class, 'store']);
     Route::post('/products/{product}', [ProductController::class, 'update']);
     Route::post('/products/{product}/menu', [ProductMenuContoller::class, 'store']);
@@ -58,4 +60,9 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('brands', BrandController::class);
     Route::apiResource('quotes', QuoteController::class)->except(['store']);
     Route::apiResource('contacts', ContactController::class)->except(['store']);
+
+    //Settings
+    Route::post('/settings/price-display', [SettingsController::class, 'priceDisplay']);
+    Route::post('/settings/contact-email', [SettingsController::class, 'contactEmail']);
+
 });
