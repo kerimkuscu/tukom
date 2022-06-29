@@ -4,14 +4,17 @@
             <h3>{{ productHeader }}</h3>
         </div>
         <div class="row col-md-12">
-            <div v-for="option in productsOptions" class="col-md-3">
-                <div class="p-card p-component m-2" @click="productDetail(option.id)">
-                    <div class="p-card-content align-items-center justify-content-center" style="display: flex">
+            <div v-for="option in productsOptions" class="col-md-2">
+                <div class="p-card p-component" style="margin-bottom: 25px" @click="productDetail(option.id)">
+                    <div v-if="option.image !==null" class="p-card-content align-items-center justify-content-center" style="display: flex">
                         <img :alt="option.description" :src="'http://tukom.test/images/' + option.image" style="width: 70%">
                     </div>
+                    <div v-else class="p-card-content align-items-center justify-content-center" style="display: flex">
+                        <span>No image found</span>
+                    </div>
 
-                    <div class="p-card-footer">
-                        <div class="align-items-center justify-content-center" style="display: flex">
+                    <div class="p-card-footer align-items-center justify-content-center" style="display: flex">
+                        <div class="align-items-center justify-content-center ellipsis">
                             {{ option.description }}
                         </div>
                     </div>
@@ -59,3 +62,11 @@ export default {
     },
 }
 </script>
+
+<style>
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+</style>
