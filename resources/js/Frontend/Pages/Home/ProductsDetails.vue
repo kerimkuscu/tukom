@@ -27,7 +27,7 @@ export default {
         },
 
         async fetchProductDetails() {
-            const response = await this.$http.get('/api/products/' + this.$route.params.id);
+            const response = await this.$http.get('/api/products/' + this.$route.params.productId);
             this.productDetailsOptions = response.data.data;
         },
     },

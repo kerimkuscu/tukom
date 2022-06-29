@@ -42,7 +42,11 @@ class UserController extends Controller
      */
     public function store(UserFormRequest $request): UserResource
     {
-        $user = User::query()->create($request->validated());
+        $attributes = $request->validated();
+
+        $attributes['password'] = Hash::make($attributes['password']);
+
+        $user = User::query()->create($attributes);
 
         return new UserResource($user);
     }
