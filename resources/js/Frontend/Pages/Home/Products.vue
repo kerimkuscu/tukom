@@ -5,7 +5,7 @@
         </div>
         <div class="row col-md-12">
             <div v-for="option in productsOptions" class="col-md-2">
-                <div class="p-card p-component" style="margin-bottom: 25px" @click="productDetail(option.id)">
+                <div class="p-card p-component" style="margin-bottom: 25px" @click="productDetail(option)">
                     <div v-if="option.image !==null" class="p-card-content align-items-center justify-content-center" style="display: flex">
                         <img :alt="option.description" :src="'http://tukom.test/images/' + option.image" style="width: 70%">
                     </div>
@@ -42,7 +42,7 @@ export default {
     methods: {
         async getProductsList(item) {
             const response = await this.$http.get('/api/products?menu_id=' + item);
-            this.productsOptions = response.data;
+            this.productsOptions = response.data.data;
             this.productName();
         },
 
@@ -57,7 +57,10 @@ export default {
         },
 
         productDetail(item) {
-            console.log(item);
+            this.$eventHub.$emit('products-details', item);
+            let urlProductName = item.menu;
+            urlProductName = urlProductName.replace(/\s+/g, '-').toLowerCase();
+            this.$router.push({ name: 'products.details', params: { productName: urlProductName,  productId: item.id } });
         }
     },
 }

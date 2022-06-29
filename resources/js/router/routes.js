@@ -26,6 +26,7 @@ import Contact from '../Frontend/Pages/Contact/Contact';
 import About from '../Frontend/Pages/About/About';
 import Quote from '../Frontend/Pages/Quote/Quote';
 import Products from '../Frontend/Pages/Home/Products';
+import ProductsDetails from '../Frontend/Pages/Home/ProductsDetails';
 import QuoteIndex from "../Backend/Pages/Quote/QuoteIndex";
 import QuoteGrid from "../Backend/Pages/Quote/QuoteGrid";
 import ContactIndex from "../Backend/Pages/Contact/ContactIndex";
@@ -194,7 +195,15 @@ export default [
         component: Products,
         meta: {
             auth: false
-        },
+        }
+    },
+    {
+        path: '/products/:productName/:productId',
+        name: 'products.details',
+        component: ProductsDetails,
+        meta: {
+            auth: false
+        }
     },
     {
         path: '/contact',
