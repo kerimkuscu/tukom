@@ -10,7 +10,7 @@
         "production": "mix --production",
         "phpcs:fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app/",
         "larastan": "vendor/bin/phpstan analyse --memory-limit=2G",
-        "lint": "node_modules/.bin/eslint resources/assets/js/ --ext .vue",
+        "lint": "node_modules/.bin/eslint resources/js/ --ext .vue",
         "lint:fix": "node_modules/.bin/eslint resources/js/ --ext .vue --fix"
     },
     "devDependencies": {

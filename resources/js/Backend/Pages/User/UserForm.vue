@@ -6,8 +6,8 @@
       </h4>
 
       <div class="float-end">
-        <Button class="p-button-sm p-button-secondary p-button-outlined" label="Cancel" @click="back" />
-        <Button type="submit" label="Save" class="p-button-sm" />
+        <Button class="p-button-sm p-button-secondary p-button-outlined" :label="$t('messages.buttons.cancel')" @click="back" />
+        <Button type="submit" :label="$t('messages.buttons.save')" class="p-button-sm" />
       </div>
     </div>
 
@@ -105,7 +105,7 @@ export default {
         },
 
         createOrEditPage() {
-            return this.form.id === null ? 'Create' : 'Edit';
+            return this.form.id === null ? this.$i18n.t('messages.buttons.create') : this.$i18n.t('messages.buttons.edit');
         }
     },
 

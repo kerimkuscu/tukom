@@ -23,16 +23,16 @@
       </div>
 
       <template #footer>
-        <Button label="Cancel" class="p-button-outlined p-button-secondary p-button-sm" @click="closeMenuModal" />
-        <Button label="Save" class=" p-button-sm" @click="saveMenu" />
+        <Button :label="$t('messages.buttons.cancel')" class="p-button-outlined p-button-secondary p-button-sm" @click="closeMenuModal" />
+        <Button :label="$t('messages.buttons.save')" class=" p-button-sm" @click="saveMenu" />
       </template>
     </Dialog>
 
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
-        Products
+        {{ $t('product.title') }}
       </h4>
-      <Button label="Create" class="float-end p-button-sm" @click="create" />
+      <Button :label="$t('messages.buttons.create')" class="float-end p-button-sm" @click="create" />
 
       <FileUpload
         mode="basic"
@@ -76,7 +76,7 @@
       <Column
         ref="card_code"
         field="card_code"
-        header="Card Code"
+        :header="this.$i18n.t('product.columns.card_code')"
         filter-match-mode="startsWith"
         :sortable="true"
         :styles="{'min-width':'400px'}"
@@ -101,7 +101,7 @@
       <Column
         ref="description"
         field="description"
-        header="Description"
+        :header="this.$i18n.t('product.columns.description')"
         filter-field="description"
         filter-match-mode="contains"
         :sortable="true"
@@ -121,7 +121,7 @@
       <Column
         ref="type"
         field="type"
-        header="Type"
+        :header="this.$i18n.t('product.columns.type')"
         filter-field="type"
         filter-match-mode="contains"
         :sortable="true"
@@ -138,7 +138,7 @@
         </template>
       </Column>
 
-      <Column field="menu" header="Menu" :styles="{'min-width':'200px'}">
+      <Column field="menu" :header="this.$i18n.t('product.columns.menu')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.menu" class="truncate">
             {{ slotProps.data.menu }}
@@ -146,7 +146,7 @@
         </template>
       </Column>
 
-      <Column field="brand" header="Brand" :styles="{'min-width':'200px'}">
+      <Column field="brand" :header="this.$i18n.t('product.columns.brand')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.brand" class="truncate">
             {{ slotProps.data.brand }}
@@ -154,7 +154,7 @@
         </template>
       </Column>
 
-      <Column field="fiili_stok" header="Fiili Stok" :styles="{'min-width':'200px'}">
+      <Column field="fiili_stok" :header="this.$i18n.t('product.columns.fiili_stok')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.fiili_stok" class="truncate">
             {{ slotProps.data.fiili_stok }}
@@ -162,7 +162,7 @@
         </template>
       </Column>
 
-      <Column field="actual_stock" header="Actual Stock" :styles="{'min-width':'200px'}">
+      <Column field="actual_stock" :header="this.$i18n.t('product.columns.actual_stock')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.actual_stock" class="truncate">
             {{ slotProps.data.actual_stock }}
@@ -170,7 +170,7 @@
         </template>
       </Column>
 
-      <Column field="main_unit" header="Main Unit" :styles="{'min-width':'200px'}">
+      <Column field="main_unit" :header="this.$i18n.t('product.columns.main_unit')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.main_unit" class="truncate">
             {{ slotProps.data.main_unit }}
@@ -178,7 +178,7 @@
         </template>
       </Column>
 
-      <Column field="price" header="Price" :styles="{'min-width':'200px'}">
+      <Column field="price" :header="this.$i18n.t('product.columns.price')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.price" class="truncate">
             {{ slotProps.data.price }}
@@ -186,7 +186,7 @@
         </template>
       </Column>
 
-      <Column field="currency" header="Currency" :styles="{'min-width':'200px'}">
+      <Column field="currency" :header="this.$i18n.t('product.columns.currency')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.currency" class="truncate">
             {{ slotProps.data.currency }}
@@ -194,7 +194,7 @@
         </template>
       </Column>
 
-      <Column field="group_code" header="Group Code" :styles="{'min-width':'200px'}">
+      <Column field="group_code" :header="this.$i18n.t('product.columns.group_code')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.group_code" class="truncate">
             {{ slotProps.data.group_code }}
@@ -202,7 +202,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_1" header="Special Code 1" :styles="{'min-width':'200px'}">
+      <Column field="special_code_1" :header="this.$i18n.t('product.columns.special_code_1')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_1" class="truncate">
             {{ slotProps.data.special_code_1 }}
@@ -210,7 +210,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_2" header="Special Code 2" :styles="{'min-width':'200px'}">
+      <Column field="special_code_2" :header="this.$i18n.t('product.columns.special_code_2')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_2" class="truncate">
             {{ slotProps.data.special_code_2 }}
@@ -218,7 +218,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_3" header="Special Code 3" :styles="{'min-width':'200px'}">
+      <Column field="special_code_3" :header="this.$i18n.t('product.columns.special_code_3')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_3" class="truncate">
             {{ slotProps.data.special_code_3 }}
@@ -226,7 +226,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_4" header="Special Code 4" :styles="{'min-width':'200px'}">
+      <Column field="special_code_4" :header="this.$i18n.t('product.columns.special_code_4')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_4" class="truncate">
             {{ slotProps.data.special_code_4 }}
@@ -234,7 +234,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_5" header="Special Code 5" :styles="{'min-width':'200px'}">
+      <Column field="special_code_5" :header="this.$i18n.t('product.columns.special_code_5')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_5" class="truncate">
             {{ slotProps.data.special_code_5 }}
@@ -242,7 +242,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_6" header="Special Code 6" :styles="{'min-width':'200px'}">
+      <Column field="special_code_6" :header="this.$i18n.t('product.columns.special_code_6')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_6" class="truncate">
             {{ slotProps.data.special_code_6 }}
@@ -250,7 +250,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_7" header="Special Code 7" :styles="{'min-width':'200px'}">
+      <Column field="special_code_7" :header="this.$i18n.t('product.columns.special_code_7')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_7" class="truncate">
             {{ slotProps.data.special_code_7 }}
@@ -258,7 +258,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_8" header="Special Code 8" :styles="{'min-width':'200px'}">
+      <Column field="special_code_8" :header="this.$i18n.t('product.columns.special_code_8')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_8" class="truncate">
             {{ slotProps.data.special_code_8 }}
@@ -266,7 +266,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_9" header="Special Code 9" :styles="{'min-width':'200px'}">
+      <Column field="special_code_9" :header="this.$i18n.t('product.columns.special_code_9')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_9" class="truncate">
             {{ slotProps.data.special_code_9 }}
@@ -274,7 +274,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_10" header="Special Code 10" :styles="{'min-width':'200px'}">
+      <Column field="special_code_10" :header="this.$i18n.t('product.columns.special_code_10')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_10" class="truncate">
             {{ slotProps.data.special_code_10 }}
@@ -395,9 +395,15 @@ export default {
                 acceptLabel: this.$i18n.t('messages.buttons.delete'),
                 rejectLabel: this.$i18n.t('messages.buttons.cancel'),
                 accept: async () => {
-                    await this.$http.delete('/api/products/' + id)
-                    this.$toast.add({ severity:'success', detail:'Product Deleted', life: 1000 });
-                    await this.fetch();
+                    const response = await this.$http.delete('/api/products/' + id)
+                    if(response.data.status){
+                        this.$toast.add({ severity:'success', detail: this.$i18n.t('product.messages.deleted'), life: 2000 });
+                    }
+                    else{
+                        this.$toast.add({ severity:'error', detail:this.$i18n.t('product.messages.not_deleted'), life: 2000 });
+                    }
+
+                    await this.fetch()
                 },
                 reject: () => {
                     //callback to execute when user rejects the action
@@ -414,7 +420,7 @@ export default {
 
                 const response = await this.$http.post('/api/products/import', formData,  { headers: { 'Content-Type': 'multipart/form-data' } });
 
-                response.status === 200 ? this.fetch() : this.$toast.add({ severity:'error', summary: 'Please try again later', detail:'Order submitted', life: 3000 });
+                response.status === 200 ? this.fetch() : this.$toast.add({ severity:'error', summary: 'Please try again later', detail:'Order submitted', life: 2000 });
 
             this.loading = false;
         },
@@ -442,10 +448,10 @@ export default {
 
             if(response.data.status){
                 await this.fetch();
-                this.$toast.add({ severity:'success', detail:'Menu saved.', life: 1000 })
+                this.$toast.add({ severity:'success', detail:'Menu saved.', life: 2000 })
             }
             else {
-                this.$toast.add({ severity:'error', detail:'Menu could not saved.', life: 1000 });
+                this.$toast.add({ severity:'error', detail:'Menu could not saved.', life: 2000 });
             }
 
             this.display = false;

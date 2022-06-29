@@ -6,7 +6,7 @@
       <h4 class="float-start card-title">
         Brands
       </h4>
-      <Button label="Create" class="float-end p-button-sm" @click="create" />
+      <Button :label="$t('messages.buttons.create')" class="float-end p-button-sm" @click="create" />
     </div>
 
     <DataTable

@@ -6636,7 +6636,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     createOrEditPage: function createOrEditPage() {
-      return this.form.id === null ? 'Create' : 'Edit';
+      return this.form.id === null ? this.$i18n.t('messages.buttons.create') : this.$i18n.t('messages.buttons.edit');
     }
   },
   mounted: function mounted() {
@@ -7419,6 +7419,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'MenuForm',
@@ -7434,7 +7435,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     createOrEditPage: function createOrEditPage() {
-      return this.form.id === null ? 'Create' : 'Edit';
+      return this.form.id === null ? this.$i18n.t('messages.buttons.create') : this.$i18n.t('messages.buttons.edit');
     }
   },
   mounted: function mounted() {
@@ -7511,12 +7512,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this3.form.post('/api/menus');
 
               case 3:
-                _context3.next = 5;
-                return _this3.$router.push({
-                  name: 'menus.grid'
+                _this3.$toast.add({
+                  severity: 'success',
+                  detail: _this3.$i18n.t('menu.messages.created'),
+                  life: 2000
                 });
 
-              case 5:
+                setTimeout(function () {
+                  _this3.$router.push({
+                    name: 'menus.grid'
+                  });
+                }, 500);
                 _context3.next = 10;
                 break;
 
@@ -7524,7 +7530,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context3.prev = 7;
                 _context3.t0 = _context3["catch"](0);
 
-                if (_context3.t0.response.status !== 422) {}
+                if (_context3.t0.response.status !== 422) {
+                  _this3.$toast.add({
+                    severity: 'error',
+                    detail: _this3.$i18n.t('menu.messages.not_created'),
+                    life: 2000
+                  });
+                }
 
               case 10:
               case "end":
@@ -7572,12 +7584,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this5.form.put('/api/menus/' + _this5.$route.params.id);
 
               case 3:
-                _context5.next = 5;
-                return _this5.$router.push({
-                  name: 'menus.grid'
+                _this5.$toast.add({
+                  severity: 'success',
+                  detail: _this5.$i18n.t('menu.messages.updated'),
+                  life: 2000
                 });
 
-              case 5:
+                setTimeout(function () {
+                  _this5.$router.push({
+                    name: 'menus.grid'
+                  });
+                }, 500);
                 _context5.next = 10;
                 break;
 
@@ -7585,7 +7602,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context5.prev = 7;
                 _context5.t0 = _context5["catch"](0);
 
-                if (_context5.t0.response.status !== 422) {}
+                if (_context5.t0.response.status !== 422) {
+                  _this5.$toast.add({
+                    severity: 'error',
+                    detail: _this5.$i18n.t('menu.messages.not_updated'),
+                    life: 2000
+                  });
+                }
 
               case 10:
               case "end":
@@ -7609,7 +7632,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context6.sent;
-                _this6.menuList = response.data.data; //this.deep = response.data.data.meta.deep;
+                _this6.menuList = response.data.data;
 
               case 4:
               case "end":
@@ -7663,7 +7686,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var primevue_toast__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! primevue/toast */ "./node_modules/primevue/toast/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -7699,17 +7721,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Menus',
-  components: {
-    Toast: primevue_toast__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
+  name: 'MenuGrid',
   data: function data() {
     return {
       menus: null
     };
+  },
+  computed: {
+    haveMenus: function haveMenus() {
+      return this.menus !== null;
+    }
   },
   mounted: function mounted() {
     this.fetch();
@@ -7729,7 +7751,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                _this.menus = response.data.data;
+                response.data.data.length === 0 ? _this.menus = null : _this.menus = response.data.data;
 
               case 4:
               case "end":
@@ -7776,16 +7798,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     if (response.data.status) {
                       _this2.$toast.add({
                         severity: 'success',
-                        summary: 'Success',
-                        detail: 'Menu deleted.',
-                        life: 1000
+                        detail: _this2.$i18n.t('menu.messages.deleted'),
+                        life: 2000
                       });
                     } else {
                       _this2.$toast.add({
                         severity: 'error',
-                        summary: 'Error',
-                        detail: 'Parent menu cannot be deleted.',
-                        life: 1000
+                        detail: _this2.$i18n.t('menu.messages.not_deleted'),
+                        life: 2000
                       });
                     }
 
@@ -8375,6 +8395,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -8415,7 +8436,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     createOrEditPage: function createOrEditPage() {
-      return this.form.id === null ? 'Create' : 'Edit';
+      return this.form.id === null ? this.$i18n.t('messages.buttons.create') : this.$i18n.t('messages.buttons.edit');
     }
   },
   mounted: function mounted() {
@@ -8548,33 +8569,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this5.form.post('/api/products');
 
               case 3:
-                _context5.next = 5;
-                return _this5.$router.push({
-                  name: 'products-list.grid'
-                });
-
-              case 5:
                 _this5.$toast.add({
                   severity: 'success',
-                  detail: 'Product Created',
-                  life: 1000
+                  detail: _this5.$i18n.t('product.messages.created'),
+                  life: 2000
                 });
 
-                _context5.next = 11;
+                setTimeout(function () {
+                  _this5.$router.push({
+                    name: 'products-list.grid'
+                  });
+                }, 500);
+                _context5.next = 10;
                 break;
 
-              case 8:
-                _context5.prev = 8;
+              case 7:
+                _context5.prev = 7;
                 _context5.t0 = _context5["catch"](0);
 
-                if (_context5.t0.response.status !== 422) {}
+                if (_context5.t0.response.status !== 422) {
+                  _this5.$toast.add({
+                    severity: 'error',
+                    detail: _this5.$i18n.t('product.messages.not_created'),
+                    life: 2000
+                  });
+                }
 
-              case 11:
+              case 10:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[0, 8]]);
+        }, _callee5, null, [[0, 7]]);
       }))();
     },
     update: function update() {
@@ -8590,33 +8616,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this6.form.post('/api/products/' + _this6.$route.params.id);
 
               case 3:
-                _context6.next = 5;
-                return _this6.$router.push({
-                  name: 'products-list.grid'
-                });
-
-              case 5:
                 _this6.$toast.add({
                   severity: 'success',
-                  detail: 'Product Updated',
-                  life: 1000
+                  detail: _this6.$i18n.t('product.messages.updated'),
+                  life: 2000
                 });
 
-                _context6.next = 11;
+                setTimeout(function () {
+                  _this6.$router.push({
+                    name: 'products-list.grid'
+                  });
+                }, 500);
+                _context6.next = 10;
                 break;
 
-              case 8:
-                _context6.prev = 8;
+              case 7:
+                _context6.prev = 7;
                 _context6.t0 = _context6["catch"](0);
 
-                if (_context6.t0.response.status !== 422) {}
+                if (_context6.t0.response.status !== 422) {
+                  _this6.$toast.add({
+                    severity: 'error',
+                    detail: _this6.$i18n.t('product.messages.not_updated'),
+                    life: 2000
+                  });
+                }
 
-              case 11:
+              case 10:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 8]]);
+        }, _callee6, null, [[0, 7]]);
       }))();
     },
     back: function back() {
@@ -9104,6 +9135,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         rejectLabel: this.$i18n.t('messages.buttons.cancel'),
         accept: function () {
           var _accept = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+            var response;
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
               while (1) {
                 switch (_context3.prev = _context3.next) {
@@ -9112,16 +9144,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     return _this3.$http["delete"]('/api/products/' + id);
 
                   case 2:
-                    _this3.$toast.add({
-                      severity: 'success',
-                      detail: 'Product Deleted',
-                      life: 1000
-                    });
+                    response = _context3.sent;
 
-                    _context3.next = 5;
+                    if (response.data.status) {
+                      _this3.$toast.add({
+                        severity: 'success',
+                        detail: _this3.$i18n.t('product.messages.deleted'),
+                        life: 2000
+                      });
+                    } else {
+                      _this3.$toast.add({
+                        severity: 'error',
+                        detail: _this3.$i18n.t('product.messages.not_deleted'),
+                        life: 2000
+                      });
+                    }
+
+                    _context3.next = 6;
                     return _this3.fetch();
 
-                  case 5:
+                  case 6:
                   case "end":
                     return _context3.stop();
                 }
@@ -9165,7 +9207,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   severity: 'error',
                   summary: 'Please try again later',
                   detail: 'Order submitted',
-                  life: 3000
+                  life: 2000
                 });
                 _this4.loading = false;
 
@@ -9218,7 +9260,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this5.$toast.add({
                   severity: 'success',
                   detail: 'Menu saved.',
-                  life: 1000
+                  life: 2000
                 });
 
                 _context5.next = 12;
@@ -9228,7 +9270,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this5.$toast.add({
                   severity: 'error',
                   detail: 'Menu could not saved.',
-                  life: 1000
+                  life: 2000
                 });
 
               case 12:
@@ -9605,7 +9647,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.$route.params.id !== undefined && !this.changePassword;
     },
     createOrEditPage: function createOrEditPage() {
-      return this.form.id === null ? 'Create' : 'Edit';
+      return this.form.id === null ? this.$i18n.t('messages.buttons.create') : this.$i18n.t('messages.buttons.edit');
     }
   },
   mounted: function mounted() {
@@ -10930,14 +10972,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var primevue_toast__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! primevue/toast */ "./node_modules/primevue/toast/index.js");
 //
 //
 //
 //
 //
 //
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Root'
+  name: 'Root',
+  components: {
+    Toast: primevue_toast__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
 });
 
 /***/ }),
@@ -11212,8 +11260,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./resources/js/lang/en/messages.js");
 /* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navbar */ "./resources/js/lang/en/navbar.js");
-/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users */ "./resources/js/lang/en/users.js");
-/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contact */ "./resources/js/lang/en/contact.js");
+/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menu */ "./resources/js/lang/en/menu.js");
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product */ "./resources/js/lang/en/product.js");
+/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./users */ "./resources/js/lang/en/users.js");
+/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contact */ "./resources/js/lang/en/contact.js");
+
+
 
 
 
@@ -11221,8 +11273,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"],
   navbar: _navbar__WEBPACK_IMPORTED_MODULE_1__["default"],
-  users: _users__WEBPACK_IMPORTED_MODULE_2__["default"],
-  contact: _contact__WEBPACK_IMPORTED_MODULE_3__["default"]
+  menu: _menu__WEBPACK_IMPORTED_MODULE_2__["default"],
+  product: _product__WEBPACK_IMPORTED_MODULE_3__["default"],
+  users: _users__WEBPACK_IMPORTED_MODULE_4__["default"],
+  contact: _contact__WEBPACK_IMPORTED_MODULE_5__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/lang/en/menu.js":
+/*!**************************************!*\
+  !*** ./resources/js/lang/en/menu.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  title: 'Menu',
+  columns: {
+    name: 'Name'
+  },
+  form: {
+    parent_menu: 'Parent Menu',
+    name: 'Name'
+  },
+  messages: {
+    deleted: 'Menu deleted',
+    not_deleted: 'Menu not deleted',
+    created: 'Menu created',
+    not_created: 'Menu not created',
+    updated: 'Menu updated',
+    not_updated: 'Menu not updated'
+  }
 });
 
 /***/ }),
@@ -11241,12 +11327,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   buttons: {
     create: 'Create',
+    save: 'Save',
     edit: 'Edit',
     "delete": 'Delete',
     cancel: 'Cancel'
   },
+  login: {
+    email: 'Email',
+    password: 'Password',
+    login: 'Login'
+  },
   messages: {
-    delete_message: 'Are you sure you want to delete this record?'
+    delete_message: 'Are you sure you want to delete this record?',
+    no_record_message: 'There is no record to display'
   }
 });
 
@@ -11281,6 +11374,79 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/lang/en/product.js":
+/*!*****************************************!*\
+  !*** ./resources/js/lang/en/product.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  title: 'Product',
+  columns: {
+    card_code: 'Card Code',
+    description: 'Description',
+    type: 'Type',
+    menu: 'Menu',
+    brand: 'Brand',
+    fiili_stok: 'Fiili Stok',
+    actual_stock: 'Actual Stock',
+    main_unit: 'Main Unit',
+    price: 'Price',
+    currency: 'Currency',
+    group_code: 'Group Code',
+    special_code_1: 'Special Code 1',
+    special_code_2: 'Special Code 2',
+    special_code_3: 'Special Code 3',
+    special_code_4: 'Special Code 4',
+    special_code_5: 'Special Code 5',
+    special_code_6: 'Special Code 6',
+    special_code_7: 'Special Code 7',
+    special_code_8: 'Special Code 8',
+    special_code_9: 'Special Code 9',
+    special_code_10: 'Special Code 10'
+  },
+  form: {
+    image: 'Image',
+    choose_an_image: 'Choose An Image',
+    menu: 'Menu',
+    card_code: 'Card Code',
+    description: 'Description',
+    type: 'Type',
+    brand: 'Brand',
+    fiili_stok: 'Fiili Stok',
+    actual_stock: 'Actual Stock',
+    main_unit: 'Main Unit',
+    price: 'Price',
+    currency: 'Currency',
+    group_code: 'Group Code',
+    special_code_1: 'Special Code 1',
+    special_code_2: 'Special Code 2',
+    special_code_3: 'Special Code 3',
+    special_code_4: 'Special Code 4',
+    special_code_5: 'Special Code 5',
+    special_code_6: 'Special Code 6',
+    special_code_7: 'Special Code 7',
+    special_code_8: 'Special Code 8',
+    special_code_9: 'Special Code 9',
+    special_code_10: 'Special Code 10'
+  },
+  messages: {
+    deleted: 'Product deleted',
+    not_deleted: 'Product not deleted',
+    created: 'Product created',
+    not_created: 'Product not created',
+    updated: 'Product updated',
+    not_updated: 'Product not updated'
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/lang/en/users.js":
 /*!***************************************!*\
   !*** ./resources/js/lang/en/users.js ***!
@@ -11294,7 +11460,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   title: 'Users',
-  column: {
+  columns: {
     name: 'Name',
     email: 'Email'
   }
@@ -11358,8 +11524,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./resources/js/lang/tr/messages.js");
 /* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navbar */ "./resources/js/lang/tr/navbar.js");
-/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users */ "./resources/js/lang/tr/users.js");
-/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contact */ "./resources/js/lang/tr/contact.js");
+/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menu */ "./resources/js/lang/tr/menu.js");
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product */ "./resources/js/lang/tr/product.js");
+/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./users */ "./resources/js/lang/tr/users.js");
+/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contact */ "./resources/js/lang/tr/contact.js");
+
+
 
 
 
@@ -11367,8 +11537,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"],
   navbar: _navbar__WEBPACK_IMPORTED_MODULE_1__["default"],
-  users: _users__WEBPACK_IMPORTED_MODULE_2__["default"],
-  contact: _contact__WEBPACK_IMPORTED_MODULE_3__["default"]
+  menu: _menu__WEBPACK_IMPORTED_MODULE_2__["default"],
+  product: _product__WEBPACK_IMPORTED_MODULE_3__["default"],
+  users: _users__WEBPACK_IMPORTED_MODULE_4__["default"],
+  contact: _contact__WEBPACK_IMPORTED_MODULE_5__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/lang/tr/menu.js":
+/*!**************************************!*\
+  !*** ./resources/js/lang/tr/menu.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  title: 'Menü',
+  columns: {
+    name: 'İsim'
+  },
+  form: {
+    parent_menu: 'Ana Menü',
+    name: 'İsim'
+  },
+  messages: {
+    deleted: 'Menü silindi',
+    not_deleted: 'Menü silinemedi',
+    created: 'Menü oluşturuldu',
+    not_created: 'Menü oluşturulamadı',
+    updated: 'Menü güncellendi',
+    not_updated: 'Menü güncellenemedi'
+  }
 });
 
 /***/ }),
@@ -11387,12 +11591,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   buttons: {
     create: 'Oluştur',
+    save: 'Kaydet',
     edit: 'Düzenle',
     "delete": 'Sil',
     cancel: 'İptal Et'
   },
+  login: {
+    email: 'Email',
+    password: 'Parola',
+    login: 'Giriş'
+  },
   messages: {
-    delete_message: 'Bu kayıdı silmek istediğinize emin misiniz?'
+    delete_message: 'Bu kayıdı silmek istediğinize emin misiniz?',
+    no_record_message: 'Görüntülenecek kayıt bulunmamaktadır'
   }
 });
 
@@ -11422,6 +11633,79 @@ __webpack_require__.r(__webpack_exports__);
     about_us: 'HAKKIMIZDA',
     quote_request: 'TEKLİF AL',
     logout: 'Çıkış'
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/lang/tr/product.js":
+/*!*****************************************!*\
+  !*** ./resources/js/lang/tr/product.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  title: 'Ürün',
+  columns: {
+    card_code: 'Kard Kodu',
+    description: 'Açıklama',
+    type: 'Tipi',
+    menu: 'Menü',
+    brand: 'Marka',
+    fiili_stok: 'Fiili Stok',
+    actual_stock: 'Gerçek Stok',
+    main_unit: 'Ana Ünite',
+    price: 'Fiyat',
+    currency: 'Para Birimi',
+    group_code: 'Grup Kodu',
+    special_code_1: 'Özel Kod 1',
+    special_code_2: 'Özel Kod 2',
+    special_code_3: 'Özel Kod 3',
+    special_code_4: 'Özel Kod 4',
+    special_code_5: 'Özel Kod 5',
+    special_code_6: 'Özel Kod 6',
+    special_code_7: 'Özel Kod 7',
+    special_code_8: 'Özel Kod 8',
+    special_code_9: 'Özel Kod 9',
+    special_code_10: 'Özel Kod 10'
+  },
+  form: {
+    image: 'Resim',
+    choose_an_image: 'Resim Seçiniz',
+    menu: 'Menü',
+    card_code: 'Kard Kodu',
+    description: 'Açıklama',
+    type: 'Tipi',
+    brand: 'Marka',
+    fiili_stok: 'Fiili Stok',
+    actual_stock: 'Gerçek Stok',
+    main_unit: 'Ana Ünite',
+    price: 'Fiyat',
+    currency: 'Para Birimi',
+    group_code: 'Grup Kodu',
+    special_code_1: 'Özel Kod 1',
+    special_code_2: 'Özel Kod 2',
+    special_code_3: 'Özel Kod 3',
+    special_code_4: 'Özel Kod 4',
+    special_code_5: 'Özel Kod 5',
+    special_code_6: 'Özel Kod 6',
+    special_code_7: 'Özel Kod 7',
+    special_code_8: 'Özel Kod 8',
+    special_code_9: 'Özel Kod 9',
+    special_code_10: 'Özel Kod 10'
+  },
+  messages: {
+    deleted: 'Ürün silindi',
+    not_deleted: 'Ürün silinemedi',
+    created: 'Ürün oluşturuldu',
+    not_created: 'Ürün oluşturulamadı',
+    updated: 'Ürün güncellendi',
+    not_updated: 'Ürün güncellenemedi'
   }
 });
 
@@ -71053,13 +71337,16 @@ var render = function () {
             [
               _c("Button", {
                 staticClass: "p-button-sm p-button-secondary p-button-outlined",
-                attrs: { label: "Cancel" },
+                attrs: { label: _vm.$t("messages.buttons.cancel") },
                 on: { click: _vm.back },
               }),
               _vm._v(" "),
               _c("Button", {
                 staticClass: "p-button-sm",
-                attrs: { type: "submit", label: "Save" },
+                attrs: {
+                  type: "submit",
+                  label: _vm.$t("messages.buttons.save"),
+                },
               }),
             ],
             1
@@ -71187,7 +71474,7 @@ var render = function () {
           _vm._v(" "),
           _c("Button", {
             staticClass: "float-end p-button-sm",
-            attrs: { label: "Create" },
+            attrs: { label: _vm.$t("messages.buttons.create") },
             on: { click: _vm.create },
           }),
         ],
@@ -71550,7 +71837,7 @@ var render = function () {
                         staticClass: "col-md-3 col-form-label",
                         attrs: { for: "email" },
                       },
-                      [_vm._v("Email")]
+                      [_vm._v(_vm._s(_vm.$t("messages.login.email")))]
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-9" }, [
@@ -71591,7 +71878,7 @@ var render = function () {
                         staticClass: "col-md-3 col-form-label",
                         attrs: { for: "password" },
                       },
-                      [_vm._v("Password")]
+                      [_vm._v(_vm._s(_vm.$t("messages.login.password")))]
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-9" }, [
@@ -71631,7 +71918,10 @@ var render = function () {
                       [
                         _c("Button", {
                           staticClass: "p-button-rounded w-50",
-                          attrs: { type: "submit", label: "Login" },
+                          attrs: {
+                            type: "submit",
+                            label: _vm.$t("messages.login.login"),
+                          },
                         }),
                       ],
                       1
@@ -71688,7 +71978,11 @@ var render = function () {
           [
             _c("h4", { staticClass: "float-start card-title" }, [
               _vm._v(
-                "\n        Menus / " + _vm._s(_vm.createOrEditPage) + "\n      "
+                "\n        " +
+                  _vm._s(_vm.$t("menu.title")) +
+                  " / " +
+                  _vm._s(_vm.createOrEditPage) +
+                  "\n      "
               ),
             ]),
             _vm._v(" "),
@@ -71699,13 +71993,16 @@ var render = function () {
                 _c("Button", {
                   staticClass:
                     "p-button-sm p-button-secondary p-button-outlined",
-                  attrs: { label: "Cancel" },
+                  attrs: { label: _vm.$t("messages.buttons.cancel") },
                   on: { click: _vm.back },
                 }),
                 _vm._v(" "),
                 _c("Button", {
                   staticClass: "p-button-sm",
-                  attrs: { type: "submit", label: "Save" },
+                  attrs: {
+                    type: "submit",
+                    label: _vm.$t("messages.buttons.save"),
+                  },
                 }),
               ],
               1
@@ -71717,7 +72014,7 @@ var render = function () {
           _c("div", { staticClass: "col-8 mx-auto" }, [
             _c("div", { staticClass: "form-group row mb-2" }, [
               _c("label", { staticClass: "col-form-label col-md-3" }, [
-                _vm._v("Parent Menu"),
+                _vm._v(_vm._s(_vm.$t("menu.form.parent_menu"))),
               ]),
               _vm._v(" "),
               _c(
@@ -71725,11 +72022,12 @@ var render = function () {
                 { staticClass: "col-md-9 grid p-fluid" },
                 [
                   _c("Dropdown", {
+                    staticClass: "p-inputtext-sm",
                     attrs: {
                       options: _vm.menuList,
                       "option-label": "text",
                       "option-value": "value",
-                      placeholder: "Parent Menu",
+                      placeholder: _vm.$t("menu.form.parent_menu"),
                       filter: true,
                     },
                     model: {
@@ -71747,7 +72045,7 @@ var render = function () {
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
               _c("label", { staticClass: "col-form-label col-md-3 required" }, [
-                _vm._v("Name"),
+                _vm._v(_vm._s(_vm.$t("menu.form.name"))),
               ]),
               _vm._v(" "),
               _c(
@@ -71757,7 +72055,11 @@ var render = function () {
                   _c("InputText", {
                     staticClass: "p-inputtext-sm",
                     class: { "p-invalid": _vm.form.errors.has("name") },
-                    attrs: { id: "name", type: "text", placeholder: "Name" },
+                    attrs: {
+                      id: "name",
+                      type: "text",
+                      placeholder: _vm.$t("menu.form.name"),
+                    },
                     model: {
                       value: _vm.form.name,
                       callback: function ($$v) {
@@ -71810,32 +72112,34 @@ var render = function () {
     [
       _c("ConfirmDialog"),
       _vm._v(" "),
-      _c("Toast", { attrs: { position: "top-right" } }),
-      _vm._v(" "),
       _c(
         "div",
         { staticClass: "pb-5", staticStyle: { "margin-bottom": "20px" } },
         [
           _c("h4", { staticClass: "float-start card-title" }, [
-            _vm._v("\n      Menus\n    "),
+            _vm._v("\n      " + _vm._s(_vm.$t("menu.title")) + "\n    "),
           ]),
           _vm._v(" "),
           _c("Button", {
             staticClass: "float-end p-button-sm",
-            attrs: { label: "Create" },
+            attrs: { label: _vm.$t("messages.buttons.create") },
             on: { click: _vm.create },
           }),
         ],
         1
       ),
       _vm._v(" "),
-      _vm.menus.length > 0
+      _vm.haveMenus
         ? _c(
             "TreeTable",
             { attrs: { value: _vm.menus } },
             [
               _c("Column", {
-                attrs: { field: "name", header: "Name", expander: true },
+                attrs: {
+                  field: "name",
+                  header: _vm.$t("menu.columns.name"),
+                  expander: true,
+                },
               }),
               _vm._v(" "),
               _c("Column", {
@@ -71885,7 +72189,13 @@ var render = function () {
             _c(
               "div",
               { staticClass: "alert alert-warning", attrs: { role: "alert" } },
-              [_vm._v("\n      There is no record to display\n    ")]
+              [
+                _vm._v(
+                  "\n      " +
+                    _vm._s(_vm.$t("messages.messages.no_record_message")) +
+                    "\n    "
+                ),
+              ]
             ),
           ]),
     ],
@@ -72322,7 +72632,11 @@ var render = function () {
         [
           _c("h4", { staticClass: "float-start card-title" }, [
             _vm._v(
-              "\n      Products / " + _vm._s(_vm.createOrEditPage) + "\n    "
+              "\n        " +
+                _vm._s(_vm.$t("product.title")) +
+                " / " +
+                _vm._s(_vm.createOrEditPage) +
+                "\n    "
             ),
           ]),
           _vm._v(" "),
@@ -72334,13 +72648,16 @@ var render = function () {
                 _c("Button", {
                   staticClass:
                     "p-button-sm p-button-secondary p-button-outlined",
-                  attrs: { label: "Cancel" },
+                  attrs: { label: _vm.$t("messages.buttons.cancel") },
                   on: { click: _vm.back },
                 }),
                 _vm._v(" "),
                 _c("Button", {
                   staticClass: "p-button-sm",
-                  attrs: { type: "submit", label: "Save" },
+                  attrs: {
+                    type: "submit",
+                    label: _vm.$t("messages.buttons.save"),
+                  },
                 }),
               ],
               1
@@ -72353,7 +72670,7 @@ var render = function () {
         _c("div", { staticClass: "col-8 mx-auto" }, [
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3 required" }, [
-              _vm._v("Image"),
+              _vm._v(_vm._s(_vm.$t("product.form.image"))),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-9 grid p-fluid" }, [
@@ -72371,7 +72688,11 @@ var render = function () {
                 [
                   !_vm.imageData
                     ? _c("span", { staticClass: "placeholder" }, [
-                        _vm._v("\n              Choose an Image\n            "),
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(_vm.$t("product.form.choose_an_image")) +
+                            "\n            "
+                        ),
                       ])
                     : _vm._e(),
                   _vm._v(" "),
@@ -72397,7 +72718,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Menu"),
+              _vm._v(_vm._s(_vm.$t("product.form.menu"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72405,11 +72726,12 @@ var render = function () {
               { staticClass: "col-md-9 grid p-fluid" },
               [
                 _c("Dropdown", {
+                  staticClass: "p-inputtext-sm",
                   attrs: {
                     options: _vm.menuList,
                     "option-label": "text",
                     "option-value": "value",
-                    placeholder: "Menu",
+                    placeholder: this.$i18n.t("product.form.menu"),
                     filter: true,
                   },
                   model: {
@@ -72427,7 +72749,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3 required" }, [
-              _vm._v("Card Code"),
+              _vm._v(_vm._s(_vm.$t("product.form.card_code"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72440,7 +72762,7 @@ var render = function () {
                   attrs: {
                     id: "cardCode",
                     type: "text",
-                    placeholder: "Card Code",
+                    placeholder: this.$i18n.t("product.form.card_code"),
                   },
                   model: {
                     value: _vm.form.card_code,
@@ -72463,7 +72785,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3 required" }, [
-              _vm._v("Description"),
+              _vm._v(_vm._s(_vm.$t("product.form.description"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72476,7 +72798,7 @@ var render = function () {
                   attrs: {
                     id: "description",
                     type: "text",
-                    placeholder: "Description",
+                    placeholder: this.$i18n.t("product.form.description"),
                   },
                   model: {
                     value: _vm.form.description,
@@ -72502,7 +72824,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3 required" }, [
-              _vm._v("Type"),
+              _vm._v(_vm._s(_vm.$t("product.form.type"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72515,7 +72837,7 @@ var render = function () {
                   attrs: {
                     id: "description",
                     type: "text",
-                    placeholder: "Type",
+                    placeholder: this.$i18n.t("product.form.type"),
                   },
                   model: {
                     value: _vm.form.type,
@@ -72538,7 +72860,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Brand"),
+              _vm._v(_vm._s(_vm.$t("product.form.brand"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72548,7 +72870,11 @@ var render = function () {
                 _c("InputText", {
                   staticClass: "p-inputtext-sm",
                   class: { "p-invalid": _vm.form.errors.has("brand") },
-                  attrs: { id: "brand", type: "text", placeholder: "Brand" },
+                  attrs: {
+                    id: "brand",
+                    type: "text",
+                    placeholder: this.$i18n.t("product.form.brand"),
+                  },
                   model: {
                     value: _vm.form.brand,
                     callback: function ($$v) {
@@ -72570,7 +72896,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Fiili Stok"),
+              _vm._v(_vm._s(_vm.$t("product.form.fiili_stok"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72583,7 +72909,7 @@ var render = function () {
                   attrs: {
                     id: "fiili_stok",
                     type: "text",
-                    placeholder: "Fiili Stok",
+                    placeholder: this.$i18n.t("product.form.fiili_stok"),
                   },
                   model: {
                     value: _vm.form.fiili_stok,
@@ -72609,7 +72935,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Actual Stock"),
+              _vm._v(_vm._s(_vm.$t("product.form.actual_stock"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72622,7 +72948,7 @@ var render = function () {
                   attrs: {
                     id: "actual_stock",
                     type: "text",
-                    placeholder: "Actual Stock",
+                    placeholder: this.$i18n.t("product.form.actual_stock"),
                   },
                   model: {
                     value: _vm.form.actual_stock,
@@ -72648,7 +72974,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Main Unit"),
+              _vm._v(_vm._s(_vm.$t("product.form.main_unit"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72661,7 +72987,7 @@ var render = function () {
                   attrs: {
                     id: "main_unit",
                     type: "text",
-                    placeholder: "Main Unit",
+                    placeholder: this.$i18n.t("product.form.main_unit"),
                   },
                   model: {
                     value: _vm.form.main_unit,
@@ -72684,7 +73010,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Price"),
+              _vm._v(_vm._s(_vm.$t("product.form.price"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72694,7 +73020,11 @@ var render = function () {
                 _c("InputText", {
                   staticClass: "p-inputtext-sm",
                   class: { "p-invalid": _vm.form.errors.has("price") },
-                  attrs: { id: "price", type: "text", placeholder: "Price" },
+                  attrs: {
+                    id: "price",
+                    type: "text",
+                    placeholder: this.$i18n.t("product.form.price"),
+                  },
                   model: {
                     value: _vm.form.price,
                     callback: function ($$v) {
@@ -72719,7 +73049,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Currency"),
+              _vm._v(_vm._s(_vm.$t("product.form.currency"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72732,7 +73062,7 @@ var render = function () {
                   attrs: {
                     id: "currency",
                     type: "text",
-                    placeholder: "Currency",
+                    placeholder: this.$i18n.t("product.form.currency"),
                   },
                   model: {
                     value: _vm.form.currency,
@@ -72758,7 +73088,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Group Code"),
+              _vm._v(_vm._s(_vm.$t("product.form.group_code"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72771,7 +73101,7 @@ var render = function () {
                   attrs: {
                     id: "group_code",
                     type: "text",
-                    placeholder: "Group Code",
+                    placeholder: this.$i18n.t("product.form.group_code"),
                   },
                   model: {
                     value: _vm.form.group_code,
@@ -72797,7 +73127,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 1"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_1"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72810,7 +73140,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_1",
                     type: "text",
-                    placeholder: "Special Code 1",
+                    placeholder: this.$i18n.t("product.form.special_code_1"),
                   },
                   model: {
                     value: _vm.form.special_code_1,
@@ -72836,7 +73166,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 2"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_2"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72849,7 +73179,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_2",
                     type: "text",
-                    placeholder: "Special Code 2",
+                    placeholder: this.$i18n.t("product.form.special_code_2"),
                   },
                   model: {
                     value: _vm.form.special_code_2,
@@ -72875,7 +73205,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 3"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_3"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72888,7 +73218,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_3",
                     type: "text",
-                    placeholder: "Special Code 3",
+                    placeholder: this.$i18n.t("product.form.special_code_3"),
                   },
                   model: {
                     value: _vm.form.special_code_3,
@@ -72914,7 +73244,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 4"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_4"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72927,7 +73257,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_4",
                     type: "text",
-                    placeholder: "Special Code 4",
+                    placeholder: this.$i18n.t("product.form.special_code_4"),
                   },
                   model: {
                     value: _vm.form.special_code_4,
@@ -72953,7 +73283,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 5"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_5"))),
             ]),
             _vm._v(" "),
             _c(
@@ -72966,7 +73296,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_5",
                     type: "text",
-                    placeholder: "Special Code 5",
+                    placeholder: this.$i18n.t("product.form.special_code_5"),
                   },
                   model: {
                     value: _vm.form.special_code_5,
@@ -72992,7 +73322,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 6"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_6"))),
             ]),
             _vm._v(" "),
             _c(
@@ -73005,7 +73335,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_6",
                     type: "text",
-                    placeholder: "Special Code 6",
+                    placeholder: this.$i18n.t("product.form.special_code_6"),
                   },
                   model: {
                     value: _vm.form.special_code_6,
@@ -73031,7 +73361,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 7"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_7"))),
             ]),
             _vm._v(" "),
             _c(
@@ -73044,7 +73374,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_7",
                     type: "text",
-                    placeholder: "Special Code 7",
+                    placeholder: this.$i18n.t("product.form.special_code_7"),
                   },
                   model: {
                     value: _vm.form.special_code_7,
@@ -73070,7 +73400,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 8"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_8"))),
             ]),
             _vm._v(" "),
             _c(
@@ -73083,7 +73413,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_8",
                     type: "text",
-                    placeholder: "Special Code 8",
+                    placeholder: this.$i18n.t("product.form.special_code_8"),
                   },
                   model: {
                     value: _vm.form.special_code_8,
@@ -73109,7 +73439,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 9"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_9"))),
             ]),
             _vm._v(" "),
             _c(
@@ -73122,7 +73452,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_9",
                     type: "text",
-                    placeholder: "Special Code 9",
+                    placeholder: this.$i18n.t("product.form.special_code_9"),
                   },
                   model: {
                     value: _vm.form.special_code_9,
@@ -73148,7 +73478,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3" }, [
-              _vm._v("Special Code 10"),
+              _vm._v(_vm._s(_vm.$t("product.form.special_code_10"))),
             ]),
             _vm._v(" "),
             _c(
@@ -73163,7 +73493,7 @@ var render = function () {
                   attrs: {
                     id: "special_code_10",
                     type: "text",
-                    placeholder: "Special Code 10",
+                    placeholder: this.$i18n.t("product.form.special_code_10"),
                   },
                   model: {
                     value: _vm.form.special_code_10,
@@ -73245,13 +73575,13 @@ var render = function () {
                   _c("Button", {
                     staticClass:
                       "p-button-outlined p-button-secondary p-button-sm",
-                    attrs: { label: "Cancel" },
+                    attrs: { label: _vm.$t("messages.buttons.cancel") },
                     on: { click: _vm.closeMenuModal },
                   }),
                   _vm._v(" "),
                   _c("Button", {
                     staticClass: " p-button-sm",
-                    attrs: { label: "Save" },
+                    attrs: { label: _vm.$t("messages.buttons.save") },
                     on: { click: _vm.saveMenu },
                   }),
                 ]
@@ -73302,12 +73632,12 @@ var render = function () {
         { staticClass: "pb-5", staticStyle: { "margin-bottom": "20px" } },
         [
           _c("h4", { staticClass: "float-start card-title" }, [
-            _vm._v("\n      Products\n    "),
+            _vm._v("\n      " + _vm._s(_vm.$t("product.title")) + "\n    "),
           ]),
           _vm._v(" "),
           _c("Button", {
             staticClass: "float-end p-button-sm",
-            attrs: { label: "Create" },
+            attrs: { label: _vm.$t("messages.buttons.create") },
             on: { click: _vm.create },
           }),
           _vm._v(" "),
@@ -73376,7 +73706,7 @@ var render = function () {
             ref: "card_code",
             attrs: {
               field: "card_code",
-              header: "Card Code",
+              header: this.$i18n.t("product.columns.card_code"),
               "filter-match-mode": "startsWith",
               sortable: true,
               styles: { "min-width": "400px" },
@@ -73447,7 +73777,7 @@ var render = function () {
             ref: "description",
             attrs: {
               field: "description",
-              header: "Description",
+              header: this.$i18n.t("product.columns.description"),
               "filter-field": "description",
               "filter-match-mode": "contains",
               sortable: true,
@@ -73522,7 +73852,7 @@ var render = function () {
             ref: "type",
             attrs: {
               field: "type",
-              header: "Type",
+              header: this.$i18n.t("product.columns.type"),
               "filter-field": "type",
               "filter-match-mode": "contains",
               sortable: true,
@@ -73593,7 +73923,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "menu",
-              header: "Menu",
+              header: this.$i18n.t("product.columns.menu"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73624,7 +73954,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "brand",
-              header: "Brand",
+              header: this.$i18n.t("product.columns.brand"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73655,7 +73985,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "fiili_stok",
-              header: "Fiili Stok",
+              header: this.$i18n.t("product.columns.fiili_stok"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73686,7 +74016,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "actual_stock",
-              header: "Actual Stock",
+              header: this.$i18n.t("product.columns.actual_stock"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73717,7 +74047,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "main_unit",
-              header: "Main Unit",
+              header: this.$i18n.t("product.columns.main_unit"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73748,7 +74078,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "price",
-              header: "Price",
+              header: this.$i18n.t("product.columns.price"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73779,7 +74109,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "currency",
-              header: "Currency",
+              header: this.$i18n.t("product.columns.currency"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73810,7 +74140,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "group_code",
-              header: "Group Code",
+              header: this.$i18n.t("product.columns.group_code"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73841,7 +74171,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_1",
-              header: "Special Code 1",
+              header: this.$i18n.t("product.columns.special_code_1"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73872,7 +74202,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_2",
-              header: "Special Code 2",
+              header: this.$i18n.t("product.columns.special_code_2"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73903,7 +74233,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_3",
-              header: "Special Code 3",
+              header: this.$i18n.t("product.columns.special_code_3"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73934,7 +74264,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_4",
-              header: "Special Code 4",
+              header: this.$i18n.t("product.columns.special_code_4"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73965,7 +74295,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_5",
-              header: "Special Code 5",
+              header: this.$i18n.t("product.columns.special_code_5"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -73996,7 +74326,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_6",
-              header: "Special Code 6",
+              header: this.$i18n.t("product.columns.special_code_6"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -74027,7 +74357,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_7",
-              header: "Special Code 7",
+              header: this.$i18n.t("product.columns.special_code_7"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -74058,7 +74388,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_8",
-              header: "Special Code 8",
+              header: this.$i18n.t("product.columns.special_code_8"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -74089,7 +74419,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_9",
-              header: "Special Code 9",
+              header: this.$i18n.t("product.columns.special_code_9"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -74120,7 +74450,7 @@ var render = function () {
           _c("Column", {
             attrs: {
               field: "special_code_10",
-              header: "Special Code 10",
+              header: this.$i18n.t("product.columns.special_code_10"),
               styles: { "min-width": "200px" },
             },
             scopedSlots: _vm._u([
@@ -74502,13 +74832,16 @@ var render = function () {
             [
               _c("Button", {
                 staticClass: "p-button-sm p-button-secondary p-button-outlined",
-                attrs: { label: "Cancel" },
+                attrs: { label: _vm.$t("messages.buttons.cancel") },
                 on: { click: _vm.back },
               }),
               _vm._v(" "),
               _c("Button", {
                 staticClass: "p-button-sm",
-                attrs: { type: "submit", label: "Save" },
+                attrs: {
+                  type: "submit",
+                  label: _vm.$t("messages.buttons.save"),
+                },
               }),
             ],
             1
@@ -74728,7 +75061,7 @@ var render = function () {
           _vm._v(" "),
           _c("Button", {
             staticClass: "float-end p-button-sm",
-            attrs: { label: "Create" },
+            attrs: { label: _vm.$t("messages.buttons.create") },
             on: { click: _vm.create },
           }),
         ],
@@ -74763,12 +75096,12 @@ var render = function () {
         [
           _c("Column", {
             ref: "name",
-            attrs: { field: "name", header: _vm.$t("users.column.name") },
+            attrs: { field: "name", header: _vm.$t("users.columns.name") },
           }),
           _vm._v(" "),
           _c("Column", {
             ref: "email",
-            attrs: { field: "email", header: _vm.$t("users.column.email") },
+            attrs: { field: "email", header: _vm.$t("users.columns.email") },
           }),
           _vm._v(" "),
           _c("Column", {
@@ -75518,9 +75851,9 @@ var render = function () {
                     },
                     [
                       _vm._v(
-                        "\n                        " +
+                        "\n            " +
                           _vm._s(option.description) +
-                          "\n                    "
+                          "\n          "
                       ),
                     ]
                   ),
@@ -75557,7 +75890,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    detay\n")])
+  return _c("div", [_vm._v("\n  detay\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -75810,7 +76143,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("router-view")], 1)
+  return _c(
+    "div",
+    [
+      _c("Toast", { attrs: { position: "top-right" } }),
+      _vm._v(" "),
+      _c("router-view"),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

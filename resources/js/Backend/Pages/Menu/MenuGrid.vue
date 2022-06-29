@@ -1,17 +1,16 @@
 <template>
   <div>
     <ConfirmDialog />
-    <Toast position="top-right" />
 
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
-        Menus
+        {{ $t('menu.title') }}
       </h4>
-      <Button label="Create" class="float-end p-button-sm" @click="create" />
+      <Button :label="$t('messages.buttons.create')" class="float-end p-button-sm" @click="create" />
     </div>
 
-    <TreeTable v-if="menus.length > 0" :value="menus">
-      <Column field="name" header="Name" :expander="true" />
+    <TreeTable v-if="haveMenus" :value="menus">
+      <Column field="name" :header="$t('menu.columns.name')" :expander="true" />
 
       <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
         <template #body="item">
@@ -22,25 +21,25 @@
     </TreeTable>
     <div v-else>
       <div class="alert alert-warning" role="alert">
-        There is no record to display
+        {{ $t('messages.messages.no_record_message') }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Toast from 'primevue/toast';
-
 export default {
-    name: 'Menus',
-
-    components : {
-        Toast
-    },
+    name: 'MenuGrid',
 
     data: () => ({
        menus: null,
     }),
+
+    computed: {
+        haveMenus() {
+            return this.menus !== null;
+        }
+    },
 
     mounted() {
       this.fetch();
@@ -49,7 +48,7 @@ export default {
     methods: {
         async fetch(){
             const response = await this.$http.get('/api/menus')
-            this.menus = response.data.data;
+            response.data.data.length === 0 ? this.menus = null : this.menus = response.data.data;
         },
 
         create(){
@@ -72,10 +71,10 @@ export default {
                 accept: async () => {
                     const response = await this.$http.delete('/api/menus/' + id)
                     if(response.data.status){
-                        this.$toast.add({ severity:'success', summary: 'Success', detail:'Menu deleted.', life: 1000 });
+                        this.$toast.add({ severity:'success', detail: this.$i18n.t('menu.messages.deleted'), life: 2000 });
                     }
                     else{
-                        this.$toast.add({ severity:'error', summary: 'Error', detail:'Parent menu cannot be deleted.', life: 1000 });
+                        this.$toast.add({ severity:'error', detail:this.$i18n.t('menu.messages.not_deleted'), life: 2000 });
                     }
 
                     await this.fetch()
