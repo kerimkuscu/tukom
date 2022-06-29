@@ -198,7 +198,7 @@ export default [
         }
     },
     {
-        path: '/products/:productName/:productId',
+        path: '/products-details/:productName/:productId',
         name: 'products.details',
         component: ProductsDetails,
         meta: {

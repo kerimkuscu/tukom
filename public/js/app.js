@@ -11664,7 +11664,7 @@ __webpack_require__.r(__webpack_exports__);
     auth: false
   }
 }, {
-  path: '/products/:productName/:productId',
+  path: '/products-details/:productName/:productId',
   name: 'products.details',
   component: _Frontend_Pages_Home_ProductsDetails__WEBPACK_IMPORTED_MODULE_19__["default"],
   meta: {
