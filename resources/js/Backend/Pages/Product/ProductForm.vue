@@ -364,9 +364,14 @@
 
 <script>
 import Form from 'form-backend-validation';
+import Toast from 'primevue/toast';
 
 export default {
     name: 'ProductForm',
+
+    components: {
+      Toast
+    },
 
     data: () => ({
         form: new Form({
@@ -442,6 +447,7 @@ export default {
             try {
                 await this.form.post('/api/products');
                 await this.$router.push({ name: 'products-list.grid' });
+                this.$toast.add({ severity:'success', detail:'Product Created', life: 1000 });
             } catch (error) {
                 if(error.response.status !== 422) {
 
@@ -453,6 +459,7 @@ export default {
             try {
                 await this.form.post('/api/products/' + this.$route.params.id);
                 await this.$router.push({ name: 'products-list.grid' });
+                this.$toast.add({ severity:'success', detail:'Product Updated', life: 1000 });
             } catch (error) {
                 if(error.response.status !== 422) {
 

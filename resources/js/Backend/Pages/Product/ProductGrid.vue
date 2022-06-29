@@ -450,6 +450,7 @@ export default {
 
             this.display = false;
             this.menuModalHeader = null;
+            this.menu = null;
         }
     }
 }

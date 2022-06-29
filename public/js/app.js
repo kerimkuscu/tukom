@@ -8004,6 +8004,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var form_backend_validation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! form-backend-validation */ "./node_modules/form-backend-validation/dist/index.js");
+/* harmony import */ var primevue_toast__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/toast */ "./node_modules/primevue/toast/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -8375,8 +8376,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'ProductForm',
+  components: {
+    Toast: primevue_toast__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   data: function data() {
     return {
       form: new form_backend_validation__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -8549,21 +8554,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 5:
-                _context5.next = 10;
+                _this5.$toast.add({
+                  severity: 'success',
+                  detail: 'Product Created',
+                  life: 1000
+                });
+
+                _context5.next = 11;
                 break;
 
-              case 7:
-                _context5.prev = 7;
+              case 8:
+                _context5.prev = 8;
                 _context5.t0 = _context5["catch"](0);
 
                 if (_context5.t0.response.status !== 422) {}
 
-              case 10:
+              case 11:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[0, 7]]);
+        }, _callee5, null, [[0, 8]]);
       }))();
     },
     update: function update() {
@@ -8585,21 +8596,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 5:
-                _context6.next = 10;
+                _this6.$toast.add({
+                  severity: 'success',
+                  detail: 'Product Updated',
+                  life: 1000
+                });
+
+                _context6.next = 11;
                 break;
 
-              case 7:
-                _context6.prev = 7;
+              case 8:
+                _context6.prev = 8;
                 _context6.t0 = _context6["catch"](0);
 
                 if (_context6.t0.response.status !== 422) {}
 
-              case 10:
+              case 11:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 7]]);
+        }, _callee6, null, [[0, 8]]);
       }))();
     },
     back: function back() {
@@ -9217,8 +9234,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 12:
                 _this5.display = false;
                 _this5.menuModalHeader = null;
+                _this5.menu = null;
 
-              case 14:
+              case 15:
               case "end":
                 return _context5.stop();
             }
@@ -10515,11 +10533,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Products',
   data: function data() {
     return {
-      productsOptions: []
+      productsOptions: [],
+      productHeader: null
     };
   },
   mounted: function mounted() {
@@ -10543,7 +10569,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 _this.productsOptions = response.data;
 
-              case 4:
+                _this.productName();
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -10565,15 +10593,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context2.sent;
-                _this2.productsOptions = response.data;
+                _this2.productsOptions = response.data.data;
 
-              case 4:
+                _this2.productName();
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
       }))();
+    },
+    productName: function productName() {
+      this.productHeader = this.$route.params.productName.replace(/-/g, ' ').toUpperCase();
+    },
+    productDetail: function productDetail(item) {
+      console.log(item);
     }
   }
 });
@@ -75162,33 +75198,67 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-card p-component m-2" }, [
-    _c("div", { staticClass: "p-card-body" }, [
-      _c("div", { staticClass: "p-card-content" }, [
-        _c(
-          "div",
-          { staticClass: "row col-md-12" },
-          _vm._l(_vm.productsOptions, function (option) {
-            return _c("div", { staticClass: "col-md-2" }, [
+  return _c("div", [
+    _c("div", { staticClass: "m-2" }, [
+      _c("h3", [_vm._v(_vm._s(_vm.productHeader))]),
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row col-md-12" },
+      _vm._l(_vm.productsOptions, function (option) {
+        return _c("div", { staticClass: "col-md-3" }, [
+          _c(
+            "div",
+            {
+              staticClass: "p-card p-component m-2",
+              on: {
+                click: function ($event) {
+                  return _vm.productDetail(option.id)
+                },
+              },
+            },
+            [
               _c(
                 "div",
                 {
-                  staticClass: "align-items-center justify-content-center",
+                  staticClass:
+                    "p-card-content align-items-center justify-content-center",
                   staticStyle: { display: "flex" },
                 },
                 [
                   _c("img", {
                     staticStyle: { width: "70%" },
-                    attrs: { alt: option.text, src: option.path },
+                    attrs: {
+                      alt: option.description,
+                      src: "http://tukom.test/images/" + option.image,
+                    },
                   }),
                 ]
               ),
-            ])
-          }),
-          0
-        ),
-      ]),
-    ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-card-footer" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "align-items-center justify-content-center",
+                    staticStyle: { display: "flex" },
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(option.description) +
+                        "\n                    "
+                    ),
+                  ]
+                ),
+              ]),
+            ]
+          ),
+        ])
+      }),
+      0
+    ),
   ])
 }
 var staticRenderFns = []
