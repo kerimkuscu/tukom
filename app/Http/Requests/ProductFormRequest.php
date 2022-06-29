@@ -27,10 +27,10 @@ class ProductFormRequest extends FormRequest
         $id = $this->route('product');
 
         return [
-            'image' => [
+            'images' => [
                 $id ? 'nullable' : 'required',
-                'mimes:jpeg,png,jpg',
-                'max:2048',
+//                'mimes:jpeg,png,jpg',
+//                'max:2048',
             ],
             'card_code' => [
                 $id ? 'nullable' : 'required',

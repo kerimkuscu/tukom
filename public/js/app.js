@@ -8375,6 +8375,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -8387,7 +8399,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: new form_backend_validation__WEBPACK_IMPORTED_MODULE_1__["default"]({
         id: null,
         menu_id: null,
-        image: null,
+        images: [],
         card_code: null,
         description: null,
         type: null,
@@ -8410,7 +8422,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         special_code_10: null
       }),
       menuList: [],
-      imageData: null
+      imageData: null,
+      images: []
     };
   },
   computed: {
@@ -8447,55 +8460,75 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
+    myUploader: function myUploader(event) {
+      console.log(event.files);
+    },
     fetch: function fetch() {
       var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return _this2.$http.get('/api/products/' + _this2.$route.params.id);
-
-              case 2:
-                response = _context2.sent;
-
-                _this2.form.populate(response.data.data); //'/images/1653505341.jpg'
-
-
-                if (_this2.form.image) {
-                  _this2.imageData = '/images/' + _this2.form.image;
-                }
-
-                _this2.form.image = null;
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    getMenus: function getMenus() {
-      var _this3 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var response;
+        var response, self;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _this3.$http.get('/api/menus/getMenuList');
+                return _this2.$http.get('/api/products/' + _this2.$route.params.id);
 
               case 2:
                 response = _context3.sent;
-                _this3.menuList = response.data.data;
 
-              case 4:
+                _this2.form.populate(response.data.data);
+
+                self = _this2;
+
+                if (_this2.form.images) {
+                  _this2.form.images.forEach( /*#__PURE__*/function () {
+                    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(image) {
+                      var file;
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+                        while (1) {
+                          switch (_context2.prev = _context2.next) {
+                            case 0:
+                              // let type = image.split('.')[1];
+                              // let path = '/images/' + image;
+                              console.log(image);
+                              _context2.next = 3;
+                              return self.urlToFile(image[0], image[1], image[2]);
+
+                            case 3:
+                              file = _context2.sent;
+                              // console.log(file.);
+                              // let file = new File(
+                              //     image[0],
+                              //     image[1],
+                              //     {
+                              //         type: image[2],
+                              //         lastModified: new Date().getTime()
+                              //     }
+                              // );
+                              self.$refs.images.$data.files.push(file);
+
+                            case 5:
+                            case "end":
+                              return _context2.stop();
+                          }
+                        }
+                      }, _callee2);
+                    }));
+
+                    return function (_x) {
+                      return _ref.apply(this, arguments);
+                    };
+                  }());
+                } // if(this.form.image){
+                //     this.imageData = '/images/' + this.form.image;
+                // }
+                //
+                // this.form.image = null;
+
+
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -8503,31 +8536,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    submit: function submit() {
-      var _this4 = this;
-
+    urlToFile: function urlToFile(url, filename, mimeType) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var res, blob, objectURL, file;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (!_this4.$route.params.id) {
-                  _context4.next = 5;
-                  break;
-                }
+                _context4.next = 2;
+                return fetch(url);
 
-                _context4.next = 3;
-                return _this4.update();
-
-              case 3:
-                _context4.next = 7;
-                break;
+              case 2:
+                res = _context4.sent;
+                _context4.next = 5;
+                return res.blob();
 
               case 5:
-                _context4.next = 7;
-                return _this4.store();
+                blob = _context4.sent;
+                objectURL = URL.createObjectURL(blob);
+                console.log(objectURL); // const buf = await res.arrayBuffer();
 
-              case 7:
+                file = new File([blob], filename, {
+                  type: mimeType
+                });
+                file.objectURL = objectURL;
+                return _context4.abrupt("return", file);
+
+              case 11:
               case "end":
                 return _context4.stop();
             }
@@ -8535,88 +8570,130 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4);
       }))();
     },
-    store: function store() {
-      var _this5 = this;
+    getMenus: function getMenus() {
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _context5.prev = 0;
-                _context5.next = 3;
-                return _this5.form.post('/api/products');
+                _context5.next = 2;
+                return _this3.$http.get('/api/menus/getMenuList');
 
-              case 3:
-                _context5.next = 5;
-                return _this5.$router.push({
-                  name: 'products-list.grid'
-                });
+              case 2:
+                response = _context5.sent;
+                _this3.menuList = response.data.data;
 
-              case 5:
-                _this5.$toast.add({
-                  severity: 'success',
-                  detail: 'Product Created',
-                  life: 1000
-                });
-
-                _context5.next = 11;
-                break;
-
-              case 8:
-                _context5.prev = 8;
-                _context5.t0 = _context5["catch"](0);
-
-                if (_context5.t0.response.status !== 422) {}
-
-              case 11:
+              case 4:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[0, 8]]);
+        }, _callee5);
       }))();
     },
-    update: function update() {
-      var _this6 = this;
+    submit: function submit() {
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                _context6.prev = 0;
+                if (!_this4.$route.params.id) {
+                  _context6.next = 5;
+                  break;
+                }
+
                 _context6.next = 3;
-                return _this6.form.post('/api/products/' + _this6.$route.params.id);
+                return _this4.update();
 
               case 3:
-                _context6.next = 5;
-                return _this6.$router.push({
-                  name: 'products-list.grid'
-                });
-
-              case 5:
-                _this6.$toast.add({
-                  severity: 'success',
-                  detail: 'Product Updated',
-                  life: 1000
-                });
-
-                _context6.next = 11;
+                _context6.next = 7;
                 break;
 
-              case 8:
-                _context6.prev = 8;
-                _context6.t0 = _context6["catch"](0);
+              case 5:
+                _context6.next = 7;
+                return _this4.store();
 
-                if (_context6.t0.response.status !== 422) {}
-
-              case 11:
+              case 7:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 8]]);
+        }, _callee6);
+      }))();
+    },
+    store: function store() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _this5.form.images = _this5.$refs.images.$data.files;
+                _context7.prev = 1;
+                _context7.next = 4;
+                return _this5.form.post('/api/products');
+
+              case 4:
+                _context7.next = 6;
+                return _this5.$router.push({
+                  name: 'products-list.grid'
+                });
+
+              case 6:
+                _this5.$toast.add({
+                  severity: 'success',
+                  detail: 'Product Created',
+                  life: 1000
+                });
+
+                _context7.next = 12;
+                break;
+
+              case 9:
+                _context7.prev = 9;
+                _context7.t0 = _context7["catch"](1);
+
+                if (_context7.t0.response.status !== 422) {}
+
+              case 12:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, null, [[1, 9]]);
+      }))();
+    },
+    update: function update() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _this6.form.images = _this6.$refs.images.$data.files;
+                console.log(_this6.$refs.images.$data.files); // try {
+                //     await this.form.post('/api/products/' + this.$route.params.id);
+                //     await this.$router.push({ name: 'products-list.grid' });
+                //     this.$toast.add({ severity:'success', detail:'Product Updated', life: 1000 });
+                // } catch (error) {
+                //     if(error.response.status !== 422) {
+                //
+                //     }
+                // }
+
+              case 2:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     },
     back: function back() {
@@ -10701,7 +10778,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.$http.get('/api/products/' + _this2.$route.params.id);
+                return _this2.$http.get('/api/products/' + _this2.$route.params.productId);
 
               case 2:
                 response = _context2.sent;
@@ -72322,7 +72399,9 @@ var render = function () {
         [
           _c("h4", { staticClass: "float-start card-title" }, [
             _vm._v(
-              "\n      Products / " + _vm._s(_vm.createOrEditPage) + "\n    "
+              "\n        Products / " +
+                _vm._s(_vm.createOrEditPage) +
+                "\n      "
             ),
           ]),
           _vm._v(" "),
@@ -72356,43 +72435,23 @@ var render = function () {
               _vm._v("Image"),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-9 grid p-fluid" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "image-input",
-                  class: { "is-invalid": _vm.form.errors.has("image") },
-                  style: {
-                    "background-image": "url(" + _vm.imageData + ")",
-                    "background-size": "100% 300px",
+            _c(
+              "div",
+              { staticClass: "col-md-9 grid p-fluid" },
+              [
+                _c("FileUpload", {
+                  ref: "images",
+                  attrs: {
+                    name: "images[]",
+                    multiple: true,
+                    fileLimit: 5,
+                    showUploadButton: false,
+                    showCancelButton: false,
                   },
-                  on: { click: _vm.chooseImage },
-                },
-                [
-                  !_vm.imageData
-                    ? _c("span", { staticClass: "placeholder" }, [
-                        _vm._v("\n              Choose an Image\n            "),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("input", {
-                    ref: "fileInput",
-                    staticClass: "file-input",
-                    attrs: { type: "file", accept: ".jpg,.png" },
-                    on: { input: _vm.onSelectFile },
-                  }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "small",
-                {
-                  staticClass: "invalid-feedback",
-                  attrs: { id: "image-help" },
-                },
-                [_vm._v(_vm._s(_vm.form.errors.first("image")))]
-              ),
-            ]),
+                }),
+              ],
+              1
+            ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [

@@ -13,6 +13,8 @@ class LocalController extends Controller
     public function test()
     {
 
+        dd(public_path('images'));
+
         app(MenuRepository::class)->getMegaMenuList();
 
 

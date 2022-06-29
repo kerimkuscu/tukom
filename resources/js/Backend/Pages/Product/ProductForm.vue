@@ -19,28 +19,40 @@
         <div class="form-group row mb-2">
           <label class="col-form-label col-md-3 required">Image</label>
           <div class="col-md-9 grid p-fluid">
-            <div
-              class="image-input"
-              :style="{ 'background-image': `url(${imageData})`, 'background-size': '100% 300px' }"
-              :class="{ 'is-invalid': form.errors.has('image')}"
-              @click="chooseImage"
-            >
-              <span
-                v-if="!imageData"
-                class="placeholder"
-              >
-                Choose an Image
-              </span>
-              <input
-                ref="fileInput"
-                class="file-input"
-                type="file"
-                accept=".jpg,.png"
-                @input="onSelectFile"
-              >
-            </div>
+<!--            <div-->
+<!--              class="image-input"-->
+<!--              :style="{ 'background-image': `url(${imageData})`, 'background-size': '100% 300px' }"-->
+<!--              :class="{ 'is-invalid': form.errors.has('image')}"-->
+<!--              @click="chooseImage"-->
+<!--            >-->
+<!--              <span-->
+<!--                v-if="!imageData"-->
+<!--                class="placeholder"-->
+<!--              >-->
+<!--                Choose an Image-->
+<!--              </span>-->
+<!--              <input-->
+<!--                ref="fileInput"-->
+<!--                class="file-input"-->
+<!--                type="file"-->
+<!--                accept=".jpg,.png"-->
+<!--                @input="onSelectFile"-->
+<!--              >-->
+<!--            </div>-->
 
-            <small id="image-help" class="invalid-feedback">{{ form.errors.first('image') }}</small>
+<!--            <small id="image-help" class="invalid-feedback">{{ form.errors.first('image') }}</small>-->
+
+
+              <FileUpload
+                  ref="images"
+                  name="images[]"
+                  :multiple="true"
+                  :fileLimit="5"
+                  :showUploadButton="false"
+                  :showCancelButton="false"
+              />
+
+
           </div>
         </div>
 
@@ -377,7 +389,7 @@ export default {
         form: new Form({
             id: null,
             menu_id: null,
-            image: null,
+            images: [],
             card_code: null,
             description: null,
             type: null,
@@ -402,7 +414,9 @@ export default {
 
         menuList: [],
 
-        imageData: null
+        imageData: null,
+
+        images: []
     }),
 
     computed: {
@@ -420,16 +434,62 @@ export default {
     },
 
     methods : {
+        myUploader(event){
+                console.log(event.files);
+        },
+
         async fetch(){
             const response = await this.$http.get('/api/products/' + this.$route.params.id);
             this.form.populate(response.data.data);
 
-            //'/images/1653505341.jpg'
-            if(this.form.image){
-                this.imageData = '/images/' + this.form.image;
+            let self = this;
+            if(this.form.images) {
+                this.form.images.forEach(async function (image){
+                    // let type = image.split('.')[1];
+
+                    // let path = '/images/' + image;
+console.log(image);
+
+                    const file = await self.urlToFile(
+                        image[0],
+                        image[1],
+                        image[2]
+                    );
+
+                    // console.log(file.);
+
+                    // let file = new File(
+                    //     image[0],
+                    //     image[1],
+                    //     {
+                    //         type: image[2],
+                    //         lastModified: new Date().getTime()
+                    //     }
+                    // );
+
+                    self.$refs.images.$data.files.push(file);
+                })
             }
 
-            this.form.image = null;
+            // if(this.form.image){
+            //     this.imageData = '/images/' + this.form.image;
+            // }
+            //
+            // this.form.image = null;
+        },
+
+        async urlToFile(url, filename, mimeType){
+            const res = await fetch(url);
+
+            let blob = await res.blob()
+            let objectURL = URL.createObjectURL(blob);
+            console.log(objectURL);
+
+            // const buf = await res.arrayBuffer();
+            let file = new File([blob], filename, { type: mimeType });
+            file.objectURL = objectURL;
+
+            return file;
         },
 
         async getMenus(){
@@ -444,6 +504,8 @@ export default {
         },
 
         async store() {
+            this.form.images = this.$refs.images.$data.files;
+
             try {
                 await this.form.post('/api/products');
                 await this.$router.push({ name: 'products-list.grid' });
@@ -456,15 +518,18 @@ export default {
         },
 
         async update() {
-            try {
-                await this.form.post('/api/products/' + this.$route.params.id);
-                await this.$router.push({ name: 'products-list.grid' });
-                this.$toast.add({ severity:'success', detail:'Product Updated', life: 1000 });
-            } catch (error) {
-                if(error.response.status !== 422) {
+            this.form.images = this.$refs.images.$data.files;
+            console.log( this.$refs.images.$data.files);
 
-                }
-            }
+            // try {
+            //     await this.form.post('/api/products/' + this.$route.params.id);
+            //     await this.$router.push({ name: 'products-list.grid' });
+            //     this.$toast.add({ severity:'success', detail:'Product Updated', life: 1000 });
+            // } catch (error) {
+            //     if(error.response.status !== 422) {
+            //
+            //     }
+            // }
         },
 
         back(){

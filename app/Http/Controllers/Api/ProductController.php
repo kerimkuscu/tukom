@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
@@ -55,9 +57,9 @@ class ProductController extends Controller
     {
         $attributes = $request->toArray();
 
-        $attributes = $this->uploadImage($request, $attributes);
-
         $product = Product::query()->create($attributes);
+
+        $this->uploadImages($request, $product->id);
 
         return new ProductResource($product);
     }
@@ -90,7 +92,7 @@ class ProductController extends Controller
             unset($attributes['image']);
         }
 
-        $attributes = $this->uploadImage($request, $attributes);
+//        $attributes = $this->uploadImages($request, $product->id);
 
         $product->update($attributes);
 
@@ -119,25 +121,37 @@ class ProductController extends Controller
 
     /**
      * @param ProductFormRequest $request
-     * @param array              $attributes
+     * @param int                $productId
      *
-     * @return array
+     * @return void
      */
-    private function uploadImage(ProductFormRequest $request, array $attributes): array
+    private function uploadImages(ProductFormRequest $request, int $productId): void
     {
-        if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
 
-            $img = Image::make($request->file('image'));
-            $img->resize(1024, 800);
+            foreach ($images as $image) {
 
-            $img->insert(public_path('fligram.png'), 'center');
-            $img->encode('png');
-            $img->save(public_path('images/' . $imageName));
+                /** @var UploadedFile $image */
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-            $attributes['image'] = $imageName;
+                $img = Image::make($image);
+                $img->resize(1024, 800);
+
+                $img->insert(public_path('fligram.png'), 'center');
+                $img->encode('png');
+                $img->save(public_path('images/' . $imageName));
+
+                ProductImage::query()
+                    ->create([
+                        'product_id' => $productId,
+                        'image'      => $imageName,
+                    ]);
+
+                // $attributes['image'] = $imageName;
+            }
         }
 
-        return $attributes;
+//        return $attributes;
     }
 }
