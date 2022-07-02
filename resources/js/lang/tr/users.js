@@ -1,7 +1,7 @@
 export default {
     title: 'Kullanıcılar',
 
-    column: {
+    columns: {
         name: 'İsim',
         email: 'Email'
     }
