@@ -8396,6 +8396,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -11492,6 +11494,7 @@ __webpack_require__.r(__webpack_exports__);
     special_code_10: 'Special Code 10'
   },
   form: {
+    choose: 'Choose picture(s)',
     images: 'Images',
     choose_an_image: 'Choose An Image',
     menu: 'Menu',
@@ -11756,6 +11759,7 @@ __webpack_require__.r(__webpack_exports__);
     special_code_10: 'Özel Kod 10'
   },
   form: {
+    choose: 'Resim(ler) seçiniz',
     images: 'Resim',
     choose_an_image: 'Resim Seçiniz',
     menu: 'Menü',
@@ -72778,6 +72782,9 @@ var render = function () {
                     fileLimit: 5,
                     showUploadButton: false,
                     showCancelButton: false,
+                    chooseLabel: _vm.$t("product.form.choose"),
+                    buttonClass:
+                      "p-button-outlined p-button-sm p-button p-component",
                   },
                 }),
                 _vm._v(" "),

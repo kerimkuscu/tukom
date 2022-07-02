@@ -28,6 +28,8 @@
                   :showUploadButton="false"
                   :showCancelButton="false"
                   :class="{ 'is-invalid': form.errors.has('images')}"
+                  :chooseLabel="$t('product.form.choose')"
+                  buttonClass="p-button-outlined p-button-sm p-button p-component"
               />
 
             <small id="image-help" class="invalid-feedback">{{ form.errors.first('images') }}</small>

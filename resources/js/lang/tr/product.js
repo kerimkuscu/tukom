@@ -26,6 +26,7 @@ export default {
     },
 
     form: {
+        choose: 'Resim(ler) seçiniz',
         images: 'Resim',
         choose_an_image: 'Resim Seçiniz',
         menu: 'Menü',

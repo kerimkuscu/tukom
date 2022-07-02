@@ -26,6 +26,7 @@ export default {
         },
 
     form: {
+        choose: 'Choose picture(s)',
         images: 'Images',
         choose_an_image: 'Choose An Image',
         menu: 'Menu',
