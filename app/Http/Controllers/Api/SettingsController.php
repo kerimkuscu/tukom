@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingContactEmailFormRequest;
+use App\Http\Requests\SettingPriceDisplayFormRequest;
 use App\Models\Setting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class SettingsController extends Controller
      *
      * @return JsonResponse
      */
-    public function priceDisplay(Request $request): JsonResponse
+    public function priceDisplay(SettingPriceDisplayFormRequest $request): JsonResponse
     {
         $created = Setting::query()
             ->updateOrCreate([
