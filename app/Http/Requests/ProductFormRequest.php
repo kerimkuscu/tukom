@@ -27,15 +27,13 @@ class ProductFormRequest extends FormRequest
         $id = $this->route('product');
 
         return [
-            'images' => [
-                $id ? 'nullable' : 'required',
-//                'mimes:jpeg,png,jpg',
-//                'max:2048',
-            ],
+//            'images' => [
+//                $id ? 'nullable' : 'required',
+//            ],
             'card_code' => [
                 $id ? 'nullable' : 'required',
                 'numeric',
-                Rule::unique('products')->ignore($id)
+                Rule::unique('products')->ignore($id),
             ],
             'description' => [
                 'required',

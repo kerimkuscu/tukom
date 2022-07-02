@@ -8025,23 +8025,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var form_backend_validation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! form-backend-validation */ "./node_modules/form-backend-validation/dist/index.js");
 /* harmony import */ var primevue_toast__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/toast */ "./node_modules/primevue/toast/index.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8408,7 +8403,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: new form_backend_validation__WEBPACK_IMPORTED_MODULE_1__["default"]({
         id: null,
         menu_id: null,
-        image: null,
+        images: [],
         card_code: null,
         description: null,
         type: null,
@@ -8431,7 +8426,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         special_code_10: null
       }),
       menuList: [],
-      imageData: null
+      imageData: null,
+      images: []
     };
   },
   computed: {
@@ -8468,11 +8464,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
+    myUploader: function myUploader(event) {
+      console.log(event.files);
+    },
     fetch: function fetch() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
+        var response, self, _iterator, _step, image, file;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -8483,40 +8483,89 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context2.sent;
 
-                _this2.form.populate(response.data.data); //'/images/1653505341.jpg'
+                _this2.form.populate(response.data.data);
 
+                self = _this2;
 
-                if (_this2.form.image) {
-                  _this2.imageData = '/images/' + _this2.form.image;
+                if (!_this2.form.images) {
+                  _context2.next = 25;
+                  break;
                 }
 
-                _this2.form.image = null;
+                _iterator = _createForOfIteratorHelper(_this2.form.images);
+                _context2.prev = 7;
 
-              case 6:
+                _iterator.s();
+
+              case 9:
+                if ((_step = _iterator.n()).done) {
+                  _context2.next = 17;
+                  break;
+                }
+
+                image = _step.value;
+                _context2.next = 13;
+                return self.urlToFile(image[0], image[1], image[2]);
+
+              case 13:
+                file = _context2.sent;
+                self.$refs.images.$data.files.push(file);
+
+              case 15:
+                _context2.next = 9;
+                break;
+
+              case 17:
+                _context2.next = 22;
+                break;
+
+              case 19:
+                _context2.prev = 19;
+                _context2.t0 = _context2["catch"](7);
+
+                _iterator.e(_context2.t0);
+
+              case 22:
+                _context2.prev = 22;
+
+                _iterator.f();
+
+                return _context2.finish(22);
+
+              case 25:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, null, [[7, 19, 22, 25]]);
       }))();
     },
-    getMenus: function getMenus() {
-      var _this3 = this;
-
+    urlToFile: function urlToFile(url, filename, mimeType) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var response;
+        var res, blob, objectURL, file;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _this3.$http.get('/api/menus/getMenuList');
+                return fetch(url);
 
               case 2:
-                response = _context3.sent;
-                _this3.menuList = response.data.data;
+                res = _context3.sent;
+                _context3.next = 5;
+                return res.blob();
 
-              case 4:
+              case 5:
+                blob = _context3.sent;
+                objectURL = URL.createObjectURL(blob); // const buf = await res.arrayBuffer();
+
+                file = new File([blob], filename, {
+                  type: mimeType
+                });
+                file.objectURL = objectURL;
+                return _context3.abrupt("return", file);
+
+              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -8524,31 +8573,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    submit: function submit() {
-      var _this4 = this;
+    getMenus: function getMenus() {
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (!_this4.$route.params.id) {
-                  _context4.next = 5;
-                  break;
-                }
+                _context4.next = 2;
+                return _this3.$http.get('/api/menus/getMenuList');
 
-                _context4.next = 3;
-                return _this4.update();
+              case 2:
+                response = _context4.sent;
+                _this3.menuList = response.data.data;
 
-              case 3:
-                _context4.next = 7;
-                break;
-
-              case 5:
-                _context4.next = 7;
-                return _this4.store();
-
-              case 7:
+              case 4:
               case "end":
                 return _context4.stop();
             }
@@ -8556,19 +8597,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4);
       }))();
     },
-    store: function store() {
-      var _this5 = this;
+    submit: function submit() {
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _context5.prev = 0;
+                if (!_this4.$route.params.id) {
+                  _context5.next = 5;
+                  break;
+                }
+
                 _context5.next = 3;
-                return _this5.form.post('/api/products');
+                return _this4.update();
 
               case 3:
+                _context5.next = 7;
+                break;
+
+              case 5:
+                _context5.next = 7;
+                return _this4.store();
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    store: function store() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _this5.form.images = _this5.$refs.images.$data.files;
+                _context6.prev = 1;
+                _context6.next = 4;
+                return _this5.form.post('/api/products');
+
+              case 4:
                 _this5.$toast.add({
                   severity: 'success',
                   detail: _this5.$i18n.t('product.messages.created'),
@@ -8580,14 +8654,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     name: 'products-list.grid'
                   });
                 }, 500);
-                _context5.next = 10;
+                _context6.next = 11;
                 break;
 
-              case 7:
-                _context5.prev = 7;
-                _context5.t0 = _context5["catch"](0);
+              case 8:
+                _context6.prev = 8;
+                _context6.t0 = _context6["catch"](1);
 
-                if (_context5.t0.response.status !== 422) {
+                if (_context6.t0.response.status !== 422) {
                   _this5.$toast.add({
                     severity: 'error',
                     detail: _this5.$i18n.t('product.messages.not_created'),
@@ -8595,27 +8669,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-              case 10:
+              case 11:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, null, [[0, 7]]);
+        }, _callee6, null, [[1, 8]]);
       }))();
     },
     update: function update() {
       var _this6 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
-                _context6.prev = 0;
-                _context6.next = 3;
+                _this6.form.images = _this6.$refs.images.$data.files;
+                console.log(_this6.$refs.images.$data.files);
+                _context7.prev = 2;
+                _context7.next = 5;
                 return _this6.form.post('/api/products/' + _this6.$route.params.id);
 
-              case 3:
+              case 5:
                 _this6.$toast.add({
                   severity: 'success',
                   detail: _this6.$i18n.t('product.messages.updated'),
@@ -8627,14 +8703,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     name: 'products-list.grid'
                   });
                 }, 500);
-                _context6.next = 10;
+                _context7.next = 12;
                 break;
 
-              case 7:
-                _context6.prev = 7;
-                _context6.t0 = _context6["catch"](0);
+              case 9:
+                _context7.prev = 9;
+                _context7.t0 = _context7["catch"](2);
 
-                if (_context6.t0.response.status !== 422) {
+                if (_context7.t0.response.status !== 422) {
                   _this6.$toast.add({
                     severity: 'error',
                     detail: _this6.$i18n.t('product.messages.not_updated'),
@@ -8642,12 +8718,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-              case 10:
+              case 12:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6, null, [[0, 7]]);
+        }, _callee7, null, [[2, 9]]);
       }))();
     },
     back: function back() {
@@ -10201,7 +10277,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _this.form.post('/api/brands');
+                return _this.form.post('/api/contacts');
 
               case 3:
                 _context.next = 8;
@@ -10743,7 +10819,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.$http.get('/api/products/' + _this2.$route.params.id);
+                return _this2.$http.get('/api/products/' + _this2.$route.params.productId);
 
               case 2:
                 response = _context2.sent;
@@ -11411,7 +11487,7 @@ __webpack_require__.r(__webpack_exports__);
     special_code_10: 'Special Code 10'
   },
   form: {
-    image: 'Image',
+    images: 'Images',
     choose_an_image: 'Choose An Image',
     menu: 'Menu',
     card_code: 'Card Code',
@@ -11675,7 +11751,7 @@ __webpack_require__.r(__webpack_exports__);
     special_code_10: 'Özel Kod 10'
   },
   form: {
-    image: 'Resim',
+    images: 'Resim',
     choose_an_image: 'Resim Seçiniz',
     menu: 'Menü',
     card_code: 'Kard Kodu',
@@ -72670,50 +72746,36 @@ var render = function () {
         _c("div", { staticClass: "col-8 mx-auto" }, [
           _c("div", { staticClass: "form-group row mb-2" }, [
             _c("label", { staticClass: "col-form-label col-md-3 required" }, [
-              _vm._v(_vm._s(_vm.$t("product.form.image"))),
+              _vm._v(_vm._s(_vm.$t("product.form.images"))),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-9 grid p-fluid" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "image-input",
-                  class: { "is-invalid": _vm.form.errors.has("image") },
-                  style: {
-                    "background-image": "url(" + _vm.imageData + ")",
-                    "background-size": "100% 300px",
+            _c(
+              "div",
+              { staticClass: "col-md-9 grid p-fluid" },
+              [
+                _c("FileUpload", {
+                  ref: "images",
+                  class: { "is-invalid": _vm.form.errors.has("images") },
+                  attrs: {
+                    name: "images[]",
+                    multiple: true,
+                    fileLimit: 5,
+                    showUploadButton: false,
+                    showCancelButton: false,
                   },
-                  on: { click: _vm.chooseImage },
-                },
-                [
-                  !_vm.imageData
-                    ? _c("span", { staticClass: "placeholder" }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(_vm.$t("product.form.choose_an_image")) +
-                            "\n            "
-                        ),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("input", {
-                    ref: "fileInput",
-                    staticClass: "file-input",
-                    attrs: { type: "file", accept: ".jpg,.png" },
-                    on: { input: _vm.onSelectFile },
-                  }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "small",
-                {
-                  staticClass: "invalid-feedback",
-                  attrs: { id: "image-help" },
-                },
-                [_vm._v(_vm._s(_vm.form.errors.first("image")))]
-              ),
-            ]),
+                }),
+                _vm._v(" "),
+                _c(
+                  "small",
+                  {
+                    staticClass: "invalid-feedback",
+                    attrs: { id: "image-help" },
+                  },
+                  [_vm._v(_vm._s(_vm.form.errors.first("images")))]
+                ),
+              ],
+              1
+            ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row mb-2" }, [
@@ -75367,7 +75429,7 @@ var render = function () {
                           "small",
                           {
                             staticClass: "p-invalid",
-                            attrs: { id: "name-help" },
+                            attrs: { id: "phone-help" },
                           },
                           [_vm._v(_vm._s(_vm.form.errors.first("phone")))]
                         ),
@@ -75410,7 +75472,7 @@ var render = function () {
                           "small",
                           {
                             staticClass: "p-invalid",
-                            attrs: { id: "name-help" },
+                            attrs: { id: "subject-help" },
                           },
                           [_vm._v(_vm._s(_vm.form.errors.first("subject")))]
                         ),
@@ -75456,7 +75518,7 @@ var render = function () {
                           "small",
                           {
                             staticClass: "p-invalid",
-                            attrs: { id: "name-help" },
+                            attrs: { id: "message-help" },
                           },
                           [_vm._v(_vm._s(_vm.form.errors.first("message")))]
                         ),

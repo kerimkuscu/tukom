@@ -26,7 +26,7 @@ export default {
     },
 
     form: {
-        image: 'Resim',
+        images: 'Resim',
         choose_an_image: 'Resim Seçiniz',
         menu: 'Menü',
         card_code: 'Kard Kodu',

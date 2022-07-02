@@ -17,32 +17,8 @@
     <div class="row">
       <div class="col-8 mx-auto">
         <div class="form-group row mb-2">
-          <label class="col-form-label col-md-3 required">{{ $t('product.form.image') }}</label>
+          <label class="col-form-label col-md-3 required">{{ $t('product.form.images') }}</label>
           <div class="col-md-9 grid p-fluid">
-<!--            <div-->
-<!--              class="image-input"-->
-<!--              :style="{ 'background-image': `url(${imageData})`, 'background-size': '100% 300px' }"-->
-<!--              :class="{ 'is-invalid': form.errors.has('image')}"-->
-<!--              @click="chooseImage"-->
-<!--            >-->
-<!--              <span-->
-<!--                v-if="!imageData"-->
-<!--                class="placeholder"-->
-<!--              >-->
-<!--                Choose an Image-->
-<!--              </span>-->
-<!--              <input-->
-<!--                ref="fileInput"-->
-<!--                class="file-input"-->
-<!--                type="file"-->
-<!--                accept=".jpg,.png"-->
-<!--                @input="onSelectFile"-->
-<!--              >-->
-<!--            </div>-->
-
-<!--            <small id="image-help" class="invalid-feedback">{{ form.errors.first('image') }}</small>-->
-
-
               <FileUpload
                   ref="images"
                   name="images[]"
@@ -50,9 +26,10 @@
                   :fileLimit="5"
                   :showUploadButton="false"
                   :showCancelButton="false"
+                  :class="{ 'is-invalid': form.errors.has('images')}"
               />
 
-            <small id="image-help" class="invalid-feedback">{{ form.errors.first('image') }}</small>
+            <small id="image-help" class="invalid-feedback">{{ form.errors.first('images') }}</small>
           </div>
         </div>
 
@@ -445,11 +422,7 @@ export default {
 
             let self = this;
             if(this.form.images) {
-                this.form.images.forEach(async function (image){
-                    // let type = image.split('.')[1];
-
-                    // let path = '/images/' + image;
-console.log(image);
+                for (const image of this.form.images) {
 
                     const file = await self.urlToFile(
                         image[0],
@@ -457,26 +430,9 @@ console.log(image);
                         image[2]
                     );
 
-                    // console.log(file.);
-
-                    // let file = new File(
-                    //     image[0],
-                    //     image[1],
-                    //     {
-                    //         type: image[2],
-                    //         lastModified: new Date().getTime()
-                    //     }
-                    // );
-
                     self.$refs.images.$data.files.push(file);
-                })
+                }
             }
-
-            // if(this.form.image){
-            //     this.imageData = '/images/' + this.form.image;
-            // }
-            //
-            // this.form.image = null;
         },
 
         async urlToFile(url, filename, mimeType){
@@ -484,7 +440,6 @@ console.log(image);
 
             let blob = await res.blob()
             let objectURL = URL.createObjectURL(blob);
-            console.log(objectURL);
 
             // const buf = await res.arrayBuffer();
             let file = new File([blob], filename, { type: mimeType });

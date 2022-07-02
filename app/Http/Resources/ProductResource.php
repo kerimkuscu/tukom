@@ -6,7 +6,7 @@ use App\Models\Product;
 use finfo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @mixin Product
@@ -32,38 +32,33 @@ class ProductResource extends JsonResource
 
         $images = $this->images->pluck('image')->toArray();
 
-//        $attributes['images'] = $images;
 
-                foreach ($images as $image) {
-                    $finfo = new finfo(FILEINFO_MIME_TYPE);
-                    $path = public_path('images/' . $image);
+        foreach ($images as $image) {
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
 
-                    $mimetype = $finfo->file($path);
+            try {
+                $path = public_path('images/' . $image);
 
-                    $source = file_get_contents($path);
-                    $base64 = base64_encode($source);
-                    $blob = 'data:'.$mimetype.';base64,'.$base64;
-                    $attributes['images'][] = [
-                        $blob,
-                        $image,
-                        $mimetype
-                    ];
-                }
+                $mimetype = $finfo->file($path);
+            } catch (\Exception $e) {
+                Log::info('Erro on creating blob image', [
+                        'message' => $e->getMessage(),
+                    ]);
 
-//        $finfo = new finfo(FILEINFO_MIME_TYPE);
-//
-//        foreach ($images as $image) {
-//            $path                   = public_path('images/' . $image);
-//            $attributes['images'][] = new UploadedFile(
-//                $path,
-//                $image,
-//                $finfo->file($path),
-//                filesize($path),
-//                0,
-//                false
-//            );
-//        }
-//dd($attributes);
+                continue;
+            }
+            $source                 = file_get_contents($path);
+            $base64                 = base64_encode($source);
+            $blob                   = 'data:' . $mimetype . ';base64,' . $base64;
+            $attributes['images'][] = [
+                    $blob,
+                    $image,
+                    $mimetype,
+                ];
+        }
+
+
+
         return $attributes;
     }
 }

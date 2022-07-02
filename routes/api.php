@@ -36,6 +36,10 @@ Route::get('menus/getMegaMenuList', [MenuController::class, 'getMegaMenuList']);
 Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{product}', [ProductController::class, 'show']);
 
+Route::post('contacts', [ContactController::class, 'store']);
+Route::post('quotes', [QuoteController::class, 'store']);
+
+
 Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/user', function(Request $request) {
         return $request->user();

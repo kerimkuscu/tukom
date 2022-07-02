@@ -66,7 +66,7 @@
                       :placeholder="$t('contact.frontend.phone')"
                       :class="{ 'p-invalid': form.errors.has('phone')}"
                     />
-                    <small id="name-help" class="p-invalid">{{ form.errors.first('phone') }}</small>
+                    <small id="phone-help" class="p-invalid">{{ form.errors.first('phone') }}</small>
                   </div>
                 </div>
                 <div class="form-group row mb-2">
@@ -80,7 +80,7 @@
                       :placeholder="$t('contact.frontend.subject')"
                       :class="{ 'p-invalid': form.errors.has('subject')}"
                     />
-                    <small id="name-help" class="p-invalid">{{ form.errors.first('subject') }}</small>
+                    <small id="subject-help" class="p-invalid">{{ form.errors.first('subject') }}</small>
                   </div>
                 </div>
                 <div class="form-group row mb-2">
@@ -96,7 +96,7 @@
                       rows="3"
                       cols="30"
                     />
-                    <small id="name-help" class="p-invalid">{{ form.errors.first('message') }}</small>
+                    <small id="message-help" class="p-invalid">{{ form.errors.first('message') }}</small>
                   </div>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default {
     methods: {
         async submit() {
             try {
-                await this.form.post('/api/brands');
+                await this.form.post('/api/contacts');
             } catch (error) {
                 if(error.response.status !== 422) {
 

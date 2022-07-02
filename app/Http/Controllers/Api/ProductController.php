@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
@@ -92,7 +93,7 @@ class ProductController extends Controller
             unset($attributes['image']);
         }
 
-//        $attributes = $this->uploadImages($request, $product->id);
+        $this->uploadImages($request, $product->id);
 
         $product->update($attributes);
 
@@ -127,31 +128,56 @@ class ProductController extends Controller
      */
     private function uploadImages(ProductFormRequest $request, int $productId): void
     {
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
+        $images = $request->file('images') ?? [];
 
-            foreach ($images as $image) {
+        $imagesInRequest = [];
 
-                /** @var UploadedFile $image */
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
+        foreach ($images as $image) {
+            $imagesInRequest[] = $image->getClientOriginalName();
 
-                $img = Image::make($image);
-                $img->resize(1024, 800);
+            $count = ProductImage::query()
+                ->where('image', $image->getClientOriginalName())
+                ->get()
+                ->count();
 
-                $img->insert(public_path('fligram.png'), 'center');
-                $img->encode('png');
-                $img->save(public_path('images/' . $imageName));
+            if ($count > 0) {
+                continue;
+            }
 
-                ProductImage::query()
-                    ->create([
+            /** @var UploadedFile $image */
+            $imageName = Str::random(40) . '.' . $image->getClientOriginalExtension();
+
+            $img = Image::make($image);
+            $img->resize(1024, 800);
+
+            $img->insert(public_path('fligram.png'), 'center');
+            $img->encode('png');
+            $img->save(public_path('images/' . $imageName));
+
+            ProductImage::query()
+                ->create([
                         'product_id' => $productId,
                         'image'      => $imageName,
                     ]);
 
-                // $attributes['image'] = $imageName;
-            }
+            $imagesInRequest[] = $imageName;
         }
 
-//        return $attributes;
+        $imagesInDb = ProductImage::query()
+            ->where('product_id', $productId)
+            ->pluck('image')
+            ->toArray();
+
+        $diff = array_diff($imagesInDb, $imagesInRequest);
+
+        ProductImage::query()
+            ->whereIn('image', $diff)
+            ->delete();
+
+        foreach ($diff as $file) {
+            $path = public_path('images') . '/' . $file;
+
+            File::delete($path);
+        }
     }
 }

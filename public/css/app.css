@@ -18037,6 +18037,6 @@ label.required:after {
   justify-content: right !important;
 }
 
-.p-invalid {
+small.p-invalid, .p-invalid.small {
   color: #dc3545;
 }
