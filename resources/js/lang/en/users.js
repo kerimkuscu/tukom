@@ -1,7 +1,7 @@
 export default {
     title: 'Users',
 
-    column: {
+    columns: {
         name: 'Name',
         email: 'Email'
     }

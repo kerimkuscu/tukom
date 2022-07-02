@@ -6,7 +6,7 @@
       <h4 class="float-start card-title">
         {{ $t('users.title') }}
       </h4>
-      <Button label="Create" class="float-end p-button-sm" @click="create" />
+      <Button :label="$t('messages.buttons.create')" class="float-end p-button-sm" @click="create" />
     </div>
 
     <DataTable
@@ -23,9 +23,9 @@
       @page="onPage($event)"
       @sort="onSort($event)"
     >
-      <Column ref="name" field="name" :header="$t('users.column.name')" />
+      <Column ref="name" field="name" :header="$t('users.columns.name')" />
 
-      <Column ref="email" field="email" :header="$t('users.column.email')" />
+      <Column ref="email" field="email" :header="$t('users.columns.email')" />
 
       <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
         <template #body="{data}">

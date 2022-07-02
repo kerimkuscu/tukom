@@ -12,7 +12,7 @@
               </div>
 
               <div class="row mb-3">
-                <label for="email" class="col-md-3 col-form-label">Email</label>
+                <label for="email" class="col-md-3 col-form-label">{{ $t('messages.login.email') }}</label>
 
                 <div class="col-md-9">
                   <input
@@ -28,7 +28,7 @@
               </div>
 
               <div class="row mb-3">
-                <label for="password" class="col-md-3 col-form-label">Password</label>
+                <label for="password" class="col-md-3 col-form-label">{{ $t('messages.login.password') }}</label>
 
                 <div class="col-md-9">
                   <input
@@ -44,7 +44,7 @@
 
               <div class="row mb-0">
                 <div class="offset-md-3">
-                  <Button type="submit" label="Login" class="p-button-rounded w-50" />
+                  <Button type="submit" :label="$t('messages.login.login')" class="p-button-rounded w-50" />
                 </div>
               </div>
             </form>

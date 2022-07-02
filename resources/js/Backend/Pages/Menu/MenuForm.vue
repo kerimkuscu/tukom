@@ -3,41 +3,42 @@
     <form @submit.prevent="submit">
       <div class="pb-5" style="margin-bottom: 20px">
         <h4 class="float-start card-title">
-          Menus / {{ createOrEditPage }}
+          {{ $t('menu.title') }} / {{ createOrEditPage }}
         </h4>
 
         <div class="float-end">
-          <Button class="p-button-sm p-button-secondary p-button-outlined" label="Cancel" @click="back" />
+          <Button class="p-button-sm p-button-secondary p-button-outlined" :label="$t('messages.buttons.cancel')" @click="back" />
 
-          <Button type="submit" label="Save" class="p-button-sm" />
+          <Button type="submit" :label="$t('messages.buttons.save')" class="p-button-sm" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-8 mx-auto">
           <div class="form-group row mb-2">
-            <label class="col-form-label col-md-3">Parent Menu</label>
+            <label class="col-form-label col-md-3">{{ $t('menu.form.parent_menu') }}</label>
             <div class="col-md-9 grid p-fluid">
               <Dropdown
                 v-model="form.parent_id"
                 :options="menuList"
                 option-label="text"
                 option-value="value"
-                placeholder="Parent Menu"
+                :placeholder="$t('menu.form.parent_menu')"
                 :filter="true"
+                class="p-inputtext-sm"
               />
             </div>
           </div>
 
           <div class="form-group row">
-            <label class="col-form-label col-md-3 required">Name</label>
+            <label class="col-form-label col-md-3 required">{{ $t('menu.form.name') }}</label>
             <div class="col-md-9 grid p-fluid">
               <InputText
                 id="name"
                 v-model="form.name"
                 class="p-inputtext-sm"
                 type="text"
-                placeholder="Name"
+                :placeholder="$t('menu.form.name')"
                 :class="{ 'p-invalid': form.errors.has('name')}"
               />
               <small id="name-help" class="p-invalid">{{ form.errors.first('name') }}</small>
@@ -67,7 +68,7 @@ export default {
 
     computed: {
         createOrEditPage() {
-            return this.form.id === null ? 'Create' : 'Edit';
+            return this.form.id === null ? this.$i18n.t('messages.buttons.create') : this.$i18n.t('messages.buttons.edit');
         }
     },
 
@@ -77,7 +78,6 @@ export default {
         }
 
         await this.getMenuTree()
-       // await this.prepareOptionGroupChildren()
     },
 
     methods : {
@@ -90,10 +90,13 @@ export default {
         async store() {
             try {
                 await this.form.post('/api/menus');
-                await this.$router.push({ name: 'menus.grid' });
+                this.$toast.add({ severity:'success', detail: this.$i18n.t('menu.messages.created'), life: 2000 });
+                setTimeout(() => {
+                    this.$router.push({ name: 'menus.grid' })
+                }, 500);
             } catch (error) {
                 if(error.response.status !== 422) {
-
+                    this.$toast.add({ severity:'error', detail: this.$i18n.t('menu.messages.not_created'), life: 2000 });
                 }
             }
         },
@@ -106,10 +109,13 @@ export default {
         async update() {
             try {
                 await this.form.put('/api/menus/' + this.$route.params.id);
-                await this.$router.push({ name: 'menus.grid' });
+                this.$toast.add({ severity:'success', detail: this.$i18n.t('menu.messages.updated'), life: 2000 });
+                setTimeout(() => {
+                    this.$router.push({ name: 'menus.grid' })
+                }, 500);
             } catch (error) {
                 if(error.response.status !== 422) {
-
+                    this.$toast.add({ severity:'error', detail: this.$i18n.t('menu.messages.not_updated'), life: 2000 });
                 }
             }
         },
@@ -117,7 +123,6 @@ export default {
         async getMenuTree(){
             const response = await this.$http.get('/api/menus/getMenuList');
             this.menuList = response.data.data;
-            //this.deep = response.data.data.meta.deep;
         },
 
         async prepareOptionGroupChildren(){
