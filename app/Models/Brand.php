@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HashId;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $image
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read string        $hashed_id
  *
  * @method static Builder|Brand newModelQuery()
  * @method static Builder|Brand newQuery()
@@ -29,7 +31,7 @@ use Illuminate\Support\Carbon;
  */
 class Brand extends Model
 {
-    use HasFactory;
+    use HasFactory, HashId;
 
     protected $fillable = [
         'name',

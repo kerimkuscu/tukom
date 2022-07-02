@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HashId;
 use Database\Factories\MenuFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Collection|Menu[] $subMenus
  * @property-read int|null $sub_menus_count
+ * @property-read string        $hashed_id
  *
  * @method static MenuFactory factory(...$parameters)
  * @method static Builder|Menu newModelQuery()
@@ -37,7 +39,7 @@ use Illuminate\Support\Carbon;
  */
 class Menu extends Model
 {
-    use HasFactory;
+    use HasFactory, HashId;
 
     protected $fillable = [
         'name',

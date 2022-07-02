@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HashId;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,6 +27,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Carbon|null $updated_at
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read string        $hashed_id
  *
  * @method static UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
@@ -43,8 +45,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
-    use Notifiable;
+    use HasFactory, Notifiable, HashId;
 
     /**
      * The attributes that are mass assignable.

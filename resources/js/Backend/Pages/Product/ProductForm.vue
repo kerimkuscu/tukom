@@ -22,6 +22,7 @@
               <FileUpload
                   ref="images"
                   name="images[]"
+                  accept="image/*"
                   :multiple="true"
                   :fileLimit="5"
                   :showUploadButton="false"

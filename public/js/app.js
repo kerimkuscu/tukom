@@ -7420,6 +7420,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'MenuForm',
@@ -8037,6 +8041,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -11800,7 +11805,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   title: 'Kullanıcılar',
-  column: {
+  columns: {
     name: 'İsim',
     email: 'Email'
   }
@@ -72099,6 +72104,7 @@ var render = function () {
                 [
                   _c("Dropdown", {
                     staticClass: "p-inputtext-sm",
+                    class: { "p-invalid": _vm.form.errors.has("parent_id") },
                     attrs: {
                       options: _vm.menuList,
                       "option-label": "text",
@@ -72114,6 +72120,15 @@ var render = function () {
                       expression: "form.parent_id",
                     },
                   }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    {
+                      staticClass: "p-invalid",
+                      attrs: { id: "parent-id-help" },
+                    },
+                    [_vm._v(_vm._s(_vm.form.errors.first("parent_id")))]
+                  ),
                 ],
                 1
               ),
@@ -72758,6 +72773,7 @@ var render = function () {
                   class: { "is-invalid": _vm.form.errors.has("images") },
                   attrs: {
                     name: "images[]",
+                    accept: "image/*",
                     multiple: true,
                     fileLimit: 5,
                     showUploadButton: false,

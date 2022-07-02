@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HashId;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,7 @@ use Illuminate\Support\Carbon;
  * @property string      $message
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read string        $hashed_id
  *
  * @method static Builder|Contact newModelQuery()
  * @method static Builder|Contact newQuery()
@@ -35,5 +37,13 @@ use Illuminate\Support\Carbon;
  */
 class Contact extends Model
 {
-    use HasFactory;
+    use HasFactory, HashId;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'subject',
+        'message',
+    ];
 }

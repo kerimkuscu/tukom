@@ -40,7 +40,7 @@ class ProductController extends Controller
             ->when($request->input('card_code'), fn($query, $value) => $query->where('card_code', 'like', '%' . $value . '%'))
             ->when($request->input('description'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
             ->when($request->input('type'), fn($query, $value) => $query->where('type', 'like', '%' . $value . '%'))
-            ->when($request->input('menu_id'), fn($query, $value) => $query->where('menu_id', $value))
+            ->when($request->input('menu_id'), fn($query, $value) => $query->where('menu_id', hashids_decode($value)))
             ->orderBy($sortColumn, $sortDirection)
             ->paginate($request->input('per_page', '15'));
 

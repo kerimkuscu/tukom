@@ -56,7 +56,10 @@ class MenuController extends Controller
      */
     public function store(MenuFormRequest $request): MenuResource
     {
-        $menu = Menu::query()->create($request->toArray());
+        $attributes              = $request->toArray();
+        $attributes['parent_id'] = hashids_decode($attributes['parent_id']);
+
+        $menu = Menu::query()->create($attributes);
 
         return new MenuResource($menu);
     }
@@ -92,6 +95,7 @@ class MenuController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Menu $menu
+     *
      * @return JsonResponse
      */
     public function destroy(Menu $menu): JsonResponse

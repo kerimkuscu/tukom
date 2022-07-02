@@ -36,6 +36,34 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        Route::bind('brand', function($id) {
+            return hashids_decode($id);
+        });
+
+        Route::bind('product', function($id) {
+            return hashids_decode($id);
+        });
+
+        Route::bind('menu', function($id) {
+            return hashids_decode($id);
+        });
+
+        Route::bind('contact', function($id) {
+            return hashids_decode($id);
+        });
+
+        Route::bind('quote', function($id) {
+            return hashids_decode($id);
+        });
+
+        Route::bind('setting', function($id) {
+            return hashids_decode($id);
+        });
+
+        Route::bind('user', function($id) {
+            return hashids_decode($id);
+        });
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HashId;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,6 +41,7 @@ use Illuminate\Support\Collection;
  * @property Carbon|null $updated_at
  * @property-read Menu|null $menu
  * @property-read Collection|null $images
+ * @property-read string        $hashed_id
  *
  * @method static Builder|Product newModelQuery()
  * @method static Builder|Product newQuery()
@@ -73,7 +75,7 @@ use Illuminate\Support\Collection;
  */
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, HashId;
 
     protected $fillable = [
         'menu_id',

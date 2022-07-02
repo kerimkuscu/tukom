@@ -26,7 +26,11 @@
                 :placeholder="$t('menu.form.parent_menu')"
                 :filter="true"
                 class="p-inputtext-sm"
+                :class="{ 'p-invalid': form.errors.has('parent_id')}"
               />
+
+                <small id="parent-id-help" class="p-invalid">{{ form.errors.first('parent_id') }}</small>
+
             </div>
           </div>
 

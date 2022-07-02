@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Repositories\MenuRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image;
 use Ramsey\Collection\Collection;
 
@@ -12,7 +13,8 @@ class LocalController extends Controller
 {
     public function test()
     {
-
+        App::setLocale('tr');
+dd(App::currentLocale());
         dd(public_path('images'));
 
         app(MenuRepository::class)->getMegaMenuList();

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HashId;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,7 @@ use Illuminate\Support\Carbon;
  * @property string      $questions_comments
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read string        $hashed_id
  *
  * @method static Builder|Quote newModelQuery()
  * @method static Builder|Quote newQuery()
@@ -57,5 +59,24 @@ use Illuminate\Support\Carbon;
  */
 class Quote extends Model
 {
-    use HasFactory;
+    use HasFactory, HashId;
+
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'title',
+        'business',
+        'company',
+        'address',
+        'city_state_zip_country',
+        'phone',
+        'fax',
+        'email',
+        'connector_interested_in',
+        'connector_supplier',
+        'eau',
+        'project_title',
+        'project_start_date',
+        'questions_comments',
+    ];
 }

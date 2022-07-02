@@ -37,7 +37,7 @@ class MenuRepository
         $data = [
             'key'  => $key,
             'data' => [
-                'id'   => $menu->id,
+                'id'   => $menu->hashed_id,
                 'name' => $menu->name,
             ],
         ];
@@ -63,7 +63,7 @@ class MenuRepository
             ->map(function($item) {
                 return [
                    'text'  => $item->name,
-                   'value' => $item->id,
+                   'value' => $item->hashed_id,
                ];
             })
             ->toArray();
@@ -133,7 +133,7 @@ class MenuRepository
             foreach ($menu->submenus as $key2 => $menu2) {
                 $items2[$key2] = [
                     'label' => $menu2->name,
-                    'id'    => $menu2->id,
+                    'id'    => $menu2->hashed_id,
                 ];
             }
 

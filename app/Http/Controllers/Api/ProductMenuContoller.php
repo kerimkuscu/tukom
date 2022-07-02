@@ -20,7 +20,7 @@ class ProductMenuContoller extends Controller
      */
     public function store(Request $request, Product $product): JsonResponse
     {
-        $menuId = $request->input('menu_id');
+        $menuId = hashids_decode($request->input('menu_id'));
         $menu   = Menu::find($menuId);
         $status = false;
 

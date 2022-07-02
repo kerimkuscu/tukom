@@ -29,9 +29,11 @@ class ProductResource extends JsonResource
         }
 
         $attributes['menu'] = $this->menu?->name;
+        $attributes['id']   = $this->hashed_id;
 
         $images = $this->images->pluck('image')->toArray();
 
+        $attributes['image'] = $images[0] ?? null;
 
         foreach ($images as $image) {
             $finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -56,8 +58,6 @@ class ProductResource extends JsonResource
                     $mimetype,
                 ];
         }
-
-
 
         return $attributes;
     }
