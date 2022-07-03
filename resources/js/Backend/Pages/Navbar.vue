@@ -30,8 +30,32 @@
           </li>
 
           <li class="nav-item">
+            <router-link :to="{name:'carousels.grid'}" class="nav-link">
+              {{ $t('navbar.headers.carousels') }}
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link :to="{name:'firms.grid'}" class="nav-link">
+              {{ $t('navbar.headers.firms') }}
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link :to="{name:'markets.grid'}" class="nav-link">
+              {{ $t('navbar.headers.markets') }}
+            </router-link>
+          </li>
+
+          <li class="nav-item">
             <router-link :to="{name:'brands.grid'}" class="nav-link">
               {{ $t('navbar.headers.brands') }}
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link :to="{name:'abouts.form'}" class="nav-link">
+              {{ $t('navbar.headers.about') }}
             </router-link>
           </li>
 

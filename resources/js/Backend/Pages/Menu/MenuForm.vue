@@ -29,8 +29,7 @@
                 :class="{ 'p-invalid': form.errors.has('parent_id')}"
               />
 
-                <small id="parent-id-help" class="p-invalid">{{ form.errors.first('parent_id') }}</small>
-
+              <small id="parent-id-help" class="p-invalid">{{ form.errors.first('parent_id') }}</small>
             </div>
           </div>
 

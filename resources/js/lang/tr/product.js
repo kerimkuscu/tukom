@@ -1,5 +1,6 @@
 export default {
         title: 'Ürün',
+    product_settings_title: 'Ürün Ayarları',
 
     columns: {
         card_code: 'Kard Kodu',
@@ -59,5 +60,9 @@ export default {
         not_created: 'Ürün oluşturulamadı',
         updated: 'Ürün güncellendi',
         not_updated: 'Ürün güncellenemedi'
+    },
+
+    frontend: {
+        no_image: 'Resim bulunamadı'
     }
 }

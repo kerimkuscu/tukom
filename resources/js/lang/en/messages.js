@@ -2,10 +2,11 @@ export default {
 
     buttons: {
       create: 'Create',
-        save: 'Save',
+      save: 'Save',
       edit: 'Edit',
       delete: 'Delete',
-      cancel: 'Cancel'
+      cancel: 'Cancel',
+      product_settings: 'Product Settings',
     },
 
     login: {

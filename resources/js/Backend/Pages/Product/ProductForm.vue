@@ -2,7 +2,7 @@
   <form @submit.prevent="submit">
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
-          {{ $t('product.title') }} / {{ createOrEditPage }}
+        {{ $t('product.title') }} / {{ createOrEditPage }}
       </h4>
 
       <div class="float-end">
@@ -19,18 +19,18 @@
         <div class="form-group row mb-2">
           <label class="col-form-label col-md-3 required">{{ $t('product.form.images') }}</label>
           <div class="col-md-9 grid p-fluid">
-              <FileUpload
-                  ref="images"
-                  name="images[]"
-                  accept="image/*"
-                  :multiple="true"
-                  :fileLimit="5"
-                  :showUploadButton="false"
-                  :showCancelButton="false"
-                  :class="{ 'is-invalid': form.errors.has('images')}"
-                  :chooseLabel="$t('product.form.choose')"
-                  buttonClass="p-button-outlined p-button-sm p-button p-component"
-              />
+            <FileUpload
+              ref="images"
+              name="images[]"
+              accept="image/*"
+              :multiple="true"
+              :file-limit="5"
+              :show-upload-button="false"
+              :show-cancel-button="false"
+              :class="{ 'is-invalid': form.errors.has('images')}"
+              :choose-label="$t('product.form.choose')"
+              button-class="p-button-outlined p-button-sm p-button p-component"
+            />
 
             <small id="image-help" class="invalid-feedback">{{ form.errors.first('images') }}</small>
           </div>
@@ -44,7 +44,7 @@
               :options="menuList"
               option-label="text"
               option-value="value"
-              :placeholder="this.$i18n.t('product.form.menu')"
+              :placeholder="$i18n.t('product.form.menu')"
               :filter="true"
               class="p-inputtext-sm"
             />
@@ -59,7 +59,7 @@
               v-model="form.card_code"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.card_code')"
+              :placeholder="$i18n.t('product.form.card_code')"
               :class="{ 'p-invalid': form.errors.has('card_code')}"
             />
             <small id="card-code-help" class="p-invalid">{{ form.errors.first('card_code') }}</small>
@@ -74,7 +74,7 @@
               v-model="form.description"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.description')"
+              :placeholder="$i18n.t('product.form.description')"
               :class="{ 'p-invalid': form.errors.has('description')}"
             />
             <small id="description-help" class="p-invalid">{{ form.errors.first('description') }}</small>
@@ -89,7 +89,7 @@
               v-model="form.type"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.type')"
+              :placeholder="$i18n.t('product.form.type')"
               :class="{ 'p-invalid': form.errors.has('type')}"
             />
             <small id="type-help" class="p-invalid">{{ form.errors.first('type') }}</small>
@@ -104,7 +104,7 @@
               v-model="form.brand"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.brand')"
+              :placeholder="$i18n.t('product.form.brand')"
               :class="{ 'p-invalid': form.errors.has('brand')}"
             />
             <small id="brand-help" class="p-invalid">{{ form.errors.first('brand') }}</small>
@@ -119,7 +119,7 @@
               v-model="form.fiili_stok"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.fiili_stok')"
+              :placeholder="$i18n.t('product.form.fiili_stok')"
               :class="{ 'p-invalid': form.errors.has('fiili_stok')}"
             />
             <small id="fiili-stok-help" class="p-invalid">{{ form.errors.first('fiili_stok') }}</small>
@@ -134,7 +134,7 @@
               v-model="form.actual_stock"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.actual_stock')"
+              :placeholder="$i18n.t('product.form.actual_stock')"
               :class="{ 'p-invalid': form.errors.has('actual_stock')}"
             />
             <small id="actual-stoct-help" class="p-invalid">{{ form.errors.first('actual_stock') }}</small>
@@ -149,7 +149,7 @@
               v-model="form.main_unit"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.main_unit')"
+              :placeholder="$i18n.t('product.form.main_unit')"
               :class="{ 'p-invalid': form.errors.has('main_unit')}"
             />
             <small id="main-unit-help" class="p-invalid">{{ form.errors.first('main_unit') }}</small>
@@ -164,7 +164,7 @@
               v-model="form.price"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.price')"
+              :placeholder="$i18n.t('product.form.price')"
               :class="{ 'p-invalid': form.errors.has('price')}"
             />
             <small id="price-unit-help" class="p-invalid">{{ form.errors.first('price') }}</small>
@@ -179,7 +179,7 @@
               v-model="form.currency"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.currency')"
+              :placeholder="$i18n.t('product.form.currency')"
               :class="{ 'p-invalid': form.errors.has('currency')}"
             />
             <small id="currency-unit-help" class="p-invalid">{{ form.errors.first('currency') }}</small>
@@ -194,7 +194,7 @@
               v-model="form.group_code"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.group_code')"
+              :placeholder="$i18n.t('product.form.group_code')"
               :class="{ 'p-invalid': form.errors.has('group_code')}"
             />
             <small id="group-code-unit-help" class="p-invalid">{{ form.errors.first('group_code') }}</small>
@@ -209,7 +209,7 @@
               v-model="form.special_code_1"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_1')"
+              :placeholder="$i18n.t('product.form.special_code_1')"
               :class="{ 'p-invalid': form.errors.has('special_code_1')}"
             />
             <small id="special-code-1-unit-help" class="p-invalid">{{ form.errors.first('special_code_1') }}</small>
@@ -224,7 +224,7 @@
               v-model="form.special_code_2"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_2')"
+              :placeholder="$i18n.t('product.form.special_code_2')"
               :class="{ 'p-invalid': form.errors.has('special_code_2')}"
             />
             <small id="special-code-2-unit-help" class="p-invalid">{{ form.errors.first('special_code_2') }}</small>
@@ -239,7 +239,7 @@
               v-model="form.special_code_3"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_3')"
+              :placeholder="$i18n.t('product.form.special_code_3')"
               :class="{ 'p-invalid': form.errors.has('special_code_3')}"
             />
             <small id="special-code-3-unit-help" class="p-invalid">{{ form.errors.first('special_code_3') }}</small>
@@ -254,7 +254,7 @@
               v-model="form.special_code_4"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_4')"
+              :placeholder="$i18n.t('product.form.special_code_4')"
               :class="{ 'p-invalid': form.errors.has('special_code_4')}"
             />
             <small id="special-code-4-unit-help" class="p-invalid">{{ form.errors.first('special_code_4') }}</small>
@@ -269,7 +269,7 @@
               v-model="form.special_code_5"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_5')"
+              :placeholder="$i18n.t('product.form.special_code_5')"
               :class="{ 'p-invalid': form.errors.has('special_code_5')}"
             />
             <small id="special-code-5-unit-help" class="p-invalid">{{ form.errors.first('special_code_5') }}</small>
@@ -284,7 +284,7 @@
               v-model="form.special_code_6"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_6')"
+              :placeholder="$i18n.t('product.form.special_code_6')"
               :class="{ 'p-invalid': form.errors.has('special_code_6')}"
             />
             <small id="special-code-6-unit-help" class="p-invalid">{{ form.errors.first('special_code_6') }}</small>
@@ -299,7 +299,7 @@
               v-model="form.special_code_7"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_7')"
+              :placeholder="$i18n.t('product.form.special_code_7')"
               :class="{ 'p-invalid': form.errors.has('special_code_7')}"
             />
             <small id="special-code-7-unit-help" class="p-invalid">{{ form.errors.first('special_code_7') }}</small>
@@ -314,7 +314,7 @@
               v-model="form.special_code_8"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_8')"
+              :placeholder="$i18n.t('product.form.special_code_8')"
               :class="{ 'p-invalid': form.errors.has('special_code_8')}"
             />
             <small id="special-code-8-unit-help" class="p-invalid">{{ form.errors.first('special_code_8') }}</small>
@@ -329,7 +329,7 @@
               v-model="form.special_code_9"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_9')"
+              :placeholder="$i18n.t('product.form.special_code_9')"
               :class="{ 'p-invalid': form.errors.has('special_code_9')}"
             />
             <small id="special-code-9-unit-help" class="p-invalid">{{ form.errors.first('special_code_9') }}</small>
@@ -344,7 +344,7 @@
               v-model="form.special_code_10"
               class="p-inputtext-sm"
               type="text"
-              :placeholder="this.$i18n.t('product.form.special_code_10')"
+              :placeholder="$i18n.t('product.form.special_code_10')"
               :class="{ 'p-invalid': form.errors.has('special_code_10')}"
             />
             <small id="special-code-10-unit-help" class="p-invalid">{{ form.errors.first('special_code_10') }}</small>

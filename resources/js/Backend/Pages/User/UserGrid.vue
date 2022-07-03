@@ -104,7 +104,14 @@ export default {
                 acceptLabel: this.$i18n.t('messages.buttons.delete'),
                 rejectLabel: this.$i18n.t('messages.buttons.cancel'),
                 accept: async () => {
-                    await this.$http.delete('/api/users/' + id)
+                    const response = await this.$http.delete('/api/users/' + id);
+                    if(response.data.status){
+                        this.$toast.add({ severity:'error', detail:this.$i18n.t('users.messages.not_deleted'), life: 2000 });
+                    }
+                    else{
+                        this.$toast.add({ severity:'success', detail: this.$i18n.t('users.messages.deleted'), life: 2000 });
+                    }
+
                     await this.fetch()
                 },
                 reject: () => {

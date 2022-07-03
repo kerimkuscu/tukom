@@ -4,7 +4,7 @@
 
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
-        Contacts
+        {{ $t('contact.backend.title') }}
       </h4>
     </div>
 
@@ -22,12 +22,11 @@
       @page="onPage($event)"
       @sort="onSort($event)"
     >
-      <Column ref="name" field="name" header="Name" />
-      <Column ref="email" field="email" header="Email" />
-      <Column ref="phone" field="phone" header="Phone" />
-      <Column ref="subject" field="subject" header="Subject" />
-      <Column ref="message" field="message" header="Message" />
-      <Column ref="message" field="message" header="Message" />
+      <Column ref="name" field="name" :header="$t('contact.backend.columns.name')" />
+      <Column ref="email" field="email" :header="$t('contact.backend.columns.email')" />
+      <Column ref="phone" field="phone" :header="$t('contact.backend.columns.phone')" />
+      <Column ref="subject" field="subject" :header="$t('contact.backend.columns.subject')" />
+      <Column ref="message" field="message" :header="$t('contact.backend.columns.message')" />
 
       <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
         <template #body="{data}">
@@ -97,7 +96,14 @@ export default {
                 acceptLabel: this.$i18n.t('messages.buttons.delete'),
                 rejectLabel: this.$i18n.t('messages.buttons.cancel'),
                 accept: async () => {
-                    await this.$http.delete('/api/contacts/' + id)
+                    const response = await this.$http.delete('/api/contacts/' + id)
+                    if(response.data.status){
+                        this.$toast.add({ severity:'success', detail: this.$i18n.t('backend.contact.messages.deleted'), life: 2000 });
+                    }
+                    else{
+                        this.$toast.add({ severity:'error', detail:this.$i18n.t('backend.contact.messages.not_deleted'), life: 2000 });
+                    }
+
                     await this.fetch()
                 },
                 reject: () => {

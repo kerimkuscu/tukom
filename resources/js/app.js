@@ -44,6 +44,8 @@ import Menu from 'primevue/menu';
 import Sidebar from 'primevue/sidebar';
 import Galleria from 'primevue/galleria';
 import Carousel from 'primevue/carousel';
+import InputSwitch from 'primevue/inputswitch';
+import Editor from 'primevue/editor';
 
 import NotFound from "./components/NotFound";
 
@@ -71,6 +73,8 @@ Vue.component('Menu', Menu);
 Vue.component('Sidebar', Sidebar);
 Vue.component('Galleria', Galleria);
 Vue.component('Carousel', Carousel);
+Vue.component('InputSwitch', InputSwitch);
+Vue.component('Editor', Editor);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
 Vue.use(ToastService);

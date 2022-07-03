@@ -2,14 +2,15 @@ export default {
 
     buttons: {
       create: 'Oluştur',
-        save: 'Kaydet',
+      save: 'Kaydet',
       edit: 'Düzenle',
       delete: 'Sil',
-      cancel: 'İptal Et'
+      cancel: 'İptal Et',
+      product_settings: 'Ürün Ayarları',
     },
 
     login: {
-        email: 'Email',
+        email: 'E-posta',
         password: 'Parola',
         login: 'Giriş'
     },

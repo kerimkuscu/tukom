@@ -4,7 +4,7 @@
 
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
-        Brands
+        {{ $t('brand.title') }}
       </h4>
       <Button :label="$t('messages.buttons.create')" class="float-end p-button-sm" @click="create" />
     </div>
@@ -23,8 +23,8 @@
       @page="onPage($event)"
       @sort="onSort($event)"
     >
-      <Column ref="name" field="name" header="Name" />
-      <Column header="Image">
+      <Column ref="name" field="name" :header="$t('brand.columns.name')" />
+      <Column :header="$t('brand.columns.image')">
         <template #body="slotProps">
           <img :src="'/images/' + slotProps.data.image" :alt="slotProps.data.image" class="brands-image" style="height: 30px">
         </template>
@@ -106,7 +106,14 @@ export default {
                 acceptLabel: this.$i18n.t('messages.buttons.delete'),
                 rejectLabel: this.$i18n.t('messages.buttons.cancel'),
                 accept: async () => {
-                    await this.$http.delete('/api/brands/' + id)
+                    const response = await this.$http.delete('/api/brands/' + id)
+                    if(response.data.status){
+                        this.$toast.add({ severity:'error', detail:this.$i18n.t('brand.messages.not_deleted'), life: 2000 });
+                    }
+                    else{
+                        this.$toast.add({ severity:'success', detail: this.$i18n.t('brand.messages.deleted'), life: 2000 });
+                    }
+
                     await this.fetch()
                 },
                 reject: () => {

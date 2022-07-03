@@ -13,9 +13,23 @@ import ProductIndex from "../Backend/Pages/Product/ProductIndex";
 import ProductGrid from "../Backend/Pages/Product/ProductGrid";
 import ProductForm from "../Backend/Pages/Product/ProductForm";
 
+import CarouselIndex from '../Backend/Pages/Carousel/CarouselIndex';
+import CarouselGrid from '../Backend/Pages/Carousel/CarouselGrid';
+import CarouselForm from '../Backend/Pages/Carousel/CarouselForm';
+
+import FirmIndex from '../Backend/Pages/Firm/FirmIndex';
+import FirmGrid from '../Backend/Pages/Firm/FirmGrid';
+import FirmForm from '../Backend/Pages/Firm/FirmForm';
+
+import MarketIndex from '../Backend/Pages/Market/MarketIndex';
+import MarketGrid from '../Backend/Pages/Market/MarketGrid';
+import MarketForm from '../Backend/Pages/Market/MarketForm';
+
 import BrandIndex from '../Backend/Pages/Brand/BrandIndex';
 import BrandGrid from '../Backend/Pages/Brand/BrandGrid';
 import BrandForm from '../Backend/Pages/Brand/BrandForm';
+
+import AboutForm from '../Backend/Pages/About/AboutForm';
 
 import NotFound from "../components/NotFound";
 
@@ -122,6 +136,84 @@ export default [
     },
 
     {
+        path: '/carousels',
+        name: 'carousels',
+        component: CarouselIndex,
+        meta: {
+            auth: true
+        },
+        children: [
+            {
+                path: '/',
+                name: 'carousels.grid',
+                component: CarouselGrid,
+            },
+            {
+                path: 'edit/:id',
+                name: 'carousels.edit',
+                component: CarouselForm,
+            },
+            {
+                path: 'create',
+                name: 'carousels.create',
+                component: CarouselForm,
+            },
+        ]
+    },
+
+    {
+        path: '/firms',
+        name: 'firms',
+        component: FirmIndex,
+        meta: {
+            auth: true
+        },
+        children: [
+            {
+                path: '/',
+                name: 'firms.grid',
+                component: FirmGrid,
+            },
+            {
+                path: 'edit/:id',
+                name: 'firms.edit',
+                component: FirmForm,
+            },
+            {
+                path: 'create',
+                name: 'firms.create',
+                component: FirmForm,
+            },
+        ]
+    },
+
+    {
+        path: '/markets',
+        name: 'markets',
+        component: MarketIndex,
+        meta: {
+            auth: true
+        },
+        children: [
+            {
+                path: '/',
+                name: 'markets.grid',
+                component: MarketGrid,
+            },
+            {
+                path: 'edit/:id',
+                name: 'markets.edit',
+                component: MarketForm,
+            },
+            {
+                path: 'create',
+                name: 'markets.create',
+                component: MarketForm,
+            },
+        ]
+    },
+
+    {
         path: '/brands',
         name: 'brands',
         component: BrandIndex,
@@ -145,6 +237,15 @@ export default [
                 component: BrandForm,
             },
         ]
+    },
+
+    {
+        path: '/abouts',
+        name: 'abouts.form',
+        component: AboutForm,
+        meta: {
+            auth: true
+        },
     },
 
     {

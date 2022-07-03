@@ -4,7 +4,7 @@
 
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
-        Quotes
+        {{ $t('quote.title') }}
       </h4>
     </div>
 
@@ -22,22 +22,22 @@
       @page="onPage($event)"
       @sort="onSort($event)"
     >
-      <Column ref="first_name" field="first_name" header="First Name" />
-      <Column ref="last_name" field="last_name" header="Last Name" />
-      <Column ref="title" field="title" header="Title" />
-      <Column ref="business" field="business" header="Business" />
-      <Column ref="company" field="company" header="Company" />
-      <Column ref="address" field="address" header="Address" />
-      <Column ref="city_state_zip_country" field="city_state_zip_country" header="City State Zip Country" />
-      <Column ref="phone" field="phone" header="Phone" />
-      <Column ref="fax" field="fax" header="Fax" />
-      <Column ref="email" field="email" header="Email" />
-      <Column ref="connector_interested_in" field="connector_interested_in" header="Interested Connector" />
-      <Column ref="connector_supplier" field="connector_supplier" header="Connector Supplier" />
-      <Column ref="eau" field="eau" header="Eau" />
-      <Column ref="project_title" field="project_title" header="Project Title" />
-      <Column ref="project_start_date" field="project_start_date" header="Project Start Date" />
-      <Column ref="questions_comments" field="questions_comments" header="Questions And Comments" />
+      <Column ref="first_name" field="first_name" :header="$t('quote.columns.first_name')" />
+      <Column ref="last_name" field="last_name" :header="$t('quote.columns.last_name')" />
+      <Column ref="title" field="title" :header="$t('quote.columns.title')" />
+      <Column ref="business" field="business" :header="$t('quote.columns.business')" />
+      <Column ref="company" field="company" :header="$t('quote.columns.company')" />
+      <Column ref="address" field="address" :header="$t('quote.columns.address')" />
+      <Column ref="city_state_zip_country" field="city_state_zip_country" :header="$t('quote.columns.zip_code')" />
+      <Column ref="phone" field="phone" :header="$t('quote.columns.phone')" />
+      <Column ref="fax" field="fax" :header="$t('quote.columns.fax')" />
+      <Column ref="email" field="email" :header="$t('quote.columns.email')" />
+      <Column ref="connector_interested_in" field="connector_interested_in" :header="$t('quote.columns.interested_connector')" />
+      <Column ref="connector_supplier" field="connector_supplier" :header="$t('quote.columns.connector_supplier')" />
+      <Column ref="eau" field="eau" :header="$t('quote.columns.eau')" />
+      <Column ref="project_title" field="project_title" :header="$t('quote.columns.project_title')" />
+      <Column ref="project_start_date" field="project_start_date" :header="$t('quote.columns.project_start_date')" />
+      <Column ref="questions_comments" field="questions_comments" :header="$t('quote.columns.questions')" />
 
       <Column :body-style="{'text-align': 'center', overflow: 'visible'}">
         <template #body="{data}">

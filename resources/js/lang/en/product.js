@@ -1,5 +1,6 @@
 export default {
         title: 'Product',
+    product_settings_title: 'Product Settings',
 
         columns: {
             card_code: 'Card Code',
@@ -59,5 +60,9 @@ export default {
         not_created: 'Product not created',
         updated: 'Product updated',
         not_updated: 'Product not updated'
+    },
+
+    frontend: {
+        no_image: 'No image found'
     }
 }

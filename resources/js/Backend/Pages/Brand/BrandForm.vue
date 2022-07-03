@@ -2,7 +2,7 @@
   <form @submit.prevent="submit">
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
-        Brands / {{ createOrEditPage }}
+        {{ $t('brand.title') }} / {{ createOrEditPage }}
       </h4>
 
       <div class="float-end">
@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-8 mx-auto">
         <div class="form-group row mb-2">
-          <label class="col-form-label col-md-3 required">Image</label>
+          <label class="col-form-label col-md-3 required">{{ $t('brand.form.image') }}</label>
           <div class="col-md-9 grid p-fluid">
             <div
               class="image-input"
@@ -26,7 +26,7 @@
                 v-if="!imageData"
                 class="placeholder"
               >
-                Choose an Image
+                {{ $t('brand.form.choose') }}
               </span>
               <input
                 ref="fileInput"
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group row mb-2">
-          <label class="col-form-label col-md-3 required">Name</label>
+          <label class="col-form-label col-md-3 required">{{ $t('brand.form.name') }}</label>
           <div class="col-md-9 grid p-fluid">
             <InputText
               id="name"
@@ -97,7 +97,6 @@ export default {
             if(this.form.image){
                 this.imageData = '/images/' + this.form.image;
             }
-
             this.form.image = null;
         },
 
@@ -110,10 +109,13 @@ export default {
         async store() {
             try {
                 await this.form.post('/api/brands');
-                await this.$router.push({ name: 'brands.grid' });
+                this.$toast.add({ severity:'success', detail: this.$i18n.t('brand.messages.created'), life: 2000 });
+                setTimeout(() => {
+                    this.$router.push({ name: 'brands.grid' });
+                }, 500);
             } catch (error) {
                 if(error.response.status !== 422) {
-
+                    this.$toast.add({ severity:'error', detail: this.$i18n.t('brand.messages.not_created'), life: 2000 });
                 }
             }
         },
@@ -121,10 +123,13 @@ export default {
         async update() {
             try {
                 await this.form.put('/api/brands/' + this.$route.params.id);
-                await this.$router.push({ name: 'brands.grid' });
+                this.$toast.add({ severity:'success', detail: this.$i18n.t('brand.messages.updated'), life: 2000 });
+                setTimeout(() => {
+                    this.$router.push({ name: 'brands.grid' });
+                }, 500);
             } catch (error) {
                 if(error.response.status !== 422) {
-
+                    this.$toast.add({ severity:'error', detail: this.$i18n.t('brand.messages.not_updated'), life: 2000 });
                 }
             }
         },

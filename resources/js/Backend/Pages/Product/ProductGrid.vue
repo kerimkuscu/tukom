@@ -2,9 +2,9 @@
   <div>
     <ConfirmDialog />
 
-    <Toast position="top-right" />
+    <ProductSettings />
 
-    <Dialog position="right" :visible.sync="display">
+    <Dialog :visible.sync="display" :modal="true" position="right">
       <template #header>
         <h3>{{ menuModalHeader }}</h3>
       </template>
@@ -32,7 +32,10 @@
       <h4 class="float-start card-title">
         {{ $t('product.title') }}
       </h4>
+
       <Button :label="$t('messages.buttons.create')" class="float-end p-button-sm" @click="create" />
+
+      <Button :label="$t('messages.buttons.product_settings')" class="float-end p-button-sm p-button-outlined p-button-secondary" style="margin-right: 3px;" @click="productSettings" />
 
       <FileUpload
         mode="basic"
@@ -76,7 +79,7 @@
       <Column
         ref="card_code"
         field="card_code"
-        :header="this.$i18n.t('product.columns.card_code')"
+        :header="$i18n.t('product.columns.card_code')"
         filter-match-mode="startsWith"
         :sortable="true"
         :styles="{'min-width':'400px'}"
@@ -101,7 +104,7 @@
       <Column
         ref="description"
         field="description"
-        :header="this.$i18n.t('product.columns.description')"
+        :header="$i18n.t('product.columns.description')"
         filter-field="description"
         filter-match-mode="contains"
         :sortable="true"
@@ -121,7 +124,7 @@
       <Column
         ref="type"
         field="type"
-        :header="this.$i18n.t('product.columns.type')"
+        :header="$i18n.t('product.columns.type')"
         filter-field="type"
         filter-match-mode="contains"
         :sortable="true"
@@ -138,7 +141,7 @@
         </template>
       </Column>
 
-      <Column field="menu" :header="this.$i18n.t('product.columns.menu')" :styles="{'min-width':'200px'}">
+      <Column field="menu" :header="$i18n.t('product.columns.menu')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.menu" class="truncate">
             {{ slotProps.data.menu }}
@@ -146,7 +149,7 @@
         </template>
       </Column>
 
-      <Column field="brand" :header="this.$i18n.t('product.columns.brand')" :styles="{'min-width':'200px'}">
+      <Column field="brand" :header="$i18n.t('product.columns.brand')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.brand" class="truncate">
             {{ slotProps.data.brand }}
@@ -154,7 +157,7 @@
         </template>
       </Column>
 
-      <Column field="fiili_stok" :header="this.$i18n.t('product.columns.fiili_stok')" :styles="{'min-width':'200px'}">
+      <Column field="fiili_stok" :header="$i18n.t('product.columns.fiili_stok')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.fiili_stok" class="truncate">
             {{ slotProps.data.fiili_stok }}
@@ -162,7 +165,7 @@
         </template>
       </Column>
 
-      <Column field="actual_stock" :header="this.$i18n.t('product.columns.actual_stock')" :styles="{'min-width':'200px'}">
+      <Column field="actual_stock" :header="$i18n.t('product.columns.actual_stock')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.actual_stock" class="truncate">
             {{ slotProps.data.actual_stock }}
@@ -170,7 +173,7 @@
         </template>
       </Column>
 
-      <Column field="main_unit" :header="this.$i18n.t('product.columns.main_unit')" :styles="{'min-width':'200px'}">
+      <Column field="main_unit" :header="$i18n.t('product.columns.main_unit')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.main_unit" class="truncate">
             {{ slotProps.data.main_unit }}
@@ -178,7 +181,7 @@
         </template>
       </Column>
 
-      <Column field="price" :header="this.$i18n.t('product.columns.price')" :styles="{'min-width':'200px'}">
+      <Column field="price" :header="$i18n.t('product.columns.price')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.price" class="truncate">
             {{ slotProps.data.price }}
@@ -186,7 +189,7 @@
         </template>
       </Column>
 
-      <Column field="currency" :header="this.$i18n.t('product.columns.currency')" :styles="{'min-width':'200px'}">
+      <Column field="currency" :header="$i18n.t('product.columns.currency')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.currency" class="truncate">
             {{ slotProps.data.currency }}
@@ -194,7 +197,7 @@
         </template>
       </Column>
 
-      <Column field="group_code" :header="this.$i18n.t('product.columns.group_code')" :styles="{'min-width':'200px'}">
+      <Column field="group_code" :header="$i18n.t('product.columns.group_code')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.group_code" class="truncate">
             {{ slotProps.data.group_code }}
@@ -202,7 +205,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_1" :header="this.$i18n.t('product.columns.special_code_1')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_1" :header="$i18n.t('product.columns.special_code_1')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_1" class="truncate">
             {{ slotProps.data.special_code_1 }}
@@ -210,7 +213,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_2" :header="this.$i18n.t('product.columns.special_code_2')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_2" :header="$i18n.t('product.columns.special_code_2')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_2" class="truncate">
             {{ slotProps.data.special_code_2 }}
@@ -218,7 +221,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_3" :header="this.$i18n.t('product.columns.special_code_3')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_3" :header="$i18n.t('product.columns.special_code_3')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_3" class="truncate">
             {{ slotProps.data.special_code_3 }}
@@ -226,7 +229,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_4" :header="this.$i18n.t('product.columns.special_code_4')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_4" :header="$i18n.t('product.columns.special_code_4')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_4" class="truncate">
             {{ slotProps.data.special_code_4 }}
@@ -234,7 +237,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_5" :header="this.$i18n.t('product.columns.special_code_5')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_5" :header="$i18n.t('product.columns.special_code_5')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_5" class="truncate">
             {{ slotProps.data.special_code_5 }}
@@ -242,7 +245,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_6" :header="this.$i18n.t('product.columns.special_code_6')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_6" :header="$i18n.t('product.columns.special_code_6')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_6" class="truncate">
             {{ slotProps.data.special_code_6 }}
@@ -250,7 +253,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_7" :header="this.$i18n.t('product.columns.special_code_7')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_7" :header="$i18n.t('product.columns.special_code_7')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_7" class="truncate">
             {{ slotProps.data.special_code_7 }}
@@ -258,7 +261,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_8" :header="this.$i18n.t('product.columns.special_code_8')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_8" :header="$i18n.t('product.columns.special_code_8')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_8" class="truncate">
             {{ slotProps.data.special_code_8 }}
@@ -266,7 +269,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_9" :header="this.$i18n.t('product.columns.special_code_9')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_9" :header="$i18n.t('product.columns.special_code_9')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_9" class="truncate">
             {{ slotProps.data.special_code_9 }}
@@ -274,7 +277,7 @@
         </template>
       </Column>
 
-      <Column field="special_code_10" :header="this.$i18n.t('product.columns.special_code_10')" :styles="{'min-width':'200px'}">
+      <Column field="special_code_10" :header="$i18n.t('product.columns.special_code_10')" :styles="{'min-width':'200px'}">
         <template #body="slotProps">
           <p :title="slotProps.data.special_code_10" class="truncate">
             {{ slotProps.data.special_code_10 }}
@@ -294,13 +297,12 @@
 </template>
 
 <script>
-import Toast from 'primevue/toast';
-
+import ProductSettings from './ProductSettings';
 export default {
     name: 'ProductGrid',
 
-    components : {
-        Toast
+    components: {
+      ProductSettings
     },
 
     data: () => ({
@@ -457,6 +459,10 @@ export default {
             this.display = false;
             this.menuModalHeader = null;
             this.menu = null;
+        },
+
+        productSettings() {
+            this.$eventHub.$emit('products-settings');
         }
     }
 }
