@@ -4,14 +4,14 @@
       <h1>MARKETS</h1>
     </div>
     <div class="row col-md-12">
-      <div v-for="item in items" class="col-md-3">
+      <div v-for="item in getMarketsListOption" class="col-md-3">
         <Card style="margin: 10px">
           <template #header>
-            <img :alt="item.text" :src="item.path">
+            <img :src="originPathName + item.image" :alt="item.name">
           </template>
           <template #title>
             <div class="align-items-center justify-content-center" style="display: flex">
-              {{ item.text }}
+              {{ item.name }}
             </div>
           </template>
         </Card>
@@ -21,20 +21,27 @@
 </template>
 
 <script>
+import pathName from '../../../mixins/pathName';
 export default {
     name: 'Markets',
 
+    mixins:[
+      pathName
+    ],
+
     data:() => ({
-        items: [
-            { text: 'MILITARY', path: '/market-images/military.jpeg' },
-            { text: 'AEROSPACE', path: '/market-images/aerospace.jpeg' },
-            { text: 'AUTOMOTIVE', path: '/market-images/automotive.jpeg' },
-            { text: 'RAILWAY', path: '/market-images/railway.jpeg' },
-            { text: 'ELECTRICAL VEHICLES', path: '/market-images/electrical.jpeg' },
-            { text: 'IT & DATA COMMUNICATION', path: '/market-images/data.jpeg' },
-            { text: 'ENERGY AND UTILITIES', path: '/market-images/solar.jpeg' },
-            { text: 'INDUSTRIAL', path: '/market-images/industrial.jpeg' },
-        ],
-    })
+        getMarketsListOption: [],
+    }),
+
+    mounted() {
+        this.getMarketsList();
+    },
+
+    methods: {
+        async getMarketsList() {
+            const response = await this.$http.get('/api/markets');
+            this.getMarketsListOption = response.data.data;
+        },
+    }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <nav v-if="show" class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #ffffff !important">
+  <nav v-if="show" class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="background-color: #ffffff !important">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <ImagePreview src="/tukom-logo.png" alt="TUKOM Electronics" image-style="height: 55px" />

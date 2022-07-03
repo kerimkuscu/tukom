@@ -1,30 +1,38 @@
 <template>
-    <div class="container-fluid">
-        <div class="row justify-content-center m-2">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-header">
-                        {{ productDetailsOptions.card_code }} - {{ productDetailsOptions.description }}
-                    </div>
+  <div class="container-fluid">
+    <div class="row justify-content-center m-2">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header">
+            {{ productDetailsOptions.card_code }} - {{ productDetailsOptions.description }}
+          </div>
 
-                    <div class="row col-md-12">
-                            <div class="col-md-6">
-                                <Galleria :value="productDetailsOptions.images" :circular="true" style="max-width: 640px;" :showThumbnails="false" :showIndicators="true" :changeItemOnIndicatorHover="true" :showIndicatorsOnItem="true">
-                                    <template #item="slotProps">
-                                        <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="width: 100%; display: block;" />
-                                    </template>
-                                </Galleria>
-                            </div>
-                            <div class="col-md-6">
-                                <div v-for="option in productDetailsOptions">
-                                    <label :for="option">{{ option }}</label>
-                                </div>
-                            </div>
-                    </div>
-                </div>
+          <div class="row col-md-12">
+            <div class="col-md-6">
+              <Galleria
+                :value="productDetailsOptions.images"
+                :circular="true"
+                style="max-width: 640px;"
+                :show-thumbnails="false"
+                :show-indicators="true"
+                :change-item-on-indicator-hover="true"
+                :show-indicators-on-item="true"
+              >
+                <template #item="slotProps">
+                  <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="width: 100%; display: block;">
+                </template>
+              </Galleria>
             </div>
+            <div class="col-md-6">
+              <div v-for="option in productDetailsOptions">
+                <label :for="option">{{ option }}</label>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
