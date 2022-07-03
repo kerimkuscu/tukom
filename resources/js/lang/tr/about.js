@@ -5,6 +5,6 @@ export default {
         created: 'Hakkımızda oluşturuldu',
         not_created: 'Hakkımızda oluşturulamadı',
         updated: 'Hakkımızda güncellendi',
-        not_updated: 'Hakkımızda güncellenemedid'
+        not_updated: 'Hakkımızda güncellenemedi'
     }
 }
