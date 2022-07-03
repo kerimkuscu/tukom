@@ -59,7 +59,9 @@ export default {
         created: 'Ürün oluşturuldu',
         not_created: 'Ürün oluşturulamadı',
         updated: 'Ürün güncellendi',
-        not_updated: 'Ürün güncellenemedi'
+        not_updated: 'Ürün güncellenemedi',
+        setting_updated: 'Ürün ayarları güncellendi',
+        setting_not_updated: 'Ürün ayarları güncellenemedi'
     },
 
     frontend: {

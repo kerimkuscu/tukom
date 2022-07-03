@@ -39,49 +39,30 @@ export default {
     data: () => ({
         form: new Form({
             about: null,
+        }, {
+            resetOnSuccess: false
         }),
-
     }),
 
     async mounted() {
-        if(this.$route.params.id){
-            await this.fetch();
-        }
+        await this.fetch();
     },
 
     methods : {
         async fetch(){
-            const response = await this.$http.get('/api/abouts/' + this.$route.params.id);
-            this.form.populate(response.data.data);
+            const response = await this.$http.get('/api/about');
+            this.form.about = response.data.data;
         },
 
         async submit() {
-            this.$route.params.id
-                ? await this.update()
-                : await this.store();
-        },
-
-        async store() {
-            try {
-                await this.form.post('/api/abouts');
-                this.$toast.add({ severity:'success', detail: this.$i18n.t('about.messages.created'), life: 2000 });
-                setTimeout(() => {
-                    this.$router.push({ name: 'abouts.grid' });
-                }, 500);
-            } catch (error) {
-                if(error.response.status !== 422) {
-                    this.$toast.add({ severity:'error', detail: this.$i18n.t('about.messages.not_created'), life: 2000 });
-                }
-            }
+            await this.update();
         },
 
         async update() {
             try {
-                await this.form.put('/api/abouts/' + this.$route.params.id);
+                await this.form.post('/api/about');
                 this.$toast.add({ severity:'success', detail: this.$i18n.t('about.messages.updated'), life: 2000 });
-                setTimeout(() => {
-                    this.$router.push({ name: 'abouts.grid' });
-                }, 500);
+
             } catch (error) {
                 if(error.response.status !== 422) {
                     this.$toast.add({ severity:'error', detail: this.$i18n.t('about.messages.not_updated'), life: 2000 });

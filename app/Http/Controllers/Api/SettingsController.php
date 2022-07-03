@@ -4,32 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingContactEmailFormRequest;
-use App\Http\Requests\SettingPriceDisplayFormRequest;
+use App\Http\Requests\SettingProductFormRequest;
 use App\Models\Setting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-    /**
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function priceDisplay(SettingPriceDisplayFormRequest $request): JsonResponse
-    {
-        $created = Setting::query()
-            ->updateOrCreate([
-                'name' => 'price_display',
-            ], [
-                'value' => (int)$request->input('price_display'),
-            ]);
-
-        return response()->json([
-            'status' => (bool)$created,
-        ]);
-    }
-
     /**
      * @param SettingContactEmailFormRequest $request
      *

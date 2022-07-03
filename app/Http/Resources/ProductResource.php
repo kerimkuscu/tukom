@@ -24,9 +24,9 @@ class ProductResource extends JsonResource
     {
         $attributes = parent::toArray($request);
 
-        if ((int)setting('price_display')) {
-            unset($attributes['price']);
-        }
+        $attributes['show_price']        = (bool)setting('display_price');
+        $attributes['show_fiili_stock']  = (bool)setting('display_fiili_stok');
+        $attributes['show_actual_stock'] = (bool)setting('display_actual_stock');
 
         $attributes['menu'] = $this->menu?->name;
         $attributes['id']   = $this->hashed_id;

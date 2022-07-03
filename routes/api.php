@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CarouselController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\FirmController;
+use App\Http\Controllers\Api\MarketController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
 use App\Http\Controllers\Api\ProductMenuContoller;
+use App\Http\Controllers\Api\ProductSettingController;
 use App\Http\Controllers\Api\QuoteController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserController;
@@ -41,6 +44,7 @@ Route::get('products/{product}', [ProductController::class, 'show']);
 Route::get('brands', [BrandController::class, 'index']);
 Route::get('carousels', [CarouselController::class, 'index']);
 Route::get('firms', [FirmController::class, 'index']);
+Route::get('markets', [MarketController::class, 'index']);
 
 Route::post('contacts', [ContactController::class, 'store']);
 Route::post('quotes', [QuoteController::class, 'store']);
@@ -76,11 +80,19 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('firms', FirmController::class)->except(['index']);
     Route::post('/firms/{firm}', [FirmController::class, 'update']);
 
+    Route::apiResource('markets', MarketController::class)->except(['index']);
+    Route::post('/markets/{market}', [MarketController::class, 'update']);
+
     Route::apiResource('quotes', QuoteController::class)->except(['store']);
     Route::apiResource('contacts', ContactController::class)->except(['store']);
 
+    Route::get('about', [AboutController::class, 'index']);
+    Route::post('about', [AboutController::class, 'update']);
+
     //Settings
-    Route::post('/settings/price-display', [SettingsController::class, 'priceDisplay']);
+    Route::get('/settings/product', [ProductSettingController::class, 'index']);
+    Route::post('/settings/product', [ProductSettingController::class, 'update']);
+
     Route::post('/settings/contact-email', [SettingsController::class, 'contactEmail']);
 
 });

@@ -122,7 +122,7 @@ export default {
 
         async update() {
             try {
-                await this.form.put('/api/markets/' + this.$route.params.id);
+                await this.form.post('/api/markets/' + this.$route.params.id);
                 this.$toast.add({ severity:'success', detail: this.$i18n.t('market.messages.updated'), life: 2000 });
                 setTimeout(() => {
                     this.$router.push({ name: 'markets.grid' });

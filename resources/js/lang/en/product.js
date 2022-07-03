@@ -59,7 +59,9 @@ export default {
         created: 'Product created',
         not_created: 'Product not created',
         updated: 'Product updated',
-        not_updated: 'Product not updated'
+        not_updated: 'Product not updated',
+        setting_updated: 'Product settings updated',
+        setting_not_updated: 'Product settings not updated'
     },
 
     frontend: {

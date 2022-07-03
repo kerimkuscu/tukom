@@ -52,7 +52,14 @@ export default {
     },
 
     methods: {
-        showProductSettingsModal() {
+        async fetch(){
+            const response = await this.$http.get('/api/settings/product');
+            this.form.populate(response.data.data);
+        },
+
+        async showProductSettingsModal() {
+            await this.fetch();
+
             this.showModal = true;
         },
 
@@ -60,8 +67,17 @@ export default {
             this.showModal = false;
         },
 
-        saveProductSettings() {
+        async saveProductSettings() {
+            try {
+                await this.form.post('/api/settings/product');
+                this.$toast.add({ severity:'success', detail: this.$i18n.t('product.messages.setting_updated'), life: 2000 });
 
+                this.closeProductSettingsModal();
+            } catch (error) {
+                if(error.response.status !== 422) {
+                    this.$toast.add({ severity:'error', detail: this.$i18n.t('product.messages.setting_not_updated'), life: 2000 });
+                }
+            }
         }
     }
 }
