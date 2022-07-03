@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\CarouselController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
@@ -36,9 +37,11 @@ Route::get('menus/getMegaMenuList', [MenuController::class, 'getMegaMenuList']);
 Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{product}', [ProductController::class, 'show']);
 
+Route::get('brands', [BrandController::class, 'index']);
+Route::get('carousels', [CarouselController::class, 'index']);
+
 Route::post('contacts', [ContactController::class, 'store']);
 Route::post('quotes', [QuoteController::class, 'store']);
-
 
 Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/user', function(Request $request) {
@@ -61,7 +64,13 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('/products/{product}/menu', [ProductMenuContoller::class, 'store']);
 
     Route::apiResource('users', UserController::class);
-    Route::apiResource('brands', BrandController::class);
+
+    Route::apiResource('brands', BrandController::class)->except(['index']);
+    Route::post('/brands/{brand}', [BrandController::class, 'update']);
+
+    Route::apiResource('carousels', CarouselController::class)->except(['index']);
+    Route::post('/carousels/{carousel}', [CarouselController::class, 'update']);
+
     Route::apiResource('quotes', QuoteController::class)->except(['store']);
     Route::apiResource('contacts', ContactController::class)->except(['store']);
 

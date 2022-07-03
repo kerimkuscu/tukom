@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BrandFormRequest extends FormRequest
 {
@@ -23,12 +24,15 @@ class BrandFormRequest extends FormRequest
      */
     public function rules()
     {
+        $brand = $this->route('brand');
+
         return [
             'name' => [
                 'required',
+                Rule::unique('brands')->ignore($brand),
             ],
             'image' => [
-                'required',
+                $brand ? 'nullable' : 'required',
                 'mimes:jpg,png',
                 'max:2048',
             ],

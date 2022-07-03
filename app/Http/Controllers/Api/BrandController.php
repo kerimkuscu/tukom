@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandFormRequest;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
+use App\Traits\HasUploadImage;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class BrandController extends Controller
 {
+    use HasUploadImage;
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +35,7 @@ class BrandController extends Controller
      */
     public function store(BrandFormRequest $request)
     {
-        $attributes = $request->toArray();
+        $attributes = $request->validated();
 
         $attributes = $this->uploadImage($request, $attributes);
 
@@ -62,7 +66,15 @@ class BrandController extends Controller
      */
     public function update(BrandFormRequest $request, Brand $brand)
     {
-        $brand->update($request->all());
+        $attributes = $request->validated();
+
+        if (!$request->file('image')) {
+            unset($attributes['image']);
+        }
+
+        $attributes = $this->uploadImage($request, $attributes);
+
+        $brand->update($attributes);
 
         return new BrandResource($brand);
     }
@@ -72,11 +84,11 @@ class BrandController extends Controller
      *
      * @param Brand $brand
      *
-     * @return void
+     * @return Response
      */
-    public function destroy(Brand $brand)
+    public function destroy(Brand $brand): Response
     {
-        $image_path = 'images/' . $brand->image;
+        $image_path = 'images/' . $brand?->image;
 
         $deleted = $brand->delete();
 
@@ -85,26 +97,7 @@ class BrandController extends Controller
                 File::delete($image_path);
             }
         }
-    }
 
-    /**
-     * @param BrandFormRequest $request
-     * @param array            $attributes
-     *
-     * @return array
-     */
-    private function uploadImage(BrandFormRequest $request, array $attributes): array
-    {
-        if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
-
-            $img = Image::make($request->file('image'));
-
-            $img->save(public_path('images/' . $imageName));
-
-            $attributes['image'] = $imageName;
-        }
-
-        return $attributes;
+        return response()->noContent();
     }
 }

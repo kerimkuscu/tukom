@@ -177,7 +177,9 @@ class ProductController extends Controller
         foreach ($diff as $file) {
             $path = public_path('images') . '/' . $file;
 
-            File::delete($path);
+            if (File::exists($path)) {
+                File::delete($path);
+            }
         }
     }
 }

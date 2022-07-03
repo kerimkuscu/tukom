@@ -122,7 +122,7 @@ export default {
 
         async update() {
             try {
-                await this.form.put('/api/carousels/' + this.$route.params.id);
+                await this.form.post('/api/carousels/' + this.$route.params.id);
                 this.$toast.add({ severity:'success', detail: this.$i18n.t('carousel.messages.updated'), life: 2000 });
                 setTimeout(() => {
                     this.$router.push({ name: 'carousels.grid' });

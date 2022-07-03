@@ -122,7 +122,7 @@ export default {
 
         async update() {
             try {
-                await this.form.put('/api/brands/' + this.$route.params.id);
+                await this.form.post('/api/brands/' + this.$route.params.id);
                 this.$toast.add({ severity:'success', detail: this.$i18n.t('brand.messages.updated'), life: 2000 });
                 setTimeout(() => {
                     this.$router.push({ name: 'brands.grid' });
