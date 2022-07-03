@@ -37,33 +37,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        Route::bind('brand', function($id) {
-            return hashids_decode($id);
-        });
-
-        Route::bind('product', function($id) {
-            return hashids_decode($id);
-        });
-
-        Route::bind('menu', function($id) {
-            return hashids_decode($id);
-        });
-
-        Route::bind('contact', function($id) {
-            return hashids_decode($id);
-        });
-
-        Route::bind('quote', function($id) {
-            return hashids_decode($id);
-        });
-
-        Route::bind('setting', function($id) {
-            return hashids_decode($id);
-        });
-
-        Route::bind('user', function($id) {
-            return hashids_decode($id);
-        });
+        $this->decodeHashIdFromRoutes();
     }
 
     /**
@@ -76,5 +50,27 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function(Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+
+    private function decodeHashIdFromRoutes(): void
+    {
+        $routes = [
+            'brand',
+            'product',
+            'menu',
+            'contact',
+            'quote',
+            'setting',
+            'user',
+            'carousel',
+            'firm',
+            'market',
+        ];
+
+        foreach ($routes as $route) {
+            Route::bind($route, function($id) {
+                return hashids_decode($id);
+            });
+        }
     }
 }

@@ -33,7 +33,7 @@ class BrandController extends Controller
      *
      * @return BrandResource
      */
-    public function store(BrandFormRequest $request)
+    public function store(BrandFormRequest $request): BrandResource
     {
         $attributes = $request->validated();
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CarouselController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\FirmController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
@@ -39,6 +40,7 @@ Route::get('products/{product}', [ProductController::class, 'show']);
 
 Route::get('brands', [BrandController::class, 'index']);
 Route::get('carousels', [CarouselController::class, 'index']);
+Route::get('firms', [FirmController::class, 'index']);
 
 Route::post('contacts', [ContactController::class, 'store']);
 Route::post('quotes', [QuoteController::class, 'store']);
@@ -70,6 +72,9 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     Route::apiResource('carousels', CarouselController::class)->except(['index']);
     Route::post('/carousels/{carousel}', [CarouselController::class, 'update']);
+
+    Route::apiResource('firms', FirmController::class)->except(['index']);
+    Route::post('/firms/{firm}', [FirmController::class, 'update']);
 
     Route::apiResource('quotes', QuoteController::class)->except(['store']);
     Route::apiResource('contacts', ContactController::class)->except(['store']);
