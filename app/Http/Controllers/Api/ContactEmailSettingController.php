@@ -4,19 +4,36 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingContactEmailFormRequest;
-use App\Http\Requests\SettingProductFormRequest;
 use App\Models\Setting;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class SettingsController extends Controller
+class ContactEmailSettingController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        $seting = setting('contact_email');
+
+        return response()->json([
+            'data' => [
+                'contact_email' => $seting,
+            ],
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
      * @param SettingContactEmailFormRequest $request
      *
      * @return JsonResponse
      */
-    public function contactEmail(SettingContactEmailFormRequest $request): JsonResponse
+    public function store(SettingContactEmailFormRequest $request): JsonResponse
     {
         $created = Setting::query()
             ->updateOrCreate([

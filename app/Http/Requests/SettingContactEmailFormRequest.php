@@ -24,7 +24,10 @@ class SettingContactEmailFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required',
+            'contact_email' => [
+                'required',
+                'email'
+            ],
         ];
     }
 }

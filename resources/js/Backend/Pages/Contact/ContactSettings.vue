@@ -42,7 +42,14 @@ export default {
     },
 
     methods: {
-        showContactSettingsModal() {
+        async fetch(){
+            const response = await this.$http.get('/api/settings/contact-email');
+            this.form.populate(response.data.data);
+        },
+
+        async showContactSettingsModal() {
+            await this.fetch();
+
             this.showModal = true;
         },
 

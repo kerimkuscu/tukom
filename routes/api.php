@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CarouselController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\ContactEmailSettingController;
 use App\Http\Controllers\Api\FirmController;
 use App\Http\Controllers\Api\MarketController;
 use App\Http\Controllers\Api\MenuController;
@@ -51,6 +52,8 @@ Route::post('quotes', [QuoteController::class, 'store']);
 
 Route::get('about', [AboutController::class, 'index']);
 
+Route::get('/settings/contact-email', [ContactEmailSettingController::class, 'index']);
+
 Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/user', function(Request $request) {
         return $request->user();
@@ -94,6 +97,6 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/settings/product', [ProductSettingController::class, 'index']);
     Route::post('/settings/product', [ProductSettingController::class, 'update']);
 
-    Route::post('/settings/contact-email', [SettingsController::class, 'contactEmail']);
+    Route::post('/settings/contact-email', [ContactEmailSettingController::class, 'store']);
 
 });
