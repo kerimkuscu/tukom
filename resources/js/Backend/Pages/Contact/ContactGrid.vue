@@ -2,10 +2,14 @@
   <div>
     <ConfirmDialog />
 
+    <ContactSettings />
+
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
         {{ $t('contact.backend.title') }}
       </h4>
+
+        <Button :label="$t('messages.buttons.contact_settings')" class="float-end p-button-sm p-button-outlined p-button-secondary" @click="contactSettingsModal" />
     </div>
 
     <DataTable
@@ -38,8 +42,13 @@
 </template>
 
 <script>
+import ContactSettings from './ContactSettings';
 export default {
     name: 'ContactGrid',
+
+    components: {
+        ContactSettings
+    },
 
     data: () => ({
         items: null,
@@ -111,6 +120,10 @@ export default {
                 }
             });
         },
+
+        contactSettingsModal() {
+            this.$eventHub.$emit('contact-settings');
+        }
     }
 }
 </script>

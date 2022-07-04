@@ -1,6 +1,7 @@
 export default {
     backend: {
       title: 'Contact',
+      contact_settings: 'İletişim Ayarları',
 
       columns: {
           name: 'Name',
@@ -13,6 +14,8 @@ export default {
         messages: {
             deleted: 'Contact deleted',
             not_deleted: 'Contact not deleted',
+            setting_updated: 'Contact settings updated',
+            setting_not_updated: 'Contact settings not updated'
         },
     },
 

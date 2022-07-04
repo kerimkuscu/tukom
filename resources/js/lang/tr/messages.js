@@ -7,6 +7,7 @@ export default {
       delete: 'Sil',
       cancel: 'İptal Et',
       product_settings: 'Ürün Ayarları',
+      contact_settings: 'İletişim Ayarları',
     },
 
     login: {

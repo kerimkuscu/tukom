@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Toast position="top-right" />
+    <Toast position="top-right" :baseZIndex="1999" />
     <router-view />
   </div>
 </template>

@@ -1,6 +1,7 @@
 export default {
     backend: {
         title: 'İletişim',
+        contact_settings: 'İletişim Ayarları',
 
         columns: {
             name: 'İsim',
@@ -13,6 +14,8 @@ export default {
         messages: {
             deleted: 'İletişim deleted',
             not_deleted: 'İletişim not deleted',
+            setting_updated: 'İletişim ayarları güncellendi',
+            setting_not_updated: 'İletişim ayarları güncellenemedi'
         },
     },
 

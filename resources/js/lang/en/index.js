@@ -10,6 +10,7 @@ import about from './about';
 import quote from './quote';
 import contact from './contact';
 import users from './users';
+import footer from './footer';
 
 export default {
     messages,
@@ -24,4 +25,5 @@ export default {
     quote,
     contact,
     users,
+    footer
 }

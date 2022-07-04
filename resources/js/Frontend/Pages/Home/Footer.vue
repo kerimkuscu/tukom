@@ -44,7 +44,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-2 mb-md-0 mb-4">
-                                <h2 class="footer-heading">USEFUL LINKS</h2>
+                                <h2 class="footer-heading">{{ $t('footer.useful_links') }}</h2>
                                 <ul class="list-unstyled">
                                     <li>
                                         <router-link :to="{name:'index'}" class="d-block">
@@ -70,11 +70,11 @@
                             </div>
 
                             <div class="col-md-4 mb-md-0 mb-4">
-                                <h2 class="footer-heading">ABOUT US</h2>
+                                <h2 class="footer-heading">{{ $t('footer.about_us') }}</h2>
                                 <ul class="list-unstyled">
                                     <li>
                                         <span class="d-block">
-                                            We believe in fair trade. Turkish companies should pay the right cost for all products and services. We are here to serve in the best conditions. We are promising to dedicate our sources to minimize the cost of procurement for the Turkish Industry.
+                                            {{ $t('footer.about_message') }}
                                         </span>
                                     </li>
                                 </ul>
@@ -102,7 +102,7 @@
                 <div class="row mt-5 pt-4 border-top">
                     <div class="col-md-6 col-lg-8 mb-md-0 mb-4">
                         <p class="copyright mb-0">
-                            Copyright &copy;{{ date }} All rights reserved. | TUKOM ELEKTRONİK
+                            {{ $t('footer.copyright') }} &copy;{{ date }} {{ $t('footer.reserved') }} | {{ $t('footer.brand_name') }}
                         </p>
                     </div>
                 </div>

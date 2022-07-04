@@ -49,6 +49,8 @@ Route::get('markets', [MarketController::class, 'index']);
 Route::post('contacts', [ContactController::class, 'store']);
 Route::post('quotes', [QuoteController::class, 'store']);
 
+Route::get('about', [AboutController::class, 'index']);
+
 Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/user', function(Request $request) {
         return $request->user();
@@ -86,7 +88,6 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('quotes', QuoteController::class)->except(['store']);
     Route::apiResource('contacts', ContactController::class)->except(['store']);
 
-    Route::get('about', [AboutController::class, 'index']);
     Route::post('about', [AboutController::class, 'update']);
 
     //Settings

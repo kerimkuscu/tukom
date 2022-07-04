@@ -19,13 +19,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/quill.bubble.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
 
         <navbar></navbar>
 
-        <main>
+        <main style="margin-top: 7em">
             @yield('content')
         </main>
     </div>

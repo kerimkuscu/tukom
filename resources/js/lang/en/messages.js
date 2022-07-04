@@ -7,6 +7,7 @@ export default {
       delete: 'Delete',
       cancel: 'Cancel',
       product_settings: 'Product Settings',
+      contact_settings: 'Contact Settings',
     },
 
     login: {
