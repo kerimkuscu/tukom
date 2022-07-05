@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactFormRequest;
 use App\Http\Resources\ContactResource;
+use App\Mail\ContactMail;
 use App\Models\Contact;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -30,8 +32,21 @@ class ContactController extends Controller
      */
     public function store(ContactFormRequest $request): ContactResource
     {
+        $attributes            = $request->validated();
+        $attributes['message'] = 'teasdaasdfgasdfg';
+
         $model = Contact::query()
-            ->create($request->validated());
+            ->create($attributes);
+
+        $contactEmail = setting('contact_email');
+
+        $mailData = [
+            'from'  => $attributes['email'],
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body'  => 'This is for testing email using smtp.',
+        ];
+
+        Mail::to($contactEmail)->send(new ContactMail($mailData));
 
         return new ContactResource($model);
     }

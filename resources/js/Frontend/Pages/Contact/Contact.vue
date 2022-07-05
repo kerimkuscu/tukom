@@ -88,7 +88,7 @@
                   <div class="col-md-9 grid p-fluid">
                     <Textarea
                       id="message"
-                      v-model="form.message"
+                      ref="message"
                       :placeholder="$t('contact.frontend.message')"
                       :class="{ 'p-invalid': form.errors.has('message')}"
                       :auto-resize="true"
@@ -134,6 +134,8 @@ export default {
     methods: {
         async submit() {
             try {
+                this.form.message = this.$refs.message.value;
+
                 await this.form.post('/api/contacts');
             } catch (error) {
                 if(error.response.status !== 422) {
