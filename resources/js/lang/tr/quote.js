@@ -14,9 +14,16 @@ export default {
         email: 'E-posta',
         interested_connector: 'İlgili Bağlayıcı',
         connector_supplier: 'Bağlayıcı Tedarikçisi',
+        connect_interested_pn: 'İlgilendiğiniz Bağlayıcı P/N',
+        current_connector_supplier: 'Akım konektörü tedarikçisi',
         eau: 'Eau',
         project_title: 'Proje Başlığı',
         project_start_date: 'Proje Başlangıç Tarihi',
         questions: 'Sorular ve Yorumlar',
+    },
+
+    messages: {
+        success: 'Teklif gönderildi',
+        error: 'Teklif gönderilemedi'
     }
 }

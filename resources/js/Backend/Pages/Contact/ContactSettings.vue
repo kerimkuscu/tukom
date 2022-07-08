@@ -7,13 +7,13 @@
     <div class="form-group row mb-2">
       <label class="col-form-label col-md-5" for="price" style="padding-top: 0">{{ $t('contact.backend.columns.email') }}</label>
       <div class="col-md-7 grid p-fluid">
-          <InputText
-              id="email"
-              v-model="form.contact_email"
-              class="p-inputtext-sm"
-              type="text"
-              :placeholder="$t('contact.frontend.email')"
-          />
+        <InputText
+          id="email"
+          v-model="form.contact_email"
+          class="p-inputtext-sm"
+          type="text"
+          :placeholder="$t('contact.frontend.email')"
+        />
       </div>
     </div>
 

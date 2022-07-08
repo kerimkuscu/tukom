@@ -4,15 +4,19 @@
       <div class="p-card-content">
         <div class="row col-md-12">
           <div v-for="item in counterListOption" class="col-md-3">
-              <div class="align-items-center justify-content-center" style="display: flex">
-                  <i :class="item.icon" style="font-size: 5em" />
-              </div>
-              <div class="align-items-center justify-content-center" style="display: flex; font-size: 2rem">{{ item.value }}</div>
-              <div class="align-items-center justify-content-center" style="display: flex">{{ item.text }}</div>
+            <div class="align-items-center justify-content-center" style="display: flex">
+              <i :class="item.icon" style="font-size: 5em" />
+            </div>
+            <div class="align-items-center justify-content-center" style="display: flex; font-size: 2rem">
+              {{ item.value }}
+            </div>
+            <div class="align-items-center justify-content-center" style="display: flex">
+              {{ item.text }}
+            </div>
           </div>
         </div>
 
-          <hr>
+        <hr>
 
         <div class="row col-md-12">
           <div v-for="option in firmsListOptions" class="col-md-2">

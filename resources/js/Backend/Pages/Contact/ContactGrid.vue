@@ -9,7 +9,7 @@
         {{ $t('contact.backend.title') }}
       </h4>
 
-        <Button :label="$t('messages.buttons.contact_settings')" class="float-end p-button-sm p-button-outlined p-button-secondary" @click="contactSettingsModal" />
+      <Button :label="$t('messages.buttons.contact_settings')" class="float-end p-button-sm p-button-outlined p-button-secondary" @click="contactSettingsModal" />
     </div>
 
     <DataTable
