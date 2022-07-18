@@ -25,15 +25,13 @@ export default {
     }),
 
     mounted() {
-        let item = window.localStorage.getItem('menu')
-        item ? this.items = JSON.parse(item) : this.getMegaMenuList();
+        this.getMegaMenuList();
     },
 
     methods: {
         async getMegaMenuList() {
             const response = await this.$http.get('/api/menus/getMegaMenuList')
             this.items = response.data.data;
-            window.localStorage.setItem('menu', JSON.stringify(this.items));
         },
     }
 }
