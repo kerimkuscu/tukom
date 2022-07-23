@@ -36,7 +36,7 @@ class ContactMail extends Mailable
 
         return
             $this->markdown('vendor.mail.html.message')
-                ->from($this->mailData['from'], setting('smtp.form.name', config('app.name')))
-                ->subject('Test Email');
+                ->from($this->mailData['from'], setting('smtp.form.name') ?? config('app.name'))
+                ->subject($this->mailData['subject']);
     }
 }

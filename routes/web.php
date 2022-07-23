@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/test', [\App\Http\Controllers\LocalController::class, 'test']);
+Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);
 
-Route::get('/fligram', [\App\Http\Controllers\LocalController::class, 'fligram']);
-Route::post('/fligram', [\App\Http\Controllers\LocalController::class, 'fligramStore'])->name('fligram.store');
+Route::get('/fligram', [\App\Http\Controllers\TestController::class, 'fligram']);
+Route::post('/fligram', [\App\Http\Controllers\TestController::class, 'fligramStore'])->name('fligram.store');
 
 //Auth::routes();
 

@@ -32,8 +32,7 @@ class ContactController extends Controller
      */
     public function store(ContactFormRequest $request): ContactResource
     {
-        $attributes            = $request->validated();
-        $attributes['message'] = 'teasdaasdfgasdfg';
+        $attributes = $request->validated();
 
         $model = Contact::query()
             ->create($attributes);
@@ -41,9 +40,10 @@ class ContactController extends Controller
         $contactEmail = setting('contact_email');
 
         $mailData = [
-            'from'  => $attributes['email'],
-            'title' => 'Mail from ItSolutionStuff.com',
-            'body'  => 'This is for testing email using smtp.',
+            'from'    => $attributes['email'],
+            'subject' => $attributes['subject'],
+            'title'   => 'Tukom Contact Email',
+            'body'    => $attributes['message'],
         ];
 
         Mail::to($contactEmail)->send(new ContactMail($mailData));
