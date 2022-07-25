@@ -4,30 +4,6 @@
 
     <ProductSettings />
 
-    <Dialog :visible.sync="display" :modal="true" position="right">
-      <template #header>
-        <h3>{{ menuModalHeader }}</h3>
-      </template>
-
-      <div class="row" style="padding: 0 1.5rem 17rem 1.5rem;">
-        <div class="col-md-12 grid p-fluid">
-          <Dropdown
-            v-model="menu"
-            :options="menuList"
-            option-label="text"
-            option-value="value"
-            placeholder="(Select Menu)"
-            :filter="true"
-          />
-        </div>
-      </div>
-
-      <template #footer>
-        <Button :label="$t('messages.buttons.cancel')" class="p-button-outlined p-button-secondary p-button-sm" @click="closeMenuModal" />
-        <Button :label="$t('messages.buttons.save')" class=" p-button-sm" @click="saveMenu" />
-      </template>
-    </Dialog>
-
     <div class="pb-5" style="margin-bottom: 20px">
       <h4 class="float-start card-title">
         {{ $t('product.title') }}
@@ -287,7 +263,6 @@
 
       <Column :exportable="false" :styles="{'min-width':'8rem'}">
         <template #body="{data}">
-          <Button icon="pi pi-bars" class="p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="showMenuModal(data)" />
           <Button icon="pi pi-pencil" class="p-button-sm p-button-secondary p-button-outlined mx-lg-1" @click="edit(data.id)" />
           <Button icon="pi pi-trash" class="p-button-sm p-button-danger" @click="remove(data.id)" />
         </template>
@@ -425,40 +400,6 @@ export default {
                 response.status === 200 ? this.fetch() : this.$toast.add({ severity:'error', summary: 'Please try again later', detail:'Order submitted', life: 2000 });
 
             this.loading = false;
-        },
-
-        showMenuModal(item) {
-            this.menuHeader(item);
-            this.selectedId = item.id;
-            this.display = true;
-        },
-
-        menuHeader(item) {
-            this.menuModalHeader = item.card_code + '-' + item.description;
-        },
-
-        closeMenuModal() {
-            this.display = false;
-            this.menuModalHeader = null;
-        },
-
-        async saveMenu() {
-            let formData = new FormData();
-            formData.append('menu_id', this.menu);
-
-            const response = await this.$http.post(`/api/products/${this.selectedId}/menu`,formData);
-
-            if(response.data.status){
-                await this.fetch();
-                this.$toast.add({ severity:'success', detail:'Menu saved.', life: 2000 })
-            }
-            else {
-                this.$toast.add({ severity:'error', detail:'Menu could not saved.', life: 2000 });
-            }
-
-            this.display = false;
-            this.menuModalHeader = null;
-            this.menu = null;
         },
 
         productSettings() {

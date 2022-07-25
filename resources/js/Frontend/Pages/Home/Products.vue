@@ -16,6 +16,7 @@
               :show-thumbnails="false"
               :show-item-navigators-on-hover="true"
               :show-indicators="false"
+              :autoPlay="true"
             >
               <template #item="slotProps">
                 <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="width: 100%; display: block;">

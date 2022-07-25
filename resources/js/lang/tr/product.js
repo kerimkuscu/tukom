@@ -65,6 +65,13 @@ export default {
     },
 
     frontend: {
-        no_image: 'Resim bulunamadı'
+        no_image: 'Resim bulunamadı',
+        brand: 'Marka',
+        product_code: 'Ürün Kodu',
+        stock: 'Stok',
+        no_stock: 'Stok Yok',
+        availability: 'Availability',
+        price: 'Fiyat',
+        features: 'Özellikleri'
     }
 }

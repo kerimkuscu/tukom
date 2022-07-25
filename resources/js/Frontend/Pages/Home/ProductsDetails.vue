@@ -17,16 +17,30 @@
                 :show-indicators="true"
                 :change-item-on-indicator-hover="true"
                 :show-indicators-on-item="true"
+                :autoPlay="true"
               >
                 <template #item="slotProps">
                   <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="width: 100%; display: block;">
                 </template>
               </Galleria>
             </div>
-            <div class="col-md-6">
-              <div v-for="option in productDetailsOptions">
-                <label :for="option">{{ option }}</label>
-              </div>
+            <div class="col-md-6 mt-5">
+                <h4>{{ $t('product.frontend.brand') }}: {{ productDetailsOptions.brand }}</h4>
+                <h4>{{ $t('product.frontend.product_code') }}: {{ productDetailsOptions.card_code }}</h4>
+                <h4>{{ $t('product.frontend.availability') }}: {{ productDetailsOptions.actual_stock > 0 ? $t('product.frontend.stock') : $t('product.frontend.no_stock') }}</h4>
+                <h4 v-if="productDetailsOptions.show_price === true">{{ $t('product.frontend.price') }}: {{ productDetailsOptions.price }} {{ productDetailsOptions.currency }}</h4>
+                <hr>
+                <h4 v-if="productDetailsOptions.special_code_1 !== null">{{ $t('product.frontend.features') }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_1 !== null">{{ productDetailsOptions.special_code_1 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_2 !== null">{{ productDetailsOptions.special_code_2 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_3 !== null">{{ productDetailsOptions.special_code_3 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_4 !== null">{{ productDetailsOptions.special_code_4 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_5 !== null">{{ productDetailsOptions.special_code_5 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_6 !== null">{{ productDetailsOptions.special_code_6 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_7 !== null">{{ productDetailsOptions.special_code_7 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_8 !== null">{{ productDetailsOptions.special_code_8 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_9 !== null">{{ productDetailsOptions.special_code_9 }}</h4>
+                <h4 v-if="productDetailsOptions.special_code_10 !== null">{{ productDetailsOptions.special_code_10 }}</h4>
             </div>
           </div>
         </div>
