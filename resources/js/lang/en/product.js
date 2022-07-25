@@ -65,6 +65,13 @@ export default {
     },
 
     frontend: {
-        no_image: 'No image found'
+        no_image: 'No image found',
+        brand: 'Brand',
+        product_code: 'Product Code',
+        stock: 'In Stock',
+        no_stock: 'No Stock',
+        availability: 'Availability',
+        price: 'Price',
+        features: 'Features'
     }
 }
