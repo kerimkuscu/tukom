@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 import SidebarMenuList from './SidebarMenuList';
 
 export default {
@@ -20,19 +19,12 @@ export default {
     },
 
     data: () => ({
-        items: [
-            {
-                "label":"Adaptör",
-                "items":[{"label":"RF Adaptörü","id":"LPkNg1lqmVa"}]},
-            {"label":"Anten"},
-            {"label":"Tel ve Kablo","items":[{"label":"Test","id":"voOrz8XzYK9"}]},
-            {"label":"Elektronik Anahtar","items":[{"label":"alt menü 1","id":"m29OgYegwyb", "items":[{"label":"Test","id":"voOrz8XzYK9"}] }]}
-        ],
+        items: [],
         visibleLeft: false,
     }),
 
     mounted() {
-        //this.getMegaMenuList();
+        this.getMegaMenuList();
     },
 
     methods: {
