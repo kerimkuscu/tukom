@@ -3,10 +3,10 @@
     <template v-for="(item, index) of model">
       <div :key="item.label + '_' + index" class="p-panelmenu-panel">
         <div class="p-component p-panelmenu-header">
-          <a href="#" class="p-panelmenu-header-link" @click="onItemClick($event, item)">
-            <span v-if="item.items" :class="getPanelToggleIcon(item)" />
-            <span class="p-menuitem-text">{{ item.label }}</span>
-          </a>
+            <a class="p-panelmenu-header-link">
+                <span v-if="item.items" :class="getPanelToggleIcon(item)" @click="onItemClick($event, item)" />
+                <a @click="onItemClickForSubMenu($event, item)"><span class="p-menuitem-text">{{ item.label }}</span></a>
+            </a>
         </div>
         <transition name="p-toggleable-content">
           <div v-show="item === activeItem" class="p-toggleable-content" role="region">
@@ -15,10 +15,12 @@
                 <ul class="p-submenu-list" role="tree">
                   <template v-for="(item, i) of item.items">
                     <li :key="item.label + i" class="p-menuitem">
-                      <a class="p-menuitem-link" role="treeitem" @click="onItemClickForSubMenu($event, item)">
-                        <span v-if="item.items" :class="getSubmenuIcon(item)" />
-                        <span class="p-menuitem-text">{{ item.label }}</span>
-                      </a>
+                        <a class="p-menuitem-link" role="treeitem" >
+                            <span v-if="item.items" :class="getSubmenuIcon(item)" />
+                            <a>
+                                <span class="p-menuitem-text" @click="onItemClickForSubMenu($event, item)">{{ item.label }}</span>
+                            </a>
+                        </a>
                     </li>
                   </template>
                 </ul>
@@ -72,6 +74,7 @@ export default {
         },
 
         getSubmenuIcon(item) {
+            console.log('hede ');
             const active = item === this.activeSubItem;
             return ['p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active }];
         },

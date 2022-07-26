@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-6 mt-5">
                 <h4>{{ $t('product.frontend.brand') }}: {{ productDetailsOptions.brand }}</h4>
-                <h4>{{ $t('product.frontend.product_code') }}: {{ productDetailsOptions.card_code }}</h4>
+                <h4>{{ $t('product.frontend.product_code') }}: {{ productDetailsOptions.card_code }}</h4>,,,
                 <h4>{{ $t('product.frontend.availability') }}: {{ productDetailsOptions.actual_stock > 0 ? $t('product.frontend.stock') : $t('product.frontend.no_stock') }}</h4>
                 <h4 v-if="productDetailsOptions.show_price === true">{{ $t('product.frontend.price') }}: {{ productDetailsOptions.price }} {{ productDetailsOptions.currency }}</h4>
                 <hr>

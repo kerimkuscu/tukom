@@ -46,6 +46,8 @@ import Galleria from 'primevue/galleria';
 import Carousel from 'primevue/carousel';
 import InputSwitch from 'primevue/inputswitch';
 import Editor from 'primevue/editor';
+import PanelMenu from 'primevue/panelmenu';
+
 
 import NotFound from "./components/NotFound";
 
@@ -75,6 +77,7 @@ Vue.component('Galleria', Galleria);
 Vue.component('Carousel', Carousel);
 Vue.component('InputSwitch', InputSwitch);
 Vue.component('Editor', Editor);
+Vue.component('PanelMenu', PanelMenu);
 Vue.use(ConfirmationService);
 Vue.use(NotFound);
 Vue.use(ToastService);
