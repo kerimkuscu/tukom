@@ -9,6 +9,7 @@
 </template>
 
 <script>
+
 import SidebarMenuList from './SidebarMenuList';
 
 export default {
@@ -20,6 +21,7 @@ export default {
 
     data: () => ({
         items: [],
+
         visibleLeft: false,
     }),
 

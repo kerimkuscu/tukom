@@ -2,29 +2,18 @@
   <div class="p-panelmenu p-component">
     <template v-for="(item, index) of model">
       <div :key="item.label + '_' + index" class="p-panelmenu-panel">
+
         <div class="p-component p-panelmenu-header">
             <a class="p-panelmenu-header-link">
                 <span v-if="item.items" :class="getPanelToggleIcon(item)" @click="onItemClick($event, item)" />
                 <a @click="onItemClickForSubMenu($event, item)"><span class="p-menuitem-text">{{ item.label }}</span></a>
             </a>
         </div>
+
         <transition name="p-toggleable-content">
           <div v-show="item === activeItem" class="p-toggleable-content" role="region">
             <div v-if="item.items" class="p-panelmenu-content">
-              <div class="p-panelmenu-root-submenu">
-                <ul class="p-submenu-list" role="tree">
-                  <template v-for="(item, i) of item.items">
-                    <li :key="item.label + i" class="p-menuitem">
-                        <a class="p-menuitem-link" role="treeitem" >
-                            <span v-if="item.items" :class="getSubmenuIcon(item)" />
-                            <a>
-                                <span class="p-menuitem-text" @click="onItemClickForSubMenu($event, item)">{{ item.label }}</span>
-                            </a>
-                        </a>
-                    </li>
-                  </template>
-                </ul>
-              </div>
+                <SidebarSubMenuList :model="item" class="p-panelmenu-root-submenu" />
             </div>
           </div>
         </transition>
@@ -34,6 +23,8 @@
 </template>
 
 <script>
+
+import SidebarSubMenuList from  './SidebarSubMenuList';
 
 export default {
     props: {
@@ -46,6 +37,11 @@ export default {
             default: true
         }
     },
+
+    components: {
+        SidebarSubMenuList
+    },
+
     data() {
         return {
             activeItem: null,
@@ -96,21 +92,13 @@ export default {
     z-index: 1;
 }
 
-.p-panelmenu .p-submenu-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.p-panelmenu .p-menuitem-link {
-    display: flex;
-    align-items: center;
-    user-select: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
 .p-panelmenu .p-menuitem-text {
     line-height: 1;
+}
+
+.p-panelmenu-icon:hover {
+    background-color: #cac7c7;
+    border-radius: 50px;
+    padding: 2px;
 }
 </style>

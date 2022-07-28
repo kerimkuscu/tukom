@@ -121,27 +121,34 @@ class MenuRepository
             ->whereNull('parent_id')
             ->get();
 
-        $items = [];
+        return  $this->getSubMenuTree($menus);
+    }
 
-        foreach ($menus as $key => $menu) {
-            $items[$key] = [
+    /**
+     * @param $subMenus
+     * @return array
+     */
+    public function getSubMenuTree($subMenus): array
+    {
+        if (empty($subMenus)) {
+            return [];
+        }
+
+        $menuList = [];
+
+        foreach ($subMenus as $key => $menu) {
+            $menuList[$key] = [
                 'label' => $menu->name,
+                'id'    => $menu->hashed_id,
             ];
 
-            $items2 = [];
+            $subMenu2 = $this->getSubMenuTree($menu->submenus);
 
-            foreach ($menu->submenus as $key2 => $menu2) {
-                $items2[$key2] = [
-                    'label' => $menu2->name,
-                    'id'    => $menu2->hashed_id,
-                ];
-            }
-
-            if (!empty($items2)) {
-                $items[$key]['items'] = $items2;
+            if (!empty($subMenu2)) {
+                $menuList[$key]['items'] = $subMenu2;
             }
         }
 
-        return $items;
+        return $menuList;
     }
 }
