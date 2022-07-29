@@ -15,7 +15,8 @@
         "psr/simple-cache": "^1.0",
         "tymon/jwt-auth": "dev-develop",
         "vinkla/hashids": "^10.0",
-        "ext-bcmath": "*"
+        "ext-bcmath": "*",
+        "ext-gmp": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
