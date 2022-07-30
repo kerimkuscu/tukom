@@ -357,14 +357,9 @@
 
 <script>
 import Form from 'form-backend-validation';
-import Toast from 'primevue/toast';
 
 export default {
     name: 'ProductForm',
-
-    components: {
-      Toast
-    },
 
     data: () => ({
         form: new Form({
