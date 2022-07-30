@@ -109,11 +109,6 @@ import PrimeVue from 'primevue/config';
 Vue.use(PrimeVue);
 Vue.use(VueRouter);
 
-// const router = new VueRouter({
-//     mode: 'history',
-//     routes
-// });
-
 const app = new Vue({
     i18n,
     el: '#app',
