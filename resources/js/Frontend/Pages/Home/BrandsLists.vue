@@ -3,7 +3,7 @@
     <div class="p-card-body">
       <div class="p-card-content">
         <div class="row col-md-12">
-          <div v-for="option in brandsListOptions" class="col-md-2">
+          <div v-for="option in brandsListOptions" :key="option.name" class="col-md-2">
             <div class="align-items-center justify-content-center" style="display: flex">
               <img :src="originPathName + option.image" :alt="option.name" style="width: 70%">
             </div>

@@ -4,7 +4,7 @@
       <h3>{{ productHeader }}</h3>
     </div>
     <div class="row col-md-12">
-      <div v-for="option in productsOptions" class="col-md-2">
+      <div v-for="option in productsOptions" :key="option.id" class="col-md-2">
         <div class="p-card p-component" style="margin-bottom: 25px">
           <div v-if="option.image !==null" class="p-card-content align-items-center justify-content-center" style="display: flex; padding: 0">
             <Galleria
@@ -16,7 +16,7 @@
               :show-thumbnails="false"
               :show-item-navigators-on-hover="true"
               :show-indicators="false"
-              :autoPlay="true"
+              :auto-play="true"
             >
               <template #item="slotProps">
                 <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="width: 100%; display: block;">

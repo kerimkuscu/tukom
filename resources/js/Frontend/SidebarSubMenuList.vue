@@ -1,21 +1,21 @@
 <template>
-    <ul class="p-submenu-list" role="tree">
-        <template v-for="(item, i) of model.items">
-            <li :key="item.label + i" class="p-menuitem">
-                <a class="p-menuitem-link" role="treeitem" >
-                    <span v-if="item.items" :class="getSubmenuIcon(item)" @click="onItemClickForSubMenu($event, item)"/>
-                    <a>
-                        <span class="p-menuitem-text" @click="updateRoute(item)">{{ item.label }}</span>
-                    </a>
-                </a>
-                <transition name="p-toggleable-content">
-                    <div class="p-toggleable-content" v-show="item === activeSubItem">
-                        <SidebarSubMenuList :model="item" v-if="item.items" :key="item.label + '_sub_'"  />
-                    </div>
-                </transition>
-            </li>
-        </template>
-    </ul>
+  <ul class="p-submenu-list" role="tree">
+    <template v-for="(item, i) of model.items">
+      <li :key="item.label + i" class="p-menuitem">
+        <a class="p-menuitem-link" role="treeitem">
+          <span v-if="item.items" :class="getSubmenuIcon(item)" @click="onItemClickForSubMenu($event, item)" />
+          <a>
+            <span class="p-menuitem-text" @click="updateRoute(item)">{{ item.label }}</span>
+          </a>
+        </a>
+        <transition name="p-toggleable-content">
+          <div v-show="item === activeSubItem" class="p-toggleable-content">
+            <SidebarSubMenuList v-if="item.items" :key="item.label + '_sub_'" :model="item" />
+          </div>
+        </transition>
+      </li>
+    </template>
+  </ul>
 </template>
 
 <script>
@@ -50,7 +50,6 @@ export default {
         },
 
         getSubmenuIcon(item) {
-            console.log('hede ');
             const active = item === this.activeSubItem;
             return ['p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active }];
         },

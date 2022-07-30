@@ -4,7 +4,7 @@
       <h1>MARKETS</h1>
     </div>
     <div class="row col-md-12">
-      <div v-for="item in getMarketsListOption" class="col-md-3">
+      <div v-for="item in getMarketsListOption" :key="item.name" class="col-md-3">
         <Card style="margin: 10px">
           <template #header>
             <img :src="originPathName + item.image" :alt="item.name">

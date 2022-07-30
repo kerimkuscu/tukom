@@ -14,7 +14,8 @@ export default {
         contact: 'CONTACT',
         about_us: 'ABOUT US',
         quote_request: 'QUOTE REQUEST',
-        logout: 'Logout'
+        logout: 'Logout',
+        search: 'SEARCH',
 
     }
 }

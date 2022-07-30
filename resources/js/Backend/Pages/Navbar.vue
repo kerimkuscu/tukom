@@ -88,6 +88,10 @@
           </router-link>
         </ul>
 
+        <router-link v-if="!$auth.check()" :to="{name:'search'}" class="nav-link" style="color: rgb(115 115 115)">
+          {{ $t('navbar.headers.search') }}
+        </router-link>
+
         <router-link v-if="!$auth.check()" :to="{name:'contact'}" class="nav-link" style="color: rgb(115 115 115)">
           {{ $t('navbar.headers.contact') }}
         </router-link>
