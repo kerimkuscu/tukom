@@ -31,20 +31,23 @@ import BrandForm from '../Backend/Pages/Brand/BrandForm';
 
 import AboutForm from '../Backend/Pages/About/AboutForm';
 
+import QuoteIndex from '../Backend/Pages/Quote/QuoteIndex';
+import QuoteGrid from '../Backend/Pages/Quote/QuoteGrid';
+
+import ContactIndex from '../Backend/Pages/Contact/ContactIndex';
+import ContactGrid from '../Backend/Pages/Contact/ContactGrid';
+
 import NotFound from "../components/NotFound";
 
 // Frontend
 
 import Index from '../Frontend/Pages/Home/Index';
+import Search from '../Frontend/Pages/Search/Search';
 import Contact from '../Frontend/Pages/Contact/Contact';
 import About from '../Frontend/Pages/About/About';
 import Quote from '../Frontend/Pages/Quote/Quote';
 import Products from '../Frontend/Pages/Home/Products';
 import ProductsDetails from '../Frontend/Pages/Home/ProductsDetails';
-import QuoteIndex from "../Backend/Pages/Quote/QuoteIndex";
-import QuoteGrid from "../Backend/Pages/Quote/QuoteGrid";
-import ContactIndex from "../Backend/Pages/Contact/ContactIndex";
-import ContactGrid from "../Backend/Pages/Contact/ContactGrid";
 
 export default [
     //Backend
@@ -305,6 +308,14 @@ export default [
         meta: {
             auth: false
         }
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: Search,
+        meta: {
+            auth: false
+        },
     },
     {
         path: '/contact',
