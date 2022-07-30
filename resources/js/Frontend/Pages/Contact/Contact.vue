@@ -138,7 +138,7 @@ export default {
 
                 await this.form.post('/api/contacts');
             } catch (error) {
-                if(error.response.status !== 422) {
+                if(error.response.status !== 422){
 
                 }
             }

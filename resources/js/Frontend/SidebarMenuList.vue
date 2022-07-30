@@ -2,18 +2,17 @@
   <div class="p-panelmenu p-component">
     <template v-for="(item, index) of model">
       <div :key="item.label + '_' + index" class="p-panelmenu-panel">
-
         <div class="p-component p-panelmenu-header">
-            <a class="p-panelmenu-header-link">
-                <span v-if="item.items" :class="getPanelToggleIcon(item)" @click="onItemClick($event, item)" />
-                <a @click="onItemClickForSubMenu($event, item)"><span class="p-menuitem-text">{{ item.label }}</span></a>
-            </a>
+          <a class="p-panelmenu-header-link">
+            <span v-if="item.items" :class="getPanelToggleIcon(item)" @click="onItemClick($event, item)" />
+            <a @click="onItemClickForSubMenu($event, item)"><span class="p-menuitem-text">{{ item.label }}</span></a>
+          </a>
         </div>
 
         <transition name="p-toggleable-content">
           <div v-show="item === activeItem" class="p-toggleable-content" role="region">
             <div v-if="item.items" class="p-panelmenu-content">
-                <SidebarSubMenuList :model="item" class="p-panelmenu-root-submenu" />
+              <SidebarSubMenuList :model="item" class="p-panelmenu-root-submenu" />
             </div>
           </div>
         </transition>
@@ -27,6 +26,10 @@
 import SidebarSubMenuList from  './SidebarSubMenuList';
 
 export default {
+
+    components: {
+        SidebarSubMenuList
+    },
     props: {
         model: {
             type: Array,
@@ -36,10 +39,6 @@ export default {
             type: Boolean,
             default: true
         }
-    },
-
-    components: {
-        SidebarSubMenuList
     },
 
     data() {
