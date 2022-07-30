@@ -69,7 +69,6 @@ export default {
         },
 
         getSubmenuIcon(item) {
-            console.log('hede ');
             const active = item === this.activeSubItem;
             return ['p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active }];
         },

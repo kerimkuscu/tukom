@@ -11,6 +11,7 @@ use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -30,7 +31,7 @@ class ProductController extends Controller
      */
     public function index(Request $request): AnonymousResourceCollection
     {
-        $columns       = ['card_code', 'description', 'type'];
+        $columns       = ['card_code', 'description', 'type', 'brand'];
         $sortValue     = $request->input('sort') ?? '';
         $sortColumn    = in_array($sortValue, $columns) ? $sortValue : 'id';
         $sortDirection = $request->input('sortOrder', '1') === '1' ? 'ASC' : 'DESC';
@@ -39,10 +40,13 @@ class ProductController extends Controller
             ->with('menu')
             ->when($request->input('card_code'), fn($query, $value) => $query->where('card_code', 'like', '%' . $value . '%'))
             ->when($request->input('description'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
+            ->when($request->input('product_id'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
             ->when($request->input('type'), fn($query, $value) => $query->where('type', 'like', '%' . $value . '%'))
+            ->when($request->input('brand'), fn($query, $value) => $query->where('brand', 'like', '%' . $value . '%'))
             ->when($request->input('menu_id'), fn($query, $value) => $query->where('menu_id', hashids_decode($value)))
             ->orderBy($sortColumn, $sortDirection)
-            ->paginate($request->input('per_page', '15'));
+            ->when($request->input('search'), fn($query) => $query->get())
+            ->when(!$request->input('search'), fn($query) => $query->paginate($request->input('per_page', '15')));
 
         return ProductResource::collection($products);
     }

@@ -3,13 +3,13 @@
     <div class="justify-content-center m-2">
       <div class="card">
         <div class="card-header">
-          <form @submit.prevent="submit">
+          <form @submit.prevent="submit" @keyup.enter="submit">
             <div class="col-md-12">
               <div class="row">
                 <div class="col-md-3">
                   <input
                     id="product_id"
-                    v-model="form.product_id"
+                    v-model="product_id"
                     type="text"
                     class="form-control"
                     :placeholder="$t('search.input.product_id')"
@@ -17,17 +17,8 @@
                 </div>
                 <div class="col-md-3">
                   <input
-                    id="description"
-                    v-model="form.type"
-                    type="text"
-                    class="form-control"
-                    :placeholder="$t('search.input.type')"
-                  >
-                </div>
-                <div class="col-md-3">
-                  <input
-                    id="description"
-                    v-model="form.brand"
+                    id="brand"
+                    v-model="brand"
                     type="text"
                     class="form-control"
                     :placeholder="$t('search.input.brand')"
@@ -60,17 +51,30 @@ export default {
     },
 
     data: () => ({
-        form: new Form({
-            product_id: null,
-            type: null,
-            brand: null,
-        }),
+        product_id: null,
+        brand: null,
         searchListOptions: null,
     }),
 
+    mounted(){
+      this.product_id = this.$route.query.product_id
+      this.brand = this.$route.query.brand
+    },
+
     methods: {
         async submit() {
-            const response = await this.form.post('....');
+            if(!(this.product_id || this.brand)){
+                return;
+            }
+
+            const route = `/search?product_id=${this.product_id}&brand=${this.brand}`;
+            const currentRoute = `${this.$route.path}?product_id=${this.$route.query.product_id}&brand=${this.$route.query.brand}`;
+
+            if(route !== currentRoute){
+                await this.$router.replace({ name: 'search', query: {product_id: this.product_id || '', brand: this.brand || ''}});
+            }
+
+            const response = await this.$http.get(`/api/products?product_id=${this.product_id || '' }&brand=${this.brand || '' }&search=1`);
             this.searchListOptions = response.data.data;
         },
     }
