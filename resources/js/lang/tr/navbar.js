@@ -14,7 +14,7 @@ export default {
         contact: 'İLETİŞİM',
         about_us: 'HAKKIMIZDA',
         quote_request: 'TEKLİF AL',
-        logout: 'Çıkış'
-
+        logout: 'Çıkış',
+        search: 'ARA',
     }
 }

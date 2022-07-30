@@ -6,6 +6,7 @@ import carousel from './carousel';
 import firm from './firm';
 import market from './market';
 import brand from './brand';
+import search from './search';
 import about from './about';
 import quote from './quote';
 import contact from './contact';
@@ -21,6 +22,7 @@ export default {
     firm,
     market,
     brand,
+    search,
     about,
     quote,
     contact,
