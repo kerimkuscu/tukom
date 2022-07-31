@@ -37,12 +37,12 @@ class ContactController extends Controller
         $model = Contact::query()
             ->create($attributes);
 
-        $contactEmail = setting('contact_email');
+        $contactEmail = setting('contact_email') ?? config('mail.mailers.smtp.username');
 
         $mailData = [
             'from'    => $attributes['email'],
             'subject' => $attributes['subject'],
-            'title'   => 'Tukom Contact Email',
+            'title'   => 'Tukom İletişim Maili',
             'body'    => $attributes['message'],
         ];
 

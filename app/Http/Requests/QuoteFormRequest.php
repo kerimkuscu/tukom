@@ -39,6 +39,9 @@ class QuoteFormRequest extends FormRequest
             'business' => [
                 'required',
             ],
+            'email' => [
+                'required',
+            ],
         ];
     }
 }

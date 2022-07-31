@@ -69,6 +69,7 @@
                       class="p-inputtext-sm"
                       :options="businessOptions"
                       option-label="text"
+                      option-value="value"
                       :placeholder="$t('quote.columns.business')"
                     />
                     <small id="business-help" class="p-invalid">{{ form.errors.first('business') }}</small>

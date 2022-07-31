@@ -14,6 +14,7 @@
           type="text"
           :placeholder="$t('contact.frontend.email')"
         />
+          <small id="email-help" class="p-invalid">{{ form.errors.first('contact_email') }}</small>
       </div>
     </div>
 

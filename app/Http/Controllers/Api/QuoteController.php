@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuoteFormRequest;
 use App\Http\Resources\QuoteResource;
+use App\Mail\ContactMail;
 use App\Models\Quote;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class QuoteController extends Controller
 {
@@ -30,8 +32,21 @@ class QuoteController extends Controller
      */
     public function store(QuoteFormRequest $request): QuoteResource
     {
+        $attributes = $request->all();
+
         $model = Quote::query()
-            ->create($request->validated());
+            ->create($attributes);
+
+        $contactEmail = setting('contact_email') ?? config('mail.mailers.smtp.username');
+
+        $mailData = [
+            'from'    => $contactEmail,
+            'subject' => $attributes['title'],
+            'title'   => 'Tukom Teklif Maili',
+            'body'    => $attributes['first_name'] . ' ' . $attributes['last_name'] . ' tarafından yeni bir teklif oluşturuldu.',
+        ];
+
+        Mail::to($contactEmail)->send(new ContactMail($mailData));
 
         return new QuoteResource($model);
     }
