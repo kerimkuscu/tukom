@@ -1,6 +1,7 @@
 <template>
   <div>
     <GalleriaList />
+    <ProductList />
     <BrandsLists />
     <Markets />
     <FirmsLists />
@@ -10,6 +11,7 @@
 
 <script>
 import GalleriaList from './GalleriaList';
+import ProductList from './ProductList';
 import BrandsLists from './BrandsLists';
 import Markets from './Markets';
 import FirmsLists from './FirmsLists';
@@ -19,6 +21,7 @@ export default {
 
     components: {
         GalleriaList,
+        ProductList,
         BrandsLists,
         Markets,
         FirmsLists,

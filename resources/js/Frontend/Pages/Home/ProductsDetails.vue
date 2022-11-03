@@ -3,12 +3,12 @@
     <div class="row justify-content-center m-2">
       <div class="card">
         <div class="card-body">
-          <div class="card-header">
-            {{ productDetailsOptions.card_code }} - {{ productDetailsOptions.description }}
+          <div class="card-header" style="font-size: 28px;font-weight: bold">
+                {{ productDetailsOptions.description }}
           </div>
 
           <div class="row col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <Galleria
                 :value="productDetailsOptions.images"
                 :circular="true"
@@ -24,10 +24,10 @@
                 </template>
               </Galleria>
             </div>
-            <div class="col-md-6 mt-5">
+            <div class="col-md-8 mt-5">
               <h4>{{ $t('product.frontend.brand') }}: {{ productDetailsOptions.brand }}</h4>
-              <h4>{{ $t('product.frontend.product_code') }}: {{ productDetailsOptions.card_code }}</h4>,,,
-              <h4>{{ $t('product.frontend.availability') }}: {{ productDetailsOptions.actual_stock > 0 ? $t('product.frontend.stock') : $t('product.frontend.no_stock') }}</h4>
+              <h4>{{ $t('product.frontend.name') }}: {{ productDetailsOptions.description }}</h4>,,,
+              <h4>{{ $t('product.frontend.fiili_stok') }}: {{ productDetailsOptions.fiili_stok }}</h4>
               <h4 v-if="productDetailsOptions.show_price === true">
                 {{ $t('product.frontend.price') }}: {{ productDetailsOptions.price }} {{ productDetailsOptions.currency }}
               </h4>

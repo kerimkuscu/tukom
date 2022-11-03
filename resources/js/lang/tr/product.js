@@ -65,6 +65,7 @@ export default {
     },
 
     frontend: {
+        name: 'Ürün Adı',
         no_image: 'Resim bulunamadı',
         brand: 'Marka',
         product_code: 'Ürün Kodu',
@@ -72,6 +73,7 @@ export default {
         no_stock: 'Stok Yok',
         availability: 'Availability',
         price: 'Fiyat',
-        features: 'Özellikleri'
+        features: 'Özellikleri',
+        fiili_stok: 'Fiili Stok'
     }
 }

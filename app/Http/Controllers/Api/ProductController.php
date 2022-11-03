@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Menu;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -43,12 +43,35 @@ class ProductController extends Controller
             ->when($request->input('product_id'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
             ->when($request->input('type'), fn($query, $value) => $query->where('type', 'like', '%' . $value . '%'))
             ->when($request->input('brand'), fn($query, $value) => $query->where('brand', 'like', '%' . $value . '%'))
-            ->when($request->input('menu_id'), fn($query, $value) => $query->where('menu_id', hashids_decode($value)))
+            ->when($request->input('menu_id'), fn($query, $value) => $query->whereIn('menu_id', $this->getMenuIdList(hashids_decode($value))))
             ->orderBy($sortColumn, $sortDirection)
             ->when($request->input('search'), fn($query) => $query->get())
             ->when(!$request->input('search'), fn($query) => $query->paginate($request->input('per_page', '15')));
 
         return ProductResource::collection($products);
+    }
+
+    public function getMenuIdList(?int $id)
+    {
+        $idList = [];
+
+        $this->fillMenuIdList($id, $idList);
+
+        return $idList;
+    }
+
+    public function fillMenuIdList(int $id, array &$idList): void
+    {
+        /** @var Menu $menu */
+        $menu = Menu::with('subMenus')->find($id);
+
+        if (isset($menu)) {
+            $idList[] = $menu->id;
+
+            foreach ($menu->subMenus as $subMenu) {
+                $this->fillMenuIdList($subMenu->id, $idList);
+            }
+        }
     }
 
     /**
@@ -152,7 +175,7 @@ class ProductController extends Controller
             $imageName = Str::random(40) . '.' . $image->getClientOriginalExtension();
 
             $img = Image::make($image);
-            $img->resize(1024, 800);
+            $img->resize(522, 522);
 
             $img->insert(public_path('fligram.png'), 'center');
             $img->encode('png');

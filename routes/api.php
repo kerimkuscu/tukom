@@ -8,12 +8,13 @@ use App\Http\Controllers\Api\ContactEmailSettingController;
 use App\Http\Controllers\Api\FirmController;
 use App\Http\Controllers\Api\MarketController;
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\ProductBulkEditController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
+use App\Http\Controllers\Api\ProductListController;
 use App\Http\Controllers\Api\ProductMenuContoller;
 use App\Http\Controllers\Api\ProductSettingController;
 use App\Http\Controllers\Api\QuoteController;
-use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -46,6 +47,7 @@ Route::get('brands', [BrandController::class, 'index']);
 Route::get('carousels', [CarouselController::class, 'index']);
 Route::get('firms', [FirmController::class, 'index']);
 Route::get('markets', [MarketController::class, 'index']);
+Route::get('product-list', ProductListController::class);
 
 Route::post('contacts', [ContactController::class, 'store']);
 Route::post('quotes', [QuoteController::class, 'store']);
@@ -73,6 +75,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('/products/import', [ProductImportController::class, 'store']);
     Route::post('/products/{product}', [ProductController::class, 'update']);
     Route::post('/products/{product}/menu', [ProductMenuContoller::class, 'store']);
+    Route::post('/products/bulk-destroy', [ProductBulkEditController::class, 'destroy']);
 
     Route::apiResource('users', UserController::class);
 

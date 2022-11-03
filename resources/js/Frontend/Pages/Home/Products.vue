@@ -19,10 +19,10 @@
               :auto-play="true"
             >
               <template #item="slotProps">
-                <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="width: 100%; display: block;">
+                <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="width: 100%; display: block;cursor: pointer" @click="productDetail(option)">
               </template>
               <template #thumbnail="slotProps">
-                <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="display: block;">
+                <img :src="originPathName + slotProps.item[1]" :alt="originPathName + slotProps.item[1]" style="display: block;cursor: pointer" @click="productDetail(option)">
               </template>
             </Galleria>
           </div>
@@ -32,7 +32,7 @@
 
           <div class="p-card-footer align-items-center justify-content-center" style="display: flex; padding: 0; cursor: pointer">
             <div class="align-items-center justify-content-center ellipsis" @click="productDetail(option)">
-              {{ option.description }}
+              <b> {{ option.description }} </b>
             </div>
           </div>
         </div>

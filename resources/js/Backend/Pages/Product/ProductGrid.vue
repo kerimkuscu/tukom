@@ -30,6 +30,7 @@
       ref="dt"
       data-key="id"
       responsive-layout="scroll"
+      :selection.sync="selectedProducts"
       :scrollable="true"
       edit-mode="cell"
       :rows="perPage"
@@ -52,7 +53,15 @@
       @sort="onSort($event)"
       @filter="onFilter($event)"
     >
-      <Column
+        <template #header v-if="selectedProducts && selectedProducts.length > 0">
+            <div class="flex justify-content-between">
+                <Button type="button" icon="pi pi-trash" label="Delete All" class="p-button-danger" />
+            </div>
+        </template>
+
+        <Column selectionMode="multiple" :styles="{'min-width': '3rem'}"></Column>
+
+        <Column
         ref="card_code"
         field="card_code"
         :header="$i18n.t('product.columns.card_code')"
@@ -297,7 +306,8 @@ export default {
         menuList: [],
         display: false,
         menuModalHeader: null,
-        selectedId: null
+        selectedId: null,
+        selectedProducts: null
     }),
 
     mounted() {
