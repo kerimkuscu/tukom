@@ -15,7 +15,7 @@
                     :placeholder="$t('search.input.product_id')"
                   >
                 </div>
-                <div class="col-md-3">
+<!--                <div class="col-md-3">
                   <input
                     id="brand"
                     v-model="brand"
@@ -23,7 +23,7 @@
                     class="form-control"
                     :placeholder="$t('search.input.brand')"
                   >
-                </div>
+                </div>-->
                 <div class="col-md-3">
                   <Button class="p-button-sm p-button-secondary p-button-outlined" :label="$t('search.title')" @click="submit" />
                 </div>
