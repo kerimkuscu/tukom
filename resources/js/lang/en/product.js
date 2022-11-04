@@ -61,7 +61,8 @@ export default {
         updated: 'Product updated',
         not_updated: 'Product not updated',
         setting_updated: 'Product settings updated',
-        setting_not_updated: 'Product settings not updated'
+        setting_not_updated: 'Product settings not updated',
+        selected_deleted: 'Deleted {count} of {total} product(s)',
     },
 
     frontend: {

@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\ContactEmailSettingController;
 use App\Http\Controllers\Api\FirmController;
 use App\Http\Controllers\Api\MarketController;
 use App\Http\Controllers\Api\MenuController;
-use App\Http\Controllers\Api\ProductBulkEditController;
+use App\Http\Controllers\Api\ProductBulkDeleteController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductImportController;
 use App\Http\Controllers\Api\ProductListController;
@@ -71,11 +71,11 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     Route::apiResource('menus', MenuController::class);
 
+    Route::post('/products/bulk-destroy', [ProductBulkDeleteController::class, 'bulkDelete']);
     Route::apiResource('products', ProductController::class)->except(['index', 'show']);
     Route::post('/products/import', [ProductImportController::class, 'store']);
     Route::post('/products/{product}', [ProductController::class, 'update']);
     Route::post('/products/{product}/menu', [ProductMenuContoller::class, 'store']);
-    Route::post('/products/bulk-destroy', [ProductBulkEditController::class, 'destroy']);
 
     Route::apiResource('users', UserController::class);
 

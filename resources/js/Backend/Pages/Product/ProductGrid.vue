@@ -55,7 +55,7 @@
     >
         <template #header v-if="selectedProducts && selectedProducts.length > 0">
             <div class="flex justify-content-between">
-                <Button type="button" icon="pi pi-trash" label="Delete All" class="p-button-danger" />
+                <Button type="button" icon="pi pi-trash" :label="$t('messages.buttons.bulk_delete')" class="p-button-danger" @click="bulkDelete()"/>
             </div>
         </template>
 
@@ -414,6 +414,46 @@ export default {
 
         productSettings() {
             this.$eventHub.$emit('products-settings');
+        },
+
+        async bulkDelete() {
+            this.$confirm.require({
+                message: this.$i18n.t('messages.messages.delete_many_message', {total : this.selectedProducts.length}),
+                header: this.$i18n.t('messages.buttons.delete'),
+                icon: 'pi pi-exclamation-triangle',
+                acceptClass: 'p-button-danger',
+                rejectClass: 'p-button-secondary p-button-outlined',
+                acceptLabel: this.$i18n.t('messages.buttons.delete'),
+                rejectLabel: this.$i18n.t('messages.buttons.cancel'),
+                accept: async () => {
+                    let idList = [];
+
+                    this.selectedProducts.forEach(function (item) {
+                        idList.push(item.id);
+                    });
+
+                    try {
+                        const response = await this.$http.post('/api/products/bulk-destroy', {
+                            hashedIdList : idList
+                        });
+
+                        this.$toast.add({ severity:'success', detail: this.$i18n.t('product.messages.selected_deleted', { count: response.data.count, total: this.selectedProducts.length }), life: 2000 });
+                    }
+                    catch (e) {
+                        if(error.response.status !== 422) {
+                            this.$toast.add({ severity:'error', detail: this.$i18n.t('product.messages.not_deleted'), life: 2000 });
+                        }
+                    }
+
+                    await this.fetch()
+
+                    this.selectedProducts = [];
+                },
+                reject: () => {
+                    //callback to execute when user rejects the action
+                }
+            });
+
         }
     }
 }

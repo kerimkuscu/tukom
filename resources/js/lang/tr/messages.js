@@ -8,6 +8,7 @@ export default {
       cancel: 'İptal Et',
       product_settings: 'Ürün Ayarları',
       contact_settings: 'İletişim Ayarları',
+        bulk_delete: 'Toplu Sil'
     },
 
     login: {
@@ -18,6 +19,7 @@ export default {
 
     messages: {
         delete_message: 'Bu kayıdı silmek istediğinize emin misiniz?',
+        delete_many_message: 'Seçilen {total} kaydı silmek istediğinize emin misiniz?',
         no_record_message: 'Görüntülenecek kayıt bulunmamaktadır'
     },
 }

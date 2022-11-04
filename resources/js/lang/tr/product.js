@@ -61,7 +61,8 @@ export default {
         updated: 'Ürün güncellendi',
         not_updated: 'Ürün güncellenemedi',
         setting_updated: 'Ürün ayarları güncellendi',
-        setting_not_updated: 'Ürün ayarları güncellenemedi'
+        setting_not_updated: 'Ürün ayarları güncellenemedi',
+        selected_deleted: 'Seçilen {total} üründen {count} tanesi silindi',
     },
 
     frontend: {
