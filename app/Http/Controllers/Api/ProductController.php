@@ -40,13 +40,18 @@ class ProductController extends Controller
             ->with('menu')
             ->when($request->input('card_code'), fn($query, $value) => $query->where('card_code', 'like', '%' . $value . '%'))
             ->when($request->input('description'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
+            ->when($request->input('description'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
             ->when($request->input('product_id'), fn($query, $value) => $query->where('description', 'like', '%' . $value . '%'))
             ->when($request->input('type'), fn($query, $value) => $query->where('type', 'like', '%' . $value . '%'))
             ->when($request->input('brand'), fn($query, $value) => $query->where('brand', 'like', '%' . $value . '%'))
             ->when($request->input('menu_id'), fn($query, $value) => $query->whereIn('menu_id', $this->getMenuIdList(hashids_decode($value))))
             ->orderBy($sortColumn, $sortDirection)
-            ->when($request->input('search'), fn($query) => $query->get())
-            ->when(!$request->input('search'), fn($query) => $query->paginate($request->input('per_page', '15')));
+            ->when(
+                $request->input('search'),
+                fn($query) => $query->whereNotNull('menu_id')->get(),
+                fn($query) => $query->paginate($request->input('per_page', '15'))
+            );
+        //->when(!$request->input('search'), fn($query) => $query->paginate($request->input('per_page', '15')));
 
         return ProductResource::collection($products);
     }
