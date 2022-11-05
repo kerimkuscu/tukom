@@ -59,6 +59,8 @@ export default {
     mounted(){
       this.product_id = this.$route.query.product_id
       this.brand = this.$route.query.brand
+
+        this.$eventHub.$on('search', this.setProductId);
     },
 
     methods: {
@@ -77,6 +79,13 @@ export default {
             const response = await this.$http.get(`/api/products?product_id=${this.product_id || '' }&brand=${this.brand || '' }&search=1`);
             this.searchListOptions = response.data.data;
         },
+
+        setProductId(productId){
+            if(productId !== undefined && productId !== null) {
+                this.product_id = productId;
+                this.submit();
+            }
+        }
     }
 }
 </script>

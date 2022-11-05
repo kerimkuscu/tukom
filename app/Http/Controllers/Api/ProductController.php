@@ -143,11 +143,16 @@ class ProductController extends Controller
     {
         $image_path = 'images/' . $product->image;
 
-        $deleted = $product->delete();
+        $productId = $product->id;
+        $deleted   = $product->delete();
 
         if ($deleted) {
             if (File::exists($image_path)) {
                 File::delete($image_path);
+
+                ProductImage::query()
+                    ->where('product_id', $productId)
+                    ->delete();
             }
         }
     }

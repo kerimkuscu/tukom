@@ -13,7 +13,14 @@
                     @focus.prevent="showDropdowns = model.length > 0"
 
                 >
-                <span class="input-group-text" style="cursor: pointer"><i class="pi pi-search"></i></span>
+                <button class="p-button-sm p-button-secondary p-button-outlined p-button p-component"
+                        type="button"
+                        @click="search">
+                    <span class="p-button-label">
+                        <i class="pi pi-search pt-1"></i>
+                    </span>
+                </button>
+
             </div>
             <div class="dropdown-menu w-100 p-1"
                  :class="{'show': showDropdowns}"
@@ -42,11 +49,11 @@ export default {
         }
     },
 
-    mounted () {
+    mounted() {
         document.addEventListener('click', this.close)
     },
-    beforeDestroy () {
-        document.removeEventListener('click',this.close)
+    beforeDestroy() {
+        document.removeEventListener('click', this.close)
     },
 
     methods: {
@@ -68,15 +75,19 @@ export default {
             this.$eventHub.$emit('products-details', item);
             let urlProductName = item.menu;
             urlProductName = urlProductName.replace(/\s+/g, '-').toLowerCase();
-            this.$router.push({ name: 'products.details', params: { productName: urlProductName,  productId: item.id } });
+            this.$router.push({name: 'products.details', params: {productName: urlProductName, productId: item.id}});
 
             this.showDropdowns = false;
         },
 
-        close (e) {
+        close(e) {
             if (!this.$el.contains(e.target)) {
                 this.showDropdowns = false
             }
+        },
+
+        search() {
+            this.$eventHub.$emit('search',this.model);
         }
     }
 }
