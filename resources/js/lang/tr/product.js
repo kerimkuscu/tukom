@@ -28,7 +28,9 @@ export default {
 
     form: {
         choose: 'Resim(ler) seçiniz',
+        file_choose: 'Dosya seçiniz',
         images: 'Resim',
+        file: 'Dosya',
         choose_an_image: 'Resim Seçiniz',
         menu: 'Menü',
         card_code: 'Kard Kodu',

@@ -28,7 +28,9 @@ export default {
 
     form: {
         choose: 'Choose picture(s)',
+        file_choose: 'Choose file',
         images: 'Images',
+        file: 'File',
         choose_an_image: 'Choose An Image',
         menu: 'Menu',
         card_code: 'Card Code',

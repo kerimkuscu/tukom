@@ -28,6 +28,7 @@ use Illuminate\Support\Collection;
  * @property string|null $currency
  * @property string|null $group_code
  * @property string|null $image
+ * @property string|null $file
  * @property string|null $special_code_1
  * @property string|null $special_code_2
  * @property string|null $special_code_3
@@ -91,6 +92,7 @@ class Product extends Model
         'currency',
         'group_code',
         'image',
+        'file',
         'special_code_1',
         'special_code_2',
         'special_code_3',

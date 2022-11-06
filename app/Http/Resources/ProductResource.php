@@ -35,9 +35,9 @@ class ProductResource extends JsonResource
 
         $attributes['image'] = $images[0] ?? null;
 
-        foreach ($images as $image) {
-            $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
 
+        foreach ($images as $image) {
             try {
                 $path = public_path('images/' . $image);
 
@@ -58,6 +58,26 @@ class ProductResource extends JsonResource
                     $mimetype,
                 ];
         }
+
+        try {
+            $path = public_path('files/' . $this->file);
+
+            $mimetype = $finfo->file($path);
+
+            $source             = file_get_contents($path);
+            $base64             = base64_encode($source);
+            $blob               = 'data:' . $mimetype . ';base64,' . $base64;
+            $attributes['file'] = [
+                    $blob,
+                    $this->file,
+                    $mimetype,
+                ];
+        } catch (\Exception $e) {
+            Log::info('Erro on creating blob image', [
+                    'message' => $e->getMessage(),
+                ]);
+        }
+
 
         return $attributes;
     }

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -90,6 +91,12 @@ class ProductController extends Controller
     {
         $attributes = $request->toArray();
 
+        if (isset($attributes['file'][0])) {
+            $attributes['file'] = $this->uploadFile($attributes['file'][0]);
+        } else {
+            unset($attributes['file']);
+        }
+
         $product = Product::query()->create($attributes);
 
         $this->uploadImages($request, $product->id);
@@ -125,6 +132,12 @@ class ProductController extends Controller
             unset($attributes['image']);
         }
 
+        if (isset($attributes['file'][0])) {
+            $attributes['file'] = $this->uploadFile($attributes['file'][0], $product->file);
+        } else {
+            unset($attributes['file']);
+        }
+
         $this->uploadImages($request, $product->id);
 
         $product->update($attributes);
@@ -142,6 +155,7 @@ class ProductController extends Controller
     public function destroy(Product $product): void
     {
         $image_path = 'images/' . $product->image;
+        $file_path  = 'files/' . $product->file;
 
         $productId = $product->id;
         $deleted   = $product->delete();
@@ -153,6 +167,10 @@ class ProductController extends Controller
                 ProductImage::query()
                     ->where('product_id', $productId)
                     ->delete();
+            }
+
+            if (File::exists($file_path)) {
+                File::delete($file_path);
             }
         }
     }
@@ -218,5 +236,29 @@ class ProductController extends Controller
                 File::delete($path);
             }
         }
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param string|null  $old
+     *
+     * @return string
+     */
+    public function uploadFile(UploadedFile $file, ?string $old = null): string
+    {
+        if ($file->getClientOriginalName() === $old) {
+            return $old;
+        }
+
+        $path = public_path('files') . '/' . $old;
+        if (File::exists($path)) {
+            File::delete($path);
+        }
+
+        $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
+        $path     = public_path('files');
+        $file->move($path, $fileName);
+
+        return $fileName;
     }
 }

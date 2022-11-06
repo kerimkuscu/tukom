@@ -36,6 +36,25 @@
           </div>
         </div>
 
+          <div class="form-group row mb-2">
+              <label class="col-form-label col-md-3 required">{{ $t('product.form.file') }}</label>
+              <div class="col-md-9 grid p-fluid">
+                  <FileUpload
+                      ref="file"
+                      name="file"
+                      accept="application/pdf"
+                      :file-limit="1"
+                      :show-upload-button="false"
+                      :show-cancel-button="false"
+                      :class="{ 'is-invalid': form.errors.has('file')}"
+                      :choose-label="$t('product.form.file_choose')"
+                      button-class="p-button-outlined p-button-sm p-button p-component"
+                  />
+
+                  <small id="file-help" class="invalid-feedback">{{ form.errors.first('file') }}</small>
+              </div>
+          </div>
+
         <div class="form-group row mb-2">
           <label class="col-form-label col-md-3">{{ $t('product.form.menu') }}</label>
           <div class="col-md-9 grid p-fluid">
@@ -366,6 +385,7 @@ export default {
             id: null,
             menu_id: null,
             images: [],
+            file: null,
             card_code: null,
             description: null,
             type: null,
@@ -431,6 +451,19 @@ export default {
                     self.$refs.images.$data.files.push(file);
                 }
             }
+
+            if(this.form.file) {
+                //for (const image of this.form.images) {
+
+                    const file = await self.urlToFile(
+                        this.form.file[0],
+                        this.form.file[1],
+                        this.form.file[2]
+                    );
+
+                    self.$refs.file.$data.files.push(file);
+                //}
+            }
         },
 
         async urlToFile(url, filename, mimeType){
@@ -459,13 +492,14 @@ export default {
 
         async store() {
             this.form.images = this.$refs.images.$data.files;
+            this.form.file = this.$refs.file.$data.files;
 
             try {
                 await this.form.post('/api/products');
                 this.$toast.add({ severity:'success', detail: this.$i18n.t('product.messages.created'), life: 2000 });
-                setTimeout(() => {
-                    this.$router.push({ name: 'products-list.grid' });
-                }, 500);
+                // setTimeout(() => {
+                //     this.$router.push({ name: 'products-list.grid' });
+                // }, 500);
             } catch (error) {
                 if(error.response.status !== 422) {
                     this.$toast.add({ severity:'error', detail: this.$i18n.t('product.messages.not_created'), life: 2000 });
@@ -475,7 +509,7 @@ export default {
 
         async update() {
             this.form.images = this.$refs.images.$data.files;
-            console.log( this.$refs.images.$data.files);
+            this.form.file = this.$refs.file.$data.files;
 
             try {
                 await this.form.post('/api/products/' + this.$route.params.id);

@@ -37,6 +37,7 @@ class ProductBulkDeleteController extends Controller
         foreach ($hashedIdList as $hashedId) {
             $product    = Product::query()->find(hashids_decode($hashedId));
             $image_path = 'images/' . $product->image;
+            $file_path  = 'files/' . $product->file;
 
             $productId = $product->id;
             $deleted   = $product->delete();
@@ -48,6 +49,10 @@ class ProductBulkDeleteController extends Controller
                     ProductImage::query()
                         ->where('product_id', $productId)
                         ->delete();
+                }
+
+                if (File::exists($file_path)) {
+                    File::delete($file_path);
                 }
 
                 $count++;
