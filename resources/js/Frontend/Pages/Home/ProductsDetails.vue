@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-body">
           <div class="card-header" style="font-size: 28px;font-weight: bold">
-                {{ productDetailsOptions.description }}
+            {{ productDetailsOptions.description }}
           </div>
 
           <div class="row col-md-12">
@@ -30,6 +30,9 @@
               <h4>{{ $t('product.frontend.fiili_stok') }}: {{ productDetailsOptions.fiili_stok }}</h4>
               <h4 v-if="productDetailsOptions.show_price === true">
                 {{ $t('product.frontend.price') }}: {{ productDetailsOptions.price }} {{ productDetailsOptions.currency }}
+              </h4>
+              <h4>
+                {{ $t('product.form.technical_data_sheet') }}: <a href="#" style="font-size: 12px"><i class="pi pi-file-pdf" style="cursor: pointer" /> {{ productDetailsOptions.description }} {{ $t('product.form.data_sheet') }}</a>
               </h4>
               <hr>
               <h4 v-if="productDetailsOptions.special_code_1 !== null">

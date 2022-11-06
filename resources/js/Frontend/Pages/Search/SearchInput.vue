@@ -1,45 +1,39 @@
 <template>
-    <div v-if="!$auth.check()" class="me-auto mb-2" style="width: 450px">
-        <div class="dropdown align-items-center">
-            <div class="input-group">
-                <input
-                    ref="searchInput"
-                    v-model="model"
-                    type="text"
-                    class="form-control"
-                    autocomplete="off"
-                    autofocus
-                    @keyup="getSugessions"
-                    @focus.prevent="showDropdowns = model.length > 0"
-
-                >
-                <button class="p-button-sm p-button-secondary p-button-outlined p-button p-component"
-                        type="button"
-                        @click="search">
-                    <span class="p-button-label">
-                        <i class="pi pi-search pt-1"></i>
-                    </span>
-                </button>
-
-            </div>
-            <div class="dropdown-menu w-100 p-1"
-                 :class="{'show': showDropdowns}"
-                 aria-labelledby="dropdownCardMenu">
-                <div v-for="(suggestion, index) in suggestions"
-                     class="dropdown-item px-2 py-0" @click="productDetail(suggestion)" style="cursor: pointer">
-                    {{ suggestion.description }}
-                </div>
-                <div v-if="!suggestions.length" class="dropdown-item px-2 py-0">
-                    No product found
-                </div>
-            </div>
+  <div v-if="!$auth.check()" class="me-auto mb-2" style="width: 360px">
+    <div class="dropdown align-items-center">
+      <div class="input-group">
+        <input
+          ref="searchInput"
+          v-model="model"
+          type="text"
+          class="form-control"
+          autocomplete="off"
+          autofocus
+          :placeholder="$i18n.t('search.title')"
+          @keyup="getSugessions"
+          @focus.prevent="showDropdowns = model.length > 0"
+        >
+      </div>
+      <div
+        class="dropdown-menu w-100 p-1"
+        :class="{'show': showDropdowns}"
+        aria-labelledby="dropdownCardMenu"
+      >
+        <div v-for="(suggestion, index) in suggestions" :key="index" class="dropdown-item px-2 py-0" style="cursor: pointer" @click="productDetail(suggestion)">
+          {{ suggestion.description }}
         </div>
+
+        <div v-if="!suggestions.length" class="dropdown-item px-2 py-0">
+          {{ $t('search.message.no_product_found') }}
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "SearchInput",
+    name: 'SearchInput',
 
     data() {
         return {
@@ -75,7 +69,7 @@ export default {
             this.$eventHub.$emit('products-details', item);
             let urlProductName = item.menu;
             urlProductName = urlProductName.replace(/\s+/g, '-').toLowerCase();
-            this.$router.push({name: 'products.details', params: {productName: urlProductName, productId: item.id}});
+            this.$router.push({ name: 'products.details', params: { productName: urlProductName, productId: item.id } });
 
             this.showDropdowns = false;
         },

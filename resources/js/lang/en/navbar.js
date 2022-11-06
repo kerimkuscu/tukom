@@ -15,7 +15,7 @@ export default {
         about_us: 'ABOUT US',
         quote_request: 'QUOTE REQUEST',
         logout: 'Logout',
-        search: 'SEARCH',
+        search: 'DETAİLED SEARCH',
 
     }
 }

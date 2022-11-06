@@ -15,6 +15,6 @@ export default {
         about_us: 'HAKKIMIZDA',
         quote_request: 'TEKLİF AL',
         logout: 'Çıkış',
-        search: 'ARA',
+        search: 'DETAYLI ARA',
     }
 }

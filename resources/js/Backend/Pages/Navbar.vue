@@ -88,7 +88,9 @@
           </router-link>
         </ul>
 
+        <div class="nav-link">
           <SearchInput />
+        </div>
 
         <router-link v-if="!$auth.check()" :to="{name:'search'}" class="nav-link" style="color: rgb(115 115 115)">
           {{ $t('navbar.headers.search') }}
@@ -136,7 +138,7 @@
 <script>
 
 import SidebarMenu from '../../Frontend/SidebarMenu';
-import SearchInput from "../../Frontend/Pages/Search/SearchInput";
+import SearchInput from '../../Frontend/Pages/Search/SearchInput';
 
 export default {
     name: 'Navbar',

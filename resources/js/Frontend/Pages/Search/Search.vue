@@ -15,7 +15,7 @@
                     :placeholder="$t('search.input.product_id')"
                   >
                 </div>
-<!--                <div class="col-md-3">
+                <!--                <div class="col-md-3">
                   <input
                     id="brand"
                     v-model="brand"
@@ -32,7 +32,7 @@
           </form>
         </div>
         <div class="card-body">
-          <search-list v-if="searchListOptions" :search-list-options="searchListOptions"></search-list>
+          <search-list v-if="searchListOptions" :search-list-options="searchListOptions" />
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@ export default {
             const currentRoute = `${this.$route.path}?product_id=${this.$route.query.product_id}&brand=${this.$route.query.brand}`;
 
             if(route !== currentRoute){
-                await this.$router.replace({ name: 'search', query: {product_id: this.product_id || '', brand: this.brand || ''}});
+                await this.$router.replace({ name: 'search', query: { product_id: this.product_id || '', brand: this.brand || '' } });
             }
 
             const response = await this.$http.get(`/api/products?product_id=${this.product_id || '' }&brand=${this.brand || '' }&search=1`);
