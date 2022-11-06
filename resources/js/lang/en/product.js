@@ -51,6 +51,8 @@ export default {
         special_code_8: 'Special Code 8',
         special_code_9: 'Special Code 9',
         special_code_10: 'Special Code 10',
+        technical_data_sheet: 'Technical Data Sheet',
+        data_sheet: 'Data Sheet',
     },
 
     messages: {

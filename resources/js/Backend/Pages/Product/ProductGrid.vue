@@ -53,15 +53,15 @@
       @sort="onSort($event)"
       @filter="onFilter($event)"
     >
-        <template #header v-if="selectedProducts && selectedProducts.length > 0">
-            <div class="flex justify-content-between">
-                <Button type="button" icon="pi pi-trash" :label="$t('messages.buttons.bulk_delete')" class="p-button-danger" @click="bulkDelete()"/>
-            </div>
-        </template>
+      <template v-if="selectedProducts && selectedProducts.length > 0" #header>
+        <div class="flex justify-content-between">
+          <Button type="button" icon="pi pi-trash" :label="$t('messages.buttons.bulk_delete')" class="p-button-danger" @click="bulkDelete" />
+        </div>
+      </template>
 
-        <Column selectionMode="multiple" :styles="{'min-width': '3rem'}"></Column>
+      <Column selection-mode="multiple" :styles="{'min-width': '3rem'}" />
 
-        <Column
+      <Column
         ref="card_code"
         field="card_code"
         :header="$i18n.t('product.columns.card_code')"
@@ -418,7 +418,7 @@ export default {
 
         async bulkDelete() {
             this.$confirm.require({
-                message: this.$i18n.t('messages.messages.delete_many_message', {total : this.selectedProducts.length}),
+                message: this.$i18n.t('messages.messages.delete_many_message', { total : this.selectedProducts.length }),
                 header: this.$i18n.t('messages.buttons.delete'),
                 icon: 'pi pi-exclamation-triangle',
                 acceptClass: 'p-button-danger',
@@ -428,7 +428,7 @@ export default {
                 accept: async () => {
                     let idList = [];
 
-                    this.selectedProducts.forEach(function (item) {
+                    this.selectedProducts.forEach((item) => {
                         idList.push(item.id);
                     });
 
