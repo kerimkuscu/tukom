@@ -497,9 +497,9 @@ export default {
             try {
                 await this.form.post('/api/products');
                 this.$toast.add({ severity:'success', detail: this.$i18n.t('product.messages.created'), life: 2000 });
-                // setTimeout(() => {
-                //     this.$router.push({ name: 'products-list.grid' });
-                // }, 500);
+                setTimeout(() => {
+                    this.$router.push({ name: 'products-list.grid' });
+                }, 500);
             } catch (error) {
                 if(error.response.status !== 422) {
                     this.$toast.add({ severity:'error', detail: this.$i18n.t('product.messages.not_created'), life: 2000 });

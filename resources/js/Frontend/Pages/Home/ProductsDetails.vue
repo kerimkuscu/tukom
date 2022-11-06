@@ -32,7 +32,7 @@
                 {{ $t('product.frontend.price') }}: {{ productDetailsOptions.price }} {{ productDetailsOptions.currency }}
               </h4>
               <h4>
-                {{ $t('product.form.technical_data_sheet') }}: <a href="#" style="font-size: 12px"><i class="pi pi-file-pdf" style="cursor: pointer" /> {{ productDetailsOptions.description }} {{ $t('product.form.data_sheet') }}</a>
+                {{ $t('product.form.technical_data_sheet') }}: <a :href="originFilePathName + productDetailsOptions.file[1]" style="font-size: 12px"><i class="pi pi-file-pdf" style="cursor: pointer" /> {{ productDetailsOptions.description }} {{ $t('product.form.data_sheet') }}</a>
               </h4>
               <hr>
               <h4 v-if="productDetailsOptions.special_code_1 !== null">
@@ -82,13 +82,15 @@ export default {
 
     data: () => ({
         productDetailsOptions: [],
-        originPathName: null
+        originPathName: null,
+        originFilePathName: null,
     }),
 
     mounted() {
         this.$eventHub.$on('products-details', this.getProductDetails);
         this.fetchProductDetails();
-        this.getPathName()
+        this.getImagePath()
+        this.getFilePath()
     },
 
     methods: {
@@ -102,8 +104,12 @@ export default {
             this.productDetailsOptions = response.data.data;
         },
 
-        getPathName() {
+        getImagePath() {
             this.originPathName = window.location.origin + '/images/';
+        },
+
+        getFilePath() {
+            this.originFilePathName = window.location.origin + '/files/';
         }
     },
 }

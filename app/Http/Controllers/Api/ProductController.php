@@ -91,6 +91,8 @@ class ProductController extends Controller
     {
         $attributes = $request->toArray();
 
+        $attributes['menu_id'] = hashids_decode($attributes['menu_id']);
+
         if (isset($attributes['file'][0])) {
             $attributes['file'] = $this->uploadFile($attributes['file'][0]);
         } else {
@@ -127,6 +129,8 @@ class ProductController extends Controller
     public function update(ProductFormRequest $request, Product $product): ProductResource
     {
         $attributes = $request->toArray();
+
+        $attributes['menu_id'] = hashids_decode($attributes['menu_id']);
 
         if (!$request->file('image')) {
             unset($attributes['image']);
