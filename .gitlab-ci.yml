@@ -1,0 +1,76 @@
+stages:
+  - test
+  - deploy
+
+variables:
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_USER: homestead
+  MYSQL_PASSWORD: secret
+  MYSQL_DATABASE: homestead
+  DB_HOST: mysql
+
+image: thecodingmachine/php:8.1-v4-fpm-node16
+
+phpunit:
+  extends:
+    - .nobrowser
+  stage: test
+  services:
+    - mysql:5.7
+  script:
+    - export COMPOSER_MEMORY_LIMIT=-1
+    - export APP_ENV=testing
+    - export CACHE_DRIVER=array
+    - php -r "echo ini_get('memory_limit');";
+    - cat /etc/php/8.1/cli/php.ini
+    - sudo rm -rf /etc/php/8.1/cli/php.ini
+    - echo "memory_limit=4G" | sudo tee -a /etc/php/8.1/cli/php.ini
+    - php -r "echo ini_get('memory_limit');";
+    - sudo apt update
+    - sudo apt install mysql-client -y
+    - sudo phpenmod -s cli ldap
+    - sudo phpenmod -s cli mongodb
+    - sudo phpenmod -s cli gd
+    - sudo phpenmod -s cli gmp
+    - sudo phpenmod -s fpm ldap
+    - sudo phpenmod -s fpm mongodb
+    - sudo phpenmod -s fpm gd
+    - sudo phpenmod -s fpm gmp
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.example .env
+    - php artisan key:generate
+    - php artisan config:cache
+    - php artisan route:cache
+    - php artisan migrate:refresh --seed --quiet
+    - vendor/bin/phpstan analyse --memory-limit=2G --no-progress
+
+eslint:
+  extends:
+    - .nobrowser
+  stage: test
+  script:
+    - node_modules/.bin/eslint resources/assets/js/ --ext .vue
+
+codestyle:
+  extends:
+    - .nobrowser
+  stage: test
+  script:
+    - test -f php-cs-fixer.phar || curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.4.0/php-cs-fixer.phar -o php-cs-fixer.phar
+    - php php-cs-fixer.phar fix --dry-run
+  dependencies: []
+  cache:
+    paths:
+      - php-cs-fixer.phar
+
+phpcpd:
+  extends:
+    - .nobrowser
+  stage: test
+  script:
+    - test -f phpcpd.phar || curl -L https://phar.phpunit.de/phpcpd.phar -o phpcpd.phar
+    - php phpcpd.phar app/
+  dependencies: []
+  cache:
+    paths:
+      - phpcpd.phar
