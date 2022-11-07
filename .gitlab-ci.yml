@@ -27,13 +27,13 @@ phpunit:
     - sudo apt update
     - sudo apt install mysql-client -y
     - sudo phpenmod -s cli ldap
-    - sudo phpenmod -s cli mongodb
     - sudo phpenmod -s cli gd
     - sudo phpenmod -s cli gmp
     - sudo phpenmod -s fpm ldap
     - sudo phpenmod -s fpm mongodb
     - sudo phpenmod -s fpm gd
     - sudo phpenmod -s fpm gmp
+    - sudo phpenmod -s fpm bcmath
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     - cp .env.example .env
     - php artisan key:generate
