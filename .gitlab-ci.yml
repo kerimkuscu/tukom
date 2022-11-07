@@ -12,8 +12,6 @@ variables:
 image: thecodingmachine/php:8.1-v4-fpm-node16
 
 phpunit:
-  extends:
-    - .nobrowser
   stage: test
   services:
     - mysql:5.7
@@ -45,15 +43,11 @@ phpunit:
     - vendor/bin/phpstan analyse --memory-limit=2G --no-progress
 
 eslint:
-  extends:
-    - .nobrowser
   stage: test
   script:
     - node_modules/.bin/eslint resources/assets/js/ --ext .vue
 
 codestyle:
-  extends:
-    - .nobrowser
   stage: test
   script:
     - test -f php-cs-fixer.phar || curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.4.0/php-cs-fixer.phar -o php-cs-fixer.phar
@@ -64,8 +58,6 @@ codestyle:
       - php-cs-fixer.phar
 
 phpcpd:
-  extends:
-    - .nobrowser
   stage: test
   script:
     - test -f phpcpd.phar || curl -L https://phar.phpunit.de/phpcpd.phar -o phpcpd.phar
