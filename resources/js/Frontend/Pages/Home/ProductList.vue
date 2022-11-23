@@ -55,7 +55,7 @@
                   class="align-items-center justify-content-center ellipsis"
                   @click="productDetail(option)"
                 >
-                  <b> {{ option.description }} </b>
+                  <b style="font-size: 20px !important;"> {{ option.description }} </b>
                 </div>
               </div>
             </div>
