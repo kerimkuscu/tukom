@@ -97,7 +97,7 @@ export default {
         },
 
         remove(id){
-            this.$conmarket.require({
+            this.$confirm.require({
                 message: this.$i18n.t('messages.messages.delete_message'),
                 header: this.$i18n.t('messages.buttons.delete'),
                 icon: 'pi pi-exclamation-triangle',

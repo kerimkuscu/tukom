@@ -28,9 +28,9 @@ class ProductResource extends JsonResource
         $attributes['show_fiili_stock']  = (bool)setting('display_fiili_stok');
         $attributes['show_actual_stock'] = (bool)setting('display_actual_stock');
 
-        $attributes['menu'] = $this->menu?->name;
+        $attributes['menu']    = $this->menu?->name;
         $attributes['menu_id'] = $this->menu?->hashed_id;
-        $attributes['id']   = $this->hashed_id;
+        $attributes['id']      = $this->hashed_id;
 
         $images = $this->images->pluck('image')->toArray();
 
