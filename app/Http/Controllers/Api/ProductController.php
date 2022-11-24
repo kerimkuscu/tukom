@@ -139,7 +139,14 @@ class ProductController extends Controller
         if (isset($attributes['file'][0])) {
             $attributes['file'] = $this->uploadFile($attributes['file'][0], $product->file);
         } else {
-            unset($attributes['file']);
+            if (isset($product->file)) {
+                $path = public_path('files') . '/' . $product->file;
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+            }
+
+            $attributes['file'] = '';
         }
 
         $this->uploadImages($request, $product->id);
