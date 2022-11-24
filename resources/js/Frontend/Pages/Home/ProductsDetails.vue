@@ -32,7 +32,7 @@
                 {{ $t('product.frontend.price') }}: {{ productDetailsOptions.price }} {{ productDetailsOptions.currency }}
               </h4>
               <h4>
-                {{ $t('product.form.technical_data_sheet') }}: <a :href="getFilePath(productDetailsOptions.file)" style="font-size: 12px"><i class="pi pi-file-pdf" style="cursor: pointer" /> {{ productDetailsOptions.description }} {{ $t('product.form.data_sheet') }}</a>
+                {{ $t('product.form.technical_data_sheet') }}: <a href="javascript:void(0)" @click="getFilePath(productDetailsOptions.file)" style="font-size: 12px"><i class="pi pi-file-pdf" style="cursor: pointer" /> {{ productDetailsOptions.description }} {{ $t('product.form.data_sheet') }}</a>
               </h4>
               <hr>
               <h4 v-if="productDetailsOptions.special_code_1 !== null">
@@ -110,7 +110,9 @@ export default {
 
         getFilePath(file) {
             if(file && file[1]) {
-                return window.location.origin + '/files/' + file[1];
+                let origin = window.location.origin;
+                window.open(origin + '/files/' + file[1]);
+                return;
             }
 
             return '';

@@ -55,6 +55,8 @@ export default {
         special_code_8: 'Özel Kod 8',
         special_code_9: 'Özel Kod 9',
         special_code_10: 'Özel Kod 10',
+        technical_data_sheet: 'Teknik Bilgi Formu',
+        data_sheet: 'Bilgi Formu',
     },
 
     messages: {

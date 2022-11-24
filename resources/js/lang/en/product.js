@@ -79,6 +79,6 @@ export default {
         price: 'Price',
         features: 'Features',
         name: 'Product Name',
-        fiili_stok: 'Fiili Stok'
+        fiili_stok: 'Fiili Stok',
     }
 }
