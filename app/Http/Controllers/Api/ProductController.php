@@ -9,11 +9,11 @@ use App\Models\Menu;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Repositories\ProductRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -154,10 +154,11 @@ class ProductController extends Controller
      *
      * @param Product $product
      *
-     * @return void
+     * @return JsonResponse
      */
-    public function destroy(Product $product): void
+    public function destroy(Product $product): JsonResponse
     {
+        $status     = false;
         $image_path = 'images/' . $product->image;
         $file_path  = 'files/' . $product->file;
 
@@ -176,7 +177,13 @@ class ProductController extends Controller
             if (File::exists($file_path)) {
                 File::delete($file_path);
             }
+
+            $status = true;
         }
+
+        return response()->json([
+            'status' => $status,
+        ]);
     }
 
     /**
