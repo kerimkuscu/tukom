@@ -24,7 +24,7 @@ class ProductListController extends Controller
             ->whereHas('menu')
             ->whereHas('images')
             ->inRandomOrder()
-            ->limit(12)
+            ->limit(6)
             ->get();
 
         return ProductResource::collection($products);

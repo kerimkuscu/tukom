@@ -48,7 +48,7 @@ class ProductController extends Controller
             ->when($request->input('menu_id'), fn($query, $value) => $query->whereIn('menu_id', $this->getMenuIdList(hashids_decode($value))))
             ->orderBy($sortColumn, $sortDirection)
             ->when(
-                $request->input('search'),
+                $request->input('search') || $request->input('menu_id'),
                 fn($query) => $query->whereNotNull('menu_id')->get(),
                 fn($query) => $query->paginate($request->input('per_page', '15'))
             );
