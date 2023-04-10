@@ -22,6 +22,8 @@ class ProductResource extends JsonResource
      */
     public function toArray($request): array
     {
+        ini_set('memory_limit', '-1');
+
         $attributes = parent::toArray($request);
 
         $attributes['show_price']        = (bool)setting('display_price');
