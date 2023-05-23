@@ -26,10 +26,7 @@ class ProductFormRequest extends FormRequest
     {
         $id = $this->route('product');
 
-        return [
-//            'images' => [
-//                $id ? 'nullable' : 'required',
-//            ],
+        $rules = [
             'card_code' => [
                 $id ? 'nullable' : 'required',
                 'numeric',
@@ -42,5 +39,13 @@ class ProductFormRequest extends FormRequest
                 'required',
             ],
         ];
+
+        $images = $this->file('images') ?? [];
+
+        foreach ($images as $key => $image) {
+            $rules["images.{$key}"] = 'required|image|max:2048';
+        }
+
+        return $rules;
     }
 }
